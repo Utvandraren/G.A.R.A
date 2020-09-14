@@ -61,8 +61,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97158125db008fd419d488cde60f4b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 5
+  detectionRange: 2
   maxSpeed: 5
+  turningRate: 0.1
+  detection: 1
+  seperationWeight: 1
+  allignmentWeight: 1
+  cohesionWeight: 1
 --- !u!1 &4432575311682083765
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +95,7 @@ Transform:
   m_GameObject: {fileID: 4432575311682083765}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.2, z: 0.5}
+  m_LocalScale: {x: 0.1, y: 0.2, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4432575310953063624}
   m_RootOrder: 0

@@ -10,14 +10,22 @@ public class BOID : MonoBehaviour
     new Rigidbody rigidbody;
     BOID[] allBoids;
     List<BOID> relevantBoids;
-    [SerializeField]float detectionRange = 5f;
-    [SerializeField]float maxSpeed = 5f;
+    [Header("Manuverability")]
+    [SerializeField] float detectionRange = 5f;
+    [SerializeField] float maxSpeed = 5f;
+    [SerializeField] [Range(0, 1)] float turningRate = 0.1f;
+    [SerializeField] [Range(-1, 1)] float detection = -0.25f;
+
+    [Header("Weights")]
+    [SerializeField] float seperationWeight = 1f;
+    [SerializeField] float allignmentWeight = 1f;
+    [SerializeField] float cohesionWeight = 1f;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        rigidbody.velocity = transform.forward * maxSpeed/2;
+        rigidbody.velocity = transform.forward * maxSpeed / 2;
         allBoids = FindObjectsOfType<BOID>();
         relevantBoids = new List<BOID>();
     }
@@ -27,10 +35,17 @@ public class BOID : MonoBehaviour
     {
         Detect();
         acceleration = CalcAcceleration();
-        rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, rigidbody.velocity + acceleration, 0.1f);
+        rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, rigidbody.velocity + acceleration, turningRate);
         if (rigidbody.velocity.magnitude > maxSpeed)
             rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+        else if (rigidbody.velocity.magnitude < maxSpeed / 10f)
+            rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed / 10f;
         transform.rotation = Quaternion.LookRotation(rigidbody.velocity.normalized);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 
     private void Detect()
@@ -43,30 +58,30 @@ public class BOID : MonoBehaviour
             Vector3 toOther = other.transform.position - transform.position;
             Vector3 normalizedToOther = Vector3.Normalize(toOther);
             if (toOther.magnitude < detectionRange)
-                if(Vector3.Dot(transform.forward, normalizedToOther) < 0)
-                relevantBoids.Add(other);
+                if (Vector3.Dot(transform.forward, normalizedToOther) > detection)
+                    relevantBoids.Add(other);
         }
     }
 
     private Vector3 CalcAcceleration()
     {
-        Vector3 repulsionVector = Vector3.zero;
+        Vector3 seperationVector = Vector3.zero;
         Vector3 allignmentVector = Vector3.zero;
         Vector3 cohesionVector = Vector3.zero;
         foreach (BOID other in relevantBoids)
         {
-            repulsionVector += CalcRepulsion(other);
+            seperationVector += CalcSeperation(other);
             allignmentVector += CalCAlignment(other);
             cohesionVector += CalcCohesion(other);
         }
         if (relevantBoids.Count > 0)
-            return (repulsionVector + allignmentVector + cohesionVector) / relevantBoids.Count;
+            return (seperationVector * seperationWeight + allignmentVector * allignmentWeight + cohesionVector * cohesionWeight) / relevantBoids.Count;
         else
-            return Vector3.zero;
+            return transform.forward;
     }
 
 
-    private Vector3 CalcRepulsion(BOID other)
+    private Vector3 CalcSeperation(BOID other)
     {
         Vector3 awayVector = -(other.transform.position - transform.position);
         awayVector /= (awayVector.sqrMagnitude);
