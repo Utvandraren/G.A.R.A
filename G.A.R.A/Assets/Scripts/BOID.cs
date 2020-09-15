@@ -8,6 +8,7 @@ public class BOID : MonoBehaviour
     Vector3 acceleration;
 
     new Rigidbody rigidbody;
+    CapsuleCollider capsule; //warning not generic
     BOID[] allBoids;
     List<BOID> relevantBoids;
     [Header("Manuverability")]
@@ -22,12 +23,16 @@ public class BOID : MonoBehaviour
     [SerializeField] float allignmentWeight = 1f;
     [SerializeField] float cohesionWeight = 1f;
     [SerializeField] float avoidWeight = 10f;
-    private float maxSteerForce = 5;
 
+    [Header("RandomWiggle")]
+    [SerializeField] float wiggleWeight = 1;
+    [SerializeField] float wiggleOffset = 1;
+    [SerializeField] float wiggleAmplitude = 1;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        capsule = GetComponent<CapsuleCollider>();
         rigidbody.velocity = transform.forward * maxSpeed / 2;
         allBoids = FindObjectsOfType<BOID>();
         relevantBoids = new List<BOID>();
@@ -39,9 +44,8 @@ public class BOID : MonoBehaviour
     {
         Detect();
         acceleration = CalcAcceleration();
-        acceleration += AvoidObstacle() * avoidWeight;
-        Debug.Log("pre: " + acceleration.magnitude);
-        acceleration = Vector3.ClampMagnitude(acceleration, maxSteerForce);
+        acceleration += AvoidObstacle();
+        acceleration += RandomWiggle() * wiggleWeight;
         rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, rigidbody.velocity + acceleration, turningRate);
         if (rigidbody.velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2))
             rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
@@ -93,12 +97,6 @@ public class BOID : MonoBehaviour
         return tempAcceleration;
     }
 
-    Vector3 SteerTowards(Vector3 vector)
-    {
-        Vector3 v = vector.normalized * maxSpeed - rigidbody.velocity;
-        return Vector3.ClampMagnitude(v, maxSteerForce);
-    }
-
     private Vector3 CalcSeperation(BOID other)
     {
         Vector3 awayVector = -(other.transform.position - transform.position);
@@ -117,24 +115,26 @@ public class BOID : MonoBehaviour
     private Vector3 AvoidObstacle()
     {
         RaycastHit hit;
-        if (!Physics.SphereCast(transform.position, 0.05f, transform.forward, out hit, detectionRange * 2, LayerMask.GetMask("Wall")))
+        if (!Physics.SphereCast(transform.position, capsule.radius*2, transform.forward, out hit, detectionRange * 2, LayerMask.GetMask("Wall")))
             return Vector3.zero;
         Vector3[] obstAvoidRayDirs = BoidManager.CollisionRayDirections;
         float shortestDistToObst = float.MaxValue;
         for (int i = 0; i < obstAvoidRayDirs.Length; i++)
         {
             RaycastHit searchHit;
-            Vector3 dir = obstAvoidRayDirs[i];
+            Vector3 dir = transform.TransformDirection(obstAvoidRayDirs[i]);
             Ray ray = new Ray(transform.position, dir);
-            if (!Physics.SphereCast(ray, 0.05f,out searchHit, detectionRange * 2, LayerMask.GetMask("Wall")))
+            if (!Physics.SphereCast(ray, capsule.radius*2, out searchHit, detectionRange * 2, LayerMask.GetMask("Wall")))
             {
-                Vector3 temp = dir / Mathf.Pow(shortestDistToObst, 2);
-                //Debug.Log(shortestDistToObst);
-                //Debug.Log(temp.magnitude);
-                return temp;
+                Vector3 avoidVec = dir * avoidWeight;// / Mathf.Pow(shortestDistToObst, 2);
+                return avoidVec;
             }
             shortestDistToObst = Mathf.Min(shortestDistToObst, searchHit.distance);
         }
-        return -transform.forward;
+        return Vector3.zero;
+    }
+    private Vector3 RandomWiggle()
+    {
+        return Vector3.Normalize(transform.forward * wiggleOffset + UnityEngine.Random.insideUnitSphere * wiggleAmplitude);
     }
 }

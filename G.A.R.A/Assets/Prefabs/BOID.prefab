@@ -76,14 +76,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97158125db008fd419d488cde60f4b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 2
-  maxSpeed: 5
-  turningRate: 0.62
-  detection: 0.36
+  detectionRange: 1.5
+  maxSpeed: 4
+  turningRate: 0.2
+  detection: -0.14
   seperationWeight: 1
   allignmentWeight: 1
   cohesionWeight: 1
-  avoidWeight: 20
+  avoidWeight: 1
 --- !u!1 &4432575311682083765
 GameObject:
   m_ObjectHideFlags: 0
