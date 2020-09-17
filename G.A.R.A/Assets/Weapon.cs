@@ -4,30 +4,42 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField]private GameObject firePoint;
+    public Transform firePoint;
+    public AudioSource shootSound;
+
+    [SerializeField] private int damage;
+    [SerializeField] private float timeBetweenAttacks;
+    
+    private float currentTime;
+
+    void Start()
+    {
+        currentTime = timeBetweenAttacks;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        HandleShooterInput();
-        UpdateDrawBack();
+        HandleShooterInput();      
     }
 
-    void HandleShooterInput()
+    void HandleShooterInput()  //If cooldown is ready then you can shoot
     {
+        currentTime -= Time.deltaTime;
+        Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
+
         if (Input.GetButtonDown("Fire1"))
         {
-            Shoot();
+            if (currentTime <= 0f)
+            {
+                Shoot();
+                currentTime = timeBetweenAttacks;
+            }
         }
     }
 
     public virtual void Shoot()
     {
-
     }
 
-    public virtual void UpdateDrawBack()
-    {
-
-    }
 }
