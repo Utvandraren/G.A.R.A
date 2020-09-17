@@ -5,7 +5,7 @@
 /// </summary>
 public class Action : Task
 {
-    public override Status Tick()
+    public override Status Tick(BehaviorTree behaviorTree)
     {
         bool succeeded = true;
         bool failed = false;

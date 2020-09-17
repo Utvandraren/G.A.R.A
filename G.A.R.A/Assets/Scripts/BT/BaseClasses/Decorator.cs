@@ -6,9 +6,9 @@
 class Decorator : Task
 {
     Task child;
-    public override Status Tick()
+    public override Status Tick(BehaviorTree behaviorTree)
     {
-        return child.Tick();
+        return child.Tick(behaviorTree);
     }
 }
 

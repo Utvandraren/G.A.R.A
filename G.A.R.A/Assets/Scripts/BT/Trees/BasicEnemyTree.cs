@@ -1,18 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemyTree : MonoBehaviour
+public class BasicEnemyTree : BehaviorTree
 {
-    // Start is called before the first frame update
-    void Start()
+    BOID movementSystem;
+    //Weapon weapon;
+    protected override void Start()
     {
-        
+        base.Start();
+        movementSystem = GetComponent<BOID>();
+        LoadTree(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LoadTree(BasicEnemyTree basicEnemyTree)
     {
         
+        throw new NotImplementedException();
     }
 }

@@ -10,11 +10,11 @@ class Selector :Task
         children = tasks;
     }
 
-    public override Status Tick()
+    public override Status Tick(BehaviorTree behaviorTree)
     {
         foreach (Task task in children)
         {
-            if (task.Tick() != Status.failed)
+            if (task.Tick(behaviorTree) != Status.failed)
                 return task.taskStatus;
         }
         return Status.failed;

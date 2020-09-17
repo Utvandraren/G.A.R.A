@@ -8,5 +8,5 @@ public abstract class Task
         failed, success, running
     }
     public Status taskStatus { get; }
-    public abstract Status Tick();
+    public abstract Status Tick(BehaviorTree behaviorTree);
 }

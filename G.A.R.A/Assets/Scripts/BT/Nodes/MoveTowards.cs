@@ -1,11 +1,6 @@
-﻿/// <summary>
-/// Not to be implemented
-/// Used as a base for the actual action nodes
-/// Copy this class to the Nodes folder and give descriptive name
-/// </summary>
-public class MoveTowards : Task
+﻿public class MoveTowards : Task
 {
-    public override Status Tick()
+    public override Status Tick(BehaviorTree behaviorTree)
     {
         bool succeeded = true;
         bool failed = false;

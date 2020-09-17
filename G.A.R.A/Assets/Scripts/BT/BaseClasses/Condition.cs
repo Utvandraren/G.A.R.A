@@ -5,8 +5,8 @@
 /// </summary>
 public class Condition : Task
 {
-    bool someCondition;
-    public override Status Tick()
+    bool someCondition = false;
+    public override Status Tick(BehaviorTree behaviorTree)
     {
         if (someCondition == true)
             return Status.success;
