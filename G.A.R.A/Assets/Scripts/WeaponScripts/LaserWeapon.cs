@@ -20,14 +20,13 @@ public class LaserWeapon : Weapon
 
         if(Physics.Raycast(firePoint.position, firePoint.forward, out hit, 100f))
         {
-            if(hit.transform.CompareTag("enemy"))
+            if(hit.transform.CompareTag("Enemy"))
             {
-                //enemy.takedamage(Damage)    <-- change to the right function when it has been implemented
+                hit.transform.GetComponent<EnemyStats>().TakeDamage(damage);
             }
-            else if(hit.transform.CompareTag("Player"))
+            else if(hit.transform.CompareTag("Interact"))
             {
-                hit.transform.GetComponent<GunInteractTest>().Interact();
-                //object.interact             <-- change to the right function when it has been implemented
+                hit.transform.GetComponent<Interactable>().Interact();              
             }
         }
     }
