@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     public AudioSource shootSound;
 
-    [SerializeField] private int damage;
+    public int damage;
     [SerializeField] private float timeBetweenAttacks;
     
     private float currentTime;
