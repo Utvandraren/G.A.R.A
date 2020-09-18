@@ -147,6 +147,7 @@ namespace UnityTemplateProjects
                 var mouseSensitivityFactor = mouseSensitivityCurve.Evaluate(mouseMovement.magnitude);
 
                 m_TargetCameraState.yaw += mouseMovement.x * mouseSensitivityFactor;
+
                 m_TargetCameraState.pitch += mouseMovement.y * mouseSensitivityFactor;
             }
             
