@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Wander : Task
+public class MoveTowards : Task
 {
     public override Status Tick(BehaviorTree behaviorTree)
     {

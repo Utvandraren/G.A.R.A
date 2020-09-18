@@ -28,24 +28,26 @@ public class BOID : MonoBehaviour
     [SerializeField] float wiggleWeight = 1;
     [SerializeField] float wiggleOffset = 1;
     [SerializeField] float wiggleAmplitude = 1;
+
+    [SerializeField] float targetWeight = 1;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         capsule = GetComponent<CapsuleCollider>();
-        rigidbody.velocity = transform.forward * maxSpeed / 2;
+        //rigidbody.velocity = transform.forward * maxSpeed / 2;
         allBoids = FindObjectsOfType<BOID>();
         relevantBoids = new List<BOID>();
         detectionRangeSqrd = Mathf.Pow(detectionRange, 2);
     }
 
-    // Update is called once per frame
-    void Update()
+    internal void UpdateMovement(Vector3 targetDir)
     {
         Detect();
         acceleration = CalcAcceleration();
         acceleration += AvoidObstacle();
         acceleration += RandomWiggle() * wiggleWeight;
+        acceleration += targetDir * targetWeight;
         rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, rigidbody.velocity + acceleration, turningRate);
         if (rigidbody.velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2))
             rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
@@ -126,7 +128,7 @@ public class BOID : MonoBehaviour
             Ray ray = new Ray(transform.position, dir);
             if (!Physics.SphereCast(ray, capsule.radius*2, out searchHit, detectionRange * 2, LayerMask.GetMask("Wall")))
             {
-                Vector3 avoidVec = dir * avoidWeight;// / Mathf.Pow(shortestDistToObst, 2);
+                Vector3 avoidVec = dir * avoidWeight / Mathf.Pow(shortestDistToObst, 2);
                 return avoidVec;
             }
             shortestDistToObst = Mathf.Min(shortestDistToObst, searchHit.distance);

@@ -7,11 +7,19 @@ using UnityEngine;
 public class BehaviorTree : MonoBehaviour
 {
     Task root;
+    internal BOID boidSystem;
     public BlackBoard BlackBoard { get; private set; }
 
     protected virtual void Start()
     {
         BlackBoard = GetComponent<BlackBoard>();
+        boidSystem = GetComponent<BOID>();
+        root = new Wander();
+    }
+
+    private void Update()
+    {
+        root.Tick(this);
     }
 }
 

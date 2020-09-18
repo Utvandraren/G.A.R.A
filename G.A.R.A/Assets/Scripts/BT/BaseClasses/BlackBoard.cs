@@ -2,5 +2,6 @@
 
 public class BlackBoard : MonoBehaviour
 {
-    public Vector3 target;
+    internal Vector3 target;
+    internal float detectionRange;
 }
