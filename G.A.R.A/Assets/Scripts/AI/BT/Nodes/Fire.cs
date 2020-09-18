@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class MoveTowards : Task
+﻿public class Fire : Task
 {
     public override Status Tick(BehaviorTree behaviorTree)
     {
@@ -8,7 +6,7 @@ public class MoveTowards : Task
         bool failed = false;
         bool HandleStub()
         {
-            behaviorTree.boidSystem.UpdateMovement(Vector3.zero);
+            behaviorTree.weapon.Shoot();
             return true;
         }
 

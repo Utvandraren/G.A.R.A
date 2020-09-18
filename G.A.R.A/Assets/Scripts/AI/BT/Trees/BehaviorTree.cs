@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 using UnityEngine;
 public class BehaviorTree : MonoBehaviour
 {
-    Task root;
+    protected Task root;
     internal BOID boidSystem;
+    internal Weapon weapon;
     public BlackBoard BlackBoard { get; private set; }
 
     protected virtual void Start()
     {
         BlackBoard = GetComponent<BlackBoard>();
         boidSystem = GetComponent<BOID>();
-        root = new Wander();
+        weapon = GetComponentInChildren<Weapon>();
+        MakeTree();
     }
+
+    protected virtual void MakeTree() { root = new Wander(); }
 
     private void Update()
     {
