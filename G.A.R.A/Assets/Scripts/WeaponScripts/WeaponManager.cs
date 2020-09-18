@@ -8,11 +8,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] GameObject explosiveWeapon;
     [SerializeField] GameObject TaserWeapon;
 
-
-
-    Weapons currentWeapon;
-    int mouseDelta;
-    int oldMouseDelta;
+    private int mouseDelta;
+    private int oldMouseDelta;
 
     enum Weapons
     {
@@ -34,7 +31,7 @@ public class WeaponManager : MonoBehaviour
         handleInput();
     }
 
-    void handleInput()
+    void handleInput()   //Check if mouseScroll has changed and thus should change the weapon
     {
         mouseDelta += (int)Input.mouseScrollDelta.y;
         mouseDelta = (int)Mathf.Clamp(mouseDelta, 0f, 2f);
@@ -47,9 +44,9 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    void ChangeWeapon(Weapons weaponToChange)
+    void ChangeWeapon(Weapons weaponToChangeTo)   //Fucntion changing the weapons
     {
-        switch (weaponToChange)
+        switch (weaponToChangeTo)
         {
             case Weapons.Laser:
                 laserWeapon.SetActive(true);
