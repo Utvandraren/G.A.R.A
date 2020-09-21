@@ -11,7 +11,7 @@ public class CheckWillToFight : Task
         someCondition = false;
         //TODO: if stats ok = true
 
-        behaviorTree.BlackBoard.target = behaviorTree.BlackBoard.PlayerTransform.position;
+        
         someCondition = true;
 
         if (someCondition == true)

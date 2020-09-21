@@ -6,6 +6,7 @@ public class BlackBoard : MonoBehaviour
     public Transform PlayerTransform;
     //Internal perceptions
     public float detectionRange;
+    public Stats stats;
 
     //Dependent perceptions
     internal Vector3 target;

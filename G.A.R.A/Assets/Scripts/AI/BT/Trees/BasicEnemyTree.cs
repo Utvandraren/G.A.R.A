@@ -13,8 +13,8 @@ public class BasicEnemyTree : BehaviorTree
 
     protected override void MakeTree()
     {
-        Task[] fire = {new CheckWillToFight(), new CheckInWeaponRange(), new CheckLineOfSight(), new Fire() };
-        Task[] getInRage = { new CheckWillToFight(), new CheckInRange(), new MoveTowards() };
+        Task[] fire = { new CheckWillToFight(), new TargetPlayer(), new CheckInWeaponRange(), new CheckLineOfSight(), new Fire() };
+        Task[] getInRage = { new CheckWillToFight(), new TargetPlayer(), new CheckInRange(), new MoveTowards() };
         Task fireSeq = new Sequence(fire);
         Task goTo = new Sequence(getInRage);
         Task[] root = { fireSeq, goTo, new Wander() };
