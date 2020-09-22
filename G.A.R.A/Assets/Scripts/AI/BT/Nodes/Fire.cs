@@ -6,7 +6,7 @@
         bool failed = false;
         bool HandleStub()
         {
-            behaviorTree.weapon.Shoot();
+            behaviorTree.weapon.HandleShooterInput();
             return true;
         }
 

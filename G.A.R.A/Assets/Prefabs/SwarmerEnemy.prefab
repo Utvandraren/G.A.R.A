@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4230501522975337930}
   - component: {fileID: 5338604928791571533}
   m_Layer: 0
-  m_Name: Swarmer
+  m_Name: SwarmerEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   detectionRange: 10
   stats: {fileID: 5338604928791571533}
+  weaponRange: 1.5
 --- !u!82 &4230501522975337930
 AudioSource:
   m_ObjectHideFlags: 0
