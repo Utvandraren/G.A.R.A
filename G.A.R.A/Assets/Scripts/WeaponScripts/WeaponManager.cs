@@ -8,6 +8,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] GameObject explosiveWeapon;
     [SerializeField] GameObject TaserWeapon;
 
+    Weapon currentWeapon;
+
     private int mouseDelta;
     private int oldMouseDelta;
 
@@ -23,6 +25,7 @@ public class WeaponManager : MonoBehaviour
     {
         mouseDelta = 0;
         oldMouseDelta = 0;
+        currentWeapon = laserWeapon.GetComponent<Weapon>();
     }
 
     // Update is called once per frame
@@ -42,6 +45,11 @@ public class WeaponManager : MonoBehaviour
             ChangeWeapon(weap);
             oldMouseDelta = mouseDelta;
         }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            currentWeapon.HandleShooterInput();
+        }
     }
 
     void ChangeWeapon(Weapons weaponToChangeTo)   //Fucntion changing the weapons
@@ -52,18 +60,21 @@ public class WeaponManager : MonoBehaviour
                 laserWeapon.SetActive(true);
                 explosiveWeapon.SetActive(false);
                 TaserWeapon.SetActive(false);
+                currentWeapon = laserWeapon.GetComponent<Weapon>();
                 break;
 
             case Weapons.Explosive:
                 explosiveWeapon.SetActive(true);
                 laserWeapon.SetActive(false);
                 TaserWeapon.SetActive(false);
+                currentWeapon = explosiveWeapon.GetComponent<Weapon>();
                 break;
 
             case Weapons.Taser:
                 TaserWeapon.SetActive(true);
                 explosiveWeapon.SetActive(false);
                 laserWeapon.SetActive(false);
+                currentWeapon = TaserWeapon.GetComponent<Weapon>();
                 break;
             default:
                 //

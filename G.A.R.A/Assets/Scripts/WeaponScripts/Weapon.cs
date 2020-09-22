@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
 
     public int damage;
     [SerializeField] private float timeBetweenAttacks;
-    
+
     private float currentTime;
 
     void Start()
@@ -17,29 +17,28 @@ public class Weapon : MonoBehaviour
         currentTime = timeBetweenAttacks;
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        HandleShooterInput();      
-    }
-
-    void HandleShooterInput()  //If cooldown is ready then you can shoot
     {
         currentTime -= Time.deltaTime;
         Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
 
-        if (Input.GetButtonDown("Fire1"))
+    }
+
+    public void HandleShooterInput()  //If cooldown is ready then you can shoot
+    {
+        currentTime -= Time.deltaTime;
+        Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
+
+        if (currentTime <= 0f)
         {
-            if (currentTime <= 0f)
-            {
-                Shoot();
-                currentTime = timeBetweenAttacks;
-            }
+            Shoot();
+            currentTime = timeBetweenAttacks;
         }
+
     }
 
     public virtual void Shoot()
-    {
+    {       
     }
 
 }
