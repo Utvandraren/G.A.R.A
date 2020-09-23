@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &893460237543197949
+--- !u!1 &6015278588857588897
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,77 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 478975097698132626}
+  - component: {fileID: 6015278588857588908}
+  - component: {fileID: 6015278588857588909}
+  - component: {fileID: 6015278588857588898}
+  - component: {fileID: 6015278588857588899}
+  - component: {fileID: 6015278588857588896}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: ExplosiveProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &478975097698132626
+--- !u!4 &6015278588857588908
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893460237543197949}
+  m_GameObject: {fileID: 6015278588857588897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.645}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.0258589, y: 2.0254917, z: -7.4017215}
+  m_LocalScale: {x: 0.1515, y: 0.1515, z: 0.1515}
   m_Children: []
-  m_Father: {fileID: 1753032842555039955}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1753032842555039954
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1753032842555039955}
-  - component: {fileID: 1753032842555039958}
-  - component: {fileID: 1753032842555039957}
-  - component: {fileID: 4991578823435492570}
-  m_Layer: 0
-  m_Name: explosiveWeapon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1753032842555039955
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753032842555039954}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.567, y: -0.382, z: 0.62}
-  m_LocalScale: {x: 0.43106672, y: 0.43106672, z: 1.1700876}
-  m_Children:
-  - {fileID: 478975097698132626}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1753032842555039958
+--- !u!33 &6015278588857588909
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753032842555039954}
+  m_GameObject: {fileID: 6015278588857588897}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1753032842555039957
+--- !u!23 &6015278588857588898
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753032842555039954}
+  m_GameObject: {fileID: 6015278588857588897}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -111,21 +81,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4991578823435492570
+--- !u!135 &6015278588857588899
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015278588857588897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6015278588857588896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753032842555039954}
+  m_GameObject: {fileID: 6015278588857588897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f82efc28e31a56945b42c1828a1ab5f2, type: 3}
+  m_Script: {fileID: 11500000, guid: ed96f70226986154ca985ba3c6c18310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 478975097698132626}
-  shootSound: {fileID: 0}
-  damage: 50
-  timeBetweenAttacks: 1
-  projectile: {fileID: 6015278588857588897, guid: 4f3bdfc939044c641af5f7f1327f42a2,
+  speed: 10
+  lifeTime: 10
+  explosiveRadius: 1.6
+  damage: 100
+  explosionEffect: {fileID: 174508067202234687, guid: bb708427dd2104e4bb7afb41f7116103,
     type: 3}
