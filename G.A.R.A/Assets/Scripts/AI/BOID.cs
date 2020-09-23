@@ -56,6 +56,18 @@ public class BOID : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(rigidbody.velocity);
     }
 
+    internal void Stop()
+    {
+        rigidbody.velocity = Vector3.zero;
+    }
+
+    internal void TurnTo(Vector3 target)
+    {
+        Transform tempTrans = transform;
+        tempTrans.LookAt(target);
+        rigidbody.MoveRotation(tempTrans.rotation);
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, detectionRange);
