@@ -35,6 +35,17 @@ public class PlayerStats : Stats
         shield += shieldRechargeRate;
         shield = Mathf.Min(shield, maxShield);
     }
+    public override void TakeDamage(SciptableAttackObj attack)
+    {
+        timer = 0;
+        if(shield == 0)
+            base.TakeDamage(attack);
+        else
+        {
+            shield -= attack.damage;
+            shield = Mathf.Max(shield, 0);
+        }
+    }
     public override void Die()
     {
         base.Die();
