@@ -22,7 +22,7 @@ public class LaserWeapon : Weapon
         {
             if(hit.transform.CompareTag("Enemy"))
             {
-                hit.transform.GetComponent<EnemyStats>().TakeDamage(damage);
+                hit.transform.GetComponent<EnemyStats>().TakeDamage(attack);
             }
             else if(hit.transform.CompareTag("Interact"))
             {

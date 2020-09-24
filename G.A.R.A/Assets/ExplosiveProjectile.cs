@@ -9,6 +9,7 @@ public class ExplosiveProjectile : MonoBehaviour
     [SerializeField] private float explosiveRadius;
     [SerializeField] private int damage;
     [SerializeField] private GameObject explosionEffect;
+    [SerializeField] private SciptableAttackObj attack;
 
     // Start is called before the first frame update
     void Start()
@@ -30,15 +31,28 @@ public class ExplosiveProjectile : MonoBehaviour
 
         foreach (Collider nearbyObj in colliders)
         {
-            if (nearbyObj.gameObject.CompareTag("obj"))   //<-----Problary change this here for a more proper way when whe are sure for how the interactions should work
+            //if (nearbyObj.gameObject.CompareTag("Interact"))   //<-----Problary change this here for a more proper way when whe are sure for how the interactions should work
+            //{
+            //    nearbyObj.GetComponent<Interactable>().Interact();
+            //}
+
+        
+            //else if (nearbyObj.gameObject.CompareTag("Enemy"))
+            //{
+            //    EnemyStats enemy = nearbyObj.GetComponent<EnemyStats>();
+            //    enemy.TakeDamage(attack);
+            //}
+
+            if(nearbyObj.TryGetComponent<Interactable>(out Interactable interObj))
             {
-                nearbyObj.GetComponent<Interactable>().Interact();
+                interObj.Interact();
             }
-            else if (nearbyObj.gameObject.CompareTag("Enemy"))
+            else if (nearbyObj.TryGetComponent<EnemyStats>(out EnemyStats attackObj))
             {
-                EnemyStats enemy = nearbyObj.GetComponent<EnemyStats>();
-                enemy.TakeDamage(damage);
-            }          
+                attackObj.TakeDamage(attack);
+            }
+
+
         }
     }
      
