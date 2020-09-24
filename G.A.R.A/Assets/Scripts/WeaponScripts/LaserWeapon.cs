@@ -19,14 +19,14 @@ public class LaserWeapon : Weapon
         Debug.LogFormat("Shots fired from: " + gameObject.ToString());
 
         if(Physics.Raycast(firePoint.position, firePoint.forward, out hit, 100f))
-        {
-            if(hit.transform.CompareTag("Enemy"))
+        {          
+            if (hit.transform.TryGetComponent<Interactable>(out Interactable interObj))
             {
-                hit.transform.GetComponent<EnemyStats>().TakeDamage(attack);
+                interObj.Interact();
             }
-            else if(hit.transform.CompareTag("Interact"))
+            else if (hit.transform.TryGetComponent<EnemyStats>(out EnemyStats attackObj))
             {
-                hit.transform.GetComponent<Interactable>().Interact();              
+                attackObj.TakeDamage(attack);
             }
         }
     }
