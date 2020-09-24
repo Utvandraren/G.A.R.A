@@ -2,6 +2,7 @@
 
 public class Interactions : MonoBehaviour
 {
+    public bool returnWithSecondInteract;
     public bool isOpen;
 
     public float rangeToOpen;
@@ -10,17 +11,28 @@ public class Interactions : MonoBehaviour
 
     public void MoveUpAndDown()
     {
-        if (isOpen)
+        
+        if (returnWithSecondInteract)
         {
-            transform.position = transform.position - new Vector3(0, rangeToOpen, 0);
+            //If second interact with object should reverse direction
+            if (isOpen)
+            {
+                transform.position = transform.position - new Vector3(0, rangeToOpen, 0);
 
+            }
+            else
+            {
+                transform.position = transform.position + new Vector3(0, rangeToOpen, 0);
+            }
+
+            isOpen = !isOpen;
         }
         else
         {
+            //If second interact with object is same direction
             transform.position = transform.position + new Vector3(0, rangeToOpen, 0);
         }
-
-        isOpen = !isOpen;
+        
     }
 
     public void MoveSideway()

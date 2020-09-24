@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Door_Interactions : MonoBehaviour
 {
+    public bool returnToNormalWithSecondInteraction;
     public bool isOpen;
 
     public float rangeToOpen;
