@@ -1,6 +1,10 @@
 ﻿class Inverter : Task
 {
     Task child;
+    public Inverter(Task task)
+    {
+        child = task;
+    }
     public override Status Tick(BehaviorTree behaviorTree)
     {
         Status status = child.Tick(behaviorTree);

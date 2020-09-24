@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 4432575310953063625}
   - component: {fileID: -1504492085246054203}
   - component: {fileID: 4432575310953063638}
-  - component: {fileID: 8690849097098263704}
   - component: {fileID: 5824157368448424437}
   - component: {fileID: 4230501522975337930}
   - component: {fileID: 5338604928791571533}
+  - component: {fileID: 7125789260421820239}
   m_Layer: 0
   m_Name: SwarmerEnemy
   m_TagString: Untagged
@@ -86,25 +86,13 @@ MonoBehaviour:
   turningRate: 0.3
   detection: 0.1
   seperationWeight: 1
-  allignmentWeight: 1.3
-  cohesionWeight: 1
+  allignmentWeight: 0.5
+  cohesionWeight: 0.7
   avoidWeight: 1
   wiggleWeight: 0
   wiggleOffset: 1
   wiggleAmplitude: 1
   targetWeight: 1
---- !u!114 &8690849097098263704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4432575310953063639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5074989f94a9254dae7e02fa4ee5811, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5824157368448424437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +108,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   detectionRange: 10
   stats: {fileID: 5338604928791571533}
-  weaponRange: 1.5
+  weaponMaxRange: 3
+  weaponMinRange: 1
 --- !u!82 &4230501522975337930
 AudioSource:
   m_ObjectHideFlags: 0
@@ -231,6 +220,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartingHealth: 50
   deathTimer: 2
+--- !u!114 &7125789260421820239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432575310953063639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c0d6d9925b60f4abf5873e7a60e62a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4432575311682083765
 GameObject:
   m_ObjectHideFlags: 0

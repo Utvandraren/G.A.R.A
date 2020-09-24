@@ -9,14 +9,15 @@ public class Stats : MonoBehaviour
     [SerializeField] private int StartingHealth;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         Health = StartingHealth;
     }
 
-    public void TakeDamage(int damage)  //Logic handling taking damage
+    public virtual void TakeDamage(SciptableAttackObj attack)  //Logic handling taking damage
     {
-        Health -= damage;
+        Health -= attack.damage;
+        Debug.Log(gameObject.ToString() + " is taking damage");
         if (Health <= 0f)
         {
             Die();
