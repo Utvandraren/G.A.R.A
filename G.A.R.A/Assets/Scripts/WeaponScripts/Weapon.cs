@@ -6,10 +6,9 @@ public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
     public AudioSource shootSound;
+    public SciptableAttackObj attack;
 
-    public int damage;
     [SerializeField] private float timeBetweenAttacks;
-
     private float currentTime;
 
     void Start()

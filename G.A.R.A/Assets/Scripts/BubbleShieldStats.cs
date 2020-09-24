@@ -11,16 +11,14 @@ namespace Assets.Scripts
     /// </summary>
     class BubbleShieldStats : Stats
     {
-        //TODO: Update string variable and parameter to better type
-        string weakness = "electricity";
-        public void TakeDamage(int damage, string damageType)
+        public override void TakeDamage(SciptableAttackObj attack)
         {
-            if (damageType == weakness)
+            if (attack.element == SciptableAttackObj.WeaponElement.Electricity)
             {
                 Die();
                 return;
             }
-            TakeDamage(damage);
+            base.TakeDamage(attack);
         }
 
         public override void Die()
