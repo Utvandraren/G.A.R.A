@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6643723016212536575}
   - component: {fileID: 6643723016212536572}
   - component: {fileID: 6643723016212536573}
-  - component: {fileID: 6643723016212536574}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -80,19 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6643723016212536574
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6643723016212536568}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6643723016480546535
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 6643723016480546534}
   shootSound: {fileID: 0}
-  damage: 10
+  attack: {fileID: 11400000, guid: 2c7365c1aa195f9449f3c91d23899128, type: 2}
   timeBetweenAttacks: 1
   laserEffect: {fileID: 4829349516553165799}
 --- !u!1 &6643723017232583696
@@ -241,6 +227,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaceHolderLaserEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: b7c2604c4155435459b887ab8b281901,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: b7c2604c4155435459b887ab8b281901,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: b7c2604c4155435459b887ab8b281901,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 412.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659172622213229567, guid: b7c2604c4155435459b887ab8b281901,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7c2604c4155435459b887ab8b281901, type: 3}
 --- !u!4 &4328566536648627492 stripped
