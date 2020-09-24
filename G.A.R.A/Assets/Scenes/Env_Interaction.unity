@@ -474,6 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   rangeToOpen: 5
+  rotationAngle: 90
 --- !u!65 &601091619
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -954,7 +955,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 601091618}
-        m_MethodName: DoorMovesSideways
+        m_MethodName: RotateAroundZ
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

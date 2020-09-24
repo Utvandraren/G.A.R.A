@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Interactions : MonoBehaviour
 {
@@ -8,7 +6,9 @@ public class Interactions : MonoBehaviour
 
     public float rangeToOpen;
 
-    public void DoorMovesUpwards()
+    public float rotationAngle;
+
+    public void MoveUpAndDown()
     {
         if (isOpen)
         {
@@ -23,7 +23,7 @@ public class Interactions : MonoBehaviour
         isOpen = !isOpen;
     }
 
-    public void DoorMovesSideways()
+    public void MoveSideway()
     {
         if (isOpen)
         {
@@ -33,6 +33,33 @@ public class Interactions : MonoBehaviour
         else
         {
             transform.position = transform.position + new Vector3(rangeToOpen, 0, 0);
+        }
+
+        isOpen = !isOpen;
+    }
+
+    public void RotateAroundZ()
+    {
+        if (isOpen)
+        {
+            transform.Rotate(new Vector3(rotationAngle, 0, 0));
+        }
+        else
+        {
+            transform.Rotate(new Vector3(-rotationAngle, 0,0));
+        }
+
+        isOpen = !isOpen;
+    }
+    public void RotateAroundX()
+    {
+        if (isOpen)
+        {
+            transform.Rotate(new Vector3(0, rotationAngle, 0));
+        }
+        else
+        {
+            transform.Rotate(new Vector3(0, -rotationAngle, 0));
         }
 
         isOpen = !isOpen;
