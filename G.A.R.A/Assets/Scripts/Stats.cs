@@ -9,7 +9,7 @@ public class Stats : MonoBehaviour
     [SerializeField] private int StartingHealth;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         Health = StartingHealth;
     }

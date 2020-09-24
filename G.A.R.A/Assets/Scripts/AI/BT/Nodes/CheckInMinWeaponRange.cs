@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public class CheckInWeaponRange : Task
+public class CheckInMinWeaponRange : Task
 {
     bool someCondition;
 
@@ -7,7 +7,7 @@ public class CheckInWeaponRange : Task
     {
         someCondition = false;
         if (Vector3.Distance(behaviorTree.BlackBoard.transform.position,
-            behaviorTree.BlackBoard.target) < behaviorTree.BlackBoard.weaponRange)
+            behaviorTree.BlackBoard.target) < behaviorTree.BlackBoard.weaponMinRange)
             someCondition = true;
         if (someCondition == true)
             return Status.success;

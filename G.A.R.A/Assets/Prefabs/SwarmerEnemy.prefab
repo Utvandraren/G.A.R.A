@@ -86,8 +86,8 @@ MonoBehaviour:
   turningRate: 0.3
   detection: 0.1
   seperationWeight: 1
-  allignmentWeight: 1.3
-  cohesionWeight: 1
+  allignmentWeight: 0.5
+  cohesionWeight: 0.7
   avoidWeight: 1
   wiggleWeight: 0
   wiggleOffset: 1
@@ -108,7 +108,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   detectionRange: 10
   stats: {fileID: 5338604928791571533}
-  weaponRange: 1.5
+  weaponMaxRange: 3
+  weaponMinRange: 1
 --- !u!82 &4230501522975337930
 AudioSource:
   m_ObjectHideFlags: 0

@@ -10,5 +10,6 @@ public class BlackBoard : MonoBehaviour
 
     //Dependent perceptions
     internal Vector3 target;
-    public float weaponRange = 1;
+    public float weaponMaxRange = 3;
+    public float weaponMinRange = 1;
 }
