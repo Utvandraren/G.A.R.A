@@ -109,7 +109,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   detectionRange: 10
   stats: {fileID: 3387418532278061876}
-  weaponRange: 2
+  weaponMaxRange: 3
+  weaponMinRange: 1
 --- !u!114 &6275980567223361759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207e6dac538e82d419eb6107fbb2d97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingHealth: 100
+  startingHealth: 100
   deathTimer: 2
 --- !u!1 &6275980568922841023
 GameObject:
@@ -527,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3995bcb9b08116b47b142ff5a0157836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingHealth: 100
+  startingHealth: 0
 --- !u!1001 &8799517504291903350
 PrefabInstance:
   m_ObjectHideFlags: 0
