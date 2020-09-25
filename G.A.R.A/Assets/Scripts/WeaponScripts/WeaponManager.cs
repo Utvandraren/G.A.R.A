@@ -48,7 +48,7 @@ public class WeaponManager : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            currentWeapon.HandleShooterInput();
+            currentWeapon.TryShoot();
         }
     }
 

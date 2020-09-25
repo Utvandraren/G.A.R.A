@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
 
     }
 
-    public void HandleShooterInput()  //If cooldown is ready then you can shoot
+    public void TryShoot()  //If cooldown is ready then you can shoot
     {
         currentTime -= Time.deltaTime;
         Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
