@@ -9,16 +9,28 @@ using UnityEngine.Events;
 /// </summary>
 public class Interactable : MonoBehaviour
 {
-    public UnityEvent onInteracted;
+    public UnityEvent laserInteraction;
+    public UnityEvent explosiveInteraction;
+    public UnityEvent electricInteraction;
     float outlineCountdown = 0;
 
     /// <summary>
     /// Called when the object is interacted with. Invokes the methods selected in the Unity editor.
     /// </summary>
-    public void Interact()
+    public void Interact(SciptableAttackObj attack)
     {
-        Debug.Log("Hit!");
-        onInteracted?.Invoke();
+        switch (attack.element)
+        {
+            case SciptableAttackObj.WeaponElement.Laser:
+                laserInteraction.Invoke();
+                break;
+            case SciptableAttackObj.WeaponElement.Explosive:
+                explosiveInteraction.Invoke();
+                break;
+            case SciptableAttackObj.WeaponElement.Electricity:
+                electricInteraction.Invoke();
+                break;
+        }
     }
 
     /// <summary>

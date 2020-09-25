@@ -13,10 +13,18 @@ public class DestroyInteraction : MonoBehaviour
     private bool firstTime; //If first time entering DestroyMethod.
     private Vector3 originalScale;
 
+    private float noInteractionTimer;
+    private float noInteractionCooldown;
+
+    private bool inCooldown;
+
     public void Start()
     {
         destroy = false;
         firstTime = true;
+        inCooldown = false;
+        noInteractionCooldown = 2f;
+        noInteractionTimer = 0f;
     }
 
     /// <summary>
@@ -25,23 +33,30 @@ public class DestroyInteraction : MonoBehaviour
     /// </summary>
     public void DestroyTheObject()
     {
-        if (resetable)
+        if (!destroy)
         {
-            if (!isActive)
+            if (resetable)
             {
-                isActive = !isActive;
-                gameObject.SetActive(isActive);
-                ResetScale();
+                if (gameObject.activeInHierarchy == false)
+                {
+                    Debug.Log("Reset");
+                    gameObject.SetActive(true);
+                    ResetScale();
+                    inCooldown = true;
+                }
+                else
+                {
+                    if (!inCooldown)
+                    {
+                        Debug.Log("Destroy");
+                        destroy = true;
+                    }
+                }
             }
             else
             {
                 destroy = true;
-                isActive = !isActive;
-            } 
-        }
-        else
-        {
-            destroy = true;
+            }
         }
     }
 
@@ -62,13 +77,14 @@ public class DestroyInteraction : MonoBehaviour
         }
         transform.localScale = Vector3.Scale(transform.localScale, new Vector3(0.97f, 0.97f, 0.97f));
 
-        if (transform.localScale.x / originalScale.x < 0.01 || transform.localScale.y / originalScale.y < 0.01|| 
+        if (transform.localScale.x / originalScale.x < 0.01 || transform.localScale.y / originalScale.y < 0.01 ||
             transform.localScale.z / originalScale.z < 0.01)
         {
             destroy = false;
+
             if (resetable)
             {
-                gameObject.SetActive(isActive);
+                gameObject.SetActive(false);
             }
             else
             {
@@ -79,6 +95,16 @@ public class DestroyInteraction : MonoBehaviour
 
     public void Update()
     {
+        if (inCooldown)
+        {
+            noInteractionTimer += Time.deltaTime;
+            if (noInteractionTimer >= noInteractionCooldown)
+            {
+                inCooldown = false;
+                noInteractionTimer = 0;
+            }
+        }
+
         if (destroy)
         {
             DestroyAnimationMinimization(); //Currently chosen destroy animation

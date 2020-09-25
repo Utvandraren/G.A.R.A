@@ -33,7 +33,7 @@ public class ExplosiveProjectile : MonoBehaviour
         {
             if(nearbyObj.TryGetComponent<Interactable>(out Interactable interObj))
             {
-                interObj.Interact();
+                interObj.Interact(attack);
             }
             else if (nearbyObj.TryGetComponent<EnemyStats>(out EnemyStats attackObj))
             {
