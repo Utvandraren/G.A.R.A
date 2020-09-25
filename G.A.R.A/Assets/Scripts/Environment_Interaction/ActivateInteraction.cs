@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Switches active state when invoked.
+/// </summary>
 public class ActivateInteraction : MonoBehaviour
 {
     public ActivationEnum active;

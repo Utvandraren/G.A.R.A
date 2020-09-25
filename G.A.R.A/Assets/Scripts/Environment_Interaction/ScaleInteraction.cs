@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Scales the obejct when invoked. Either maximizes or minimizes.
+/// </summary>
 public class ScaleInteraction : MonoBehaviour
 {
-    public bool returnWithSecondInteract;
-    public bool isOpen;
+    public bool returnWithSecondInteract; //If the object should return to original scale with seond interaction.
+    public bool isFullyScaled;
 
-    public float scaleChange;
+    public float scaleChange; //How much the scale should change.
 
     private bool firstInteract = true;
     private Vector3 originalScale;
 
+    /// <summary>
+    /// Scales up the object when invoked. On second invoke either returns to normal or continues to scale
+    /// </summary>
     public void Maximize()
     {
         if (firstInteract)
@@ -21,7 +27,7 @@ public class ScaleInteraction : MonoBehaviour
         }
         if (returnWithSecondInteract)
         {
-            if (isOpen)
+            if (isFullyScaled)
             {
 
                 transform.localScale = originalScale;
@@ -31,7 +37,7 @@ public class ScaleInteraction : MonoBehaviour
                 transform.localScale = Vector3.Scale(transform.localScale, new Vector3(scaleChange, scaleChange, scaleChange));
             }
 
-            isOpen = !isOpen;
+            isFullyScaled = !isFullyScaled;
         }
         else
         {
@@ -39,6 +45,10 @@ public class ScaleInteraction : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// Scales down the object when invoked. On second invoke either returns to normal or continues to scale
+    /// </summary>
     public void Minimize()
     {
         if (firstInteract)
@@ -49,7 +59,7 @@ public class ScaleInteraction : MonoBehaviour
 
         if (returnWithSecondInteract)
         {
-            if (isOpen)
+            if (isFullyScaled)
             {
                 transform.localScale = originalScale;
             }
@@ -58,7 +68,7 @@ public class ScaleInteraction : MonoBehaviour
                 transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1/scaleChange, 1/scaleChange, 1/scaleChange));
             }
 
-            isOpen = !isOpen;
+            isFullyScaled = !isFullyScaled;
         }
         else
         {

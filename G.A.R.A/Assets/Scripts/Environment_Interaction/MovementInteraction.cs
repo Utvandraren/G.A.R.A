@@ -5,16 +5,19 @@ using UnityEngine;
 public class MovementInteraction : MonoBehaviour
 {
     public bool reverseWithSecondInteract;
-    public bool isOpen;
+    public bool isFullyMoved;
 
     public float rangeToOpen;
 
+    /// <summary>
+    /// Moves the object along y-axis when invoked. Moves object back with second invoke or continues moving in same direction.
+    /// </summary>
     public void MoveUpAndDown()
     {
         if (reverseWithSecondInteract)
         {
             //If second interact with object should reverse direction
-            if (isOpen)
+            if (isFullyMoved)
             {
                 transform.position = transform.position - new Vector3(0, rangeToOpen, 0);
 
@@ -24,7 +27,7 @@ public class MovementInteraction : MonoBehaviour
                 transform.position = transform.position + new Vector3(0, rangeToOpen, 0);
             }
 
-            isOpen = !isOpen;
+            isFullyMoved = !isFullyMoved;
         }
         else
         {
@@ -34,11 +37,14 @@ public class MovementInteraction : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Moves the object along x-axis when invoked. Moves object back with second invoke or continues moving in same direction.
+    /// </summary>
     public void MoveSideway()
     {
         if (reverseWithSecondInteract)
         {
-            if (isOpen)
+            if (isFullyMoved)
             {
                 transform.position = transform.position - new Vector3(rangeToOpen, 0, 0);
 
@@ -48,7 +54,7 @@ public class MovementInteraction : MonoBehaviour
                 transform.position = transform.position + new Vector3(rangeToOpen, 0, 0);
             }
 
-            isOpen = !isOpen;
+            isFullyMoved = !isFullyMoved;
         }
         else
         {

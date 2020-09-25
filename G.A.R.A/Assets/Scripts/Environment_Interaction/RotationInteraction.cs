@@ -5,15 +5,18 @@ using UnityEngine;
 public class RotationInteraction : MonoBehaviour
 {
     public bool returnWithSecondInteract;
-    public bool isOpen;
+    public bool isFullyRotated;
 
     public float rotationAngle;
 
+    /// <summary>
+    /// Rotates around Z when invoked. Either returns to normal with second invoke or continues rotating.
+    /// </summary>
     public void RotateZ()
     {
         if (returnWithSecondInteract)
         {
-            if (isOpen)
+            if (isFullyRotated)
             {
                 transform.Rotate(new Vector3(-rotationAngle, 0, 0));
             }
@@ -22,7 +25,7 @@ public class RotationInteraction : MonoBehaviour
                 transform.Rotate(new Vector3(rotationAngle, 0, 0));
             }
 
-            isOpen = !isOpen;
+            isFullyRotated = !isFullyRotated;
         }
         else
         {
@@ -30,11 +33,15 @@ public class RotationInteraction : MonoBehaviour
         }
         
     }
+
+    /// <summary>
+    /// Rotates around Y when invoked. Either returns to normal with second invoke or continues rotating.
+    /// </summary>
     public void RotateY()
     {
         if (returnWithSecondInteract)
         {
-            if (isOpen)
+            if (isFullyRotated)
             {
                 transform.Rotate(new Vector3(0, -rotationAngle, 0));
             }
@@ -43,7 +50,7 @@ public class RotationInteraction : MonoBehaviour
                 transform.Rotate(new Vector3(0, rotationAngle, 0));
             }
 
-            isOpen = !isOpen;
+            isFullyRotated = !isFullyRotated;
         }
         else
         {
