@@ -46,6 +46,12 @@ public class PlayerStats : Stats
             shield = Mathf.Max(shield, 0);
         }
     }
+    public void RestoreHealth(int amount)
+    {
+        //TODO: not pick up hp items if at full, need item implementation to do so
+        health += amount;
+        health = Mathf.Min(health, startingHealth);
+    }
     public override void Die()
     {
         base.Die();

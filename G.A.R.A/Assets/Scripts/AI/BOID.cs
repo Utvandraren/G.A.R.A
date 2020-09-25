@@ -9,7 +9,6 @@ public class BOID : MonoBehaviour
 
     new Rigidbody rigidbody;
     CapsuleCollider capsule; //warning not generic
-    BOID[] allBoids;
     List<BOID> relevantBoids;
     [Header("Manuverability")]
     [SerializeField] float detectionRange = 5f;
@@ -35,10 +34,9 @@ public class BOID : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         capsule = GetComponent<CapsuleCollider>();
-        //rigidbody.velocity = transform.forward * maxSpeed / 2;
-        allBoids = FindObjectsOfType<BOID>();
         relevantBoids = new List<BOID>();
         detectionRangeSqrd = Mathf.Pow(detectionRange, 2);
+        BoidManager.allBoids.Add(this);
     }
 
     internal void UpdateMovement(Vector3 targetDir)
@@ -76,7 +74,7 @@ public class BOID : MonoBehaviour
     private void Detect()
     {
         relevantBoids.Clear();
-        foreach (BOID other in allBoids)
+        foreach (BOID other in BoidManager.allBoids)
         {
             if (other == this)
                 continue;

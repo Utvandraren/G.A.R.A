@@ -5,16 +5,22 @@ using UnityEngine;
 public class BoidManager : MonoBehaviour
 {
     public static Vector3[] CollisionRayDirections { get; private set; }
+    public static List<BOID> allBoids;
     // Start is called before the first frame update
     void Awake()
     {
         GetSampleDirections();
+        allBoids = new List<BOID>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        for (int i = allBoids.Count - 1; i >= 0; i--)
+        {
+            if (allBoids[i] == null)
+                allBoids.RemoveAt(i);
+        }
     }
 
     /// <summary>

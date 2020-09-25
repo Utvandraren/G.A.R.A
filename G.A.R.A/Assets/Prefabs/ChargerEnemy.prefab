@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1395411641993713789}
   shootSound: {fileID: 0}
-  damage: 10
+  attack: {fileID: 0}
   timeBetweenAttacks: 1
   laserEffect: {fileID: 0}
 --- !u!1 &1395411642799184483
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 5338604928791571533}
   m_Layer: 0
   m_Name: ChargerEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,6 +262,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   detectionRange: 10
   stats: {fileID: 5338604928791571533}
+  weaponMaxRange: 3
+  weaponMinRange: 1
 --- !u!82 &4230501522975337930
 AudioSource:
   m_ObjectHideFlags: 0
@@ -370,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207e6dac538e82d419eb6107fbb2d97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingHealth: 50
+  startingHealth: 0
   deathTimer: 2
 --- !u!1 &4432575311682083765
 GameObject:

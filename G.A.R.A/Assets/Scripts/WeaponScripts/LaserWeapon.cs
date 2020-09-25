@@ -20,7 +20,7 @@ public class LaserWeapon : Weapon
 
         if(Physics.Raycast(firePoint.position, firePoint.forward, out hit, 100f))
         {
-            if(hit.transform.CompareTag("Enemy"))
+            if(hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
             {
                 hit.transform.GetComponent<Stats>().TakeDamage(attack);
             }
@@ -30,8 +30,4 @@ public class LaserWeapon : Weapon
             }
         }
     }
-
-   
-
-    
 }
