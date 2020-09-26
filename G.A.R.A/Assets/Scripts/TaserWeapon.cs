@@ -90,12 +90,12 @@ public class TaserWeapon : Weapon
         return false;
     }
 
-    EnemyStats GetClosestEnemy(Collider[] colliders, Collider startEnemy)  //Find the enemy closest to the startEnemy
+    EnemyStats GetClosestEnemy(Collider[] colliders, Collider startEnemy)  //Find the enemy closest to the startEnemy 
     {
         Collider closestEnemy = colliders[0];
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (Vector3.Distance(transform.position, colliders[i].transform.position) < Vector3.Distance(transform.position, closestEnemy.transform.position) && targetAlreadyHit(colliders[i]) == false /*&& colliders[i] != closestEnemy*/)
+            if (Vector3.Distance(startEnemy.transform.position, colliders[i].transform.position) < Vector3.Distance(startEnemy.transform.position, closestEnemy.transform.position) && targetAlreadyHit(colliders[i]) == false /*&& colliders[i] != closestEnemy*/)
             {
                 closestEnemy = colliders[i];
             }
