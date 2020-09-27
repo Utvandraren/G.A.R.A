@@ -5,20 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Stats : MonoBehaviour
 {
-    private int Health;
-    [SerializeField] private int StartingHealth;
+    protected int health;
+    [SerializeField] protected int startingHealth;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        Health = StartingHealth;
+        health = startingHealth;
     }
 
     public virtual void TakeDamage(SciptableAttackObj attack)  //Logic handling taking damage
     {
-        Health -= attack.damage;
+        health -= attack.damage;
         Debug.Log(gameObject.ToString() + " is taking damage");
-        if (Health <= 0f)
+        if (health <= 0f)
         {
             Die();
         }

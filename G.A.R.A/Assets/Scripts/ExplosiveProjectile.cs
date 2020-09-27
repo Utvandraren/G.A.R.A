@@ -31,18 +31,6 @@ public class ExplosiveProjectile : MonoBehaviour
 
         foreach (Collider nearbyObj in colliders)
         {
-            //if (nearbyObj.gameObject.CompareTag("Interact"))   //<-----Problary change this here for a more proper way when whe are sure for how the interactions should work
-            //{
-            //    nearbyObj.GetComponent<Interactable>().Interact();
-            //}
-
-        
-            //else if (nearbyObj.gameObject.CompareTag("Enemy"))
-            //{
-            //    EnemyStats enemy = nearbyObj.GetComponent<EnemyStats>();
-            //    enemy.TakeDamage(attack);
-            //}
-
             if(nearbyObj.TryGetComponent<Interactable>(out Interactable interObj))
             {
                 interObj.Interact();
@@ -51,8 +39,6 @@ public class ExplosiveProjectile : MonoBehaviour
             {
                 attackObj.TakeDamage(attack);
             }
-
-
         }
     }
      

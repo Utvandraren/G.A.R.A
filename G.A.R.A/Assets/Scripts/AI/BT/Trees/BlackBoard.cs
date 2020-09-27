@@ -12,4 +12,9 @@ public class BlackBoard : MonoBehaviour
     internal Vector3 target;
     public float weaponMaxRange = 3;
     public float weaponMinRange = 1;
+
+    private void Start()
+    {
+        PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 }
