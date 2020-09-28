@@ -7,6 +7,7 @@ public class BlackBoard : MonoBehaviour
     //Internal perceptions
     public float detectionRange;
     public Stats stats;
+    internal bool readyForApproach;
 
     //Dependent perceptions
     internal Vector3 target;

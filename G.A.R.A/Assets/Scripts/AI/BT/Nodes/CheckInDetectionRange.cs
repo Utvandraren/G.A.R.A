@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public class CheckInRange : Task
+public class CheckInDetectionRange : Task
 {
     bool someCondition;
 

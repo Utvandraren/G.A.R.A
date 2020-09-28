@@ -15,7 +15,7 @@ class Selector :Task
         foreach (Task task in children)
         {
             if (task.Tick(behaviorTree) != Status.failed)
-                return task.taskStatus;
+                return Status.success;
         }
         return Status.failed;
     }
