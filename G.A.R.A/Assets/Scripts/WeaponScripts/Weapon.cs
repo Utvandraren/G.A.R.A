@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
 
     private float currentTime;
 
-    void Start()
+    public virtual void Start()
     {
         currentTime = timeBetweenAttacks;
         ammo.ResetValue();
@@ -35,6 +35,7 @@ public class Weapon : MonoBehaviour
         {
             Shoot();
             currentTime = timeBetweenAttacks;
+            ammo.value--;
         }
 
     }
@@ -47,10 +48,15 @@ public class Weapon : MonoBehaviour
     {
         if(ammo.value > 0)
         {
+
             return true;
         }
+        else
+        {
+            Debug.Log("Ammo Empty " + ammo.value.ToString() + " " + ammo.name);
+            return false;
+        }
         
-        return false;
     }
 
 }

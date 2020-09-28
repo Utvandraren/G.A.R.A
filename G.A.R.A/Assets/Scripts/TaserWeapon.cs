@@ -13,8 +13,9 @@ public class TaserWeapon : Weapon
     private List<Collider> targetsAlreadyHit;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         targetsAlreadyHit = new List<Collider>();
         line = gameObject.GetComponentInChildren<LineRenderer>();
     }
