@@ -13,8 +13,9 @@ public class TaserWeapon : Weapon
     private List<Collider> targetsAlreadyHit;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         targetsAlreadyHit = new List<Collider>();
         line = gameObject.GetComponentInChildren<LineRenderer>();
     }
@@ -90,12 +91,12 @@ public class TaserWeapon : Weapon
         return false;
     }
 
-    EnemyStats GetClosestEnemy(Collider[] colliders, Collider startEnemy)  //Find the enemy closest to the startEnemy
+    EnemyStats GetClosestEnemy(Collider[] colliders, Collider startEnemy)  //Find the enemy closest to the startEnemy 
     {
         Collider closestEnemy = colliders[0];
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (Vector3.Distance(transform.position, colliders[i].transform.position) < Vector3.Distance(transform.position, closestEnemy.transform.position) && targetAlreadyHit(colliders[i]) == false /*&& colliders[i] != closestEnemy*/)
+            if (Vector3.Distance(startEnemy.transform.position, colliders[i].transform.position) < Vector3.Distance(startEnemy.transform.position, closestEnemy.transform.position) && targetAlreadyHit(colliders[i]) == false /*&& colliders[i] != closestEnemy*/)
             {
                 closestEnemy = colliders[i];
             }
