@@ -360,6 +360,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2750877411973155217, guid: a38018904f0165549a3cce3c8272c634,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4199879972989165055, guid: a38018904f0165549a3cce3c8272c634,
         type: 3}
       propertyPath: PlayerTransform
@@ -426,6 +431,16 @@ PrefabInstance:
       value: BasicEnemy (4)
       objectReference: {fileID: 0}
     - target: {fileID: 6275980567223361757, guid: a38018904f0165549a3cce3c8272c634,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6275980568922841023, guid: a38018904f0165549a3cce3c8272c634,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348201365385495412, guid: a38018904f0165549a3cce3c8272c634,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1659,7 +1674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1214099104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3217,5 +3232,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4614297702468155904, guid: a38018904f0165549a3cce3c8272c634, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a38018904f0165549a3cce3c8272c634, type: 3}

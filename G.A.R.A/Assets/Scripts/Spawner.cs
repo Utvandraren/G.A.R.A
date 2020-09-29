@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
             timer = 0;
             for (int i = 0; i < spawnAmount; i++)
             {
-                Instantiate(spawnObject);
+                Instantiate(spawnObject,transform.position,transform.rotation);
 
             }
         }
