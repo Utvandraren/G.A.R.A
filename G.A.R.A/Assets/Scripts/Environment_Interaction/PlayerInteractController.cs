@@ -9,6 +9,8 @@ public class PlayerInteractController : MonoBehaviour
     public float maxInteractDistance;
     public float maxOutlineDistance;
 
+    public bool canInteract;
+
     private void Update()
     {
         RaycastForOutline();
@@ -41,7 +43,6 @@ public class PlayerInteractController : MonoBehaviour
 
     /// <summary>
     /// Raycast to see if interactable object is hit. If it is hit and the object is closer than max distance the outline is enabled.
-    /// 
     /// </summary>
     private void RaycastForOutline()
     {
@@ -55,9 +56,12 @@ public class PlayerInteractController : MonoBehaviour
                 float distance = Vector3.Distance(camera.position, interactable.transform.position);
                 if (distance <= maxOutlineDistance)
                 {
+                    canInteract = true;
                     interactable.EnableOutline();
                 }
+                else canInteract = false;
             }
+            else canInteract = false;
         }
     }
 }
