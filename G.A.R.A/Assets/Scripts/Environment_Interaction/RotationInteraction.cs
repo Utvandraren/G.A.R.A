@@ -12,7 +12,7 @@ public class RotationInteraction : MonoBehaviour
     /// <summary>
     /// Rotates around Z when invoked. Either returns to normal with second invoke or continues rotating.
     /// </summary>
-    public void RotateZ()
+    public  void RotateZ()
     {
         if (returnWithSecondInteract)
         {
@@ -37,7 +37,7 @@ public class RotationInteraction : MonoBehaviour
     /// <summary>
     /// Rotates around Y when invoked. Either returns to normal with second invoke or continues rotating.
     /// </summary>
-    public void RotateY()
+    public  void RotateY()
     {
         if (returnWithSecondInteract)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementInteraction : MonoBehaviour
 {
-    public bool reverseWithSecondInteract;
+    public bool reverseMovementSecondInteract;
     public bool isFullyMoved;
 
     public float rangeToOpen;
@@ -12,9 +12,9 @@ public class MovementInteraction : MonoBehaviour
     /// <summary>
     /// Moves the object along y-axis when invoked. Moves object back with second invoke or continues moving in same direction.
     /// </summary>
-    public void MoveUpAndDown()
+    public  void MoveUpAndDown()
     {
-        if (reverseWithSecondInteract)
+        if (reverseMovementSecondInteract)
         {
             //If second interact with object should reverse direction
             if (isFullyMoved)
@@ -42,7 +42,7 @@ public class MovementInteraction : MonoBehaviour
     /// </summary>
     public void MoveSideway()
     {
-        if (reverseWithSecondInteract)
+        if (reverseMovementSecondInteract)
         {
             if (isFullyMoved)
             {

@@ -31,7 +31,7 @@ public class TaserWeapon : Weapon
         {
             if (hit.transform.TryGetComponent<Interactable>(out Interactable interObj))
             {
-                interObj.Interact();
+                interObj.Interact(attack);
             }
             else if (hit.transform.TryGetComponent<EnemyStats>(out EnemyStats attackObj))
             {

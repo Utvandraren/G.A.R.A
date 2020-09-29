@@ -22,7 +22,7 @@ public class LaserWeapon : Weapon
         {
             if (hit.transform.TryGetComponent<Interactable>(out Interactable interObj))
             {
-                interObj.Interact();
+                interObj.Interact(attack);
             }
 
             else if(hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
