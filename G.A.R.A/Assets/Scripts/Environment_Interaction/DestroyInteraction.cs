@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 /// <summary>
@@ -7,10 +8,7 @@ using UnityEngine;
 /// </summary>
 public class DestroyInteraction : MonoBehaviour
 {
-    public bool resetable; //If reset should be possible
-    public bool isActive;
     private bool destroy; //If object should be destroyed
-    private bool firstTime; //If first time entering DestroyMethod.
     private Vector3 originalScale;
 
     private float noInteractionTimer;
@@ -21,7 +19,6 @@ public class DestroyInteraction : MonoBehaviour
     public void Start()
     {
         destroy = false;
-        firstTime = true;
         inCooldown = false;
         noInteractionCooldown = 2f;
         noInteractionTimer = 0f;
@@ -33,35 +30,16 @@ public class DestroyInteraction : MonoBehaviour
     /// </summary>
     public void DestroyTheObject()
     {
-        if (!destroy)
+        if (!destroy && !inCooldown)
         {
-            if (resetable)
-            {
-                if (gameObject.activeInHierarchy == false)
-                {
-                    Debug.Log("Reset");
-                    gameObject.SetActive(true);
-                    ResetScale();
-                    inCooldown = true;
-                }
-                else
-                {
-                    if (!inCooldown)
-                    {
-                        Debug.Log("Destroy");
-                        destroy = true;
-                    }
-                }
-            }
-            else
-            {
-                destroy = true;
-            }
+            originalScale = transform.localScale;
+            destroy = true;
         }
     }
 
-    private void ResetScale()
+    public void ResetObject()
     {
+        inCooldown = true;
         transform.localScale = originalScale;
     }
 
@@ -70,26 +48,14 @@ public class DestroyInteraction : MonoBehaviour
     /// </summary>
     private void DestroyAnimationMinimization()
     {
-        if (firstTime)
-        {
-            originalScale = transform.localScale;
-            firstTime = false;
-        }
         transform.localScale = Vector3.Scale(transform.localScale, new Vector3(0.97f, 0.97f, 0.97f));
 
-        if (transform.localScale.x / originalScale.x < 0.01 || transform.localScale.y / originalScale.y < 0.01 ||
-            transform.localScale.z / originalScale.z < 0.01)
+        if (transform.localScale.x / originalScale.x < 0.05 || transform.localScale.y / originalScale.y < 0.05 ||
+            transform.localScale.z / originalScale.z < 0.05)
         {
             destroy = false;
-
-            if (resetable)
-            {
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            PuzzleManager.Instance.AddDeletedObjectToQueue(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
