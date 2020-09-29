@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField, Range(.1f, 2f)] private float mouseSensitivityMultiplier = 1f; //Might move this later to a manager type script
 
+    /// <summary>
+    /// CameraState class from the unity base camera script, slightly changed. Handles mouse look.
+    /// </summary>
     class CameraState
     {
         public float yaw;
@@ -63,6 +66,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Whether or not to invert our Y axis for mouse input to rotation.")]
     public bool invertY = false;
 
+    /// <summary>
+    /// Gets the players desired direction of movement.
+    /// </summary>
+    /// <returns></returns>
     private Vector3 GetInputTranslationDirection()
     {
         Vector3 direction = new Vector3();
@@ -107,6 +114,9 @@ public class PlayerController : MonoBehaviour
         m_CameraState.SetFromTransform(transform);
     }
 
+    /// <summary>
+    /// Update here mostly handles rotation (mouse look) of the player as well and the roll rate.
+    /// </summary>
     private void Update()
     {
         Vector3 translation = Vector3.zero;
@@ -129,7 +139,7 @@ public class PlayerController : MonoBehaviour
             currentRollRate = Mathf.Lerp(currentRollRate, -maxRollRate, 1f - Mathf.Exp((Mathf.Log(1f - 0.8f) / rollLerpTime) * Time.deltaTime));
             transform.Rotate(new Vector3(0, 0, currentRollRate));
         }
-        else
+        else //Smoothly stop the rotation
         {
             currentRollRate = Mathf.Lerp(currentRollRate, 0, 1f - Mathf.Exp((Mathf.Log(1f - 0.99f) / (rollLerpTime)) * Time.deltaTime));
             transform.Rotate(new Vector3(0, 0, currentRollRate));
@@ -147,7 +157,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //Everything physics related must be added here, not in Update()
+    /// <summary>
+    /// Everything that uses physics or force should be added here. Handles the movement of the player by adding force to the rigidbody.
+    /// Right now uses drag to simulate stopping.
+    /// </summary>
     private void FixedUpdate()
     {
         Vector3 translation = Vector3.zero;
@@ -170,10 +183,5 @@ public class PlayerController : MonoBehaviour
         //    Vector3 dampeningVector = -velocityVector;
         //    rb.AddForce(dampeningVector * dampeningThrustForce, ForceMode.Force);
         //}
-    }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 250, 100), currentRollRate.ToString());
     }
 }

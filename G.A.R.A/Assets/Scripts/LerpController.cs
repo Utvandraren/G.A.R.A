@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraLerpController : MonoBehaviour
+/// <summary>
+/// The point of this script is to lerp to the new camera position, 
+/// because Unity caused slighly jittery movement when only using rigidbody interpolation
+/// </summary>
+public class LerpController : MonoBehaviour
 {
-
-    //The point of this script is to lerp to the new camera position, 
-    //because Unity caused slighly jittery movement when only using rigidbody interpolation
     private Transform target;
     private float targetPosX;
     private float targetPosY;
@@ -24,7 +25,10 @@ public class CameraLerpController : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// First gets the desired target rotation and then desired position.
+    /// Then lerps to the rotation and position of the target object (usually a childed empty game object)
+    /// </summary>
     void Update()
     {
         //Rotation lerp

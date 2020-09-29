@@ -23,6 +23,10 @@ public class DialogueManager : MonoBehaviour
         interact = FindObjectOfType<PlayerInteractController>();
     }
 
+    /// <summary>
+    /// Checks if the player is trying to advance currently running dialogue 
+    /// or if they go to far from the dialogue source it ends the dialogue
+    /// </summary>
     private void Update()
     {
         if (animator.GetBool("IsOpen"))
@@ -42,7 +46,7 @@ public class DialogueManager : MonoBehaviour
     /// <summary>
     /// This is called by the DialogueTrigger script when the player starts a dialogue
     /// </summary>
-    /// <param name="dialogue">dialogue variable from the object that contains the dialogue</param>
+    /// <param name="dialogue">Dialogue variable from the object that contains the dialogue text</param>
     public void StartDialogue(Dialogue dialogue)
     {
         animator.SetBool("IsOpen", true);
