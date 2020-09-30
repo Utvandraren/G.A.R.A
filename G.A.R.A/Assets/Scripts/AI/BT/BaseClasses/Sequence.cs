@@ -1,5 +1,7 @@
 ﻿/// <summary>
 /// To be implemented and used
+/// Returns sucess only if all childern succeeds
+/// Used to implement a sequence of dependent tasks
 /// </summary>
 class Sequence : Task
 {

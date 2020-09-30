@@ -16,6 +16,8 @@ public class BoidManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Quick fix for removal, an event system is better,
+        //boids handles initialization individually, see BOID start method
         for (int i = allBoids.Count - 1; i >= 0; i--)
         {
             if (allBoids[i] == null)
@@ -24,7 +26,8 @@ public class BoidManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns well spaced directions on a sphere
+    /// Calculates well spaced directions on a sphere
+    /// Used to query from a point in front to a point in the back sequentially
     /// </summary>
     /// <param name="numSamples"></param>
     /// <returns></returns>

@@ -2,6 +2,7 @@
 /// Not to be implemented
 /// Used as a base for the actual Decorator nodes
 /// Copy this class to the Nodes folder and give descriptive name
+/// Decorators modifies its child node
 /// </summary>
 class Decorator : Task
 {

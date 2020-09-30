@@ -1,5 +1,7 @@
 ﻿/// <summary>
 /// To be implemented and used
+/// Return sucess as soon as one child returns sucess
+/// used to select one behavior
 /// </summary>
 class Selector :Task
 {

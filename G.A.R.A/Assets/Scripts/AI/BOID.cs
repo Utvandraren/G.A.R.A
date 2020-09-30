@@ -15,7 +15,8 @@ public class BOID : MonoBehaviour
     float detectionRangeSqrd;
     [SerializeField] float maxSpeed = 5f;
     [SerializeField] [Range(0, 1)] float turningRate = 0.1f;
-    [SerializeField] [Range(-1, 1)] float detection = -0.25f;
+    [SerializeField] [Range(0, 1)] float detectionView = 0.30f;
+    float detectDotCompare;
 
     [Header("Weights")]
     [SerializeField] float seperationWeight = 1f;
@@ -59,6 +60,10 @@ public class BOID : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
     }
 
+    /// <summary>
+    /// Used to turn enemy without movement
+    /// </summary>
+    /// <param name="target"></param>
     internal void TurnTo(Vector3 target)
     {
         Transform tempTrans = transform;
@@ -73,6 +78,7 @@ public class BOID : MonoBehaviour
 
     private void Detect()
     {
+        detectDotCompare = -(detectionView * 2 - 1);
         relevantBoids.Clear();
         foreach (BOID other in BoidManager.allBoids)
         {
@@ -81,11 +87,14 @@ public class BOID : MonoBehaviour
             Vector3 toOther = other.transform.position - transform.position;
             Vector3 normalizedToOther = Vector3.Normalize(toOther);
             if (toOther.sqrMagnitude < detectionRangeSqrd)
-                if (Vector3.Dot(transform.forward, normalizedToOther) > detection)
+                if (Vector3.Dot(transform.forward, normalizedToOther) > detectDotCompare)
                     relevantBoids.Add(other);
         }
     }
-
+    /// <summary>
+    /// Calculates the acceleration vector from BOID behavior
+    /// </summary>
+    /// <returns>Acceleration</returns>
     private Vector3 CalcAcceleration()
     {
         Vector3 seperationVector = Vector3.zero;
@@ -108,7 +117,11 @@ public class BOID : MonoBehaviour
             tempAcceleration = transform.forward;
         return tempAcceleration;
     }
-
+    /// <summary>
+    /// Gets a vector pointing away from a visible boid entity
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns>seperation vector</returns>
     private Vector3 CalcSeperation(BOID other)
     {
         Vector3 awayVector = -(other.transform.position - transform.position);
@@ -124,6 +137,10 @@ public class BOID : MonoBehaviour
         return other.transform.position - transform.position;
     }
 
+    /// <summary>
+    /// Finds an unobstructed directon if risking collision
+    /// </summary>
+    /// <returns></returns>
     private Vector3 AvoidObstacle()
     {
         RaycastHit hit;
@@ -141,10 +158,14 @@ public class BOID : MonoBehaviour
                 Vector3 avoidVec = dir * avoidWeight / Mathf.Pow(shortestDistToObst, 2);
                 return avoidVec;
             }
-            shortestDistToObst = Mathf.Min(shortestDistToObst, searchHit.distance);
+            shortestDistToObst = Mathf.Min(shortestDistToObst, searchHit.distance); //sets shortest distance to obstacle, used to determin magnintude of avoid vector
         }
         return Vector3.zero;
     }
+    /// <summary>
+    /// Gives a random jitter to prevent wall-hugging
+    /// </summary>
+    /// <returns></returns>
     private Vector3 RandomWiggle()
     {
         return Vector3.Normalize(transform.forward * wiggleOffset + UnityEngine.Random.insideUnitSphere * wiggleAmplitude);
