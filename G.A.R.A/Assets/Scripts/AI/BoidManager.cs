@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Holds the list of boid elements and manages removal from the list
+/// Holds CollisionRayDirections for every boid to use as reference
+/// </summary>
 public class BoidManager : MonoBehaviour
 {
     public static Vector3[] CollisionRayDirections { get; private set; }
