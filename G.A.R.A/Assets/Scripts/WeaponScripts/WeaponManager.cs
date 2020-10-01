@@ -8,6 +8,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] GameObject explosiveWeapon;
     [SerializeField] GameObject TaserWeapon;
 
+    [SerializeField] private Animator taserAnim;
+
     Weapon currentWeapon;
 
     private int mouseDelta;
@@ -34,6 +36,11 @@ public class WeaponManager : MonoBehaviour
         handleInput();
     }
 
+    public void FixedUpdate()
+    {
+        taserAnim.SetBool("Fire", false);
+    }
+
     void handleInput()   //Check if mouseScroll has changed and thus should change the weapon
     {
         mouseDelta += (int)Input.mouseScrollDelta.y;
@@ -49,6 +56,7 @@ public class WeaponManager : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             currentWeapon.TryShoot();
+            taserAnim.SetBool("Fire", true);
         }
     }
 
