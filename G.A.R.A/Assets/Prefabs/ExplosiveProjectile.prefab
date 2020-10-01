@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6015278588857588898}
   - component: {fileID: 6015278588857588899}
   - component: {fileID: 6015278588857588896}
+  - component: {fileID: 474241167138293703}
   m_Layer: 0
   m_Name: ExplosiveProjectile
   m_TagString: Untagged
@@ -109,7 +110,24 @@ MonoBehaviour:
   speed: 10
   lifeTime: 10
   explosiveRadius: 1.6
-  damage: 100
   explosionEffect: {fileID: 174508067202234687, guid: bb708427dd2104e4bb7afb41f7116103,
     type: 3}
   attack: {fileID: 11400000, guid: 831de824c43d10b4aacafa72288ac165, type: 2}
+  directHitAttack: {fileID: 11400000, guid: 7151e65878a37d049b699f91c77f5b97, type: 2}
+  rigidBody: {fileID: 474241167138293703}
+--- !u!54 &474241167138293703
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015278588857588897}
+  serializedVersion: 2
+  m_Mass: 0.5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

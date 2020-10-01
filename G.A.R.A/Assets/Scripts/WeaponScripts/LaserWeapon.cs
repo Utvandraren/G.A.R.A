@@ -6,13 +6,14 @@ using UnityEngine.Diagnostics;
 
 public class LaserWeapon : Weapon
 {
-    [SerializeField]private ParticleSystem laserEffect;
+    [SerializeField]private GameObject laserEffect;
 
     public override void Shoot()  //Starts visual effects and draw ray to check if colldiding with any valiable target
     {
         base.Shoot();
-
-        laserEffect.Play();
+        GameObject instantLaserEffect;
+        instantLaserEffect = Instantiate(laserEffect, firePoint.position, firePoint.rotation);
+        Destroy(instantLaserEffect, 0.5f);
         //shootSound.Play();
 
         RaycastHit hit;
