@@ -559,8 +559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 302968463}
-  maxInteractDistance: 1
-  maxOutlineDistance: 1
+  maxInteractDistance: 2
+  maxOutlineDistance: 5
   canInteract: 0
 --- !u!1 &517224291
 GameObject:
@@ -610,7 +610,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af47be7ea4fa2e4ca2e69a4b259ad99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteracted:
+  laserInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+  explosiveInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+  electricInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+  useInteraction:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 517224297}
@@ -729,6 +738,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3709482351168555325, guid: cbb541747f780e84ca2cc3a0aadf2561,
+        type: 3}
+      propertyPath: maxOutlineDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709482351168555325, guid: cbb541747f780e84ca2cc3a0aadf2561,
+        type: 3}
+      propertyPath: maxInteractDistance
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3887101940122989429, guid: cbb541747f780e84ca2cc3a0aadf2561,
         type: 3}
       propertyPath: m_LocalPosition.z

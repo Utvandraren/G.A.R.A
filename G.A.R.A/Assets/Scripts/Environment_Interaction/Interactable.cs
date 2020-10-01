@@ -12,6 +12,7 @@ public class Interactable : MonoBehaviour
     public UnityEvent laserInteraction;
     public UnityEvent explosiveInteraction;
     public UnityEvent electricInteraction;
+    public UnityEvent useInteraction;
     float outlineCountdown = 0;
 
     /// <summary>
@@ -31,6 +32,11 @@ public class Interactable : MonoBehaviour
                 electricInteraction.Invoke();
                 break;
         }
+    }
+
+    public void Interact()
+    {
+        useInteraction.Invoke();
     }
 
     /// <summary>
