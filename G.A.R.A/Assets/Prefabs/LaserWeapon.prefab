@@ -127,10 +127,11 @@ MonoBehaviour:
   firePoint: {fileID: 6643723017232583703}
   shootSound: {fileID: 0}
   attack: {fileID: 11400000, guid: 2c7365c1aa195f9449f3c91d23899128, type: 2}
-  timeBetweenAttacks: 1
+  timeBetweenAttacks: 0.4
   ammo: {fileID: 11400000, guid: 09b7a550a075bdb4d8306072664b3afb, type: 2}
   laserEffect: {fileID: 6146890791480089275, guid: 7e80ff815d8740443bf2ac33fcbf4cbf,
     type: 3}
+  maxRange: 100
 --- !u!1 &6643723017232583696
 GameObject:
   m_ObjectHideFlags: 0

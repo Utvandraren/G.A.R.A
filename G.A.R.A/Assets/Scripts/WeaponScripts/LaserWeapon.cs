@@ -14,8 +14,8 @@ public class LaserWeapon : Weapon
     {
         base.Shoot();
         GameObject instantLaserEffect;
-        instantLaserEffect = Instantiate(laserEffect, firePoint.position, firePoint.rotation);
-        Destroy(instantLaserEffect, 0.5f);
+        instantLaserEffect = Instantiate(laserEffect, firePoint.position, firePoint.rotation,transform);
+        Destroy(instantLaserEffect, 0.2f);
         //shootSound.Play();
 
         RaycastHit hit;
