@@ -43,17 +43,24 @@ public class WeaponManager : MonoBehaviour
 
     void handleInput()   //Check if mouseScroll has changed and thus should change the weapon
     {
-        mouseDelta += (int)Input.mouseScrollDelta.y;
-        mouseDelta = (int)Mathf.Clamp(mouseDelta, 0f, 2f);
-        Weapons weap = (Weapons)mouseDelta;
-
+        if((int)Input.mouseScrollDelta.y < 0)
+        {
+            mouseDelta -= (int)Input.mouseScrollDelta.y;
+        }
+        else
+        {
+            mouseDelta += (int)Input.mouseScrollDelta.y;
+        }
+        
         if(mouseDelta != oldMouseDelta)
         {
+            mouseDelta = mouseDelta % 3;
+            Weapons weap = (Weapons)mouseDelta;
             ChangeWeapon(weap);
             oldMouseDelta = mouseDelta;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             currentWeapon.TryShoot();
             taserAnim.SetBool("Fire", true);

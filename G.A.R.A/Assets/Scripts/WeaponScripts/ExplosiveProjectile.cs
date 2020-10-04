@@ -7,21 +7,20 @@ public class ExplosiveProjectile : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float lifeTime;
     [SerializeField] private float explosiveRadius;
-    [SerializeField] private int damage;
     [SerializeField] private GameObject explosionEffect;
     [SerializeField] private SciptableAttackObj attack;
+    [SerializeField] private SciptableAttackObj directHitAttack;
+    [SerializeField] private Rigidbody rigidBody;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, lifeTime);
+        rigidBody.velocity = transform.forward * speed;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position += transform.forward * speed * Time.deltaTime;
-    }
+
 
     void Explode() //The logic handling what happens if a interactable object or enemy is inside the explosion radius when the projectile explode
     {
@@ -31,19 +30,35 @@ public class ExplosiveProjectile : MonoBehaviour
 
         foreach (Collider nearbyObj in colliders)
         {
-            if(nearbyObj.TryGetComponent<Interactable>(out Interactable interObj))
+            if (nearbyObj.TryGetComponent<Interactable>(out Interactable interObj))
             {
                 interObj.Interact(attack);
             }
             else if (nearbyObj.TryGetComponent<EnemyStats>(out EnemyStats attackObj))
             {
+                ////Code here deal damage to enemies caught in the explosion based on the distance to center
+                //float distanceToCenter = (int)Vector3.Distance(transform.position, attackObj.transform.position);         
+                //distanceToCenter /= explosiveRadius;
+                //int oldDamage = attack.damage;
+                //float newDamage;
+                //newDamage = (float)attack.damage * distanceToCenter;
+                //attack.damage = (int)newDamage;
+                //Debug.Log("Damage: " + attack.damage.ToString(), attackObj.gameObject);
+                //attackObj.TakeDamage(attack);
+                //attack.damage = oldDamage;
+
                 attackObj.TakeDamage(attack);
             }
         }
     }
-     
-    void OnTriggerEnter(Collider other) 
+
+    void OnTriggerEnter(Collider other)  //Damage if possible the obj the projectile collided with and then explode 
     {
+        if (other.TryGetComponent<EnemyStats>(out EnemyStats attackObj))
+        {
+            attackObj.TakeDamage(directHitAttack);
+        }
+
         Explode();
         gameObject.SetActive(false);
         Destroy(gameObject, 3f);
