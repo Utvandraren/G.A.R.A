@@ -5,12 +5,14 @@ using UnityEngine;
 public class PuzzleManager : Singleton<PuzzleManager>
 {
     private Queue<GameObject> deletedObjects;
+    public bool puzzleCompleted;
 
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         deletedObjects = new Queue<GameObject>();
+        puzzleCompleted = false;
     }
 
     public void Update()
@@ -20,7 +22,7 @@ public class PuzzleManager : Singleton<PuzzleManager>
             Debug.Log(deletedObjects.Count);
             GameObject temp = deletedObjects.Dequeue();
             temp.SetActive(true);
-            if(temp.TryGetComponent<DestroyInteraction>(out DestroyInteraction di))
+            if (temp.TryGetComponent<DestroyInteraction>(out DestroyInteraction di))
             {
                 di.ResetObject();
             }

@@ -15,6 +15,7 @@ public class DestroyInteraction : MonoBehaviour
     private float noInteractionCooldown;
 
     private bool inCooldown;
+    public bool destroyable;
 
     public void Start()
     {
@@ -30,7 +31,7 @@ public class DestroyInteraction : MonoBehaviour
     /// </summary>
     public void DestroyTheObject()
     {
-        if (!destroy && !inCooldown)
+        if (!destroy && !inCooldown && destroyable)
         {
             originalScale = transform.localScale;
             destroy = true;

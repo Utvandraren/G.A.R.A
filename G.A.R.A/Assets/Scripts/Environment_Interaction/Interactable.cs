@@ -14,23 +14,29 @@ public class Interactable : MonoBehaviour
     public UnityEvent electricInteraction;
     public UnityEvent useInteraction;
     float outlineCountdown = 0;
+    public bool canInteract;
+    public bool showOutline;
+
 
     /// <summary>
     /// Called when the object is interacted with. Invokes the methods selected in the Unity editor.
     /// </summary>
     public void Interact(SciptableAttackObj attack)
     {
-        switch (attack.element)
+        if (canInteract)
         {
-            case SciptableAttackObj.WeaponElement.Laser:
-                laserInteraction.Invoke();
-                break;
-            case SciptableAttackObj.WeaponElement.Explosive:
-                explosiveInteraction.Invoke();
-                break;
-            case SciptableAttackObj.WeaponElement.Electricity:
-                electricInteraction.Invoke();
-                break;
+            switch (attack.element)
+            {
+                case SciptableAttackObj.WeaponElement.Laser:
+                    laserInteraction.Invoke();
+                    break;
+                case SciptableAttackObj.WeaponElement.Explosive:
+                    explosiveInteraction.Invoke();
+                    break;
+                case SciptableAttackObj.WeaponElement.Electricity:
+                    electricInteraction.Invoke();
+                    break;
+            }
         }
     }
 
@@ -44,11 +50,14 @@ public class Interactable : MonoBehaviour
     /// </summary>
     public void EnableOutline()
     {
-        if(!transform.GetComponent<Outline>().enabled)
+        if (showOutline)
         {
-            transform.GetComponent<Outline>().enabled = true;
+            if (!transform.GetComponent<Outline>().enabled)
+            {
+                transform.GetComponent<Outline>().enabled = true;
+            }
+            outlineCountdown = 1f;
         }
-        outlineCountdown = 1f;
     }
 
     /// <summary>

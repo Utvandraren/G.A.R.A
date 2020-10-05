@@ -13,7 +13,6 @@ public class PlayerInteractController : MonoBehaviour
 
     public void Start()
     {
-        camera = Camera.main.transform;
     }
 
     private void Update()
