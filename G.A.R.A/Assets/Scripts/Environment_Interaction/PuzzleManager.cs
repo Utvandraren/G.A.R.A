@@ -6,6 +6,10 @@ public class PuzzleManager : Singleton<PuzzleManager>
 {
     private Queue<GameObject> deletedObjects;
     public bool puzzleCompleted;
+    public GameObject[] puzzle;
+    private Vector3[] puzzleStartPos;
+    private Quaternion[] puzzleStartRot;
+    private Vector3[] puzzleStartScale;
 
     // Start is called before the first frame update
     void Start()
@@ -13,18 +17,31 @@ public class PuzzleManager : Singleton<PuzzleManager>
         DontDestroyOnLoad(gameObject);
         deletedObjects = new Queue<GameObject>();
         puzzleCompleted = false;
+        FillStartTransforms();
+    }
+    public void FillStartTransforms()
+    {
+        
+        puzzleStartPos = new Vector3[puzzle.Length];
+        puzzleStartRot = new Quaternion[puzzle.Length];
+        puzzleStartScale = new Vector3[puzzle.Length];
+        for (int i = 0; i < puzzle.Length; i++)
+        {
+            puzzleStartPos[i] = puzzle[i].transform.position;
+            puzzleStartRot[i] = puzzle[i].transform.rotation;
+            puzzleStartScale[i] = puzzle[i].transform.localScale;
+        }
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Debug.Log(deletedObjects.Count);
-            GameObject temp = deletedObjects.Dequeue();
-            temp.SetActive(true);
-            if (temp.TryGetComponent<DestroyInteraction>(out DestroyInteraction di))
+            for (int i = 0; i < puzzle.Length; i++)
             {
-                di.ResetObject();
+                puzzle[i].transform.position = puzzleStartPos[i];
+                puzzle[i].transform.rotation = puzzleStartRot[i];
+                puzzle[i].transform.localScale = puzzleStartScale[i];
             }
         }
     }

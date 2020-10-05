@@ -26,7 +26,7 @@ public class SwitchMaterial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isRed)
+        if (isBlue || isGreen)
         {
             if (gameObject.TryGetComponent<ActivateInteraction>(out ActivateInteraction interaction))
             {
@@ -55,6 +55,7 @@ public class SwitchMaterial : MonoBehaviour
             if (!isRed)
             {
                 gameObject.GetComponent<MeshRenderer>().material = red;
+                isRed = true;
             }
         }
     }

@@ -12,11 +12,13 @@ public class PuzzlePiecesColission : MonoBehaviour
             PuzzleManager.Instance.puzzleCompleted = true;
             if(gameObject.TryGetComponent<SwitchMaterial>(out SwitchMaterial sm))
             {
-                sm.isRed = true;
+                sm.isBlue = false;
+                sm.isGreen = false;
             }
             if (collision.gameObject.TryGetComponent<SwitchMaterial>(out SwitchMaterial smc))
             {
-                smc.isRed = true;
+                smc.isBlue = false;
+                smc.isGreen = false;
             }
             if(gameObject.TryGetComponent<Interactable>(out Interactable i))
             {
@@ -37,19 +39,23 @@ public class PuzzlePiecesColission : MonoBehaviour
             PuzzleManager.Instance.puzzleCompleted = true;
             if (gameObject.TryGetComponent<SwitchMaterial>(out SwitchMaterial sm))
             {
-                sm.isRed = true;
+                sm.isBlue = false;
+                sm.isGreen = false;
             }
             if (other.gameObject.TryGetComponent<SwitchMaterial>(out SwitchMaterial smc))
             {
-                smc.isRed = true;
+                smc.isBlue = false;
+                smc.isGreen = false;
             }
             if (gameObject.TryGetComponent<Interactable>(out Interactable i))
             {
-                i.enabled = false;
+                i.canInteract = false;
+                i.showOutline = false;
             }
             if (other.gameObject.TryGetComponent<Interactable>(out Interactable ic))
             {
-                ic.enabled = false;
+                ic.canInteract = false;
+                ic.showOutline = false;
             }
         }
     }
