@@ -9,12 +9,31 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] private Dialogue dialogue;
-
+    private bool hasBeenInvoked = false;
+    private float coolDownTimer = 0;
+    private float coolDown = 1f;
     /// <summary>
     /// This method is called whenever the player tries to start a dialogue
     /// </summary>
     public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        if (!hasBeenInvoked)
+        {
+            hasBeenInvoked = true;
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        }
+    }
+
+    public void Update()
+    {
+        if (hasBeenInvoked)
+        {
+            coolDownTimer += Time.deltaTime;
+            if(coolDownTimer > coolDown)
+            {
+                hasBeenInvoked = false;
+                coolDownTimer = 0;
+            }
+        }
     }
 }

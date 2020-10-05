@@ -11,6 +11,10 @@ public class PlayerInteractController : MonoBehaviour
 
     public bool canInteract;
 
+    public void Start()
+    {
+    }
+
     private void Update()
     {
         RaycastForOutline();
@@ -34,7 +38,7 @@ public class PlayerInteractController : MonoBehaviour
                     float distance = Vector3.Distance(camera.position, interactable.transform.position);
                     if (distance <= maxInteractDistance)
                     {
-                        interactable.Interact(null);
+                        interactable.Interact();
                     }
                 }
             }
