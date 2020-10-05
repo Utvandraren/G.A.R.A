@@ -134,6 +134,8 @@ MonoBehaviour:
   jumpRange: 8
   nmbrJumps: 4
   electricityEffect: {fileID: 3116009254974975394}
+  electricityHitSparks: {fileID: 5635865214718621758, guid: 28221bddfd847a548af9f804f04a40b5,
+    type: 3}
 --- !u!1 &1689679520757863481
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +185,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 47c51b083b01224498e699083aa57a90, type: 2}
+  - {fileID: 2100000, guid: 15674d4c9f61c0c45a6612c52aed53a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -207,7 +209,7 @@ LineRenderer:
   m_Positions: []
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -252,10 +254,10 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 10
     numCapVertices: 0
     alignment: 0
-    textureMode: 1
+    textureMode: 0
     shadowBias: 0.5
     generateLightingData: 1
   m_UseWorldSpace: 1
@@ -332,6 +334,71 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: TrailModule.minVertexDistance
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: TrailModule.inheritParticleColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxGradient.key0.r
+      value: 0.4009434
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxGradient.key0.b
+      value: 0.95364004
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxGradient.key1.r
+      value: 0.41176474
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxGradient.key1.b
+      value: 0.95294124
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: NoiseModule.strength.scalar
+      value: 3.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105568043848724182, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: NoiseModule.frequency
+      value: 0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659172622213229567, guid: 7bdfc8076a4f65b4ab9269781013d263,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 15674d4c9f61c0c45a6612c52aed53a8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bdfc8076a4f65b4ab9269781013d263, type: 3}
 --- !u!4 &6064425037955490657 stripped
