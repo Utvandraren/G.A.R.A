@@ -42,6 +42,10 @@ public class PuzzleManager : Singleton<PuzzleManager>
                 puzzle[i].transform.position = puzzleStartPos[i];
                 puzzle[i].transform.rotation = puzzleStartRot[i];
                 puzzle[i].transform.localScale = puzzleStartScale[i];
+                if (puzzle[i].TryGetComponent<MovementInteraction>(out MovementInteraction mi))
+                {
+                    mi.stopCoroutine = false;
+                }
             }
         }
     }

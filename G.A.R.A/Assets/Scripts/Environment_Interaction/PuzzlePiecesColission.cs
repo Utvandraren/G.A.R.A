@@ -42,21 +42,15 @@ public class PuzzlePiecesColission : MonoBehaviour
                 sm.isBlue = false;
                 sm.isGreen = false;
             }
-            if (other.gameObject.TryGetComponent<SwitchMaterial>(out SwitchMaterial smc))
-            {
-                smc.isBlue = false;
-                smc.isGreen = false;
-            }
             if (gameObject.TryGetComponent<Interactable>(out Interactable i))
             {
                 i.canInteract = false;
                 i.showOutline = false;
             }
-            if (other.gameObject.TryGetComponent<Interactable>(out Interactable ic))
-            {
-                ic.canInteract = false;
-                ic.showOutline = false;
-            }
+        }
+        if (gameObject.TryGetComponent<MovementInteraction>(out MovementInteraction mi))
+        {
+            mi.stopCoroutine = true;
         }
     }
 }

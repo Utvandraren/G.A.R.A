@@ -11,6 +11,7 @@ public class MovementInteraction : MonoBehaviour
     public float distanceToMove;
 
     private bool move = false;
+    public bool stopCoroutine = false;
 
     public void SwitchBetweenUpAndPosX()
     {
@@ -80,14 +81,14 @@ public class MovementInteraction : MonoBehaviour
         }
     }
 
-    private void MoveDown()
+    public void MoveDown()
     {
         Vector3 target = transform.position - new Vector3(0, distanceToMove, 0);
         move = true;
         StartCoroutine(MoveToPosition(transform, target, 1));
     }
 
-    private void MoveUp()
+    public void MoveUp()
     {
         Vector3 target = transform.position + new Vector3(0, distanceToMove, 0);
         move = true;
@@ -100,6 +101,10 @@ public class MovementInteraction : MonoBehaviour
         var t = 0f;
         while (t < 1)
         {
+            if (stopCoroutine)
+            {
+                break;
+            }
             t += Time.deltaTime / timeToMove;
             transform.position = Vector3.Lerp(currentPos, position, t);
             yield return null;
@@ -136,14 +141,14 @@ public class MovementInteraction : MonoBehaviour
         
     }
 
-    private void MoveNegX()
+    public void MoveNegX()
     {
         Vector3 target = transform.position - new Vector3(distanceToMove, 0, 0);
         move = true;
         StartCoroutine(MoveToPosition(transform, target, 1));
     }
 
-    private void MovePosX()
+    public void MovePosX()
     {
         Vector3 target = transform.position + new Vector3(distanceToMove, 0, 0);
         move = true;
