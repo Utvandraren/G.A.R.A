@@ -8,6 +8,8 @@ public class TaserWeapon : Weapon
     [SerializeField] private float jumpRange;
     [SerializeField] private int nmbrJumps;
     [SerializeField] private ParticleSystem electricityEffect;
+    [SerializeField] private GameObject electricityHitSparks;
+
 
     private LineRenderer line;
     private List<Collider> targetsAlreadyHit;
@@ -60,24 +62,52 @@ public class TaserWeapon : Weapon
                 break;
             }
         }
-        DrawVisualEffects();
-        targetsAlreadyHit.Clear();
+        //DrawVisualEffects();
+        StartCoroutine("VisualEffectCo");
+        
     }
 
-    void DrawVisualEffects()  //Draw the visual effects for the electricity based on the targets that have been hit.                        Instatiate electricity instead?
-    {
-        //Debug.Log("Number of targets: " + targetsAlreadyHit.Count.ToString());
-        line.positionCount = targetsAlreadyHit.Count;
+    IEnumerator VisualEffectCo()   //Draw the visual effects for the electricity based on the targets that have been hit.    
+    {    
         int i = 0;
-        line.SetPosition(i, firePoint.position);
+        List<GameObject> sparksEffectList = new List<GameObject>();
 
         //Draw line from fireposition to the next target
         foreach (Collider target in targetsAlreadyHit)
         {
+            ++line.positionCount;
             line.SetPosition(i, target.transform.position);
+            sparksEffectList.Add(Instantiate(electricityHitSparks, target.transform.position, Quaternion.identity));     //Sparkseffekts
             ++i;
+            yield return new WaitForSeconds(0.1f);
         }
+        
+        yield return new WaitForSeconds(1f);
+        targetsAlreadyHit.Clear();
+        line.positionCount = 0;
+
+        foreach (GameObject effect in sparksEffectList)
+        {
+            Destroy(effect, 1f);
+        }
+
+
     }
+
+    //void DrawVisualEffects()  //Draw the visual effects for the electricity based on the targets that have been hit.                        
+    //{
+    //    //Debug.Log("Number of targets: " + targetsAlreadyHit.Count.ToString());
+    //    line.positionCount = targetsAlreadyHit.Count;
+    //    int i = 0;
+    //    line.SetPosition(i, firePoint.position);
+
+    //    //Draw line from fireposition to the next target
+    //    foreach (Collider target in targetsAlreadyHit)
+    //    {
+    //        line.SetPosition(i, target.transform.position);
+    //        ++i;
+    //    }
+    //}
 
     bool targetAlreadyHit(Collider collider)
     {

@@ -22,7 +22,7 @@ public class LerpController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("CameraTarget").transform;
     }
 
     /// <summary>
