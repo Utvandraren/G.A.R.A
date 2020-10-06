@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private SciptableIntObj ammo;
+    [SerializeField] public Animator anim;
 
     private float currentTime;
 
@@ -34,6 +35,7 @@ public class Weapon : MonoBehaviour
         if (currentTime <= 0f && AmmoNotEmpty())
         {
             Shoot();
+            anim.SetBool("Fire", true);
             currentTime = timeBetweenAttacks;
             ammo.value--;
         }

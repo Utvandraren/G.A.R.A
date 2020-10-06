@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : Stats
 {
-    int shield;
-    [SerializeField] int maxShield;
+    public int shield;
+    [SerializeField] public int maxShield;
     [SerializeField] float shieldRechargeDelay;
     [SerializeField] int shieldRechargeRate;
     float timer;
