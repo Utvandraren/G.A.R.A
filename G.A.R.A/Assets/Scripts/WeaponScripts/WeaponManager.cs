@@ -6,9 +6,7 @@ public class WeaponManager : MonoBehaviour
 {
     [SerializeField] GameObject laserWeapon;
     [SerializeField] GameObject explosiveWeapon;
-    [SerializeField] GameObject TaserWeapon;
-
-    [SerializeField] private Animator taserAnim;
+    [SerializeField] GameObject taserWeapon;
 
     Weapon currentWeapon;
 
@@ -28,6 +26,8 @@ public class WeaponManager : MonoBehaviour
         mouseDelta = 0;
         oldMouseDelta = 0;
         currentWeapon = laserWeapon.GetComponent<Weapon>();
+        explosiveWeapon.SetActive(false);
+        taserWeapon.SetActive(false);
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class WeaponManager : MonoBehaviour
 
     public void FixedUpdate()
     {
-        taserAnim.SetBool("Fire", false);
+        currentWeapon.anim.SetBool("Fire", false);
     }
 
     void handleInput()   //Check if mouseScroll has changed and thus should change the weapon
@@ -63,7 +63,7 @@ public class WeaponManager : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             currentWeapon.TryShoot();
-            taserAnim.SetBool("Fire", true);
+            
         }
     }
 
@@ -74,22 +74,22 @@ public class WeaponManager : MonoBehaviour
             case Weapons.Laser:
                 laserWeapon.SetActive(true);
                 explosiveWeapon.SetActive(false);
-                TaserWeapon.SetActive(false);
+                taserWeapon.SetActive(false);
                 currentWeapon = laserWeapon.GetComponent<Weapon>();
                 break;
 
             case Weapons.Explosive:
                 explosiveWeapon.SetActive(true);
                 laserWeapon.SetActive(false);
-                TaserWeapon.SetActive(false);
+                taserWeapon.SetActive(false);
                 currentWeapon = explosiveWeapon.GetComponent<Weapon>();
                 break;
 
             case Weapons.Taser:
-                TaserWeapon.SetActive(true);
+                taserWeapon.SetActive(true);
                 explosiveWeapon.SetActive(false);
                 laserWeapon.SetActive(false);
-                currentWeapon = TaserWeapon.GetComponent<Weapon>();
+                currentWeapon = taserWeapon.GetComponent<Weapon>();
                 break;
             default:
                 //

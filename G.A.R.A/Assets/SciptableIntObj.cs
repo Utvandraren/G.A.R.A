@@ -5,7 +5,7 @@ public class SciptableIntObj : ScriptableObject
 {
     public int startValue;
 
-    [HideInInspector] public int value;
+    public int value;
 
     public void ResetValue()
     {

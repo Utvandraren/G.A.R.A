@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Stats : MonoBehaviour
 {
-    protected int health;
-    [SerializeField] protected int startingHealth;
+    public int health;
+    [SerializeField] public int startingHealth;
 
     // Start is called before the first frame update
     protected virtual void Start()
