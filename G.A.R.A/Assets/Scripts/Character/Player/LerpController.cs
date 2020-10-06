@@ -17,7 +17,7 @@ public class LerpController : MonoBehaviour
     private float targetRotY;
     private float targetRotZ;
 
-    private float lerpTimePcts = 0.1f;
+    [SerializeField] private float lerpTimePcts = 0.1f;
 
     // Start is called before the first frame update
     void Start()
