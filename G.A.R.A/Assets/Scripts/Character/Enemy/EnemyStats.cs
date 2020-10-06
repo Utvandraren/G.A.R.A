@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyStats : Stats
 {
     [Tooltip("How long the enemy stays after dying")]
-    [SerializeField] private float deathTimer = 2f;
+    [SerializeField] private float deathTimer = 0;
 
     public override void Die()
     {
