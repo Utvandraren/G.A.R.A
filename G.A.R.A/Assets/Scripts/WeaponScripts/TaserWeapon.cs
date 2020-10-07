@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class TaserWeapon : Weapon
 {
-    [SerializeField] private float range;
+    [SerializeField] private float maxRange;
     [SerializeField] private float jumpRange;
     [SerializeField] private int nmbrJumps;
     [SerializeField] private ParticleSystem electricityEffect;
     [SerializeField] private GameObject electricityHitSparks;
+    [SerializeField] private float laserThickness = 0.15f;
+
 
 
     private LineRenderer line;
@@ -29,7 +31,7 @@ public class TaserWeapon : Weapon
         Debug.LogFormat("Shots fired from: " + gameObject.ToString());
         electricityEffect.Play();
 
-        if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, range))
+        if (Physics.SphereCast(firePoint.position, laserThickness, firePoint.forward, out hit, maxRange))
         {
             if (hit.transform.TryGetComponent<Interactable>(out Interactable interObj))
             {
