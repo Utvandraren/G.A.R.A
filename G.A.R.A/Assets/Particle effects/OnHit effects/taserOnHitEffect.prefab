@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6834862941529621335}
   - component: {fileID: 6705987607429912194}
   - component: {fileID: 8440846610614967501}
+  - component: {fileID: 2057707514949030083}
   m_Layer: 0
   m_Name: taserOnHitEffect
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4369327707953495383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: -0.345}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,21 +49,30 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 30
+      - m_Value: 50
         m_Name: TrailSpawnRate
-        m_Overridden: 0
+        m_Overridden: 1
       - m_Value: 1
         m_Name: TrailsLifetime
         m_Overridden: 0
+      - m_Value: 2000
+        m_Name: ParticleSpawnRate
+        m_Overridden: 1
+      - m_Value: 4
+        m_Name: BeamSpawnRate
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 2.6333926, y: 9.631392, z: 14.629958, w: 0}
+      - m_Value: {x: 0.56925493, y: 1.7826667, z: 2.9960785, w: 0}
         m_Name: Color
-        m_Overridden: 0
+        m_Overridden: 1
+      - m_Value: {x: 1.8041958, y: 3.9858067, z: 18.136913, w: 0}
+        m_Name: Color 2
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -119,3 +129,22 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &2057707514949030083
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4369327707953495383}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 72600d4fb7e03234bb834ae1019da5d7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

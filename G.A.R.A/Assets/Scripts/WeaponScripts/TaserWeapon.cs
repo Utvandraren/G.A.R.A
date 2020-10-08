@@ -88,7 +88,7 @@ public class TaserWeapon : Weapon
 
         foreach (GameObject effect in sparksEffectList)
         {
-            Destroy(effect, 1f);
+            Destroy(effect, 3f);
         }
 
 
