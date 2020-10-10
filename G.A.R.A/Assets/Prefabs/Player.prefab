@@ -722,6 +722,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: taserWeapon
       objectReference: {fileID: 0}
+    - target: {fileID: 470496076153194801, guid: 217692cea192c39418198ce01a267b79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2301878582775487443, guid: 217692cea192c39418198ce01a267b79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -777,7 +782,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 257302122396367432, guid: 217692cea192c39418198ce01a267b79, type: 3}
+    - {fileID: 3465899412606178324, guid: 217692cea192c39418198ce01a267b79, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 217692cea192c39418198ce01a267b79, type: 3}
 --- !u!4 &121840620646962906 stripped
 Transform:
@@ -802,6 +809,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: explosiveWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753032842555039954, guid: 50a96976ee4c0e14995771a480e2f6b4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1753032842555039955, guid: 50a96976ee4c0e14995771a480e2f6b4,
         type: 3}
@@ -858,7 +870,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1753032842555039958, guid: 50a96976ee4c0e14995771a480e2f6b4, type: 3}
+    - {fileID: 1753032842555039957, guid: 50a96976ee4c0e14995771a480e2f6b4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 50a96976ee4c0e14995771a480e2f6b4, type: 3}
 --- !u!1 &5616259505519992391 stripped
 GameObject:
@@ -938,6 +952,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaserWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6643723016480546535, guid: 8623b9c46484dd048a8b8e9adfcd847c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6643723016480546533, guid: 8623b9c46484dd048a8b8e9adfcd847c, type: 3}

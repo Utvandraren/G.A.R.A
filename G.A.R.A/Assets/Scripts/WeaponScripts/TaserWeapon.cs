@@ -27,7 +27,6 @@ public class TaserWeapon : Weapon
     {
         base.Shoot();
         RaycastHit hit;
-        Debug.LogFormat("Shots fired from: " + gameObject.ToString());
         electricityEffect.Play();
 
         if (Physics.SphereCast(firePoint.position, laserThickness, firePoint.forward, out hit, maxRange))
@@ -63,7 +62,6 @@ public class TaserWeapon : Weapon
                 break;
             }
         }
-        //DrawVisualEffects();
 
         List<Vector3> targets = new List<Vector3>();
         foreach (Collider transformTarget in targetsAlreadyHit)
@@ -107,20 +105,7 @@ public class TaserWeapon : Weapon
 
     }
 
-    //void DrawVisualEffects()  //Draw the visual effects for the electricity based on the targets that have been hit.                        
-    //{
-    //    //Debug.Log("Number of targets: " + targetsAlreadyHit.Count.ToString());
-    //    line.positionCount = targetsAlreadyHit.Count;
-    //    int i = 0;
-    //    line.SetPosition(i, firePoint.position);
-
-    //    //Draw line from fireposition to the next target
-    //    foreach (Collider target in targetsAlreadyHit)
-    //    {
-    //        line.SetPosition(i, target.transform.position);
-    //        ++i;
-    //    }
-    //}
+   
 
     bool targetAlreadyHit(Collider collider)
     {

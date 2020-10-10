@@ -17,7 +17,7 @@ public class ExplosiveProjectile : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, lifeTime);
-        rigidBody.velocity = transform.forward * speed;
+        //rigidBody.velocity = transform.forward * speed;
     }
 
 
@@ -62,6 +62,12 @@ public class ExplosiveProjectile : MonoBehaviour
         Explode();
         gameObject.SetActive(false);
         Destroy(gameObject, 3f);
+    }
+
+    public void SetDirection(Vector3 direction)
+    {
+
+        rigidBody.velocity = direction * speed;
     }
 
     void OnDrawGizmosSelected()

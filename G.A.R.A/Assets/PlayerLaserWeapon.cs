@@ -16,6 +16,7 @@ public class PlayerLaserWeapon : Weapon
         camera = Camera.main;
     }
 
+    //Draws ray from middle of screen to see if something is hit
     public override void Shoot()  //Starts visual effects and draw ray to check if colldiding with any valiable target
     {
         base.Shoot();
@@ -43,12 +44,11 @@ public class PlayerLaserWeapon : Weapon
         }
     }
 
+    //Draws the laserline
     public override void DrawVisuals(Vector3 target)
     {
         base.DrawVisuals(target);
-
-        
-
+    
         if (target == Vector3.zero)
         {
             laserEffect.GetComponent<LineRenderer>().SetPosition(0, firePoint.position);
