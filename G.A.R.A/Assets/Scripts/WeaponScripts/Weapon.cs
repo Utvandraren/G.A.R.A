@@ -61,4 +61,9 @@ public class Weapon : MonoBehaviour
         
     }
 
+    public virtual void DrawVisuals(Vector3 target)
+    {
+
+    }
+
 }
