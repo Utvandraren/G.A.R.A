@@ -12,8 +12,7 @@ public class TaserWeapon : Weapon
     [SerializeField] private GameObject electricityLine;
     [SerializeField] private float laserThickness = 0.15f;
 
-
-
+    private Camera camera;
     private List<Collider> targetsAlreadyHit;
 
     // Start is called before the first frame update
@@ -21,6 +20,7 @@ public class TaserWeapon : Weapon
     {
         base.Start();
         targetsAlreadyHit = new List<Collider>();
+        camera = Camera.main;
     }
 
     public override void Shoot()
@@ -28,8 +28,9 @@ public class TaserWeapon : Weapon
         base.Shoot();
         RaycastHit hit;
         electricityEffect.Play();
+        Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
-        if (Physics.SphereCast(firePoint.position, laserThickness, firePoint.forward, out hit, maxRange))
+        if (Physics.SphereCast(rayOrigin, laserThickness, camera.transform.forward, out hit, maxRange))
         {
             if (hit.transform.TryGetComponent<Interactable>(out Interactable interObj))
             {
@@ -40,6 +41,7 @@ public class TaserWeapon : Weapon
                 HandleElectricityArchs(attackObj);
             }
         }
+
     }
 
     void HandleElectricityArchs(EnemyStats attackObj) //Handles how the weapon go from enemy to enemy damaging them
