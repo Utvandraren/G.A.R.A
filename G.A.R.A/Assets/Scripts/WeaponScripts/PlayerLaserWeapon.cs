@@ -4,9 +4,11 @@ using UnityEngine;
 public class PlayerLaserWeapon : Weapon
 {
     [SerializeField] private GameObject laserEffect;
+    [SerializeField] private GameObject laserHit;
     [SerializeField] private float maxRange = 100f;
     [SerializeField] private float laserThickness = 0.15f;
     [SerializeField] private float laserDuration = 0.5f;
+
 
     private Camera camera;
 
@@ -47,16 +49,19 @@ public class PlayerLaserWeapon : Weapon
     public override void DrawVisuals(Vector3 target)
     {
         base.DrawVisuals(target);
-    
+        laserEffect.GetComponent<LineRenderer>().SetPosition(0, firePoint.position);
+
         if (target == Vector3.zero)
         {
-            laserEffect.GetComponent<LineRenderer>().SetPosition(0, firePoint.position);
             laserEffect.GetComponent<LineRenderer>().SetPosition(1, camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f)) + camera.transform.forward * maxRange);
+            
         }
         else
         {
-            laserEffect.GetComponent<LineRenderer>().SetPosition(0, firePoint.position);
             laserEffect.GetComponent<LineRenderer>().SetPosition(1, target);
+            GameObject hitVisualInstance = Instantiate(laserHit, target, Quaternion.identity);
+            hitVisualInstance.GetComponent<AudioSource>().Play();
+            Destroy(hitVisualInstance, 4f);
         }
 
         StartCoroutine(TurnOffLaserEffect());

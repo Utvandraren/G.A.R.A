@@ -428,11 +428,11 @@ AudioSource:
   m_GameObject: {fileID: 3543366885880990955}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 2d483ad5726ff6f499314956a3975aea,
+  OutputAudioMixerGroup: {fileID: -3629562373716054715, guid: 2d483ad5726ff6f499314956a3975aea,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 27b46eb65501eb045867495020c10345, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7bf00f698081c3d41852e587eca81b79, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.548
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -534,6 +534,8 @@ MonoBehaviour:
   ammo: {fileID: 11400000, guid: 09b7a550a075bdb4d8306072664b3afb, type: 2}
   anim: {fileID: 5129530900555281534}
   laserEffect: {fileID: 6146890791673610629}
+  laserHit: {fileID: 8710594568946369608, guid: ccd6bc785a84c4345b1bee2a51863e1f,
+    type: 3}
   maxRange: 100
   laserThickness: 0.15
   laserDuration: 0.3
@@ -1215,6 +1217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6643723016480546533, guid: 8623b9c46484dd048a8b8e9adfcd847c, type: 3}
+    - {fileID: -2897718024294322099, guid: 8623b9c46484dd048a8b8e9adfcd847c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8623b9c46484dd048a8b8e9adfcd847c, type: 3}
 --- !u!95 &5129530900555281534 stripped
 Animator:
