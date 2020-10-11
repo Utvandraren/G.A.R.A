@@ -25,6 +25,7 @@ public class ExplosiveProjectile : MonoBehaviour
     void Explode() //The logic handling what happens if a interactable object or enemy is inside the explosion radius when the projectile explode
     {
         GameObject effect = Instantiate(explosionEffect, transform.position, transform.rotation);
+        effect.GetComponent<AudioSource>().Play();
         Destroy(effect, 10f);
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosiveRadius);
 
