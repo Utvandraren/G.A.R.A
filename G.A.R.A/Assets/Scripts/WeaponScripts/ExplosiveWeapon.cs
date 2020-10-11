@@ -18,6 +18,8 @@ public class ExplosiveWeapon : Weapon
     public override void Shoot()
     {
         base.Shoot();
+        PlayShootSound();
+
         GameObject projectileInstance = Instantiate(projectile, firePoint.position, transform.rotation);
         RaycastHit hit;
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));

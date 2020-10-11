@@ -28,6 +28,8 @@ public class TaserWeapon : Weapon
         base.Shoot();
         RaycastHit hit;
         electricityEffect.Play();
+        PlayShootSound();
+
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
         if (Physics.SphereCast(rayOrigin, laserThickness, camera.transform.forward, out hit, maxRange))

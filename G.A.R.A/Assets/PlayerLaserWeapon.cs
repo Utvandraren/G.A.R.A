@@ -22,7 +22,6 @@ public class PlayerLaserWeapon : Weapon
         base.Shoot();
         RaycastHit hit;
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
-
         if (Physics.SphereCast(rayOrigin, laserThickness, camera.transform.forward, out hit, maxRange))
         {
             DrawVisuals(hit.point);
@@ -65,7 +64,7 @@ public class PlayerLaserWeapon : Weapon
 
     private IEnumerator TurnOffLaserEffect()
     {
-        //shootSound.Play();
+        PlayShootSound();
         laserEffect.SetActive(true);
         yield return new WaitForSeconds(laserDuration);
         laserEffect.SetActive(false);
