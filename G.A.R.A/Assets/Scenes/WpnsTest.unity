@@ -174,6 +174,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &149976396
 AudioSource:
   m_ObjectHideFlags: 0
@@ -397,6 +399,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &309852964
 AudioSource:
   m_ObjectHideFlags: 0
@@ -620,6 +624,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &314233729
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1033,6 +1039,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &754167160
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1256,6 +1264,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &780884447
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1553,6 +1563,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &818155696
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1702,6 +1714,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &1062583653
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1939,6 +1953,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoidManagerWithPlacedEnemies
       objectReference: {fileID: 0}
+    - target: {fileID: 893281568499336306, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97daec7f7023a9f46bfeddfe9e93a3aa, type: 3}
 --- !u!1 &1402462997
@@ -1994,6 +2013,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &1402463000
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2217,6 +2238,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &1403896389
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2440,6 +2463,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &1428334830
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2663,6 +2688,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &1502332425
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2898,6 +2925,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &1630294266
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3075,23 +3104,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2180084195567112641, guid: d3f600aa61e02e848b002a457adcd0d6,
-        type: 3}
-      propertyPath: taserLine
-      value: 
-      objectReference: {fileID: 9189739617364979578, guid: b69e94d8a472f65428994078275e77da,
-        type: 3}
-    - target: {fileID: 2180084195567112641, guid: d3f600aa61e02e848b002a457adcd0d6,
-        type: 3}
-      propertyPath: maxRange
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 2180084195567112641, guid: d3f600aa61e02e848b002a457adcd0d6,
-        type: 3}
-      propertyPath: electricityLine
-      value: 
-      objectReference: {fileID: 7558213752637156041, guid: b69e94d8a472f65428994078275e77da,
-        type: 3}
     - target: {fileID: 4422008866739512600, guid: d3f600aa61e02e848b002a457adcd0d6,
         type: 3}
       propertyPath: m_Name
@@ -3207,6 +3219,8 @@ MonoBehaviour:
   health: 0
   startingHealth: 0
   deathTimer: 2
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
 --- !u!82 &1756094553
 AudioSource:
   m_ObjectHideFlags: 0

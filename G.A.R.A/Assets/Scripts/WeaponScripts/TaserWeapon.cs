@@ -12,8 +12,7 @@ public class TaserWeapon : Weapon
     [SerializeField] private GameObject electricityLine;
     [SerializeField] private float laserThickness = 0.15f;
 
-
-
+    private Camera camera;
     private List<Collider> targetsAlreadyHit;
 
     // Start is called before the first frame update
@@ -21,16 +20,19 @@ public class TaserWeapon : Weapon
     {
         base.Start();
         targetsAlreadyHit = new List<Collider>();
+        camera = Camera.main;
     }
 
     public override void Shoot()
     {
         base.Shoot();
         RaycastHit hit;
-        Debug.LogFormat("Shots fired from: " + gameObject.ToString());
         electricityEffect.Play();
+        PlayShootSound();
 
-        if (Physics.SphereCast(firePoint.position, laserThickness, firePoint.forward, out hit, maxRange))
+        Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+
+        if (Physics.SphereCast(rayOrigin, laserThickness, camera.transform.forward, out hit, maxRange))
         {
             if (hit.transform.TryGetComponent<Interactable>(out Interactable interObj))
             {
@@ -41,6 +43,7 @@ public class TaserWeapon : Weapon
                 HandleElectricityArchs(attackObj);
             }
         }
+
     }
 
     void HandleElectricityArchs(EnemyStats attackObj) //Handles how the weapon go from enemy to enemy damaging them
@@ -63,7 +66,6 @@ public class TaserWeapon : Weapon
                 break;
             }
         }
-        //DrawVisualEffects();
 
         List<Vector3> targets = new List<Vector3>();
         foreach (Collider transformTarget in targetsAlreadyHit)
@@ -107,20 +109,7 @@ public class TaserWeapon : Weapon
 
     }
 
-    //void DrawVisualEffects()  //Draw the visual effects for the electricity based on the targets that have been hit.                        
-    //{
-    //    //Debug.Log("Number of targets: " + targetsAlreadyHit.Count.ToString());
-    //    line.positionCount = targetsAlreadyHit.Count;
-    //    int i = 0;
-    //    line.SetPosition(i, firePoint.position);
-
-    //    //Draw line from fireposition to the next target
-    //    foreach (Collider target in targetsAlreadyHit)
-    //    {
-    //        line.SetPosition(i, target.transform.position);
-    //        ++i;
-    //    }
-    //}
+   
 
     bool targetAlreadyHit(Collider collider)
     {
