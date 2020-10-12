@@ -17,7 +17,7 @@ public class ExplosiveProjectile : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, lifeTime);
-        rigidBody.velocity = transform.forward * speed;
+        //rigidBody.velocity = transform.forward * speed;
     }
 
 
@@ -25,6 +25,7 @@ public class ExplosiveProjectile : MonoBehaviour
     void Explode() //The logic handling what happens if a interactable object or enemy is inside the explosion radius when the projectile explode
     {
         GameObject effect = Instantiate(explosionEffect, transform.position, transform.rotation);
+        effect.GetComponent<AudioSource>().Play();
         Destroy(effect, 10f);
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosiveRadius);
 
@@ -62,6 +63,12 @@ public class ExplosiveProjectile : MonoBehaviour
         Explode();
         gameObject.SetActive(false);
         Destroy(gameObject, 3f);
+    }
+
+    public void SetDirection(Vector3 direction)
+    {
+
+        rigidBody.velocity = direction * speed;
     }
 
     void OnDrawGizmosSelected()
