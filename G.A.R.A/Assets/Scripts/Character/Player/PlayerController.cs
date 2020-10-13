@@ -5,22 +5,25 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    private float maxSpeed; //Will use later hopefully
-
-    //Rigidbody and physics related
+    private float maxSpeed;
     private Rigidbody rb;
+
+    [Header("Keyboard movement settings")]
     [SerializeField] private float thrustForce;
-    [SerializeField] private float dampeningThrustForceMax;
-    private float dampeningThrustForce;
-    private float dragCoef = .8f;
-    private float angularDragCoef = 10;
-
-    float currentRollRate = 0.0f;
-    float maxRollRate = 5.0f;
+    [SerializeField] private float maxRollRate = 5.0f;
     [SerializeField] private float rollLerpTime = 2f;
+    private float currentRollRate = 0.0f;
+    private float dampeningThrustForceMax;
+    private float dampeningThrustForce;
+    private float dragCoef = 1f;
+    private float angularDragCoef = 10;
+    private float acceleration;
+    private Vector3 velocity;
 
+    [Header("Mouse look Settings")]
+    [Tooltip("Do you want to invert the direction for looking up and down with the mouse?")]
+    [SerializeField] private bool invertY = false;
     [SerializeField, Range(.1f, 2f)] private float mouseSensitivityMultiplier = 1f; //Might move this later to a manager type script
-
     /// <summary>
     /// CameraState class from the unity base camera script, slightly changed. Handles mouse look.
     /// </summary>
@@ -62,10 +65,6 @@ public class PlayerController : MonoBehaviour
     private CameraState m_TargetCameraState = new CameraState();
     private CameraState m_CameraState = new CameraState();
 
-    [Header("Movement Settings")]
-    [Tooltip("Whether or not to invert our Y axis for mouse input to rotation.")]
-    public bool invertY = false;
-
     /// <summary>
     /// Gets the players desired direction of movement.
     /// </summary>
@@ -73,30 +72,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 GetInputTranslationDirection()
     {
         Vector3 direction = new Vector3();
-        if (Input.GetKey(KeyCode.W))
-        {
-            direction += gameObject.transform.forward;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            direction += -gameObject.transform.forward;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction += -gameObject.transform.right;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            direction += gameObject.transform.right;
-        }
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            direction += -gameObject.transform.up;
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            direction += gameObject.transform.up;
-        }
+        direction += gameObject.transform.right * Input.GetAxis("Left-Right");
+        direction += gameObject.transform.up * Input.GetAxis("Up-Down");
+        direction += gameObject.transform.forward * Input.GetAxis("Forward-Back");
         return direction;
     }
 
@@ -119,7 +97,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        Vector3 translation = Vector3.zero;
+        Vector3 direction = Vector3.zero;
 
         #if ENABLE_LEGACY_INPUT_MANAGER
 
@@ -129,31 +107,49 @@ public class PlayerController : MonoBehaviour
         m_TargetCameraState.pitch = mouseMovement.y * mouseSensitivityMultiplier;
 
         //Keyboard rotation
-        if (Input.GetKey(KeyCode.Q))
+        if(Input.GetAxis("Roll") == 0)
         {
-            currentRollRate = Mathf.Lerp(currentRollRate, maxRollRate, 1f - Mathf.Exp((Mathf.Log(1f - 0.8f) / rollLerpTime) * Time.deltaTime));
-            transform.Rotate(new Vector3(0, 0, currentRollRate));
-        }
-        else if (Input.GetKey(KeyCode.E))
-        {
-            currentRollRate = Mathf.Lerp(currentRollRate, -maxRollRate, 1f - Mathf.Exp((Mathf.Log(1f - 0.8f) / rollLerpTime) * Time.deltaTime));
-            transform.Rotate(new Vector3(0, 0, currentRollRate));
-        }
-        else //Smoothly stop the rotation
-        {
+            //Smoothly stops the rotation
             currentRollRate = Mathf.Lerp(currentRollRate, 0, 1f - Mathf.Exp((Mathf.Log(1f - 0.99f) / (rollLerpTime)) * Time.deltaTime));
             transform.Rotate(new Vector3(0, 0, currentRollRate));
         }
-
+        else
+        {
+            currentRollRate = Mathf.Lerp(currentRollRate, maxRollRate * Input.GetAxis("Roll"), 1f - Mathf.Exp((Mathf.Log(1f - 0.99f) / rollLerpTime) * Time.deltaTime));
+            transform.Rotate(new Vector3(0, 0, currentRollRate));
+        }
 
         // Translation
-        translation = GetInputTranslationDirection() * Time.deltaTime;
+        direction = GetInputTranslationDirection() * Time.deltaTime;
         #elif USE_INPUT_SYSTEM
             // TODO: make the new input system work
         #endif
 
-        m_TargetCameraState.Translate(translation);
+        m_TargetCameraState.Translate(direction);
         m_CameraState.UpdateRotation(m_TargetCameraState, transform);
+
+        ////Keyboard Movement
+        //direction.Normalize();
+        //acceleration = thrustForce / rb.mass;
+        //acceleration *= Time.deltaTime;
+        //velocity += acceleration * direction;
+        //Vector3 newPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        //newPos += velocity * Time.deltaTime;
+        //rb.MovePosition(newPos);
+
+        //if (direction.x == 0)
+        //{
+        //    Mathf.SmoothDamp(velocity.x, 0f, ref velocity.x, 1f);
+        //}
+        //if (direction.y == 0)
+        //{
+        //    Mathf.SmoothDamp(velocity.y, 0f, ref velocity.y, 1f);
+        //}
+        //if (direction.z == 0)
+        //{
+        //    Mathf.SmoothDamp(velocity.z, 0f, ref velocity.z, 1f);
+        //}
+
     }
 
 
@@ -164,7 +160,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 translation = Vector3.zero;
-        translation = GetInputTranslationDirection() * Time.deltaTime;
+        translation = GetInputTranslationDirection();
 
         //Movement and Thrust
         if (translation != Vector3.zero)
@@ -183,5 +179,12 @@ public class PlayerController : MonoBehaviour
         //    Vector3 dampeningVector = -velocityVector;
         //    rb.AddForce(dampeningVector * dampeningThrustForce, ForceMode.Force);
         //}
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 200, 60), "Velocity: " + velocity.ToString());
+        GUI.Label(new Rect(10, 30, 200, 60), "Acceleration: " + acceleration.ToString());
+        GUI.Label(new Rect(10, 50, 200, 60), "rb.Velocity: " + rb.velocity.ToString());
     }
 }
