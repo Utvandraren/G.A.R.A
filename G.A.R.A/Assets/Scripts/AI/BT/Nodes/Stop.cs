@@ -6,7 +6,7 @@
         bool failed = false;
         bool HandleStub()
         {
-            behaviorTree.boidSystem.Stop();
+            behaviorTree.engine.Stop();
             return true;
         }
 

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4230501522975337930}
   - component: {fileID: 5338604928791571533}
   - component: {fileID: 7125789260421820239}
+  - component: {fileID: 4593384419581367792}
   m_Layer: 0
   m_Name: SwarmerEnemy
   m_TagString: Enemy
@@ -82,17 +83,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 2
-  maxSpeed: 3
-  turningRate: 0.3
   detectionView: 0.4
   seperationWeight: 1
   allignmentWeight: 0.5
   cohesionWeight: 0.7
   avoidWeight: 1
+  targetWeight: 1
   wiggleWeight: 0
   wiggleOffset: 1
   wiggleAmplitude: 1
-  targetWeight: 1
 --- !u!114 &5824157368448424437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +234,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c0d6d9925b60f4abf5873e7a60e62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4593384419581367792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432575310953063639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60767c334891e304181a88c7b5eab588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  defaultSpeed: 5
+  degreesPerTick: 1.6
+  speedStabilisation: 0.21
 --- !u!1001 &2330128262617068457
 PrefabInstance:
   m_ObjectHideFlags: 0

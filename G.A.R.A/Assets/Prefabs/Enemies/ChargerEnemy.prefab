@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1395411641993713789}
-  shootSound: {fileID: 0}
   attack: {fileID: 0}
   timeBetweenAttacks: 1
   ammo: {fileID: 0}
@@ -162,6 +161,7 @@ GameObject:
   - component: {fileID: 4230501522975337930}
   - component: {fileID: 5338604928791571533}
   - component: {fileID: 2837124741929905598}
+  - component: {fileID: 5166984323851223336}
   m_Layer: 0
   m_Name: ChargerEnemy
   m_TagString: Enemy
@@ -228,17 +228,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 2
-  maxSpeed: 3
-  turningRate: 0.3
   detectionView: 0.3
   seperationWeight: 1
   allignmentWeight: 1.3
   cohesionWeight: 1
   avoidWeight: 1
+  targetWeight: 1
   wiggleWeight: 0
   wiggleOffset: 1
   wiggleAmplitude: 1
-  targetWeight: 1
 --- !u!114 &5824157368448424437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +379,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3a5e11740f060458eae0fe1f3469d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5166984323851223336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432575310953063639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60767c334891e304181a88c7b5eab588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  defaultSpeed: 5
+  degreesPerTick: 0.5
+  speedStabilisation: 0.04
 --- !u!1 &6542909232275290860
 GameObject:
   m_ObjectHideFlags: 0

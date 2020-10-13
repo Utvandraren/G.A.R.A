@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6275980567223361759}
   - component: {fileID: 829105424057548698}
   - component: {fileID: 3387418532278061876}
+  - component: {fileID: 8714030098041109475}
   m_Layer: 0
   m_Name: ShieldedEnemy
   m_TagString: Enemy
@@ -83,17 +84,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 1
-  maxSpeed: 3
-  turningRate: 0.15
   detectionView: 0.2
   seperationWeight: 1
   allignmentWeight: 1
   cohesionWeight: 1
   avoidWeight: 1
-  wiggleWeight: 1
+  targetWeight: 1
+  wiggleWeight: 0
   wiggleOffset: 1
   wiggleAmplitude: 1
-  targetWeight: 1
 --- !u!114 &4199879972989165055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +237,22 @@ MonoBehaviour:
     type: 3}
   shieldHealth: 200
   shield: {fileID: 7348201365385495412}
+--- !u!114 &8714030098041109475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275980567223361757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60767c334891e304181a88c7b5eab588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  defaultSpeed: 5
+  degreesPerTick: 3.1
+  speedStabilisation: 0.15
 --- !u!1 &7348201365385495412
 GameObject:
   m_ObjectHideFlags: 0
