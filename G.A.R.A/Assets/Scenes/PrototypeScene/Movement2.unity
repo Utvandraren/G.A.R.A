@@ -682,77 +682,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &896471215
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336304, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 893281568499336306, guid: 97daec7f7023a9f46bfeddfe9e93a3aa,
-        type: 3}
-      propertyPath: m_Name
-      value: BoidManagerWithPlacedEnemies
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 97daec7f7023a9f46bfeddfe9e93a3aa, type: 3}
 --- !u!1 &911359246
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,8 +2074,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3887101940151084163}
   serializedVersion: 2
-  m_Mass: 20
-  m_Drag: 0.5
+  m_Mass: 50
+  m_Drag: 5
   m_AngularDrag: 1e+23
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -2163,9 +2094,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5860164df1f06c446ab2deb370e0d6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustForce: 10000
-  maxRollRate: 3
+  standardthrustForce: 400
+  additionalBoostForce: 250
+  maxRollRate: 2
   rollLerpTime: 1
+  maxNormalSpeed: 9
+  maxSprintSpeed: 15
   invertY: 0
   mouseSensitivityMultiplier: 1
 --- !u!1 &3887101940151084163
@@ -2217,8 +2151,8 @@ Transform:
   m_Father: {fileID: 911359247}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3887101940151084166
-BoxCollider:
+--- !u!136 &3887101940151084166
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2227,8 +2161,9 @@ BoxCollider:
   m_Material: {fileID: 13400000, guid: adf651f676426ce42a27d2df511b1266, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &3887101940151084167
 MeshRenderer:

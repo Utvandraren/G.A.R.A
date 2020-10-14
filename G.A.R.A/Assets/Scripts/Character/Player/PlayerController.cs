@@ -5,20 +5,25 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    private float maxSpeed;
     private Rigidbody rb;
 
-    [Header("Keyboard movement settings")]
-    [SerializeField] private float thrustForce;
+    [Header("Movement settings")]
+    [Tooltip("This is the standard thrust force used to move the player.")]
+    [SerializeField] private float standardthrustForce;
+    [Tooltip("This is the additional force that will be added to the standard thrust when the player is boosting their movement.")]
+    [SerializeField] private float additionalBoostForce;
     [SerializeField] private float maxRollRate = 5.0f;
     [SerializeField] private float rollLerpTime = 2f;
+    private float thrustForce;
     private float currentRollRate = 0.0f;
-    private float dampeningThrustForceMax;
-    private float dampeningThrustForce;
-    private float dragCoef = 1f;
-    private float angularDragCoef = 10;
     private float acceleration;
-    private Vector3 velocity;
+    private float dragCoef;
+    private float currentMaxSpeed;
+    [Tooltip("The max speed that the player can travel in when not boosting.")]
+    [SerializeField] private float maxNormalSpeed;
+    [Tooltip("The new max speed that the player can travel when actively boosting.")]
+    [SerializeField] private float maxSprintSpeed;
+    private float stopSpeed = -2f;
 
     [Header("Mouse look Settings")]
     [Tooltip("Do you want to invert the direction for looking up and down with the mouse?")]
@@ -81,9 +86,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        rb.drag = dragCoef;
-        rb.angularDrag = angularDragCoef;
-        dampeningThrustForce = dampeningThrustForceMax;
+        dragCoef = rb.drag;
     }
 
     private void OnEnable()
@@ -117,6 +120,31 @@ public class PlayerController : MonoBehaviour
         {
             currentRollRate = Mathf.Lerp(currentRollRate, maxRollRate * Input.GetAxis("Roll"), 1f - Mathf.Exp((Mathf.Log(1f - 0.99f) / rollLerpTime) * Time.deltaTime));
             transform.Rotate(new Vector3(0, 0, currentRollRate));
+        }
+
+        //Sprint/Boost
+        if (Input.GetButton("Sprint"))
+        {
+            Debug.Log("Why?");
+            thrustForce = standardthrustForce + additionalBoostForce;
+            Debug.Log("Hello?");
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSprintSpeed);
+            Debug.Log("HELLO I AM SETTING THE CURRENTMAXSPEED TO MAXSPRINTSPEED FOR SOME FUCKING REASON");
+            currentMaxSpeed = maxSprintSpeed;
+        }
+        else
+        {
+            thrustForce = standardthrustForce;
+            if (rb.velocity.magnitude > maxNormalSpeed + .5f)
+            {
+                currentMaxSpeed = Mathf.Lerp(currentMaxSpeed, maxNormalSpeed, 1f - Mathf.Exp((Mathf.Log(1f - 0.99f) / stopSpeed) * Time.deltaTime));
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentMaxSpeed);
+            }
+            else
+            {
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxNormalSpeed);
+            }
+
         }
 
         // Translation
@@ -162,14 +190,15 @@ public class PlayerController : MonoBehaviour
         Vector3 translation = Vector3.zero;
         translation = GetInputTranslationDirection();
 
-        //Movement and Thrust
+        //Keyboard movement and thrust
         if (translation != Vector3.zero)
         {
             Vector3 direction = translation.normalized;
             direction *= thrustForce;
-            rb.AddForce(direction * Time.deltaTime, ForceMode.Force);
-            dampeningThrustForce = dampeningThrustForceMax;
+            rb.AddForce(direction, ForceMode.Force);
+            rb.drag = 0;
         }
+        else rb.drag = dragCoef;
 
         //Doesn't wörk, might use later for now, use rigidbody drag to achieve similar effect
         //else
@@ -183,8 +212,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 200, 60), "Velocity: " + velocity.ToString());
-        GUI.Label(new Rect(10, 30, 200, 60), "Acceleration: " + acceleration.ToString());
-        GUI.Label(new Rect(10, 50, 200, 60), "rb.Velocity: " + rb.velocity.ToString());
+        GUI.Label(new Rect(10, 10, 200, 60), "Speed limit: " + currentMaxSpeed.ToString());
+        GUI.Label(new Rect(10, 30, 200, 60), "Roll rate: " + currentRollRate.ToString());
+        GUI.Label(new Rect(10, 50, 200, 60), "rb.Velocity.magnitude: " + rb.velocity.magnitude.ToString());
     }
 }
