@@ -95,7 +95,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625968720964959381}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: adf651f676426ce42a27d2df511b1266, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -114,11 +114,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5860164df1f06c446ab2deb370e0d6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustForce: 10000
-  dampeningThrustForceMax: 20000
-  rollLerpTime: 2
-  mouseSensitivityMultiplier: 1
+  standardthrustForce: 450
+  additionalBoostForce: 250
+  maxRollRate: 1
+  rollLerpTime: 0.1
+  stopLerpTime: 0.1
+  maxNormalSpeed: 11
+  maxSprintSpeed: 16
+  stopSmoothFactor: 0.8
+  rollSmoothFactor: 0.99
   invertY: 0
+  mouseSensitivityMultiplier: 1
 --- !u!54 &625968720964959382
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,14 +133,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625968720964959381}
   serializedVersion: 2
-  m_Mass: 20
-  m_Drag: 0.5
-  m_AngularDrag: 5
+  m_Mass: 50
+  m_Drag: 0
+  m_AngularDrag: 1e+22
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &5120883518262830754
 MonoBehaviour:
   m_ObjectHideFlags: 0

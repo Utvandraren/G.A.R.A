@@ -1,28 +1,51 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// This script handles all the movement the player can perform.
+/// It includes mouse and keyboard movement. 
+/// In order to function, the object it is attached to should have a rigidbody, a collider and a low-friction physics material assigned to it.
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
-    private float maxSpeed; //Will use later hopefully
-
-    //Rigidbody and physics related
     private Rigidbody rb;
-    [SerializeField] private float thrustForce;
-    [SerializeField] private float dampeningThrustForceMax;
-    private float dampeningThrustForce;
-    private float dragCoef = .8f;
-    private float angularDragCoef = 10;
 
-    float currentRollRate = 0.0f;
-    float maxRollRate = 5.0f;
-    [SerializeField] private float rollLerpTime = 2f;
+    [Header("Movement settings")]
+    [Tooltip("This is the standard thrust force used to move the player.")]
+    [SerializeField] private float standardthrustForce;
+    [Tooltip("This is the additional force that will be added to the standard thrust when the player is boosting their movement.")]
+    [SerializeField] private float additionalBoostForce;
+    [SerializeField] private float maxRollRate;
+    [SerializeField] private float rollLerpTime;
+    [Tooltip("This is the time it takes to slow down to normal speed after releasing the sprint button.")]
+    [SerializeField] private float stopLerpTime;
+    [Tooltip("The max speed that the player can travel in when not boosting.")]
+    [SerializeField] private float maxNormalSpeed;
+    [Tooltip("The new max speed that the player can travel when actively boosting.")]
+    [SerializeField] private float maxSprintSpeed;
+    [SerializeField, Range(0.01f, .99f)] private float stopSmoothFactor;
+    [SerializeField, Range(0.01f, .99f)] private float rollSmoothFactor;
+    [Tooltip("The amount of drag that will be applied when the player lets go of all movement buttons.")]
+    [SerializeField] private float stopDragCoef;
 
+    private float thrustForce;
+    private float currentRollRate = 0.0f;
+    private float acceleration;
+
+    private float currentMaxSpeed;
+
+    private float rollLerpPct;
+    private float stopLerpPct;
+
+    [Header("Mouse look Settings")]
+    [Tooltip("Do you want to invert the direction for looking up and down with the mouse?")]
+    [SerializeField] private bool invertY = false;
     [SerializeField, Range(.1f, 2f)] private float mouseSensitivityMultiplier = 1f; //Might move this later to a manager type script
-
     /// <summary>
-    /// CameraState class from the unity base camera script, slightly changed. Handles mouse look.
+    /// CameraState class from the unity base camera script, modified. Handles mouse look rotation.
     /// </summary>
     class CameraState
     {
@@ -62,10 +85,6 @@ public class PlayerController : MonoBehaviour
     private CameraState m_TargetCameraState = new CameraState();
     private CameraState m_CameraState = new CameraState();
 
-    [Header("Movement Settings")]
-    [Tooltip("Whether or not to invert our Y axis for mouse input to rotation.")]
-    public bool invertY = false;
-
     /// <summary>
     /// Gets the players desired direction of movement.
     /// </summary>
@@ -73,39 +92,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 GetInputTranslationDirection()
     {
         Vector3 direction = new Vector3();
-        if (Input.GetKey(KeyCode.W))
-        {
-            direction += gameObject.transform.forward;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            direction += -gameObject.transform.forward;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction += -gameObject.transform.right;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            direction += gameObject.transform.right;
-        }
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            direction += -gameObject.transform.up;
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            direction += gameObject.transform.up;
-        }
+        direction += gameObject.transform.right * Input.GetAxis("Left-Right");
+        direction += gameObject.transform.up * Input.GetAxis("Up-Down");
+        direction += gameObject.transform.forward * Input.GetAxis("Forward-Back");
         return direction;
     }
 
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        rb.drag = dragCoef;
-        rb.angularDrag = angularDragCoef;
-        dampeningThrustForce = dampeningThrustForceMax;
+        currentMaxSpeed = maxNormalSpeed;
     }
 
     private void OnEnable()
@@ -119,7 +115,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        Vector3 translation = Vector3.zero;
+        Vector3 direction = Vector3.zero;
 
         #if ENABLE_LEGACY_INPUT_MANAGER
 
@@ -129,31 +125,72 @@ public class PlayerController : MonoBehaviour
         m_TargetCameraState.pitch = mouseMovement.y * mouseSensitivityMultiplier;
 
         //Keyboard rotation
-        if (Input.GetKey(KeyCode.Q))
+        if(Input.GetAxis("Roll") == 0)
         {
-            currentRollRate = Mathf.Lerp(currentRollRate, maxRollRate, 1f - Mathf.Exp((Mathf.Log(1f - 0.8f) / rollLerpTime) * Time.deltaTime));
+            //Smoothly stops the rotation
+            currentRollRate = calculateLerp(currentRollRate, 0, rollLerpTime, rollSmoothFactor);
             transform.Rotate(new Vector3(0, 0, currentRollRate));
         }
-        else if (Input.GetKey(KeyCode.E))
+        else
         {
-            currentRollRate = Mathf.Lerp(currentRollRate, -maxRollRate, 1f - Mathf.Exp((Mathf.Log(1f - 0.8f) / rollLerpTime) * Time.deltaTime));
-            transform.Rotate(new Vector3(0, 0, currentRollRate));
-        }
-        else //Smoothly stop the rotation
-        {
-            currentRollRate = Mathf.Lerp(currentRollRate, 0, 1f - Mathf.Exp((Mathf.Log(1f - 0.99f) / (rollLerpTime)) * Time.deltaTime));
+            currentRollRate = calculateLerp(currentRollRate, maxRollRate * Input.GetAxis("Roll"), rollLerpTime, rollSmoothFactor);
             transform.Rotate(new Vector3(0, 0, currentRollRate));
         }
 
+        //Sprint/Boost
+        if (Input.GetButton("Sprint"))
+        {
+            thrustForce = standardthrustForce + additionalBoostForce;
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSprintSpeed);
+            currentMaxSpeed = maxSprintSpeed;
+        }
+        else
+        {
+            thrustForce = standardthrustForce;
+            if (rb.velocity.magnitude > maxNormalSpeed + .5f)
+            {
+                currentMaxSpeed = calculateLerp(currentMaxSpeed, maxNormalSpeed, stopLerpTime, stopSmoothFactor);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentMaxSpeed);
+            }
+            else
+            {
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxNormalSpeed);
+            }
 
-        // Translation
-        translation = GetInputTranslationDirection() * Time.deltaTime;
+        }
+
+        direction = GetInputTranslationDirection() * Time.deltaTime;
         #elif USE_INPUT_SYSTEM
             // TODO: make the new input system work
         #endif
 
-        m_TargetCameraState.Translate(translation);
+        m_TargetCameraState.Translate(direction);
         m_CameraState.UpdateRotation(m_TargetCameraState, transform);
+
+
+        //Keep this part for now until player will for sure not be kinematic
+        ////Keyboard Movement
+        //direction.Normalize();
+        //acceleration = thrustForce / rb.mass;
+        //acceleration *= Time.deltaTime;
+        //velocity += acceleration * direction;
+        //Vector3 newPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        //newPos += velocity * Time.deltaTime;
+        //rb.MovePosition(newPos);
+
+        //if (direction.x == 0)
+        //{
+        //    Mathf.SmoothDamp(velocity.x, 0f, ref velocity.x, 1f);
+        //}
+        //if (direction.y == 0)
+        //{
+        //    Mathf.SmoothDamp(velocity.y, 0f, ref velocity.y, 1f);
+        //}
+        //if (direction.z == 0)
+        //{
+        //    Mathf.SmoothDamp(velocity.z, 0f, ref velocity.z, 1f);
+        //}
+
     }
 
 
@@ -163,25 +200,31 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        Vector3 translation = Vector3.zero;
-        translation = GetInputTranslationDirection() * Time.deltaTime;
+        Vector3 direction = Vector3.zero;
+        direction = GetInputTranslationDirection();
 
-        //Movement and Thrust
-        if (translation != Vector3.zero)
+        //Keyboard movement and thrust
+        if (direction != Vector3.zero)
         {
-            Vector3 direction = translation.normalized;
+            Vector3 dir = direction.normalized;
             direction *= thrustForce;
-            rb.AddForce(direction * Time.deltaTime, ForceMode.Force);
-            dampeningThrustForce = dampeningThrustForceMax;
+            rb.AddForce(direction, ForceMode.Force);
+            rb.drag = 0;
         }
+        else rb.drag = stopDragCoef;
+    }
 
-        //Doesn't wörk, might use later for now, use rigidbody drag to achieve similar effect
-        //else
-        //{
-        //    var velocityLerpPct = 1f - Mathf.Exp((Mathf.Log(1f - 0.8f) / stopLerpTime) * Time.deltaTime);
-        //    Vector3 velocityVector = rb.velocity.normalized;
-        //    Vector3 dampeningVector = -velocityVector;
-        //    rb.AddForce(dampeningVector * dampeningThrustForce, ForceMode.Force);
-        //}
+    private float calculateLerp(float current, float target, float lerpTime, float smoothnessFactor)
+    {
+        float temp = Mathf.Lerp(current, target, (1f - Mathf.Exp((Mathf.Log(1f - smoothnessFactor) / lerpTime) * Time.deltaTime)));
+        //float temp = Mathf.Lerp(current, target, smoothnessFactor * Time.deltaTime);
+        return temp;
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 200, 60), "Speed limit: " + currentMaxSpeed.ToString());
+        GUI.Label(new Rect(10, 30, 200, 60), "Roll rate: " + currentRollRate.ToString());
+        GUI.Label(new Rect(10, 50, 200, 60), "rb.Velocity.magnitude: " + rb.velocity.magnitude.ToString());
     }
 }
