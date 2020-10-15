@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1395411641993713789}
-  shootSound: {fileID: 0}
   attack: {fileID: 0}
   timeBetweenAttacks: 1
   ammo: {fileID: 0}
@@ -156,12 +155,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4432575310953063624}
   - component: {fileID: 4432575310953063625}
-  - component: {fileID: -1504492085246054203}
   - component: {fileID: 4432575310953063638}
   - component: {fileID: 5824157368448424437}
   - component: {fileID: 4230501522975337930}
   - component: {fileID: 5338604928791571533}
   - component: {fileID: 2837124741929905598}
+  - component: {fileID: 5399270227523836066}
   m_Layer: 0
   m_Name: ChargerEnemy
   m_TagString: Enemy
@@ -201,20 +200,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &-1504492085246054203
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4432575310953063639}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.025
-  m_Height: 0.25
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4432575310953063638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 2
+  radius: 0.22
   maxSpeed: 3
   turningRate: 0.3
   detectionView: 0.3
@@ -381,6 +367,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3a5e11740f060458eae0fe1f3469d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5399270227523836066
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432575310953063639}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.41, y: 0.41, z: 0.41}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6542909232275290860
 GameObject:
   m_ObjectHideFlags: 0

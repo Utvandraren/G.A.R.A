@@ -82,7 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c2379ea93bfc14fb64ce2e83260e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 1
+  detectionRange: 2
+  radius: 0.45
   maxSpeed: 3
   turningRate: 0.15
   detectionView: 0.2
@@ -90,7 +91,7 @@ MonoBehaviour:
   allignmentWeight: 1
   cohesionWeight: 1
   avoidWeight: 1
-  wiggleWeight: 1
+  wiggleWeight: 0
   wiggleOffset: 1
   wiggleAmplitude: 1
   targetWeight: 1
