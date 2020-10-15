@@ -6,7 +6,7 @@
         bool failed = false;
         bool HandleStub()
         {
-            behaviorTree.engine.LookTowards(behaviorTree.BlackBoard.target);
+            behaviorTree.boidSystem.TurnTo(behaviorTree.BlackBoard.target);
             return true;
         }
 

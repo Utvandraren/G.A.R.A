@@ -9,12 +9,10 @@ public class BehaviorTree : MonoBehaviour
     protected Task root;
     internal BOID boidSystem;
     internal Weapon weapon;
-    internal AIMoveEngine engine;
     public BlackBoard BlackBoard { get; private set; }
 
     protected virtual void Start()
     {
-        engine = GetComponent<AIMoveEngine>();
         BlackBoard = GetComponent<BlackBoard>();
         boidSystem = GetComponent<BOID>();
         weapon = GetComponentInChildren<Weapon>();

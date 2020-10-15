@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class BOID : MonoBehaviour
 {
-    AIMoveEngine engine;
-    Vector3 direction;
+    Vector3 acceleration;
 
     new Rigidbody rigidbody;
-    CapsuleCollider boundingCapsule; //warning not generic
+    CapsuleCollider capsule; //warning not generic
     List<BOID> relevantBoids;
-    [Header("Detection")]
+    [Header("Manuverability")]
     [SerializeField] float detectionRange = 5f;
-    [SerializeField] [Range(0, 1)] float detectionView = 0.30f;
     float detectionRangeSqrd;
+    [SerializeField] float maxSpeed = 5f;
+    [SerializeField] [Range(0, 1)] float turningRate = 0.1f;
+    [SerializeField] [Range(0, 1)] float detectionView = 0.30f;
     float detectDotCompare;
 
     [Header("Weights")]
@@ -22,41 +23,53 @@ public class BOID : MonoBehaviour
     [SerializeField] float allignmentWeight = 1f;
     [SerializeField] float cohesionWeight = 1f;
     [SerializeField] float avoidWeight = 10f;
-    [SerializeField] float targetWeight = 1;
-    [SerializeField] float wiggleWeight = 1;
 
-    [Header("RandomWiggle")]//might not want this here
+    [Header("RandomWiggle")]
+    [SerializeField] float wiggleWeight = 1;
     [SerializeField] float wiggleOffset = 1;
     [SerializeField] float wiggleAmplitude = 1;
 
+    [SerializeField] float targetWeight = 1;
     // Start is called before the first frame update
     void Start()
     {
-        engine = GetComponent<AIMoveEngine>();
         rigidbody = GetComponent<Rigidbody>();
-        boundingCapsule = GetComponent<CapsuleCollider>();
+        capsule = GetComponent<CapsuleCollider>();
         relevantBoids = new List<BOID>();
         detectionRangeSqrd = Mathf.Pow(detectionRange, 2);
         BoidManager.allBoids.Add(this);
     }
 
-    public void OnDestroy()
-    {
-        BoidManager.allBoids.Remove(this);
-    }
-
     internal void UpdateMovement(Vector3 targetDir)
     {
         Detect();
-        direction = CalculateDirection();
-        direction += AvoidObstacle();
-        direction += RandomWiggle() * wiggleWeight;
-        direction += targetDir * targetWeight;
-        direction.Normalize();
-        engine.DirectionRotateAndMove(direction);
+        acceleration = CalcAcceleration();
+        acceleration += AvoidObstacle();
+        acceleration += RandomWiggle() * wiggleWeight;
+        acceleration += targetDir * targetWeight;
+        rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, rigidbody.velocity + acceleration, turningRate);
+        if (rigidbody.velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2))
+            rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+        else if (rigidbody.velocity.sqrMagnitude < Mathf.Pow(maxSpeed / 10f, 2))
+            rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed / 10f;
+        transform.rotation = Quaternion.LookRotation(rigidbody.velocity);
     }
 
-    
+    internal void Stop()
+    {
+        rigidbody.velocity = Vector3.zero;
+    }
+
+    /// <summary>
+    /// Used to turn enemy without movement
+    /// </summary>
+    /// <param name="target"></param>
+    internal void TurnTo(Vector3 target)
+    {
+        Transform tempTrans = transform;
+        tempTrans.LookAt(target);
+        rigidbody.MoveRotation(tempTrans.rotation);
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -82,7 +95,7 @@ public class BOID : MonoBehaviour
     /// Calculates the acceleration vector from BOID behavior
     /// </summary>
     /// <returns>Acceleration</returns>
-    private Vector3 CalculateDirection()
+    private Vector3 CalcAcceleration()
     {
         Vector3 seperationVector = Vector3.zero;
         Vector3 allignmentVector = Vector3.zero;
@@ -90,36 +103,36 @@ public class BOID : MonoBehaviour
 
         foreach (BOID other in relevantBoids)
         {
-            seperationVector += CalculateSeperation(other);
-            allignmentVector += CalculateAlignment(other);
-            cohesionVector += CalculateCohesion(other);
+            seperationVector += CalcSeperation(other);
+            allignmentVector += CalCAlignment(other);
+            cohesionVector += CalcCohesion(other);
         }
-        Vector3 tempDirection;
+        Vector3 tempAcceleration;
         if (relevantBoids.Count > 0)
-            tempDirection = (seperationVector * seperationWeight +
+            tempAcceleration = (seperationVector * seperationWeight +
                                 allignmentVector * allignmentWeight +
                                 cohesionVector * cohesionWeight) /
                                 relevantBoids.Count;
         else
-            tempDirection = transform.forward;
-        return tempDirection;
+            tempAcceleration = transform.forward;
+        return tempAcceleration;
     }
     /// <summary>
     /// Gets a vector pointing away from a visible boid entity
     /// </summary>
     /// <param name="other"></param>
     /// <returns>seperation vector</returns>
-    private Vector3 CalculateSeperation(BOID other)
+    private Vector3 CalcSeperation(BOID other)
     {
         Vector3 awayVector = -(other.transform.position - transform.position);
         awayVector /= (awayVector.sqrMagnitude);
         return awayVector;
     }
-    private Vector3 CalculateAlignment(BOID other)
+    private Vector3 CalCAlignment(BOID other)
     {
         return other.rigidbody.velocity;
     }
-    private Vector3 CalculateCohesion(BOID other)
+    private Vector3 CalcCohesion(BOID other)
     {
         return other.transform.position - transform.position;
     }
@@ -131,7 +144,7 @@ public class BOID : MonoBehaviour
     private Vector3 AvoidObstacle()
     {
         RaycastHit hit;
-        if (!Physics.SphereCast(transform.position, boundingCapsule.radius*2, transform.forward, out hit, detectionRange * 2, LayerMask.GetMask("Wall")))
+        if (!Physics.SphereCast(transform.position, capsule.radius*2, transform.forward, out hit, detectionRange * 2, LayerMask.GetMask("Wall")))
             return Vector3.zero;
         Vector3[] obstAvoidRayDirs = BoidManager.CollisionRayDirections;
         float shortestDistToObst = float.MaxValue;
@@ -140,7 +153,7 @@ public class BOID : MonoBehaviour
             RaycastHit searchHit;
             Vector3 dir = transform.TransformDirection(obstAvoidRayDirs[i]);
             Ray ray = new Ray(transform.position, dir);
-            if (!Physics.SphereCast(ray, boundingCapsule.radius*2, out searchHit, detectionRange * 2, LayerMask.GetMask("Wall")))
+            if (!Physics.SphereCast(ray, capsule.radius*2, out searchHit, detectionRange * 2, LayerMask.GetMask("Wall")))
             {
                 Vector3 avoidVec = dir * avoidWeight / Mathf.Pow(shortestDistToObst, 2);
                 return avoidVec;
