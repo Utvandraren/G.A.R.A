@@ -9,10 +9,10 @@ public class BOID : MonoBehaviour
     Vector3 direction;
 
     new Rigidbody rigidbody;
+    CapsuleCollider boundingCapsule; //warning not generic
     List<BOID> relevantBoids;
     [Header("Detection")]
     [SerializeField] float detectionRange = 5f;
-    [SerializeField] float radius = 1f;
     [SerializeField] [Range(0, 1)] float detectionView = 0.30f;
     float detectionRangeSqrd;
     float detectDotCompare;
@@ -34,6 +34,7 @@ public class BOID : MonoBehaviour
     {
         engine = GetComponent<AIMoveEngine>();
         rigidbody = GetComponent<Rigidbody>();
+        boundingCapsule = GetComponent<CapsuleCollider>();
         relevantBoids = new List<BOID>();
         detectionRangeSqrd = Mathf.Pow(detectionRange, 2);
         BoidManager.allBoids.Add(this);
@@ -59,7 +60,7 @@ public class BOID : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 
     private void Detect()
@@ -130,7 +131,7 @@ public class BOID : MonoBehaviour
     private Vector3 AvoidObstacle()
     {
         RaycastHit hit;
-        if (!Physics.SphereCast(transform.position, radius * 2, transform.forward, out hit, detectionRange * 2, LayerMask.GetMask("Wall")))
+        if (!Physics.SphereCast(transform.position, boundingCapsule.radius*2, transform.forward, out hit, detectionRange * 2, LayerMask.GetMask("Wall")))
             return Vector3.zero;
         Vector3[] obstAvoidRayDirs = BoidManager.CollisionRayDirections;
         float shortestDistToObst = float.MaxValue;
@@ -139,7 +140,7 @@ public class BOID : MonoBehaviour
             RaycastHit searchHit;
             Vector3 dir = transform.TransformDirection(obstAvoidRayDirs[i]);
             Ray ray = new Ray(transform.position, dir);
-            if (!Physics.SphereCast(ray, radius * 2, out searchHit, detectionRange * 2, LayerMask.GetMask("Wall")))
+            if (!Physics.SphereCast(ray, boundingCapsule.radius*2, out searchHit, detectionRange * 2, LayerMask.GetMask("Wall")))
             {
                 Vector3 avoidVec = dir * avoidWeight / Mathf.Pow(shortestDistToObst, 2);
                 return avoidVec;

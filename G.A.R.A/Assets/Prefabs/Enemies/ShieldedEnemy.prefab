@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6275980567223361730}
   - component: {fileID: 6275980567223361731}
-  - component: {fileID: 6275980567223361759}
-  - component: {fileID: 4199879972989165055}
-  - component: {fileID: 3387418532278061876}
-  - component: {fileID: 8575901145359420446}
-  - component: {fileID: 8714030098041109475}
+  - component: {fileID: 109652898179839183}
   - component: {fileID: 6275980567223361756}
+  - component: {fileID: 4199879972989165055}
+  - component: {fileID: 6275980567223361759}
   - component: {fileID: 829105424057548698}
+  - component: {fileID: 3387418532278061876}
+  - component: {fileID: 8714030098041109475}
   m_Layer: 0
   m_Name: ShieldedEnemy
   m_TagString: Enemy
@@ -57,7 +57,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6275980567223361759
+--- !u!136 &109652898179839183
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275980567223361757}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 0.45
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6275980567223361756
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,9 +80,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6275980567223361757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5074989f94a9254dae7e02fa4ee5811, type: 3}
+  m_Script: {fileID: 11500000, guid: f9c2379ea93bfc14fb64ce2e83260e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRange: 1
+  detectionView: 0.2
+  seperationWeight: 1
+  allignmentWeight: 1
+  cohesionWeight: 1
+  avoidWeight: 1
+  targetWeight: 1
+  wiggleWeight: 0
+  wiggleOffset: 1
+  wiggleAmplitude: 1
 --- !u!114 &4199879972989165055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +110,7 @@ MonoBehaviour:
   stats: {fileID: 3387418532278061876}
   weaponMaxRange: 7
   weaponMinRange: 3
---- !u!114 &3387418532278061876
+--- !u!114 &6275980567223361759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,68 +119,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6275980567223361757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3995bcb9b08116b47b142ff5a0157836, type: 3}
+  m_Script: {fileID: 11500000, guid: b5074989f94a9254dae7e02fa4ee5811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  startingHealth: 10
-  deathTimer: 0
-  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
-    type: 3}
-  shieldHealth: 200
-  shield: {fileID: 7348201365385495412}
---- !u!135 &8575901145359420446
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6275980567223361757}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.37
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8714030098041109475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6275980567223361757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60767c334891e304181a88c7b5eab588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  defaultSpeed: 5
-  degreesPerTick: 2.8
-  speedStabilisation: 0.15
---- !u!114 &6275980567223361756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6275980567223361757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9c2379ea93bfc14fb64ce2e83260e58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectionRange: 1
-  radius: 0.43
-  detectionView: 0.2
-  seperationWeight: 1
-  allignmentWeight: 1
-  cohesionWeight: 1
-  avoidWeight: 10
-  targetWeight: 1
-  wiggleWeight: 0
-  wiggleOffset: 1
-  wiggleAmplitude: 1
 --- !u!82 &829105424057548698
 AudioSource:
   m_ObjectHideFlags: 0
@@ -253,6 +218,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3387418532278061876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275980567223361757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3995bcb9b08116b47b142ff5a0157836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  startingHealth: 10
+  deathTimer: 0
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
+  shieldHealth: 200
+  shield: {fileID: 7348201365385495412}
+--- !u!114 &8714030098041109475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275980567223361757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60767c334891e304181a88c7b5eab588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  defaultSpeed: 5
+  degreesPerTick: 3.1
+  speedStabilisation: 0.15
 --- !u!1 &7348201365385495412
 GameObject:
   m_ObjectHideFlags: 0

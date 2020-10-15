@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4432575310953063624}
   - component: {fileID: 4432575310953063625}
-  - component: {fileID: 217327054929208489}
+  - component: {fileID: -1504492085246054203}
   - component: {fileID: 4432575310953063638}
   - component: {fileID: 5824157368448424437}
   - component: {fileID: 4230501522975337930}
@@ -56,7 +56,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &217327054929208489
+--- !u!136 &-1504492085246054203
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,7 +69,7 @@ CapsuleCollider:
   m_Radius: 0.08
   m_Height: 0.52
   m_Direction: 2
-  m_Center: {x: 0, y: 0.03, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4432575310953063638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,12 +83,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 2
-  radius: 0.22
   detectionView: 0.4
   seperationWeight: 1
   allignmentWeight: 0.5
   cohesionWeight: 0.7
-  avoidWeight: 10
+  avoidWeight: 1
   targetWeight: 1
   wiggleWeight: 0
   wiggleOffset: 1
@@ -249,8 +248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   defaultSpeed: 5
-  degreesPerTick: 1.9
-  speedStabilisation: 0.09
+  degreesPerTick: 1.6
+  speedStabilisation: 0.21
 --- !u!1001 &2330128262617068457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -333,11 +332,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4432575310953063624}
     m_Modifications:
-    - target: {fileID: 6643723016212536568, guid: 8623b9c46484dd048a8b8e9adfcd847c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6643723016212536575, guid: 8623b9c46484dd048a8b8e9adfcd847c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -449,16 +443,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserWeapon
       objectReference: {fileID: 0}
-    - target: {fileID: 6643723016480546535, guid: 8623b9c46484dd048a8b8e9adfcd847c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6643723017232583696, guid: 8623b9c46484dd048a8b8e9adfcd847c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6643723017232583703, guid: 8623b9c46484dd048a8b8e9adfcd847c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -473,11 +457,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 7132874962581947715, guid: 8623b9c46484dd048a8b8e9adfcd847c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8623b9c46484dd048a8b8e9adfcd847c, type: 3}
