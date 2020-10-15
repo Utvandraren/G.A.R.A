@@ -155,13 +155,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4432575310953063624}
   - component: {fileID: 4432575310953063625}
-  - component: {fileID: -1504492085246054203}
-  - component: {fileID: 4432575310953063638}
-  - component: {fileID: 5824157368448424437}
-  - component: {fileID: 4230501522975337930}
-  - component: {fileID: 5338604928791571533}
+  - component: {fileID: 5784108756199056629}
   - component: {fileID: 2837124741929905598}
+  - component: {fileID: 5824157368448424437}
+  - component: {fileID: 5338604928791571533}
   - component: {fileID: 5166984323851223336}
+  - component: {fileID: 4432575310953063638}
+  - component: {fileID: -1504492085246054203}
+  - component: {fileID: 4230501522975337930}
   m_Layer: 0
   m_Name: ChargerEnemy
   m_TagString: Enemy
@@ -201,8 +202,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &-1504492085246054203
-CapsuleCollider:
+--- !u!65 &5784108756199056629
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -211,11 +212,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
-  m_Height: 0.25
-  m_Direction: 2
+  serializedVersion: 2
+  m_Size: {x: 0.41, y: 0.4, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4432575310953063638
+--- !u!114 &2837124741929905598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,19 +224,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4432575310953063639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9c2379ea93bfc14fb64ce2e83260e58, type: 3}
+  m_Script: {fileID: 11500000, guid: ff3a5e11740f060458eae0fe1f3469d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 2
-  detectionView: 0.3
-  seperationWeight: 1
-  allignmentWeight: 1.3
-  cohesionWeight: 1
-  avoidWeight: 1
-  targetWeight: 1
-  wiggleWeight: 0
-  wiggleOffset: 1
-  wiggleAmplitude: 1
 --- !u!114 &5824157368448424437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +244,76 @@ MonoBehaviour:
   stats: {fileID: 5338604928791571533}
   weaponMaxRange: 5
   weaponMinRange: 1
+--- !u!114 &5338604928791571533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432575310953063639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207e6dac538e82d419eb6107fbb2d97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  startingHealth: 100
+  deathTimer: 0.2
+  deathEffect: {fileID: 4432575310953063639, guid: 154bc80e7d255db46bcf6083f6668749,
+    type: 3}
+--- !u!114 &5166984323851223336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432575310953063639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60767c334891e304181a88c7b5eab588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  defaultSpeed: 5
+  degreesPerTick: 1
+  speedStabilisation: 0.04
+--- !u!114 &4432575310953063638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432575310953063639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c2379ea93bfc14fb64ce2e83260e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 2
+  radius: 0.22
+  detectionView: 0.3
+  seperationWeight: 1
+  allignmentWeight: 1.3
+  cohesionWeight: 1
+  avoidWeight: 10
+  targetWeight: 1
+  wiggleWeight: 0
+  wiggleOffset: 1
+  wiggleAmplitude: 1
+--- !u!136 &-1504492085246054203
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432575310953063639}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.21
+  m_Height: 0.49
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &4230501522975337930
 AudioSource:
   m_ObjectHideFlags: 0
@@ -350,51 +410,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5338604928791571533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4432575310953063639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207e6dac538e82d419eb6107fbb2d97d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  startingHealth: 100
-  deathTimer: 0.2
-  deathEffect: {fileID: 4432575310953063639, guid: 154bc80e7d255db46bcf6083f6668749,
-    type: 3}
---- !u!114 &2837124741929905598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4432575310953063639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff3a5e11740f060458eae0fe1f3469d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5166984323851223336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4432575310953063639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60767c334891e304181a88c7b5eab588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  defaultSpeed: 5
-  degreesPerTick: 0.5
-  speedStabilisation: 0.04
 --- !u!1 &6542909232275290860
 GameObject:
   m_ObjectHideFlags: 0

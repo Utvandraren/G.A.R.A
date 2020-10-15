@@ -8,7 +8,7 @@ public class AIMoveEngine : MonoBehaviour
     new Rigidbody rigidbody;
     [SerializeField] float speed;
     [SerializeField] float defaultSpeed = 5f;
-    [SerializeField] [Range(0, 10)] float degreesPerTick = 2f;
+    [SerializeField] [Range(1, 10)] float degreesPerTick = 2f;
     [SerializeField] [Range(0, 1)] float speedStabilisation = 0.3f;
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,7 @@ public class AIMoveEngine : MonoBehaviour
     {
         Quaternion toRotation = Quaternion.LookRotation(direction);
         rigidbody.MoveRotation(Quaternion.RotateTowards(rigidbody.rotation, toRotation, degreesPerTick));
-        rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, transform.forward * defaultSpeed, speedStabilisation);
+        rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, direction * defaultSpeed, speedStabilisation);
     }
 
     internal void MoveWithoutRotation(Vector3 addedVelocity)
