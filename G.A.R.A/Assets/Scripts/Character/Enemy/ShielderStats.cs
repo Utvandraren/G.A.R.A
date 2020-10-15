@@ -11,9 +11,10 @@ namespace Assets.Scripts
         public GameObject shield;
         public override void TakeDamage(SciptableAttackObj attack)
         {
-            if (attack.element == SciptableAttackObj.WeaponElement.Electricity)
+            if (attack.element == SciptableAttackObj.WeaponElement.Electricity && shield.activeInHierarchy)
             {
                 shieldHealth = 0;
+                shield.SetActive(false);
                 return;
             }
             if (shieldHealth <= 0)

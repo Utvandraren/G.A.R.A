@@ -232,8 +232,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  startingHealth: 100
-  deathTimer: 2
+  startingHealth: 10
+  deathTimer: 0
+  deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
+    type: 3}
   shieldHealth: 200
   shield: {fileID: 7348201365385495412}
 --- !u!1 &7348201365385495412
@@ -247,7 +249,7 @@ GameObject:
   - component: {fileID: 8220856072651667821}
   - component: {fileID: 9024595720649731406}
   - component: {fileID: 1929987153976622002}
-  - component: {fileID: 6779779785183930202}
+  - component: {fileID: 1978434470134298165}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Enemy
@@ -316,7 +318,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6779779785183930202
+--- !u!135 &1978434470134298165
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -327,7 +329,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.49999997
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2505143509827530817
 PrefabInstance:
