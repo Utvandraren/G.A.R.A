@@ -2094,12 +2094,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5860164df1f06c446ab2deb370e0d6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardthrustForce: 400
-  additionalBoostForce: 250
-  maxRollRate: 2
+  standardthrustForce: 450
+  additionalBoostForce: 200
+  maxRollRate: 1
   rollLerpTime: 1
-  maxNormalSpeed: 9
-  maxSprintSpeed: 15
+  stopLerpTime: 1
+  maxNormalSpeed: 11
+  maxSprintSpeed: 16
+  stopSmoothFactor: 0.8
+  rollSmoothFactor: 0.99
   invertY: 0
   mouseSensitivityMultiplier: 1
 --- !u!1 &3887101940151084163
