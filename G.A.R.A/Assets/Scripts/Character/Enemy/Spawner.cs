@@ -4,29 +4,15 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    BoidManager manager;
-    [SerializeField] GameObject spawnObject;
-    [SerializeField] float spawnInterval = 10;
-    [SerializeField] int spawnAmount = 1;
-    float timer;
-    // Start is called before the first frame update
-    void Start()
+    public enum Type
     {
-        manager = FindObjectOfType<BoidManager>();
+        WALL,
+        ROOM
     }
-
-    // Update is called once per frame
-    void Update()
+    public Type type;
+    public int index;
+    public void Spawn(GameObject gameObject)
     {
-        timer += Time.deltaTime;
-        if(timer >= spawnInterval)
-        {
-            timer = 0;
-            for (int i = 0; i < spawnAmount; i++)
-            {
-                Instantiate(spawnObject,transform.position,transform.rotation);
-
-            }
-        }
+        Instantiate(gameObject, transform.position + Random.insideUnitSphere, transform.rotation);
     }
 }
