@@ -4858,6 +4858,7 @@ GameObject:
   - component: {fileID: 9067358271642225332}
   - component: {fileID: 9067358271642225330}
   - component: {fileID: 9067358271642225331}
+  - component: {fileID: 5455379864496124074}
   m_Layer: 0
   m_Name: Chunks
   m_TagString: Untagged
@@ -4887,7 +4888,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9067358271642225333}
   serializedVersion: 6
-  lengthInSec: 5
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5593,7 +5594,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.5
+      value: 0.1
       mode: 0
       spread: 0
       speed:
@@ -5822,7 +5823,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 20
+        scalar: 30
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -5886,7 +5887,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.038921356
+          time: 0.56307733
           value: 1
           inSlope: -1.0100431
           outSlope: -1.0100431
@@ -5895,8 +5896,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.15887918
         - serializedVersion: 3
-          time: 0.3103062
-          value: 0.0298515
+          time: 1
+          value: 0
           inSlope: -0.1689855
           outSlope: -0.1689855
           tangentMode: 0
@@ -6041,8 +6042,8 @@ ParticleSystem:
     enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.2617994
+      minMaxState: 2
+      scalar: 7.8539815
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6072,8 +6073,8 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 0
+          time: 0.0030769228
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -6094,8 +6095,8 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.17453292
+      minMaxState: 2
+      scalar: 6.0213857
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6125,8 +6126,8 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 0
+          time: 0.3507692
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -6147,8 +6148,8 @@ ParticleSystem:
         m_RotationOrder: 4
     curve:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.7853982
+      minMaxState: 2
+      scalar: 6.806784
       minScalar: 0.7853982
       maxCurve:
         serializedVersion: 2
@@ -6164,7 +6165,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: -0.014925003
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -6178,8 +6179,8 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 1
+          time: 0.012306213
+          value: 0.014925003
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -6188,7 +6189,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: -0.02487564
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -6200,7 +6201,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 1
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -6225,8 +6226,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 39321
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
@@ -6234,7 +6235,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9614,7 +9615,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 31ab4ddceb6c098469d36ae31e571ca3, type: 3}
+  - {fileID: 2100000, guid: a5aaee4111611af43b5abbff184fe5fa, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -9646,7 +9647,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
@@ -9654,13 +9655,25 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: -1550514412580984892, guid: 23ce1875b4ba19043a1d4241c1fc12b8, type: 3}
-  m_Mesh1: {fileID: -5495902117074765545, guid: 2b3c3c25781360047897eb9751e44bf7,
+  m_Mesh: {fileID: -868200025765319072, guid: 54e61d9c83bf59140a751c651f9a48da, type: 3}
+  m_Mesh1: {fileID: 2964991919305849542, guid: c69a024b96424854a9d221a0028c9271, type: 3}
+  m_Mesh2: {fileID: -7911188841748432666, guid: 1fb8cb45216bf434d9ceebed338ca0d4,
     type: 3}
-  m_Mesh2: {fileID: 4493585093827132993, guid: 31ab4ddceb6c098469d36ae31e571ca3, type: 3}
-  m_Mesh3: {fileID: -8678823145569952518, guid: f6fc0485a8ab691409df9464345d3df0,
+  m_Mesh3: {fileID: -4273789190682731333, guid: 81e69809774ac9c4f81405a3265a30ab,
     type: 3}
   m_MaskInteraction: 0
+--- !u!114 &5455379864496124074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9067358271642225333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 941d13552579223438fb0972c1a951ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9067358271727995282
 GameObject:
   m_ObjectHideFlags: 0
