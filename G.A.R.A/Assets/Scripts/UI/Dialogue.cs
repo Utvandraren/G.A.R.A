@@ -10,6 +10,17 @@ public class Dialogue
     [Tooltip("The name of the NPC or logbook")]
     public string name;
 
-    [TextArea(3, 10)]
     public string[] sentences;
+
+    public Dialogue(string[] textFileSentences)
+    {
+        sentences = new string[textFileSentences.Length];
+        sentences = textFileSentences;
+    }
+
+    public void FillSentences(string[] textFileSentences)
+    {
+        sentences = new string[textFileSentences.Length];
+        sentences = textFileSentences;
+    }
 }
