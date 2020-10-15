@@ -28,11 +28,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxSprintSpeed;
     [SerializeField, Range(0.01f, .99f)] private float stopSmoothFactor;
     [SerializeField, Range(0.01f, .99f)] private float rollSmoothFactor;
+    [Tooltip("The amount of drag that will be applied when the player lets go of all movement buttons.")]
+    [SerializeField] private float stopDragCoef;
 
     private float thrustForce;
     private float currentRollRate = 0.0f;
     private float acceleration;
-    private float dragCoef;
+
     private float currentMaxSpeed;
 
     private float rollLerpPct;
@@ -99,7 +101,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        dragCoef = rb.drag;
         currentMaxSpeed = maxNormalSpeed;
     }
 
@@ -210,7 +211,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(direction, ForceMode.Force);
             rb.drag = 0;
         }
-        else rb.drag = dragCoef;
+        else rb.drag = stopDragCoef;
     }
 
     private float calculateLerp(float current, float target, float lerpTime, float smoothnessFactor)
