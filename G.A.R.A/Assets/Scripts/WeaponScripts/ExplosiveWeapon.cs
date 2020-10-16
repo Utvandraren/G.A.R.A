@@ -30,14 +30,12 @@ public class ExplosiveWeapon : Weapon
             Vector3 direction = hit.point - rayOrigin;
             direction = direction.normalized;
             projectileInstance.GetComponent<ExplosiveProjectile>().SetDirection(direction);
-
         }
         else
         {
             Vector3 direction = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f)) + camera.transform.forward * 2000f;
             direction = direction.normalized;
             projectileInstance.GetComponent<ExplosiveProjectile>().SetDirection(direction);
-
         }
     }
 

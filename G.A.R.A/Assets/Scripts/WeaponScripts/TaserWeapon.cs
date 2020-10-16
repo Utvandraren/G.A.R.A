@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class TaserWeapon : Weapon
 {
-    [SerializeField] private float maxRange;
-    [SerializeField] private float jumpRange;
-    [SerializeField] private int nmbrJumps;
+    [Header("Taser effects")]
     [SerializeField] private ParticleSystem electricityEffect;
     [SerializeField] private GameObject electricityHitSparks;
     [SerializeField] private GameObject electricityLine;
-    [SerializeField] private float laserThickness = 0.15f;
+
+    [Header("Taser properties")]
+    [SerializeField] private float maxRange;
+    [SerializeField] private float jumpRange;
+    [SerializeField] private int nmbrJumps;
+    [SerializeField] private float taserThickness = 0.15f;
 
     private Camera camera;
     private List<Collider> targetsAlreadyHit;
@@ -32,7 +35,7 @@ public class TaserWeapon : Weapon
 
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
-        if (Physics.SphereCast(rayOrigin, laserThickness, camera.transform.forward, out hit, maxRange))
+        if (Physics.SphereCast(rayOrigin, taserThickness, camera.transform.forward, out hit, maxRange))
         {
             if (hit.transform.TryGetComponent<Interactable>(out Interactable interObj))
             {
@@ -43,7 +46,6 @@ public class TaserWeapon : Weapon
                 HandleElectricityArchs(attackObj);
             }
         }
-
     }
 
     void HandleElectricityArchs(EnemyStats attackObj) //Handles how the weapon go from enemy to enemy damaging them
@@ -66,20 +68,17 @@ public class TaserWeapon : Weapon
                 break;
             }
         }
-
         List<Vector3> targets = new List<Vector3>();
         foreach (Collider transformTarget in targetsAlreadyHit)
         {
             targets.Add(transformTarget.transform.position);
         }
-
         StartCoroutine("VisualEffectCo", targets);       
     }
 
     IEnumerator VisualEffectCo(List<Vector3> targets)   //Draw the visual effects for the electricity based on the targets that have been hit.    
     {    
         int i = 0;
-        List<GameObject> sparksEffectList = new List<GameObject>();
         LineRenderer line = Instantiate(electricityLine, gameObject.transform.position, Quaternion.identity).GetComponent<LineRenderer>();
         line.positionCount = 0;
 
@@ -93,23 +92,14 @@ public class TaserWeapon : Weapon
             }
             ++line.positionCount;
             line.SetPosition(i, target);
-            sparksEffectList.Add(Instantiate(electricityHitSparks, target, Quaternion.identity));     //Sparkseffekts
+            Instantiate(electricityHitSparks, target, Quaternion.identity);     //Sparkseffekts
             ++i;
             yield return new WaitForSeconds(0.1f);
-        }
-        
+        }       
         yield return new WaitForSeconds(1f);
         targetsAlreadyHit.Clear();
         line.positionCount = 0;
-
-        foreach (GameObject effect in sparksEffectList)
-        {
-            Destroy(effect, 3f);
-        }
-
     }
-
-   
 
     bool targetAlreadyHit(Collider collider)
     {
@@ -140,7 +130,6 @@ public class TaserWeapon : Weapon
         }
         else
         {
-            Debug.Log("No enemies found");
             return null;
         }
     }

@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class PlayerLaserWeapon : Weapon
 {
+    [Header("Laser effects")]
     [SerializeField] private GameObject laserEffect;
     [SerializeField] private GameObject laserHit;
+
+    [Header("Laser properties")]
     [SerializeField] private float maxRange = 100f;
     [SerializeField] private float laserThickness = 0.15f;
     [SerializeField] private float laserDuration = 0.5f;
-
 
     private Camera camera;
 

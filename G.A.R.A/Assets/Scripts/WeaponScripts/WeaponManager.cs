@@ -42,19 +42,19 @@ public class WeaponManager : MonoBehaviour
     }
 
     void handleInput()   //Check if mouseScroll has changed and thus should change the weapon
-    {
-        if((int)Input.mouseScrollDelta.y < 0)
+    {       
+        mouseDelta += (int)Input.mouseScrollDelta.y;
+
+        if (mouseDelta != oldMouseDelta)
         {
-            mouseDelta -= (int)Input.mouseScrollDelta.y;
-        }
-        else
-        {
-            mouseDelta += (int)Input.mouseScrollDelta.y;
-        }
-        
-        if(mouseDelta != oldMouseDelta)
-        {
-            mouseDelta = mouseDelta % 3;
+           if(mouseDelta > 2)
+           {
+                mouseDelta = 0;
+           }
+           else if(mouseDelta < 0)
+           {
+                mouseDelta = 2;
+           }
             Weapons weap = (Weapons)mouseDelta;
             ChangeWeapon(weap);
             oldMouseDelta = mouseDelta;

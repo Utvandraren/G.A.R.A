@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6705987607429912194}
   - component: {fileID: 8440846610614967501}
   - component: {fileID: 2057707514949030083}
+  - component: {fileID: 2373457921504231024}
   m_Layer: 0
   m_Name: taserOnHitEffect
   m_TagString: Untagged
@@ -148,3 +149,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2373457921504231024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4369327707953495383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fac21d1f093d344816942d1abce94e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TimeOut: 2
+  m_DetachChildren: 0
