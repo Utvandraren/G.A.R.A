@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Transform firePoint;       //<----
-    public SciptableAttackObj attack; //<----Must be public due to other scripts using them
+    public Transform firePoint;
+    public SciptableAttackObj attack;
 
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private SciptableIntObj ammo;

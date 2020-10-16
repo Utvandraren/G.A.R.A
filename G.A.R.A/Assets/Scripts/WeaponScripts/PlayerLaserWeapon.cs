@@ -36,6 +36,7 @@ public class PlayerLaserWeapon : Weapon
                 interObj.Interact(attack);
 
             }
+
             else if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
             {
                 hit.transform.GetComponent<Stats>().TakeDamage(attack);
