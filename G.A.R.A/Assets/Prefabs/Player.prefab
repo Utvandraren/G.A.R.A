@@ -830,6 +830,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7558213752637156041, guid: b69e94d8a472f65428994078275e77da,
         type: 3}
+    - target: {fileID: 1404116168, guid: 217692cea192c39418198ce01a267b79, type: 3}
+      propertyPath: startUpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a79eb25a9d72884999abf18dee97357, type: 3}
     - target: {fileID: 470496076153194801, guid: 217692cea192c39418198ce01a267b79,
         type: 3}
       propertyPath: m_Name
@@ -928,6 +932,16 @@ PrefabInstance:
       propertyPath: laserEffect
       value: 
       objectReference: {fileID: 6146890790766463384}
+    - target: {fileID: 1350432437760800335, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
+        type: 3}
+      propertyPath: startUpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b141020e6b36f704f957e4f8e4a82e2f, type: 3}
+    - target: {fileID: 1350432437760800335, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
+        type: 3}
+      propertyPath: laserDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2365036969022466034, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
         type: 3}
       propertyPath: m_Name
@@ -1080,6 +1094,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4991578823435492570, guid: 50a96976ee4c0e14995771a480e2f6b4,
+        type: 3}
+      propertyPath: startUpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a84f17709ab054458b0144883b8d92d, type: 3}
     m_RemovedComponents:
     - {fileID: 1753032842555039958, guid: 50a96976ee4c0e14995771a480e2f6b4, type: 3}
     - {fileID: 1753032842555039957, guid: 50a96976ee4c0e14995771a480e2f6b4, type: 3}

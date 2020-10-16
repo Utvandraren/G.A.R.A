@@ -13,6 +13,7 @@ public class PlayerLaserWeapon : Weapon
     [SerializeField] private float laserDuration = 0.5f;
 
     private Camera camera;
+    
 
     public override void Start()
     {
@@ -77,6 +78,7 @@ public class PlayerLaserWeapon : Weapon
         laserEffect.SetActive(false);
     }
 
+    
 
     void OnDrawGizmos()
     {
