@@ -15,11 +15,12 @@ public class DialogueTrigger : MonoBehaviour
     private float coolDownTimer = 0;
     private float coolDown = 1f;
     [SerializeField] private TextAsset dialogueFile;
+    private bool firstTimeTriggering;
     
     public void Start()
     {
         dialogue = new Dialogue(dialogueFile.text.Split('\n'));
-
+        firstTimeTriggering = true;
     }
     /// <summary>
     /// This method is called whenever the player tries to start a dialogue
@@ -28,6 +29,15 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (!hasBeenInvoked)
         {
+            if (firstTimeTriggering)
+            {
+                firstTimeTriggering = false;
+                GameObject obj = GameObject.Find("LogBookCounter");
+                if(obj.TryGetComponent<LogbookCounter>(out LogbookCounter lc))
+                {
+                    lc.FoundLogbook();
+                }
+            }
             hasBeenInvoked = true;
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
         }
