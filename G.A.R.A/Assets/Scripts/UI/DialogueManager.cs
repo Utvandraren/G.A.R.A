@@ -37,10 +37,10 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if(!interact.canInteract)
-        {
-            EndDialogue();
-        }
+        //if(!interact.canInteract)
+        //{
+        //    EndDialogue();
+        //}
     }
 
     /// <summary>
@@ -75,8 +75,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         string sentence = sentences.Dequeue();
-        StopCoroutine(TypeSentence(sentence));
-        StartCoroutine(TypeSentence(sentence));
+        dialogueText.text = sentence;
+        //StopCoroutine(TypeSentence(sentence));
+        //StartCoroutine(TypeSentence(sentence));
     }
 
     /// <summary>
