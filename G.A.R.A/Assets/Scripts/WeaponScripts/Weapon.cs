@@ -25,6 +25,8 @@ public class Weapon : MonoBehaviour
         weaponAudioSource = GetComponent<AudioSource>();
     }
 
+    
+
     void Update()
     {
         currentTime -= Time.deltaTime;
@@ -71,15 +73,16 @@ public class Weapon : MonoBehaviour
 
     }
 
+    //Sound for when weapon is shot
     public void PlayShootSound()
     {
         weaponAudioSource.pitch = Random.Range(1f, 1.1f);
         weaponAudioSource.Play();
     }
 
-    void OnEnable()
+    public void PlayStartUpSound()
     {
-        weaponAudioSource.PlayOneShot(startUpSound);
+        weaponAudioSource.PlayOneShot(startUpSound); 
     }
 
 }

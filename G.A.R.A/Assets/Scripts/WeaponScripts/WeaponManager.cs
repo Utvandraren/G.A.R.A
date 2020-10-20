@@ -76,6 +76,7 @@ public class WeaponManager : MonoBehaviour
                 explosiveWeapon.SetActive(false);
                 taserWeapon.SetActive(false);
                 currentWeapon = laserWeapon.GetComponent<Weapon>();
+                currentWeapon.PlayStartUpSound();
                 break;
 
             case Weapons.Explosive:
@@ -83,6 +84,7 @@ public class WeaponManager : MonoBehaviour
                 laserWeapon.SetActive(false);
                 taserWeapon.SetActive(false);
                 currentWeapon = explosiveWeapon.GetComponent<Weapon>();
+                currentWeapon.PlayStartUpSound();
                 break;
 
             case Weapons.Taser:
@@ -90,6 +92,7 @@ public class WeaponManager : MonoBehaviour
                 explosiveWeapon.SetActive(false);
                 laserWeapon.SetActive(false);
                 currentWeapon = taserWeapon.GetComponent<Weapon>();
+                currentWeapon.PlayStartUpSound();
                 break;
             default:
                 //
