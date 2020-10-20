@@ -14,7 +14,6 @@ public class LogbookCounter : MonoBehaviour
         logbooks = GameObject.FindGameObjectsWithTag("Logbook");
         numberOfLogbooks = logbooks.Length;
         gameObject.GetComponent<Text>().text = numberOfLogbooks.ToString();
-        Debug.Log(numberOfLogbooks);
     }
 
     // Update is called once per frame
@@ -27,7 +26,6 @@ public class LogbookCounter : MonoBehaviour
     {
         numberOfLogbooks--;
         gameObject.GetComponent<Text>().text = numberOfLogbooks.ToString();
-        Debug.Log(numberOfLogbooks);
     }
 
     public int GetNumberOfLogbooks()
