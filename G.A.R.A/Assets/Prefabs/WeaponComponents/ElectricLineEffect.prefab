@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2265118182859407119}
   - component: {fileID: 937314557155364950}
+  - component: {fileID: 5094772248865356037}
   m_Layer: 0
   m_Name: ElectricLineEffect
   m_TagString: Untagged
@@ -126,3 +127,17 @@ LineRenderer:
     generateLightingData: 1
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &5094772248865356037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7558213752637156041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fac21d1f093d344816942d1abce94e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TimeOut: 2
+  m_DetachChildren: 0

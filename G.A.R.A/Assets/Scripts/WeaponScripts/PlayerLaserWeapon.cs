@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class PlayerLaserWeapon : Weapon
 {
+    [Header("Laser effects")]
     [SerializeField] private GameObject laserEffect;
     [SerializeField] private GameObject laserHit;
+
+    [Header("Laser properties")]
     [SerializeField] private float maxRange = 100f;
     [SerializeField] private float laserThickness = 0.15f;
     [SerializeField] private float laserDuration = 0.5f;
 
-
     private Camera camera;
+    
 
     public override void Start()
     {
@@ -33,7 +36,6 @@ public class PlayerLaserWeapon : Weapon
                 interObj.Interact(attack);
 
             }
-
             else if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
             {
                 hit.transform.GetComponent<Stats>().TakeDamage(attack);
@@ -75,6 +77,7 @@ public class PlayerLaserWeapon : Weapon
         laserEffect.SetActive(false);
     }
 
+    
 
     void OnDrawGizmos()
     {

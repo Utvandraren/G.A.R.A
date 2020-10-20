@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Transform firePoint;
-    public SciptableAttackObj attack;
+    public Transform firePoint;       //<----
+    public SciptableAttackObj attack; //<----Must be public due to other scripts using them
 
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private SciptableIntObj ammo;
     [SerializeField] public Animator anim;
+    [SerializeField] public AudioClip startUpSound;
+
 
     private float currentTime;
-    private AudioSource shootSound;
+    private AudioSource weaponAudioSource;
     private System.Random rnd;
 
     public virtual void Start()
@@ -20,8 +22,10 @@ public class Weapon : MonoBehaviour
         currentTime = timeBetweenAttacks;
         ammo.ResetValue();
         rnd = new System.Random();
-        shootSound = GetComponent<AudioSource>();
+        weaponAudioSource = GetComponent<AudioSource>();
     }
+
+    
 
     void Update()
     {
@@ -69,10 +73,16 @@ public class Weapon : MonoBehaviour
 
     }
 
+    //Sound for when weapon is shot
     public void PlayShootSound()
     {
-        shootSound.pitch = Random.Range(1f, 1.1f);
-        shootSound.Play();
+        weaponAudioSource.pitch = Random.Range(1f, 1.1f);
+        weaponAudioSource.Play();
+    }
+
+    public void PlayStartUpSound()
+    {
+        weaponAudioSource.PlayOneShot(startUpSound); 
     }
 
 }
