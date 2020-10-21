@@ -11,8 +11,13 @@ public class LaserWeapon : Weapon
     [Header("Laser properties")]
     [SerializeField] private float maxRange = 100f;
     [SerializeField] private float laserThickness = 0.15f;
+    [SerializeField] public Animator anim;
 
 
+    public void FixedUpdate()
+    {
+        anim.SetBool("Fire", false);
+    }
 
     public override void Shoot()  //Starts visual effects and draw ray to check if colldiding with any valiable target
     {
@@ -21,6 +26,7 @@ public class LaserWeapon : Weapon
         instantLaserEffect = Instantiate(laserEffect, firePoint.position, firePoint.rotation,transform);
         Destroy(instantLaserEffect, 0.2f);
         PlayShootSound();
+        anim.CrossFadeInFixedTime("Fire Laser Weapon", 0.01f);
 
         RaycastHit hit;
         Debug.LogFormat("Shots fired from: " + gameObject.ToString());

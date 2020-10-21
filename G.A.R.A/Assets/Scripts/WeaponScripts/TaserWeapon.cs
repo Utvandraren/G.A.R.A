@@ -11,6 +11,7 @@ public class TaserWeapon : Weapon
     [SerializeField] private GameObject electricityHitSparks;
     [SerializeField] private GameObject electricityLine;
     [SerializeField] private float laserThickness = 0.15f;
+    [SerializeField] public Animator anim;
 
     private Camera camera;
     private List<Collider> targetsAlreadyHit;
@@ -23,12 +24,18 @@ public class TaserWeapon : Weapon
         camera = Camera.main;
     }
 
+    public void FixedUpdate()
+    {
+        anim.SetBool("Fire", false);
+    }
+
     public override void Shoot()
     {
         base.Shoot();
         RaycastHit hit;
         electricityEffect.Play();
         PlayShootSound();
+        anim.CrossFadeInFixedTime("Fire Taser Weapon", 0.01f);
 
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
