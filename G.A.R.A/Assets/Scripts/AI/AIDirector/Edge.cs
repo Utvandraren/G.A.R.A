@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
+[System.Serializable]
 public class Edge
 {
     public enum DoorType
@@ -14,20 +14,13 @@ public class Edge
         DESTRUCTABLE,
         TOGGLEABLE
     }
-    DoorType type;
-    Node from;
-    Node to;
+    [SerializeField] private DoorType type;
+    [SerializeField] private int from;
+    [SerializeField] private int to;
 
-    public Edge(Node from, Node to, DoorType type)
+    public Edge(int from, int to, DoorType type)
     {
         this.type = type;
-        this.from = from;
-        this.to = to;
-    }
-    
-    public Edge(Node from, Node to)
-    {
-        this.type = DoorType.NONE;
         this.from = from;
         this.to = to;
     }
