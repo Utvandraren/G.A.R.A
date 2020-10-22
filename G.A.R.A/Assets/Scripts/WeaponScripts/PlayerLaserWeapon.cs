@@ -19,6 +19,7 @@ public class PlayerLaserWeapon : Weapon
     {
         base.Start();
         camera = Camera.main;
+        //camera = gameObject.GetComponentInChildren<Camera>();
     }
 
     //Draws ray from middle of screen to see if something is hit
