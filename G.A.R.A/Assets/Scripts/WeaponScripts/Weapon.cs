@@ -7,13 +7,13 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;       //<----
     public SciptableAttackObj attack; //<----Must be public due to other scripts using them
 
-    [SerializeField] private float timeBetweenAttacks;
+    [SerializeField] protected float timeBetweenAttacks;
     [SerializeField] private SciptableIntObj ammo;
     [SerializeField] public Animator anim;
     [SerializeField] public AudioClip startUpSound;
 
 
-    private float currentTime;
+    protected float currentTime;
     private AudioSource weaponAudioSource;
     private System.Random rnd;
 
@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
 
     }
 
-    public void TryShoot()  //If cooldown is ready then you can shoot
+    public virtual void TryShoot()  //If cooldown is ready then you can shoot
     {
         //currentTime -= Time.deltaTime;
         //Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
