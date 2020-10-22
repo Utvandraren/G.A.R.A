@@ -27,30 +27,25 @@ public class Weapon : MonoBehaviour
 
     
 
-    void Update()
+    public virtual void Update()
     {
         currentTime -= Time.deltaTime;
         Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
-
     }
 
-    public void TryShoot()  //If cooldown is ready then you can shoot
+    public virtual void TryShoot()  //If cooldown is ready then you can shoot
     {
-        //currentTime -= Time.deltaTime;
-        //Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
-
         if (currentTime <= 0f && AmmoNotEmpty())
         {
             Shoot();
-            anim.SetBool("Fire", true);
             currentTime = timeBetweenAttacks;
-            ammo.value--;
+            ammo.value--;           
         }
-
     }
 
     public virtual void Shoot()
-    {       
+    {
+        anim.SetBool("Fire", true);
     }
 
     bool AmmoNotEmpty()  //Metod checking if ammo is still left
@@ -73,13 +68,17 @@ public class Weapon : MonoBehaviour
 
     }
 
-    //Sound for when weapon is shot
+    /// <summary>
+    /// Sound for when weapon is shot
+    /// </summary>
     public void PlayShootSound()
     {
         weaponAudioSource.pitch = Random.Range(1f, 1.1f);
         weaponAudioSource.Play();
     }
-
+    /// <summary>
+    /// Plays the startupSound for this weapon
+    /// </summary>
     public void PlayStartUpSound()
     {
         weaponAudioSource.PlayOneShot(startUpSound); 

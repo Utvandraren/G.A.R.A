@@ -4,44 +4,93 @@ using UnityEngine;
 
 public class TrackingLaser : Weapon
 {
-    [SerializeField] private float trackingTime = 0f;
+    [SerializeField] private float trackingSpeed = 0f;
+    [SerializeField] private float chargeUpTime = 0f;
     [SerializeField] private float attackDuration = 0f;
+    [SerializeField] private float laserBeamAttackRadius = 1;
     [SerializeField] private GameObject laserBeam;
-
+    [SerializeField] private GameObject aimingBeam;
 
     private GameObject target;
-    private Transform currentTransform;
-
+    private BossMovement bossMov;
+    private bool currentlyShooting;
 
     // Start is called before the first frame update
     public override void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        currentlyShooting = false;
         base.Start();
-
+        bossMov = GetComponentInParent<BossMovement>();
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        Vector3 currentDirection = target.transform.position - transform.position;
-        //transform.rotation = Quaternion.LookRotation(currentDirection);
-        Quaternion neededRotation = Quaternion.LookRotation(currentDirection);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * trackingTime);
-    } 
+        base.Update();
+        handleTargeting();
+        TryShoot();
+    }
+
+    public override void TryShoot()
+    {     
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position, laserBeamAttackRadius, transform.forward, out hit))
+        {
+            if (hit.transform.gameObject.CompareTag("Player"))
+            {
+                base.TryShoot();
+            }
+            else
+            {
+                Debug.Log(hit.transform.name);
+            }
+        }
+    }
 
     public override void Shoot()
     {
-        base.Shoot();
+        
+        StartCoroutine(ChargeLaser());
+    }
+
+    //Function moving handling how the laser/targetbeam moves around towards the player
+    private void handleTargeting()
+    {
+        if (currentlyShooting)   //Stop the targeting from moving while moving
+        {
+            return;
+        }
+        Vector3 currentDirection = target.transform.position - transform.position;
+        Quaternion neededRotation = Quaternion.LookRotation(currentDirection);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * trackingSpeed);
+    }
+
+    //Plays the chargeup effects warning the player an attack is imminent before the laser is activated
+    private IEnumerator ChargeLaser()
+    {
+        PlayStartUpSound();
+        currentlyShooting = true;
+        bossMov.enabled = false;        
+        yield return new WaitForSeconds(chargeUpTime);
         StartCoroutine(ActivateLaser());
     }
 
-    public IEnumerator ActivateLaser()
-    {
+    //Activates the laser that damage the player
+    private IEnumerator ActivateLaser()
+    {       
         laserBeam.SetActive(true);
-        //PLayVisualEffects
+        aimingBeam.SetActive(false);
+        PlayShootSound();
         yield return new WaitForSeconds(attackDuration);
+        currentlyShooting = false;
+        bossMov.enabled = true;
         laserBeam.SetActive(false);
+        aimingBeam.SetActive(true);
+    }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, transform.forward);
     }
 }

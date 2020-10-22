@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
+    private Transform target;
+
     BossPhases currentPhase = BossPhases.ShieldPhase;
     Animator animator;
 
@@ -19,6 +21,11 @@ public class BossManager : MonoBehaviour
     {
         TransitionToNextPhase();
         animator = GetComponent<Animator>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void Update()
+    {
     }
 
     public void TransitionToNextPhase()

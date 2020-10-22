@@ -10,6 +10,7 @@ public class BossStats : Stats
 
     protected override void Start()
     {
+        base.Start();
         treshold = bossHealth.startValue / 3;
     }
 
