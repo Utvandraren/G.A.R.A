@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0.01f, .99f)] private float stopSmoothFactor;
     [SerializeField, Range(0.01f, .99f)] private float rollSmoothFactor;
     [Tooltip("The amount of drag that will be applied when the player lets go of all movement buttons.")]
-    [SerializeField] private float stopDragCoef;
+    [SerializeField] private float stopDragCoef = 5;
 
     private float thrustForce;
     private float currentRollRate = 0.0f;
@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         currentMaxSpeed = maxNormalSpeed;
+        stopDragCoef = rb.drag;
     }
 
     private void OnEnable()
