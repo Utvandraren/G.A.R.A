@@ -15,12 +15,20 @@ public class Node
         NO_SPAWN,
         SPAWN
     }
+    [HideInInspector] public int index = -1;
     public RoomType type;
     public Vector3 roomCenter;
-    public Node(RoomType type, Vector3 roomCenter)
+    public int[] edgeTo;
+    [HideInInspector] public List<Edge> edges;
+    [HideInInspector] public float percentToEnd;
+    public Node()
     {
-        this.type = type;
-        this.roomCenter = roomCenter;
+        edges = new List<Edge>();
+    }
+
+    internal void CreateEdge(int toNodeIndex, Edge.DoorType edgeType)
+    {
+        edges.Add(new Edge(toNodeIndex, edgeType));
     }
 }
 
