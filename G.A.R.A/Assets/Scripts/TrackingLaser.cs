@@ -11,6 +11,7 @@ public class TrackingLaser : Weapon
     [SerializeField] private GameObject laserBeam;
     [SerializeField] private GameObject aimingBeam;
 
+
     private GameObject target;
     private BossMovement bossMov;
     private bool currentlyShooting;
@@ -64,8 +65,9 @@ public class TrackingLaser : Weapon
         Vector3 currentDirection = target.transform.position - transform.position;
         Quaternion neededRotation = Quaternion.LookRotation(currentDirection);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * trackingSpeed);
-    }
 
+    }
+    
     //Plays the chargeup effects warning the player an attack is imminent before the laser is activated
     private IEnumerator ChargeLaser()
     {
