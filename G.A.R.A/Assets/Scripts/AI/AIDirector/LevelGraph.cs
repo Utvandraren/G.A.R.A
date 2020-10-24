@@ -6,25 +6,20 @@ using UnityEngine;
 public class LevelGraph : ScriptableObject
 {
     [SerializeField] private Node[] nodes;
-    [SerializeField] private Tuple<int,int,Edge.DoorType>[] edgeData;
+    [SerializeField] private Tuple<int, int, Edge.DoorType>[] edgeData;
+    private Edge[] edges;
     public void Initialize()
     {
-        SetIndicies();
-        CreateEdges();
+        edges = CreateEdges();
     }
-    private void SetIndicies()
+    private Edge[] CreateEdges()
     {
-        for (int i = 0; i < nodes.Length; i++)
+        List<Edge> tempEdges = new List<Edge>();
+        foreach (var tuple in edgeData)
         {
-            nodes[i].index = i;
+            tempEdges.Add(new Edge(tuple.Item1, tuple.Item2, tuple.Item3));
         }
-    }
-    private void CreateEdges()
-    {
-        foreach (var currentEdge in edgeData)
-        {
-            nodes[currentEdge.Item1].CreateEdge(currentEdge.Item2, currentEdge.Item3);
-        }
+        return tempEdges.ToArray();
     }
     public Node FindEnd()
     {
@@ -81,15 +76,37 @@ public class LevelGraph : ScriptableObject
         return frontNodes.ToArray();
     }
 
-    public Node[] FindShortestPath(int from, int to)
+    public Path FindShortestPath(int from, int to)
+    {
+        Path path = new Path();
+        bool[] visited = new bool[nodes.Length];
+        Queue<Node> nodeQue = new Queue<Node>();
+
+        nodeQue.Enqueue(nodes[from]);
+        while (nodeQue.Count > 0)
+        {
+            Node activeNode = nodeQue.Dequeue();
+            visited[activeNode.index] = true;
+            if (activeNode == nodes[to])
+            {
+
+            }
+            foreach (Edge edge in activeNode.edges)
+            {
+                int toIndex = edge.to;
+                if (!visited[toIndex])
+                {
+                    nodeQue.Enqueue(nodes[toIndex]);
+                }
+            }
+        }
+        throw new ArgumentException("No Path Found");
+    }
+    public Path FindShortestPathToGoal(int from)
     {
         throw new NotImplementedException();
     }
-    public Node[] FindShortestPathToGoal(int from)
-    {
-        throw new NotImplementedException();
-    }
-    public Node[] FindShortestPathWithoutSpecialAmmo(int from, int to)
+    public Path FindShortestPathWithoutSpecialAmmo(int from, int to)
     {
         throw new NotImplementedException();
     }
