@@ -28,6 +28,7 @@ public class PlayerLaserWeapon : Weapon
         base.Shoot();
         RaycastHit hit;
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+        laserEffect.SetActive(true);
         if (Physics.SphereCast(rayOrigin, laserThickness, camera.transform.forward, out hit, maxRange))
         {
             DrawVisuals(hit.point);
@@ -37,7 +38,7 @@ public class PlayerLaserWeapon : Weapon
                 interObj.Interact(attack);
 
             }
-            else if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
+            else if (hit.transform.CompareTag("Enemy"))
             {
                 hit.transform.GetComponent<Stats>().TakeDamage(attack);
             }
@@ -74,7 +75,7 @@ public class PlayerLaserWeapon : Weapon
     private IEnumerator TurnOffLaserEffect()
     {
         PlayShootSound();
-        laserEffect.SetActive(true);
+        //laserEffect.SetActive(true);
         yield return new WaitForSeconds(laserDuration);
         laserEffect.SetActive(false);
     }
