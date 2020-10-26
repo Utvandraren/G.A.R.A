@@ -13,6 +13,8 @@ public class LaserWeapon : Weapon
     [SerializeField] private float maxRange = 100f;
     [SerializeField] private float laserThickness = 0.15f;
     [SerializeField] private float laserDuration = 0.5f;
+    [SerializeField] private float inaccuracyFactor;
+    private Vector3 shootDirection;
 
 
 
@@ -21,12 +23,16 @@ public class LaserWeapon : Weapon
         base.Shoot();
 
         RaycastHit hit;
-        if(Physics.SphereCast(firePoint.position, laserThickness, firePoint.forward, out hit, maxRange))
+        float x = Random.Range(-inaccuracyFactor, inaccuracyFactor);
+        float y = Random.Range(-inaccuracyFactor, inaccuracyFactor);
+        shootDirection = firePoint.transform.forward + new Vector3(x,y,0);
+        if (Physics.SphereCast(firePoint.position, laserThickness, shootDirection, out hit, maxRange))
         {
             DrawVisuals(hit.point);
             if (hit.transform.CompareTag("Player"))
             {
-                hit.transform.GetComponent<Stats>().TakeDamage(attack);
+                //hit.transform.GetComponent<Stats>().TakeDamage(attack);
+                Debug.Log("Hit");
             }
         }
         else
@@ -53,8 +59,7 @@ public class LaserWeapon : Weapon
 
         if (target == Vector3.zero)
         {
-            laserEffect.GetComponent<LineRenderer>().SetPosition(1, firePoint.position + firePoint.transform.forward * maxRange);
-
+            laserEffect.GetComponent<LineRenderer>().SetPosition(1, firePoint.position + (shootDirection * maxRange));
         }
         else
         {

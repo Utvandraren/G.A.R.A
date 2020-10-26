@@ -270,7 +270,7 @@ Transform:
   m_GameObject: {fileID: 2365036969022466034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.095, y: -0.038, z: 0.779}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 2365036968700867842}
   - {fileID: 2365036969828263402}
@@ -399,6 +399,7 @@ MonoBehaviour:
   maxRange: 100
   laserThickness: 0.15
   laserDuration: 0.1
+  inaccuracyFactor: 0.02
 --- !u!1 &2365036969828263405
 GameObject:
   m_ObjectHideFlags: 0
