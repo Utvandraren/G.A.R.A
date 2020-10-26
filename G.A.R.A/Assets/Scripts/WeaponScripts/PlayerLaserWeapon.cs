@@ -52,6 +52,7 @@ public class PlayerLaserWeapon : Weapon
     public override void DrawVisuals(Vector3 target)
     {
         base.DrawVisuals(target);
+        
         laserEffect.GetComponent<LineRenderer>().SetPosition(0, firePoint.position);
 
         if (target == Vector3.zero)
