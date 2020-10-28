@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 1803987306}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  startingHealth: 10000
+  startingHealth: 1
   bossHealth: {fileID: 11400000, guid: 96a4ba0071f5035498a9b021cdc7ad55, type: 2}
 --- !u!114 &2206360773547588373
 MonoBehaviour:
@@ -259,6 +259,14 @@ MonoBehaviour:
   startShieldHealth: 2
   shieldCoolDown: 5
   switchRoot: {fileID: 0}
+  enemySwarmerPrefab: {fileID: 4432575310953063639, guid: 154bc80e7d255db46bcf6083f6668749,
+    type: 3}
+  enemyAmountToSpawn: 1
+  enemyLimit: 50
+  spawnTimeRate: 13.2
+  tentaclePrefab: {fileID: 5166235331517407766, guid: dd03696f37ede6f4a99d0cff183ea4db,
+    type: 3}
+  tentaclesAmount: 2
 --- !u!114 &7230158357167033581
 MonoBehaviour:
   m_ObjectHideFlags: 0

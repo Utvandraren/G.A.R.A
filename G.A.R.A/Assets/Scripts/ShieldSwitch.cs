@@ -39,4 +39,9 @@ public class ShieldSwitch : MonoBehaviour
         turnedOffObj.SetActive(false);
     }
 
+    void OnDestroy()
+    {
+        //PlayVisualizeEffect
+    }
+
 }

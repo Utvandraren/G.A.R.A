@@ -10,21 +10,17 @@ public class BossStats : Stats
 
     protected override void Start()
     {
-        base.Start();
         treshold = bossHealth.startValue / 3;
+        health = bossHealth.startValue;
     }
 
-    //
+    
     public override void TakeDamage(SciptableAttackObj attack)
     {
         bossHealth.value -= attack.damage;
         treshold -= attack.damage;
 
-        if (bossHealth.value <= 0)
-        {
-            Die();
-        }
-        else if(treshold <= 0)
+        if(treshold <= 0)
         {
             treshold = bossHealth.startValue / 3;
             GetComponent<BossManager>().TransitionToNextPhase();
@@ -33,8 +29,9 @@ public class BossStats : Stats
 
     public override void Die()
     {
-        //Gamemanager.winGame();
+        GameManager.Instance.Win();
         //StartTimelineanimation
-        Debug.Log("Boss dead!!!");
+        
+
     }
 }
