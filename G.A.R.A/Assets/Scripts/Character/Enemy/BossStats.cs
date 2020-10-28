@@ -34,6 +34,7 @@ public class BossStats : Stats
     public override void Die()
     {
         //Gamemanager.winGame();
+        //StartTimelineanimation
         Debug.Log("Boss dead!!!");
     }
 }
