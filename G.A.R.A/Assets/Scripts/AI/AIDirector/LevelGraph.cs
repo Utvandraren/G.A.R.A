@@ -7,54 +7,59 @@ public class LevelGraph : ScriptableObject
 {
     [SerializeField] private Node[] nodes;
     [SerializeField] private Tuple<int, int, Edge.DoorType>[] edgeData;
-    private Edge[] edges;
+    private List<Edge>[] edges;
     public void Initialize()
     {
-        edges = CreateEdges();
+        edges = new List<Edge>[nodes.Length];
+        for (int i = 0; i < edges.Length; i++)
+        {
+            edges[i] = new List<Edge>();
+        }
+        CreateEdges();
     }
-    private Edge[] CreateEdges()
+    private void CreateEdges()
     {
-        List<Edge> tempEdges = new List<Edge>();
         foreach (var tuple in edgeData)
         {
-            tempEdges.Add(new Edge(tuple.Item1, tuple.Item2, tuple.Item3));
+            edges[tuple.Item1].Add(new Edge(tuple.Item2, tuple.Item3));
+            edges[tuple.Item2].Add(new Edge(tuple.Item1, tuple.Item3));
         }
-        return tempEdges.ToArray();
+
     }
-    public Node FindEnd()
+    public int FindEnd()
     {
-        foreach (Node node in nodes)
+        for (int i = 0; i < nodes.Length; i++)
         {
-            if (node.type == Node.RoomType.END)
-                return node;
+            if (nodes[i].type == Node.RoomType.END)
+                return i;
         }
         throw new NullReferenceException("No \"End\" node in graph");
     }
     public void SetNodeGradient()
     {
         bool[] visited = new bool[nodes.Length];
-        Queue<Node> nodeQue = new Queue<Node>();
+        Queue<int> nodeQue = new Queue<int>();
         nodeQue.Enqueue(FindEnd());
         int treeDepth = 0;
-        Node newDepthNode = nodeQue.Peek();
+        int newDepthNode = nodeQue.Peek();
         while (nodeQue.Count > 0)
         {
-            Node activeNode = nodeQue.Dequeue();
-            activeNode.percentToEnd = treeDepth;
-            visited[activeNode.index] = true;
+            int activeNode = nodeQue.Dequeue();
+            nodes[activeNode].percentToEnd = treeDepth;
+            visited[activeNode] = true;
             if (activeNode == newDepthNode)
             {
                 treeDepth++;
             }
-            foreach (Edge edge in activeNode.edges)
+            foreach (Edge edge in edges[activeNode])
             {
                 int toIndex = edge.to;
                 if (!visited[toIndex])
                 {
-                    nodeQue.Enqueue(nodes[toIndex]);
+                    nodeQue.Enqueue(toIndex);
                     if (activeNode == newDepthNode)
                     {
-                        newDepthNode = nodes[toIndex];
+                        newDepthNode = toIndex;
                     }
                 }
             }
@@ -76,38 +81,44 @@ public class LevelGraph : ScriptableObject
         return frontNodes.ToArray();
     }
 
-    public Path FindShortestPath(int from, int to)
+    public int[] CreateMinSpanTree(int from)
     {
-        Path path = new Path();
         bool[] visited = new bool[nodes.Length];
-        Queue<Node> nodeQue = new Queue<Node>();
-
-        nodeQue.Enqueue(nodes[from]);
+        int[] minSpanningTree = new int[nodes.Length];
+        Queue<int> nodeQue = new Queue<int>();
+        nodeQue.Enqueue(from);
         while (nodeQue.Count > 0)
         {
-            Node activeNode = nodeQue.Dequeue();
-            visited[activeNode.index] = true;
-            if (activeNode == nodes[to])
-            {
-
-            }
-            foreach (Edge edge in activeNode.edges)
+            int activeNode = nodeQue.Dequeue();
+            visited[activeNode] = true;
+            foreach (Edge edge in edges[activeNode])
             {
                 int toIndex = edge.to;
                 if (!visited[toIndex])
                 {
-                    nodeQue.Enqueue(nodes[toIndex]);
+                    minSpanningTree[edge.to] = activeNode;
+                    nodeQue.Enqueue(toIndex);
                 }
             }
         }
-        throw new ArgumentException("No Path Found");
+        return minSpanningTree;
     }
     public Path FindShortestPathToGoal(int from)
     {
-        throw new NotImplementedException();
-    }
-    public Path FindShortestPathWithoutSpecialAmmo(int from, int to)
-    {
-        throw new NotImplementedException();
+        Path path = new Path();
+        int[] minSpanTree = CreateMinSpanTree(from);
+        for (int nodeId = FindEnd(); nodeId != from; nodeId = minSpanTree[nodeId])
+        {
+            path.AddNode(nodes[nodeId]);
+            for (int i = 0; i < edges[nodeId].Count; i++)
+            {
+                if (edges[nodeId][i].to == minSpanTree[nodeId])
+                {
+                    path.AddEdge(edges[nodeId][i]);
+                    break;
+                }
+            }
+        }
+        return path;
     }
 }

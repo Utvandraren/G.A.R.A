@@ -14,14 +14,12 @@ public class Edge
         TOGGLEABLE
     }
     public DoorType type { get; private set; }
-    public int one { get; private set; }
-    public int other { get; private set; }
+    public int to { get; private set; }
 
-    public Edge(int one, int other, DoorType type)
+    public Edge(int to, DoorType type)
     {
         this.type = type;
-        this.one = one;
-        this.other = other;
+        this.to = to;
     }
 }
 

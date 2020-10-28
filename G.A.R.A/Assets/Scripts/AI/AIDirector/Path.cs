@@ -7,37 +7,40 @@ using System.Threading.Tasks;
 
 public class Path
 {
-    List<Node> nodes; //Nodes of the path
-    List<Edge> edges; //edges connecting the nodes of the path
+    Stack<Node> nodes; //Nodes of the path
+    Stack<Edge> edges; //edges connecting the nodes of the path
 
     public Path()
     {
-        nodes = new List<Node>();
-        edges = new List<Edge>();
+        nodes = new Stack<Node>();
+        edges = new Stack<Edge>();
     }
 
     public void AddNode(Node node)
     {
-        nodes.Add(node);
+        nodes.Push(node);
     }
     public void RemoveNode(Node node)
     {
-        nodes.Remove(node);
+        nodes.Pop();
     }
     
     public void AddEdge(Edge edge)
     {
-        edges.Add(edge);
+        edges.Push(edge);
     }
     public void RemoveEdge(Edge edge)
     {
-        edges.Remove(edge);
+        edges.Pop();
     }
 
 
     public void TraversePath()
     {
+        while (nodes.Count > 0)
+        {
 
+        }
     }
 }
 
