@@ -14,16 +14,16 @@ public class BossStats : Stats
         health = bossHealth.startValue;
     }
 
-    
+
     public override void TakeDamage(SciptableAttackObj attack)
     {
         bossHealth.value -= attack.damage;
         treshold -= attack.damage;
 
-        if(treshold <= 0)
+        if (treshold <= 0)
         {
             treshold = bossHealth.startValue / 3;
-            GetComponent<BossManager>().TransitionToNextPhase();
+            GetComponent<BossManager>().PrepareNextPhase();  
         }
     }
 

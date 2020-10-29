@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BossManager : Singleton<BossManager>
 {
-    private Transform target;
+    [SerializeField] private float invincibleTime = 3;
 
     [Header("Phase 1")]
     [SerializeField] private GameObject shield;
@@ -27,14 +27,11 @@ public class BossManager : Singleton<BossManager>
     [Header("Phase 3")]
     [SerializeField] private GameObject tentaclePrefab;
     [SerializeField] private int tentaclesAmount = 1;
-
     private List<GameObject> tentacles;
 
-
-
-
-    BossPhases currentPhase = BossPhases.ShieldPhase;
-    Animator animator;
+    private BossPhases currentPhase = BossPhases.ShieldPhase;
+    private Animator animator;
+    private Transform target;
 
     enum BossPhases
     {
@@ -66,6 +63,7 @@ public class BossManager : Singleton<BossManager>
 
             case BossPhases.SwarmPhase:
                 Destroy(switchRoot);
+                shield.SetActive(false);
                 StartSwarmPhase();
                 currentPhase++;
                 break;
@@ -85,13 +83,14 @@ public class BossManager : Singleton<BossManager>
     //starts the shield and activates random switches to deactivate the shield
     void StartShieldPhase()
     {
+        switchRoot.SetActive(true);
         ResetSwitches();
         shield.SetActive(true);
         ActivateSwitches();
         shieldHealth = startShieldHealth;
     }
 
-    //Turns the shield off until and then activates it again
+    //Turns the shield off for a certain amount of time and then activates it again
     IEnumerator TurnOffShield()
     {
         shield.SetActive(false);
@@ -105,24 +104,18 @@ public class BossManager : Singleton<BossManager>
         System.Random rnd = new System.Random();
         int objLeftToActivate = startShieldHealth;
         List<ShieldSwitch> activatedObjs = new List<ShieldSwitch>();
-
+        activatedObjs.AddRange(switchRoot.GetComponentsInChildren<ShieldSwitch>());
+        
         while (objLeftToActivate > 0)
         {
-            for (int i = 0; i < switches.Length; i++)
+            foreach (ShieldSwitch switchobj in activatedObjs)
             {
-                if (objLeftToActivate < 0)
+                if (rnd.Next(0, 10) >= 5)
                 {
-                    break;
-                }
-                else if (IsAlreadyActivated(switches[i], activatedObjs))
-                {
-                    continue;
-                }
-                else if (rnd.Next(0, 10) > 5)
-                {
-                    switches[i].Activate();
-                    activatedObjs.Add(switches[i]);
+                    switchobj.Activate();
+                    activatedObjs.Remove(switchobj);
                     objLeftToActivate--;
+                    break;
                 }
             }
         }
@@ -135,19 +128,6 @@ public class BossManager : Singleton<BossManager>
         {
             switches[i].ResetSwitch();
         }
-    }
-
-    //function for checking if a switch is already activated
-    bool IsAlreadyActivated(ShieldSwitch currentObj, List<ShieldSwitch> activatedObjs)
-    {
-        foreach (ShieldSwitch activatedObj in activatedObjs)
-        {
-            if (currentObj == activatedObj)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     //Reduce the health for the shield until it is less than 0 so it is removed
@@ -165,7 +145,7 @@ public class BossManager : Singleton<BossManager>
     {
         for (int i = 0; i < enemyAmountToSpawn; i++)
         {
-            Instantiate(enemySwarmerPrefab, transform);
+            enemyPool.Add(Instantiate(enemySwarmerPrefab, transform));
         }
         StartCoroutine(ContinousSpawning());
     }
@@ -176,23 +156,23 @@ public class BossManager : Singleton<BossManager>
         yield return new WaitForSeconds(spawnTimeRate);
         if (currentEnemyAmount < enemyLimit)
         {
+            enemyPool.Add(Instantiate(enemySwarmerPrefab, transform));
             currentEnemyAmount++;
-            Instantiate(enemySwarmerPrefab, transform);
         }
     }
 
     //Remove enemies left when transitioning to the next phase
     void DestroyAllEnemies()
-    {
+    {       
         foreach (GameObject enemy in enemyPool)
         {
-            Destroy(enemy, 1f);
+            Destroy(enemy);
         }
     }
 
+    //Starts the tentacle phase, instantiate all the tentacles and gives them a random direction to rotate in
     void StartTentaclePhase()
     {
-        Debug.Log("Entered tentaclePhase");
         System.Random rnd = new System.Random();
         for (int i = 0; i < tentaclesAmount; i++)
         {
@@ -203,7 +183,23 @@ public class BossManager : Singleton<BossManager>
         }
     }
 
-    
+    //Used by bossstats to call on the coroutine becomeinvicible
+    public void PrepareNextPhase()
+    {
+        StartCoroutine(BecomeInvincible());
+    }
 
-    
+    //Disable Bossstats so boss cant be damaged a certain amount of time then transition to the next phase
+    public IEnumerator BecomeInvincible()
+    {
+        GetComponent<BossStats>().enabled = false;
+        shield.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        GetComponent<BossStats>().enabled = true;
+        shield.SetActive(false);
+        TransitionToNextPhase();
+    }
+
+
+
 }

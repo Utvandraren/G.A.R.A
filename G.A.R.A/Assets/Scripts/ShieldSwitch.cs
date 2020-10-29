@@ -9,6 +9,11 @@ public class ShieldSwitch : MonoBehaviour
     [SerializeField] private GameObject turnedOffObj;
     [SerializeField] private GameObject neutralObj;
 
+    [Header("Visual effects")]
+    [SerializeField] private GameObject spawnEffect;
+    [SerializeField] private GameObject dissapearEffect;
+
+
     bool isActive = false;
 
     public void Activate()
@@ -42,6 +47,11 @@ public class ShieldSwitch : MonoBehaviour
     void OnDestroy()
     {
         //PlayVisualizeEffect
+    }
+
+    void OnEnable()
+    {
+        //Play visual effect
     }
 
 }

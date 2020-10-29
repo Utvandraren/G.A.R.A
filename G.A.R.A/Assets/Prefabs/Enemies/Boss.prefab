@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 357588032}
   m_LocalRotation: {x: -0, y: -0.7072261, z: -0, w: 0.70698744}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5337136, y: 2.5337136, z: 2.5337136}
+  m_LocalScale: {x: 7.3315535, y: 7.3315535, z: 7.3315535}
   m_Children: []
   m_Father: {fileID: 2206360773547588368}
   m_RootOrder: 2
@@ -255,13 +255,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edbdb6f927da3441a5a0e153d3723fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invincibleTime: 3
   shield: {fileID: 357588032}
   startShieldHealth: 2
   shieldCoolDown: 5
   switchRoot: {fileID: 0}
   enemySwarmerPrefab: {fileID: 4432575310953063639, guid: 154bc80e7d255db46bcf6083f6668749,
     type: 3}
-  enemyAmountToSpawn: 1
+  enemyAmountToSpawn: 35
   enemyLimit: 50
   spawnTimeRate: 13.2
   tentaclePrefab: {fileID: 5166235331517407766, guid: dd03696f37ede6f4a99d0cff183ea4db,
@@ -412,7 +413,7 @@ GameObject:
   - component: {fileID: 2206360775236182209}
   - component: {fileID: 2206360775236182208}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -427,7 +428,7 @@ Transform:
   m_GameObject: {fileID: 2206360775236182213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.2174, y: 3.2174, z: 3.2174}
   m_Children: []
   m_Father: {fileID: 2206360773547588368}
   m_RootOrder: 0
@@ -507,7 +508,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4537979668194792297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.294, y: 0.314, z: 0.536}
+  m_LocalPosition: {x: 1.157, y: 1.306, z: 1.653}
   m_LocalScale: {x: 0.26948, y: 0.26948, z: 0.26948}
   m_Children:
   - {fileID: 4881387034573752334}
