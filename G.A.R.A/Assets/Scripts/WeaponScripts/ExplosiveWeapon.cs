@@ -14,6 +14,15 @@ public class ExplosiveWeapon : Weapon
         camera = Camera.main;
     }
 
+    //Might want to move this to the base class at some point
+    private void FixedUpdate()
+    {
+        if (camera == null)
+        {
+            camera = Camera.main;
+        }
+    }
+
     //Sends ray to get what direction projectile needs to shoot into the middle of the crosshair
     public override void Shoot()
     {

@@ -23,6 +23,15 @@ public class TaserWeapon : Weapon
         camera = Camera.main;
     }
 
+    //Might want to move this to the base class at some point
+    private void FixedUpdate()
+    {
+        if(camera == null)
+        {
+            camera = Camera.main;
+        }
+    }
+
     public override void Shoot()
     {
         base.Shoot();
