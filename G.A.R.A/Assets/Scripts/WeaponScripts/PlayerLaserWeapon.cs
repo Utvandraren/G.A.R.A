@@ -22,6 +22,15 @@ public class PlayerLaserWeapon : Weapon
         //camera = gameObject.GetComponentInChildren<Camera>();
     }
 
+    //Might want to move this to the base class at some point
+    private void FixedUpdate()
+    {
+        if (camera == null)
+        {
+            camera = Camera.main;
+        }
+    }
+
     //Draws ray from middle of screen to see if something is hit
     public override void Shoot()  //Starts visual effects and draw ray to check if colldiding with any valiable target
     {

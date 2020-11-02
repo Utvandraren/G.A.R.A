@@ -7,10 +7,13 @@ public class GameManager : Singleton<GameManager>
 {
     public GameObject[] systemPrefabs;
 
+    [SerializeField] private string loadingScene;
+
     private string currentLevel;
+    private string previousLevel;
+    private string nextLevel;
     private List<AsyncOperation> loadOperations;
     private List<GameObject> instancedSystemPrefabs;
-    
 
     void Start()
     {
@@ -20,7 +23,7 @@ public class GameManager : Singleton<GameManager>
 
         InstantiateSystemPrefabs();
 
-        //LoadLevel("Start");
+        LoadScene("MainMenu");
     }
 
     void InstantiateSystemPrefabs()
@@ -38,43 +41,84 @@ public class GameManager : Singleton<GameManager>
         if (loadOperations.Contains(ao))
         {
             loadOperations.Remove(ao);
+            if (currentLevel == loadingScene)
+            {
+                UnloadScene(previousLevel);
+            }
+            else if (currentLevel != loadingScene && SceneManager.GetSceneByName(loadingScene).isLoaded)
+            {
+                UnloadScene(loadingScene);
+            }
             //transition between scenes here
         }
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLevel)); //Required for SceneManager.GetActiveScene to work properly
         Debug.Log("Load complete");
     }
 
     void OnUnloadOperationComplete(AsyncOperation ao)
     {
         Debug.Log("Unload complete");
+
+        if (currentLevel == loadingScene)
+        {
+            LoadScene(nextLevel);
+        }
     }
 
-
-    public void LoadLevel(string levelName)
+    /// <summary>
+    /// Loads a level additively on top of already loaded scenes.
+    /// </summary>
+    /// <param name="sceneName"></param>
+    public void LoadScene(string sceneName)
     {
-        AsyncOperation ao = SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive);
+        previousLevel = currentLevel;
+        AsyncOperation ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
         if(ao == null)
         {
-            Debug.LogError("[Gamemanager] unable to load level " + levelName);
+            Debug.LogError("[GameManager] unable to load level: " + sceneName);
             return;
         }
 
         ao.completed += OnLoadOperationComplete;
         loadOperations.Add(ao);
-        currentLevel = levelName;
+        currentLevel = sceneName;
     }
 
-    public void UnloadLevel(string levelName)
+    /// <summary>
+    /// Unloads one of the scenes that are currently loaded.
+    /// </summary>
+    /// <param name="sceneName"></param>
+    public void UnloadScene(string sceneName)
     {
-        AsyncOperation ao = SceneManager.UnloadSceneAsync(levelName);
+        AsyncOperation ao = SceneManager.UnloadSceneAsync(sceneName);
 
         if (ao == null)
         {
-            Debug.LogError("[Gamemanager] unable to unload level " + levelName);
+            Debug.LogError("[Gamemanager] unable to unload level " + sceneName);
             return;
         }
 
         ao.completed += OnUnloadOperationComplete;
+    }
+
+    public void GoToNextLevel(string testScene)
+    {
+        //ONLY FOR DEBUG IN EDITOR
+        if (SceneManager.GetSceneByBuildIndex((SceneManager.GetActiveScene().buildIndex + 1)).name == null)
+        {
+            nextLevel = testScene;
+            LoadScene(loadingScene);
+            //LoadLevel(testScene);
+            //UnloadLevel(SceneManager.GetActiveScene().name);
+        }
+        else //This is for builds
+        {
+            nextLevel = SceneManager.GetSceneByBuildIndex((SceneManager.GetActiveScene().buildIndex + 1)).name;
+            //LoadLevel((SceneManager.GetSceneByBuildIndex((SceneManager.GetActiveScene().buildIndex + 1)).name));
+            //UnloadLevel(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void GameOver()
