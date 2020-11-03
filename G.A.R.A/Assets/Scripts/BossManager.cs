@@ -103,21 +103,13 @@ public class BossManager : Singleton<BossManager>
     {
         System.Random rnd = new System.Random();
         int objLeftToActivate = startShieldHealth;
-        List<ShieldSwitch> activatedObjs = new List<ShieldSwitch>();
-        activatedObjs.AddRange(switchRoot.GetComponentsInChildren<ShieldSwitch>());
-        
+      
         while (objLeftToActivate > 0)
         {
-            foreach (ShieldSwitch switchobj in activatedObjs)
+            if(switches[rnd.Next(0, switches.Length)].Activate())
             {
-                if (rnd.Next(0, 10) >= 5)
-                {
-                    switchobj.Activate();
-                    activatedObjs.Remove(switchobj);
-                    objLeftToActivate--;
-                    break;
-                }
-            }
+                objLeftToActivate--;
+            }                          
         }
     }
 

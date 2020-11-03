@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 3393908132167786862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 626061009959299809}
   - {fileID: 8490691919747817828}
@@ -194,6 +194,8 @@ MonoBehaviour:
   turnedOnObj: {fileID: 7083532571801943225}
   turnedOffObj: {fileID: 9172894371091117670}
   neutralObj: {fileID: 203950397206873018}
+  spawnEffect: {fileID: 0}
+  dissapearEffect: {fileID: 0}
 --- !u!1 &7083532571801943225
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,13 +16,19 @@ public class ShieldSwitch : MonoBehaviour
 
     bool isActive = false;
 
-    public void Activate()
+    public bool Activate()
     {
-        Debug.Log(name + " activated");
-        isActive = true;
-        neutralObj.SetActive(false);
-        turnedOnObj.SetActive(false);
-        turnedOffObj.SetActive(true);
+        if (!isActive)
+        {
+            isActive = true;
+            neutralObj.SetActive(false);
+            turnedOnObj.SetActive(false);
+            turnedOffObj.SetActive(true);
+            return true;
+        }
+
+        return false;
+
     }
 
     public void SwitchOn()
