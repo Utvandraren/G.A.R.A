@@ -49,9 +49,13 @@ MonoBehaviour:
   timeBetweenAttacks: 1
   ammo: {fileID: 0}
   anim: {fileID: 0}
+  startUpSound: {fileID: 0}
   laserEffect: {fileID: 0}
+  laserHit: {fileID: 0}
   maxRange: 100
   laserThickness: 0.15
+  laserDuration: 0.5
+  inaccuracyFactor: 0
 --- !u!1 &1395411642799184483
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +115,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 85d1bbd213c65c2499b78364a95f353c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -439,7 +443,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 85d1bbd213c65c2499b78364a95f353c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
