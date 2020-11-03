@@ -394,6 +394,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0816a6565da5f0c48b2c2ae0395c1b4c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fe70cc810712e6e48ae260ff181d3363, type: 2}
     - target: {fileID: 919132149155446097, guid: 0816a6565da5f0c48b2c2ae0395c1b4c,
         type: 3}
       propertyPath: m_Name
@@ -429,6 +434,12 @@ PrefabInstance:
       propertyPath: timeBetweenAttacks
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2073099231816479268, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 11400000, guid: d934b69d9608fc34a88d6a87cf245604,
+        type: 2}
     - target: {fileID: 2365036969022466034, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
       propertyPath: m_Name
@@ -492,6 +503,36 @@ PrefabInstance:
     - target: {fileID: 6146890791352375864, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146890791352375867, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146890791352375867, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146890791352375867, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146890791352375867, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146890791352375867, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146890791352375867, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
