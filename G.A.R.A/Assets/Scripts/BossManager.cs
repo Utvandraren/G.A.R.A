@@ -21,6 +21,8 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private int enemyLimit = 50;
     [Range(4f, 20f)]
     [SerializeField] private float spawnTimeRate = 1;
+    [SerializeField] private Transform rotatingPoint;
+
     private int currentEnemyAmount = 0;
     private List<GameObject> enemyPool;
 
@@ -29,7 +31,7 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private int tentaclesAmount = 1;
     private List<GameObject> tentacles;
 
-    private BossPhases currentPhase = BossPhases.ShieldPhase;
+    private BossPhases currentPhase = BossPhases.SwarmPhase;
     private Animator animator;
     private Transform target;
 
@@ -137,7 +139,7 @@ public class BossManager : Singleton<BossManager>
     {
         for (int i = 0; i < enemyAmountToSpawn; i++)
         {
-            enemyPool.Add(Instantiate(enemySwarmerPrefab, transform));
+            enemyPool.Add(Instantiate(enemySwarmerPrefab, rotatingPoint));
         }
         StartCoroutine(ContinousSpawning());
     }
@@ -148,7 +150,7 @@ public class BossManager : Singleton<BossManager>
         yield return new WaitForSeconds(spawnTimeRate);
         if (currentEnemyAmount < enemyLimit)
         {
-            enemyPool.Add(Instantiate(enemySwarmerPrefab, transform));
+            enemyPool.Add(Instantiate(enemySwarmerPrefab, rotatingPoint));
             currentEnemyAmount++;
         }
     }

@@ -93,6 +93,56 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1048161091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1048161092}
+  - component: {fileID: 1048161093}
+  m_Layer: 0
+  m_Name: EnemyRotatingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1048161092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048161091}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2206360773547588368}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1048161093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048161091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1347817507220a4384f3ff6f7c24546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveUnitsPerSecond:
+    value: {x: 0, y: 0, z: 0}
+    space: 1
+  rotateDegreesPerSecond:
+    value: {x: 50, y: 0, z: 0}
+    space: 1
+  ignoreTimescale: 0
 --- !u!1 &2206360773547588372
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +178,7 @@ Transform:
   - {fileID: 2206360775236182210}
   - {fileID: 7771514754752454247}
   - {fileID: 357588033}
+  - {fileID: 1048161092}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -260,11 +311,12 @@ MonoBehaviour:
   startShieldHealth: 2
   shieldCoolDown: 5
   switchRoot: {fileID: 0}
-  enemySwarmerPrefab: {fileID: 4432575310953063639, guid: 154bc80e7d255db46bcf6083f6668749,
+  enemySwarmerPrefab: {fileID: 2025306752045900190, guid: f0df5280ce27ad14ab1aa956ab44571e,
     type: 3}
   enemyAmountToSpawn: 35
   enemyLimit: 50
   spawnTimeRate: 13.2
+  rotatingPoint: {fileID: 1048161092}
   tentaclePrefab: {fileID: 5166235331517407766, guid: dd03696f37ede6f4a99d0cff183ea4db,
     type: 3}
   tentaclesAmount: 2
@@ -280,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40db3eafde5517143b04fb402c2773c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turningSpeed: 10
+  turningSpeed: 35
 --- !u!65 &1803987306
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -630,7 +682,7 @@ MonoBehaviour:
   ammo: {fileID: 11400000, guid: 09b7a550a075bdb4d8306072664b3afb, type: 2}
   anim: {fileID: 0}
   startUpSound: {fileID: 8300000, guid: b141020e6b36f704f957e4f8e4a82e2f, type: 3}
-  trackingSpeed: 20
+  trackingSpeed: 5
   chargeUpTime: 2
   attackDuration: 1
   laserBeamAttackRadius: 2
