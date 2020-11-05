@@ -131,6 +131,12 @@ public class GameManager : Singleton<GameManager>
         //LoadLevel("MainMeny");
     }
 
+    public void Win()
+    {
+        //Load timelineendingscene and credit
+        Debug.Log("Game won!!!");
+    }
+
     protected override void OnDestroy()
     {
         base.OnDestroy();
