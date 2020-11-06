@@ -161,7 +161,7 @@ public class BossManager : Singleton<BossManager>
         for (int i = 0; i < enemyAmountToSpawn; i++)
         {
             //blendPower += 0.2f;
-            enemyPool.Add(Instantiate(enemySwarmerPrefab, spawnPoint));
+            SpawnEnemy();
             yield return new WaitForSeconds(0.3f);
 
         }
@@ -173,9 +173,16 @@ public class BossManager : Singleton<BossManager>
         yield return new WaitForSeconds(spawnTimeRate);
         if (currentEnemyAmount < enemyLimit)
         {
-            enemyPool.Add(Instantiate(enemySwarmerPrefab, spawnPoint));
+            SpawnEnemy();
             currentEnemyAmount++;
         }
+    }
+
+    void SpawnEnemy()
+    {
+        Vector3 posToSpawn = transform.position + Random.insideUnitSphere * 20f;
+        enemyPool.Add(Instantiate(enemySwarmerPrefab, posToSpawn, Quaternion.identity, transform));
+
     }
 
     //Remove enemies left when transitioning to the next phase

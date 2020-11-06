@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossStats : Stats
+public class BossStats : EnemyStats
 {
     public SciptableIntObj bossHealth;
     public bool isInvicible;

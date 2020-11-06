@@ -116,7 +116,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778751064}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 5.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -481,13 +481,13 @@ MonoBehaviour:
   switchRoot: {fileID: 0}
   enemySwarmerPrefab: {fileID: 6149223644204277946, guid: d686a2062bf99474eac2966ce524f6e5,
     type: 3}
-  enemyAmountToSpawn: 35
-  enemyLimit: 50
+  enemyAmountToSpawn: 50
+  enemyLimit: 70
   spawnTimeRate: 5.14
   spawnPoint: {fileID: 778751065}
   tentaclePrefab: {fileID: 5166235331517407766, guid: dd03696f37ede6f4a99d0cff183ea4db,
     type: 3}
-  tentaclesAmount: 2
+  tentaclesAmount: 7
 --- !u!114 &7230158357167033581
 MonoBehaviour:
   m_ObjectHideFlags: 0
