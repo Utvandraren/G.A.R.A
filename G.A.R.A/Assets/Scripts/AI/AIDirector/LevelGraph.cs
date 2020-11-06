@@ -5,10 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Graph", menuName = "ScriptableObjects/LevelGraph", order = 1)]
 public class LevelGraph : ScriptableObject
 {
-    [SerializeField] private Node[] nodes;
+    [SerializeField] public Node[] nodes;
     [SerializeField] private Tuple<int, int, Edge.DoorType>[] edgeData;
     private List<Edge>[] edges;
     public int playerNode = -1;
+
+    public event EventHandler ChangedNode;
+
     public void Initialize()
     {
         edges = new List<Edge>[nodes.Length];
@@ -49,6 +52,7 @@ public class LevelGraph : ScriptableObject
 
     public int FindPlayerNode(Vector3 playerPos)
     {
+        bool movedNode = false;
         float savedNodeDistance = Vector3.Distance(nodes[playerNode].roomCenter, playerPos);
         while (true)
         {
@@ -62,16 +66,18 @@ public class LevelGraph : ScriptableObject
                     closerNode = edge.to;
                     closestNeighboringNodeDistance = CurrentNodeDistance;
                 }
-                
             }
             if (closestNeighboringNodeDistance < savedNodeDistance)
             {
                 playerNode = closerNode;
                 savedNodeDistance = closestNeighboringNodeDistance;
+                movedNode = true;
             }
             else
                 break;
         }
+        if (movedNode)
+            ChangedNode?.Invoke(this, new EventArgs());
         return playerNode;
     }
 
@@ -162,5 +168,20 @@ public class LevelGraph : ScriptableObject
             }
         }
         return path;
+    }
+
+    public List<Node> FindActiveArea()
+    {
+        return Radiate(playerNode, 5);
+    }
+
+    public List<Node> Radiate(int origo, int depth)
+    {
+        List<Node> radialNodes = new List<Node>();
+        int[] minSpanTree = CreateMinSpanTree(origo);
+
+
+
+        return radialNodes;
     }
 }

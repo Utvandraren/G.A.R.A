@@ -15,6 +15,12 @@ public class Path
         nodes = new Stack<Node>();
         edges = new Stack<Edge>();
     }
+    public Path(Path original)
+    {
+        nodes = new Stack<Node>(original.nodes);
+        edges = new Stack<Edge>(original.edges);
+    }
+
 
     public void AddNode(Node node)
     {

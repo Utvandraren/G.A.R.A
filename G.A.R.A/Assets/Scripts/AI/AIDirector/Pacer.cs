@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class Pacer : MonoBehaviour
 {
+    enum TempoType
+    {
+        BUILDUP,
+        SUSTAIN,
+        FADE,
+        RELAX,
+    }
+
     PlayerReader playerReader;
     float panicScore;
     float maxPanicScore = 10;
@@ -15,29 +23,36 @@ public class Pacer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (started)
-            levelTime += Time.deltaTime;
-        panicScore = Mathf.Min(panicScore += panicRate * Time.deltaTime, maxPanicScore);
+        if (!started)
+            return;
+
+        levelTime += Time.deltaTime;
+        panicScore = Mathf.Max(Mathf.Min(panicScore + panicRate * Time.deltaTime, maxPanicScore), 0);
     }
 
-    internal void GivePlayerReader(PlayerReader playerReader)
+    internal void StorePlayerReader(PlayerReader playerReader)
     {
         this.playerReader = playerReader;
     }
 
     void CalcPanicRate()
     {
-        float decrease = (1 / playerReader.GetPlayerHP()) * Time.deltaTime;
+        float decrease = (maxPanicScore / (playerReader.playerStats.health / playerReader.playerStats.startingHealth)) * Time.deltaTime;
     }
 
-    public void StartedLevel(int playerNode)
+    public void StartedLevel()
     {
         started = true;
+    }
+
+    public void IncreasePanic(float panicAddition)
+    {
+        panicScore = Mathf.Min(panicScore + panicAddition, maxPanicScore);
     }
 }

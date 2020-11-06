@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-class SpawnManager : Singleton<SpawnManager>
+class SpawnManager : MonoBehaviour
 {
     public enum SpawnType
     {
@@ -13,11 +13,27 @@ class SpawnManager : Singleton<SpawnManager>
         HALTING,
         PUSHING,
     }
+
+    public int highIntensityEnemyCount = 10;
+    public int lowIntensityEnemyCount = 0;
+    public int mobSize = 5;
+
+    Path optimalPath;
     List<Spawner> spawners;
     int playerRoomIndex = 0;
     private void Start()
     {
         GetComponentsInChildren(spawners);
+    }
+
+    public void Initialize()
+    {
+        
+    }
+
+    public void IncreaseThreatSizes()
+    {
+
     }
 
     public void RecieveMission(Vector3 playerPos, GameObject[] enemyBatch, SpawnType type)

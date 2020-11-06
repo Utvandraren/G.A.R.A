@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerReader : MonoBehaviour
 {
     public GameObject player;
-    PlayerStats playerStats;
+    public PlayerStats playerStats;
     [SerializeField]SciptableIntObj laserAmmo, projectileAmmo, tazerAmmo;
     int playerNode;
     // Start is called before the first frame update
