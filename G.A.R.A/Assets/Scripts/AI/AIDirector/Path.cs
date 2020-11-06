@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 public class Path
 {
-    Stack<Node> nodes; //Nodes of the path
-    Stack<Edge> edges; //edges connecting the nodes of the path
+    public Stack<Node> nodes; //Nodes of the path
+    public Stack<Edge> edges; //edges connecting the nodes of the path
 
     public Path()
     {

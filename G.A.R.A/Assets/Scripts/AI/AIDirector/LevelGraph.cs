@@ -8,6 +8,7 @@ public class LevelGraph : ScriptableObject
     [SerializeField] private Node[] nodes;
     [SerializeField] private Tuple<int, int, Edge.DoorType>[] edgeData;
     private List<Edge>[] edges;
+    public int playerNode = -1;
     public void Initialize()
     {
         edges = new List<Edge>[nodes.Length];
@@ -16,6 +17,7 @@ public class LevelGraph : ScriptableObject
             edges[i] = new List<Edge>();
         }
         CreateEdges();
+        playerNode = FindStart();
     }
     private void CreateEdges()
     {
@@ -35,6 +37,44 @@ public class LevelGraph : ScriptableObject
         }
         throw new NullReferenceException("No \"End\" node in graph");
     }
+    public int FindStart()
+    {
+        for (int i = 0; i < nodes.Length; i++)
+        {
+            if (nodes[i].type == Node.RoomType.START)
+                return i;
+        }
+        throw new NullReferenceException("No \"Start\" node in graph");
+    }
+
+    public int FindPlayerNode(Vector3 playerPos)
+    {
+        float savedNodeDistance = Vector3.Distance(nodes[playerNode].roomCenter, playerPos);
+        while (true)
+        {
+            float closestNeighboringNodeDistance = int.MaxValue;
+            int closerNode = -1;
+            foreach (Edge edge in edges[playerNode])
+            {
+                float CurrentNodeDistance = Vector3.Distance(nodes[edge.to].roomCenter, playerPos);
+                if (closestNeighboringNodeDistance > CurrentNodeDistance)
+                {
+                    closerNode = edge.to;
+                    closestNeighboringNodeDistance = CurrentNodeDistance;
+                }
+                
+            }
+            if (closestNeighboringNodeDistance < savedNodeDistance)
+            {
+                playerNode = closerNode;
+                savedNodeDistance = closestNeighboringNodeDistance;
+            }
+            else
+                break;
+        }
+        return playerNode;
+    }
+
     public void SetNodeGradient()
     {
         bool[] visited = new bool[nodes.Length];
@@ -105,6 +145,8 @@ public class LevelGraph : ScriptableObject
     }
     public Path FindShortestPathToGoal(int from)
     {
+        if (from == -1)
+            throw new ArgumentOutOfRangeException("tried using node \"-1\"");
         Path path = new Path();
         int[] minSpanTree = CreateMinSpanTree(from);
         for (int nodeId = FindEnd(); nodeId != from; nodeId = minSpanTree[nodeId])
