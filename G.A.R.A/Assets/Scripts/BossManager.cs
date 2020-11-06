@@ -6,6 +6,7 @@ using UnityEngine;
 public class BossManager : Singleton<BossManager>
 {
     [SerializeField] private float invincibleTime = 3;
+    [SerializeField] private GameObject trackingLaser;
 
     [Header("Phase 1")]
     [SerializeField] private GameObject shield;
@@ -14,6 +15,7 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private GameObject switchRoot;
     private int shieldHealth = 0;
     private ShieldSwitch[] switches;
+    private BossStats bossStats;
 
     [Header("Phase 2")]
     [SerializeField] private GameObject enemySwarmerPrefab;
@@ -21,7 +23,7 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private int enemyLimit = 50;
     [Range(4f, 20f)]
     [SerializeField] private float spawnTimeRate = 1;
-    [SerializeField] private Transform rotatingPoint;
+    [SerializeField] private Transform spawnPoint;
 
     private int currentEnemyAmount = 0;
     private List<GameObject> enemyPool;
@@ -34,6 +36,7 @@ public class BossManager : Singleton<BossManager>
     private BossPhases currentPhase = BossPhases.SwarmPhase;
     private Animator animator;
     private Transform target;
+    private float blendPower = 0;
 
     enum BossPhases
     {
@@ -46,13 +49,21 @@ public class BossManager : Singleton<BossManager>
     void Start()
     {
         switches = switchRoot.GetComponentsInChildren<ShieldSwitch>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         enemyPool = new List<GameObject>();
         tentacles = new List<GameObject>();
+        bossStats = GetComponent<BossStats>();
 
         TransitionToNextPhase();
     }
+
+    //void Update()
+    //{
+    //    blendPower -= Time.deltaTime * 0.08f;
+    //    blendPower = Mathf.Clamp01(blendPower);
+    //    animator.SetFloat("Blend", 1);
+    //}
 
     public void TransitionToNextPhase()
     {
@@ -90,12 +101,14 @@ public class BossManager : Singleton<BossManager>
         shield.SetActive(true);
         ActivateSwitches();
         shieldHealth = startShieldHealth;
+        bossStats.isInvicible = true;
     }
 
     //Turns the shield off for a certain amount of time and then activates it again
     IEnumerator TurnOffShield()
     {
         shield.SetActive(false);
+        bossStats.isInvicible = false;
         yield return new WaitForSeconds(shieldCoolDown);
         StartShieldPhase();
     }
@@ -137,11 +150,21 @@ public class BossManager : Singleton<BossManager>
     //Starts spawnphase by spawning first enemies and start continousspawncoRoutine
     void StartSwarmPhase()
     {
+        trackingLaser.SetActive(false);
+        StartCoroutine(FastSpawnEnemies());
+        StartCoroutine(ContinousSpawning());
+        animator.SetFloat("Blend", 1);
+    }
+
+    IEnumerator FastSpawnEnemies()
+    {
         for (int i = 0; i < enemyAmountToSpawn; i++)
         {
-            enemyPool.Add(Instantiate(enemySwarmerPrefab, rotatingPoint));
+            //blendPower += 0.2f;
+            enemyPool.Add(Instantiate(enemySwarmerPrefab, spawnPoint));
+            yield return new WaitForSeconds(0.3f);
+
         }
-        StartCoroutine(ContinousSpawning());
     }
 
     //CoRoutine spawning a new enemy every few second
@@ -150,7 +173,7 @@ public class BossManager : Singleton<BossManager>
         yield return new WaitForSeconds(spawnTimeRate);
         if (currentEnemyAmount < enemyLimit)
         {
-            enemyPool.Add(Instantiate(enemySwarmerPrefab, rotatingPoint));
+            enemyPool.Add(Instantiate(enemySwarmerPrefab, spawnPoint));
             currentEnemyAmount++;
         }
     }
@@ -167,6 +190,7 @@ public class BossManager : Singleton<BossManager>
     //Starts the tentacle phase, instantiate all the tentacles and gives them a random direction to rotate in
     void StartTentaclePhase()
     {
+        trackingLaser.SetActive(true);
         System.Random rnd = new System.Random();
         for (int i = 0; i < tentaclesAmount; i++)
         {
@@ -186,10 +210,10 @@ public class BossManager : Singleton<BossManager>
     //Disable Bossstats so boss cant be damaged a certain amount of time then transition to the next phase
     public IEnumerator BecomeInvincible()
     {
-        GetComponent<BossStats>().enabled = false;
+        bossStats.isInvicible = true;
         shield.SetActive(true);
         yield return new WaitForSeconds(3f);
-        GetComponent<BossStats>().enabled = true;
+        bossStats.isInvicible = false;
         shield.SetActive(false);
         TransitionToNextPhase();
     }

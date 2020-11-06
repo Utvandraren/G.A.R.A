@@ -30,7 +30,7 @@ public class TrackingLaser : Weapon
     {
         base.Update();
         handleTargeting();
-        TryShoot();
+        //TryShoot();
     }
 
     public override void TryShoot()
@@ -44,7 +44,7 @@ public class TrackingLaser : Weapon
             }
             else
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
             }
         }
     }

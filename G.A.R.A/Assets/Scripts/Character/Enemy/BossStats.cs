@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossStats : Stats
 {
     public SciptableIntObj bossHealth;
+    public bool isInvicible;
 
     int treshold;
 
@@ -12,11 +13,16 @@ public class BossStats : Stats
     {
         treshold = bossHealth.startValue / 3;
         health = bossHealth.startValue;
+        isInvicible = false;
     }
 
 
     public override void TakeDamage(SciptableAttackObj attack)
     {
+        if(isInvicible)
+        {
+            return;
+        }
         bossHealth.value -= attack.damage;
         treshold -= attack.damage;
 
