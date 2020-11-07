@@ -5,6 +5,8 @@ using UnityEngine;
 public class BossStats : EnemyStats
 {
     public SciptableIntObj bossHealth;
+    
+    [HideInInspector]
     public bool isInvicible;
 
     int treshold;

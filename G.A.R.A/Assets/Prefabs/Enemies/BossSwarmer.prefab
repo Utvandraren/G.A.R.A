@@ -122,8 +122,9 @@ AudioSource:
   m_GameObject: {fileID: 6149223644204277946}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3629562373716054715, guid: 2d483ad5726ff6f499314956a3975aea,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: af4f07e6b6cc49646a7193bc4f29367a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -134,9 +135,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 100
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -250,7 +251,7 @@ GameObject:
   - component: {fileID: 729971256678321441}
   - component: {fileID: 6521314997753512003}
   m_Layer: 0
-  m_Name: ExplosionEffect 1
+  m_Name: SpawnEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,7 +299,7 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0.9911022, y: 0.049706575, z: 0.049706575, w: 0}
+      - m_Value: {x: 0.47932023, y: 0.9911022, z: 0.52711535, w: 0}
         m_Name: Color
         m_Overridden: 1
     m_Uint:
@@ -582,12 +583,17 @@ PrefabInstance:
     - target: {fileID: 2073099231816479268, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
       propertyPath: timeBetweenAttacks
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2073099231816479268, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
       propertyPath: inaccuracyFactor
-      value: 0.2
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073099231816479268, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: maxRange
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2365036969022466034, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
@@ -648,6 +654,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -3629562373716054715, guid: 2d483ad5726ff6f499314956a3975aea,
+        type: 2}
+    - target: {fileID: 3109822106332318040, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: DopplerLevel
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fb6f09a5b98bc243b18c767f1513ec3, type: 3}

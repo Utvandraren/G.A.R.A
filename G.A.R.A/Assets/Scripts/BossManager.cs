@@ -33,10 +33,11 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private int tentaclesAmount = 1;
     private List<GameObject> tentacles;
 
-    private BossPhases currentPhase = BossPhases.SwarmPhase;
+    private BossPhases currentPhase = BossPhases.ShieldPhase;
     private Animator animator;
     private Transform target;
     private float blendPower = 0;
+    private AudioSource source;
 
     enum BossPhases
     {
@@ -54,6 +55,7 @@ public class BossManager : Singleton<BossManager>
         enemyPool = new List<GameObject>();
         tentacles = new List<GameObject>();
         bossStats = GetComponent<BossStats>();
+        source = GetComponent<AudioSource>();
 
         TransitionToNextPhase();
     }
@@ -154,6 +156,7 @@ public class BossManager : Singleton<BossManager>
         StartCoroutine(FastSpawnEnemies());
         StartCoroutine(ContinousSpawning());
         animator.SetFloat("Blend", 1);
+        source.Play();
     }
 
     IEnumerator FastSpawnEnemies()
@@ -197,6 +200,7 @@ public class BossManager : Singleton<BossManager>
     //Starts the tentacle phase, instantiate all the tentacles and gives them a random direction to rotate in
     void StartTentaclePhase()
     {
+        source.Stop();
         trackingLaser.SetActive(true);
         System.Random rnd = new System.Random();
         for (int i = 0; i < tentaclesAmount; i++)

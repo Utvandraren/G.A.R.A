@@ -85,6 +85,7 @@ public class TrackingLaser : Weapon
         aimingBeam.SetActive(false);
         PlayShootSound();
         yield return new WaitForSeconds(attackDuration);
+        StopShootSound();
         currentlyShooting = false;
         bossMov.enabled = true;
         laserBeam.SetActive(false);
