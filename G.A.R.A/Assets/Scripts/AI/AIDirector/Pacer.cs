@@ -1,29 +1,32 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pacer : MonoBehaviour
 {
-    enum TempoType
+    public enum TempoType
     {
         BUILDUP,
         SUSTAIN,
         FADE,
         RELAX,
     }
-
+    public TempoType currentTempo;
     PlayerReader playerReader;
     float panicScore;
     float maxPanicScore = 10;
-    float panicRate;
+    float panicReductionRate;
     float nodeTime;
     float levelTime;
     public bool started;
+    private float upperThreshold;
+    private float lowerThreshold;
+    private float tempoTimer;
+    public float sustainTime = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        DetermineThreshold();
+        currentTempo = TempoType.BUILDUP;
     }
 
     // Update is called once per frame
@@ -33,7 +36,53 @@ public class Pacer : MonoBehaviour
             return;
 
         levelTime += Time.deltaTime;
-        panicScore = Mathf.Max(Mathf.Min(panicScore + panicRate * Time.deltaTime, maxPanicScore), 0);
+        if (!playerReader.InCombat())
+            panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
+        ChangeTempo();
+    }
+
+    private void DetermineThreshold()
+    {
+        upperThreshold = Random.Range(5, 10);
+        lowerThreshold = Random.Range(0, 2);
+    }
+
+    private void ChangeTempo()
+    {
+        switch (currentTempo)
+        {
+            case TempoType.BUILDUP:
+                if (panicScore > upperThreshold)
+                {
+                    currentTempo = TempoType.SUSTAIN;
+                    tempoTimer = 0;
+                }
+                break;
+            case TempoType.SUSTAIN:
+                tempoTimer += Time.deltaTime;
+                if (tempoTimer > sustainTime)
+                {
+                    currentTempo = TempoType.FADE;
+                }
+                break;
+            case TempoType.FADE:
+                if (panicScore < lowerThreshold)
+                {
+                    currentTempo = TempoType.RELAX;
+                    tempoTimer = 0;
+                }
+                break;
+            case TempoType.RELAX:
+                tempoTimer += Time.deltaTime;
+                if (tempoTimer > sustainTime)
+                {
+                    currentTempo = TempoType.BUILDUP;
+                    DetermineThreshold();
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     internal void StorePlayerReader(PlayerReader playerReader)
@@ -41,9 +90,11 @@ public class Pacer : MonoBehaviour
         this.playerReader = playerReader;
     }
 
-    void CalcPanicRate()
+    void CalcPanicReductionRate()
     {
-        float decrease = (maxPanicScore / (playerReader.playerStats.health / playerReader.playerStats.startingHealth)) * Time.deltaTime;
+        float hpPercent = playerReader.GetHPPercent();
+        float shieldPercent = playerReader.GetShieldPercent();
+        panicReductionRate = maxPanicScore * hpPercent + (maxPanicScore / 4) * shieldPercent;
     }
 
     public void StartedLevel()

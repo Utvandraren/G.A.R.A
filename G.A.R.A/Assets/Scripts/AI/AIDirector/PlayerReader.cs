@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,5 +36,19 @@ public class PlayerReader : MonoBehaviour
             playerNode = currentNode;
             return true;
         }
+    }
+
+    internal bool InCombat()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal int GetHPPercent()
+    {
+        return playerStats.health / playerStats.startingHealth;
+    }
+    internal int GetShieldPercent()
+    {
+        return playerStats.shield / playerStats.maxShield;
     }
 }
