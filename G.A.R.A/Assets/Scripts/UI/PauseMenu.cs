@@ -30,7 +30,8 @@ public class PauseMenu : MonoBehaviour
 
     public void BackToMain()
     {
-        GameManager.Instance.LoadScene("MainMenu");
+        Resume();
+        GameManager.Instance.ReturnToMain();
     }
 
     public void ShowOptions()

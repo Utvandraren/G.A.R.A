@@ -35,6 +35,9 @@ public class Weapon : MonoBehaviour
         //currentTime -= Time.deltaTime;
         //Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
 
+        if (PauseMenu.GameIsPaused)
+            return;
+
         if (currentTime <= 0f && AmmoNotEmpty())
         {
             Shoot();

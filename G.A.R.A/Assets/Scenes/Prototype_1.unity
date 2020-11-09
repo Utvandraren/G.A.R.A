@@ -156,6 +156,18 @@ Transform:
   m_Father: {fileID: 665423900}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &175373485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 625968720964959390, guid: d3f600aa61e02e848b002a457adcd0d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1309565584}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661d8a3c6047d5e42b7993e530a73e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &175654997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1153814146753795766, guid: 5de54f05ae6bc13478a56a68bdc9304e,
@@ -1198,6 +1210,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 625968720964959382, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: m_Drag
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 625968720964959383, guid: d3f600aa61e02e848b002a457adcd0d6,
         type: 3}
       propertyPath: rollLerpTime
@@ -1207,6 +1224,31 @@ PrefabInstance:
         type: 3}
       propertyPath: stopLerpTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 625968720964959383, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: standardthrustForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 625968720964959383, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: additionalBoostForce
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 625968720964959383, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: stopDragCoef
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 625968720964959383, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: maxNormalSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 625968720964959383, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: maxSprintSpeed
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4422008866739512600, guid: d3f600aa61e02e848b002a457adcd0d6,
         type: 3}
@@ -1670,7 +1712,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 175373485}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc47d0dd516831c46ad4e03694d4cf43, type: 3}
 --- !u!1 &2138677391
