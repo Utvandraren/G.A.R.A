@@ -13,14 +13,17 @@ class SpawnManager : MonoBehaviour
         HALTING,
         PUSHING,
     }
-
+    public Pacer.TempoType currentTempo;
+    public List<Edge.DoorType> obstacles;
     public int highIntensityEnemyCount = 10;
     public int lowIntensityEnemyCount = 0;
     public int mobSize = 5;
-
+    private float mobSpawnTimer;
+    public float timeBetweenMobs;
     Path optimalPath;
     List<Spawner> spawners;
-    int playerRoomIndex = 0;
+    public bool started;
+    public bool mobReady;
     private void Start()
     {
         GetComponentsInChildren(spawners);
@@ -28,7 +31,7 @@ class SpawnManager : MonoBehaviour
 
     public void Initialize()
     {
-        
+
     }
 
     public void IncreaseThreatSizes()
@@ -36,13 +39,27 @@ class SpawnManager : MonoBehaviour
 
     }
 
-    public void RecieveMission(Vector3 playerPos, GameObject[] enemyBatch, SpawnType type)
+    private void Update()
     {
-        /*
-         * 1. Find player room index
-         * 2. Find spawnlocations
-         * 3. Delegate enemy spawns
-         */
+        if (!started)
+            return;
+
+        mobSpawnTimer += Time.deltaTime;
+        if (mobSpawnTimer > timeBetweenMobs && BoidManager.allBoids.Count < highIntensityEnemyCount)
+        {
+            mobReady = true;
+        }
+    }
+
+    public void SpawnStragelers(Node playerNode, List<Node> activeArea)
+    {
+
+    }
+
+    public void SpawnMob(Node playerNode, List<Node> activeArea, List<Edge.DoorType> obstacleTypes)
+    {
+        mobReady = false;
+        mobSpawnTimer = 0;
     }
 }
 

@@ -16,7 +16,7 @@ public class Pacer : MonoBehaviour
     float panicReductionRate;
     float nodeTime;
     float levelTime;
-    public bool started;
+    private bool started;
     private float upperThreshold;
     private float lowerThreshold;
     private float tempoTimer;
@@ -43,8 +43,8 @@ public class Pacer : MonoBehaviour
 
     private void DetermineThreshold()
     {
-        upperThreshold = Random.Range(5, 10);
-        lowerThreshold = Random.Range(0, 2);
+        upperThreshold = 10; // Random.Range(5, 10);
+        lowerThreshold = 0;  // Random.Range(0, 2);
     }
 
     private void ChangeTempo()

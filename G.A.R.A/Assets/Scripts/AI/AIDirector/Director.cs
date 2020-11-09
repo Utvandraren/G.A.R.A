@@ -30,6 +30,7 @@ public class Director : MonoBehaviour
     /// <param name="e"></param>
     private void Graph_ChangedNode(object sender, System.EventArgs e)
     {
+        spawnManager.started = true;
         pacer.StartedLevel();
         if (shortestPath.nodes.Pop() != graph.nodes[graph.playerNode])
             graph.FindShortestPathToGoal(graph.playerNode);
@@ -41,7 +42,7 @@ public class Director : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        spawnManager.currentTempo = pacer.currentTempo;
     }
 
     void GivePacerPlayerData()
@@ -70,5 +71,6 @@ public class Director : MonoBehaviour
                     break;
             }
         }
+
     }
 }
