@@ -34,6 +34,10 @@ public class PlayerLaserWeapon : Weapon
     //Draws ray from middle of screen to see if something is hit
     public override void Shoot()  //Starts visual effects and draw ray to check if colldiding with any valiable target
     {
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
         base.Shoot();
         RaycastHit hit;
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));

@@ -37,6 +37,10 @@ public class TaserWeapon : Weapon
 
     public override void Shoot()
     {
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
         base.Shoot();
         RaycastHit hit;
         electricityEffect.Play();

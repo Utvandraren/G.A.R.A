@@ -26,6 +26,10 @@ public class ExplosiveWeapon : Weapon
     //Sends ray to get what direction projectile needs to shoot into the middle of the crosshair
     public override void Shoot()
     {
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
         base.Shoot();
         PlayShootSound();
 
