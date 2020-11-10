@@ -36,10 +36,6 @@ public class WeaponManager : MonoBehaviour
         handleInput();
     }
 
-    public void FixedUpdate()
-    {
-        currentWeapon.anim.SetBool("Fire", false);
-    }
 
     void handleInput()   //Check if mouseScroll has changed and thus should change the weapon
     {       
