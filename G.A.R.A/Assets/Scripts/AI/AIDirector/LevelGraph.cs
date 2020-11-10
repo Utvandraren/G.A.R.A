@@ -6,9 +6,9 @@ using UnityEngine;
 public class LevelGraph : ScriptableObject
 {
     [SerializeField] public Node[] nodes;
-    [SerializeField] private Tuple<int, int, Edge.DoorType>[] edgeData;
+    [SerializeField] private EdgeDescription[] edgeData;
     private List<Edge>[] edges;
-    public int playerNode = -1;
+    [HideInInspector] public int playerNode = -1;
 
     public event EventHandler ChangedNode;
 
@@ -53,14 +53,14 @@ public class LevelGraph : ScriptableObject
     public int FindPlayerNode(Vector3 playerPos)
     {
         bool movedNode = false;
-        float savedNodeDistance = Vector3.Distance(nodes[playerNode].roomCenter, playerPos);
+        float savedNodeDistance = Vector3.Distance(nodes[playerNode].spawner.transform.position, playerPos);
         while (true)
         {
             float closestNeighboringNodeDistance = int.MaxValue;
             int closerNode = -1;
             foreach (Edge edge in edges[playerNode])
             {
-                float CurrentNodeDistance = Vector3.Distance(nodes[edge.to].roomCenter, playerPos);
+                float CurrentNodeDistance = Vector3.Distance(nodes[edge.to].spawner.transform.position, playerPos);
                 if (closestNeighboringNodeDistance > CurrentNodeDistance)
                 {
                     closerNode = edge.to;

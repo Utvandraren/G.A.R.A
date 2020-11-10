@@ -12,7 +12,7 @@ public class PlayerReader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("player");
+        player = GameObject.FindGameObjectWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
     }
 
@@ -40,7 +40,7 @@ public class PlayerReader : MonoBehaviour
 
     internal bool InCombat()
     {
-        throw new NotImplementedException();
+        return false;
     }
 
     internal int GetHPPercent()

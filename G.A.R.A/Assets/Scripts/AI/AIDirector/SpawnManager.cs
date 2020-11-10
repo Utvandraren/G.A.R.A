@@ -7,6 +7,7 @@ using UnityEngine;
 
 class SpawnManager : MonoBehaviour
 {
+    public GameObject[] enemyPrefabs;
     public enum SpawnType
     {
         NORMAL,
@@ -36,7 +37,9 @@ class SpawnManager : MonoBehaviour
 
     public void IncreaseThreatSizes()
     {
-
+        highIntensityEnemyCount = Mathf.Min(highIntensityEnemyCount + 5, 50);
+        lowIntensityEnemyCount = Mathf.Min(lowIntensityEnemyCount + 2, 20);
+        mobSize += 1;
     }
 
     private void Update()
@@ -51,9 +54,58 @@ class SpawnManager : MonoBehaviour
         }
     }
 
-    public void SpawnStragelers(Node playerNode, List<Node> activeArea)
+    public void OnPlayerNodeChange(Node playerNode, List<Node> oldActiveArea, List<Node> newActiveArea)
     {
+        List<Node> newActiveAreaDiff = new List<Node>(newActiveArea);
+        List<Node> oldActiveAreaDiff = new List<Node>(oldActiveArea);
+        RemoveCommonNodes(ref oldActiveAreaDiff, ref newActiveAreaDiff);
+        PurgeEnemies(oldActiveAreaDiff);
+        SpawnWanderers(newActiveAreaDiff);
+    }
 
+    private void SpawnWanderers(List<Node> newActiveAreaDiff)
+    {
+        if(BoidManager.allBoids.Count < highIntensityEnemyCount)
+        {
+            for (int i = 0; i < newActiveAreaDiff.Count * 2; i++)
+            {
+                newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemyPrefabs[i % enemyPrefabs.Length]);
+                if (BoidManager.allBoids.Count > highIntensityEnemyCount)
+                    break;
+            }
+        }
+    }
+
+    private void PurgeEnemies(List<Node> nodesOutOfRange)
+    {
+        for (int i = nodesOutOfRange.Count - 1; i >= 0; i--)
+        {
+            for (int j = BoidManager.allBoids.Count - 1; j >= 0; j--)
+            {
+                if (Vector3.Distance(BoidManager.allBoids[j].transform.position, nodesOutOfRange[i].spawner.transform.position) < 10)
+                {
+                    BoidManager.allBoids[j].GetComponent<EnemyStats>().Die();
+                }
+            }
+        }
+    }
+
+    private void RemoveCommonNodes(ref List<Node> oldActiveArea, ref List<Node> newActiveArea)
+    {
+        for (int i = oldActiveArea.Count - 1; i >= 0; i--)
+        {
+            Node oldCompare = oldActiveArea[i];
+            for (int j = newActiveArea.Count - 1; j >= 0; j--)
+            {
+                Node newCompare = newActiveArea[j];
+                if(oldCompare == newCompare)
+                {
+                    oldActiveArea.Remove(oldCompare);
+                    newActiveArea.Remove(newCompare);
+                    break;
+                }
+            }
+        }
     }
 
     public void SpawnMob(Node playerNode, List<Node> activeArea, List<Edge.DoorType> obstacleTypes)

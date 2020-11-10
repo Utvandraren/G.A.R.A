@@ -22,6 +22,7 @@ public class Director : MonoBehaviour
         GivePacerPlayerData();
         graph.ChangedNode += Graph_ChangedNode;
         shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
+        activeArea = graph.FindActiveArea();
     }
     /// <summary>
     /// Activates functions when the player moves to a new node in the graph
@@ -37,12 +38,21 @@ public class Director : MonoBehaviour
         else
             shortestPath.edges.Pop();
         CheckAmmoRequirements();
+
+        List<Node> newActiveArea = graph.FindActiveArea();
+        spawnManager.OnPlayerNodeChange(graph.nodes[graph.playerNode], activeArea, newActiveArea);
+        activeArea = newActiveArea;
     }
 
     // Update is called once per frame
     void Update()
     {
         spawnManager.currentTempo = pacer.currentTempo;
+        if (spawnManager.mobReady)
+        {
+            spawnManager.SpawnMob(graph.nodes[graph.playerNode], activeArea, doorTypes);
+            spawnManager.IncreaseThreatSizes();
+        }
     }
 
     void GivePacerPlayerData()
