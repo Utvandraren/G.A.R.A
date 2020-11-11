@@ -19,11 +19,6 @@ public class Node
     public RoomType type;
     //public Vector3 roomCenter;
     [HideInInspector] public float percentToEnd;
-    public GameObject spawnerObject;
     public Spawner spawner;
-    public Node()
-    {
-        spawner = spawnerObject.GetComponent<Spawner>();
-    }
 }
 

@@ -6,8 +6,8 @@ public class Spawner : MonoBehaviour
 {
     public enum Type
     {
-        WALL,
-        ROOM
+        ROOM,
+        WALL
     }
     public Type type;
     public int index;

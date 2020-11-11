@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Director : MonoBehaviour
 {
-    [SerializeField] private LevelGraph graph;
-    [SerializeField] private SpawnManager spawnManager;
+    private LevelGraph graph;
+    private SpawnManager spawnManager;
     PlayerReader playerReader;
     Pacer pacer;
     Path shortestPath;
@@ -16,11 +16,15 @@ public class Director : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        activeArea = new List<Node>();
-        playerReader = GetComponent<PlayerReader>();
+        graph = GetComponent<LevelGraph>();
         pacer = GetComponent<Pacer>();
+        spawnManager = GetComponent<SpawnManager>();
+        playerReader = GetComponent<PlayerReader>();
+        activeArea = new List<Node>();
+
         GivePacerPlayerData();
         graph.ChangedNode += Graph_ChangedNode;
+        graph.Initialize();
         shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
         activeArea = graph.FindActiveArea();
     }

@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "Graph", menuName = "ScriptableObjects/LevelGraph", order = 1)]
-public class LevelGraph : ScriptableObject
+public class LevelGraph : MonoBehaviour
 {
     [SerializeField] public Node[] nodes;
     [SerializeField] private EdgeDescription[] edgeData;
