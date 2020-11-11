@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0.01f, .99f)] private float stopSmoothFactor;
     [SerializeField, Range(0.01f, .99f)] private float rollSmoothFactor;
     [Tooltip("The amount of drag that will be applied when the player lets go of all movement buttons.")]
-    [SerializeField] private float stopDragCoef;
+    [SerializeField] private float stopDragCoef = 5;
 
     private float thrustForce;
     private float currentRollRate = 0.0f;
@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         currentMaxSpeed = maxNormalSpeed;
+        stopDragCoef = rb.drag;
     }
 
     private void OnEnable()
@@ -116,6 +117,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Vector3 direction = Vector3.zero;
+
+        if (PauseMenu.GameIsPaused)
+            return;
 
         #if ENABLE_LEGACY_INPUT_MANAGER
 
@@ -166,31 +170,6 @@ public class PlayerController : MonoBehaviour
 
         m_TargetCameraState.Translate(direction);
         m_CameraState.UpdateRotation(m_TargetCameraState, transform);
-
-
-        //Keep this part for now until player will for sure not be kinematic
-        ////Keyboard Movement
-        //direction.Normalize();
-        //acceleration = thrustForce / rb.mass;
-        //acceleration *= Time.deltaTime;
-        //velocity += acceleration * direction;
-        //Vector3 newPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        //newPos += velocity * Time.deltaTime;
-        //rb.MovePosition(newPos);
-
-        //if (direction.x == 0)
-        //{
-        //    Mathf.SmoothDamp(velocity.x, 0f, ref velocity.x, 1f);
-        //}
-        //if (direction.y == 0)
-        //{
-        //    Mathf.SmoothDamp(velocity.y, 0f, ref velocity.y, 1f);
-        //}
-        //if (direction.z == 0)
-        //{
-        //    Mathf.SmoothDamp(velocity.z, 0f, ref velocity.z, 1f);
-        //}
-
     }
 
 

@@ -19,14 +19,29 @@ public class PlayerLaserWeapon : Weapon
     {
         base.Start();
         camera = Camera.main;
+        //camera = gameObject.GetComponentInChildren<Camera>();
+    }
+
+    //Might want to move this to the base class at some point
+    private void FixedUpdate()
+    {
+        if (camera == null)
+        {
+            camera = Camera.main;
+        }
     }
 
     //Draws ray from middle of screen to see if something is hit
     public override void Shoot()  //Starts visual effects and draw ray to check if colldiding with any valiable target
     {
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
         base.Shoot();
         RaycastHit hit;
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+        laserEffect.SetActive(true);
         if (Physics.SphereCast(rayOrigin, laserThickness, camera.transform.forward, out hit, maxRange))
         {
             DrawVisuals(hit.point);
@@ -36,7 +51,7 @@ public class PlayerLaserWeapon : Weapon
                 interObj.Interact(attack);
 
             }
-            else if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
+            else if (hit.transform.CompareTag("Enemy"))
             {
                 hit.transform.GetComponent<Stats>().TakeDamage(attack);
             }
@@ -51,6 +66,7 @@ public class PlayerLaserWeapon : Weapon
     public override void DrawVisuals(Vector3 target)
     {
         base.DrawVisuals(target);
+        
         laserEffect.GetComponent<LineRenderer>().SetPosition(0, firePoint.position);
 
         if (target == Vector3.zero)
@@ -72,7 +88,7 @@ public class PlayerLaserWeapon : Weapon
     private IEnumerator TurnOffLaserEffect()
     {
         PlayShootSound();
-        laserEffect.SetActive(true);
+        //laserEffect.SetActive(true);
         yield return new WaitForSeconds(laserDuration);
         laserEffect.SetActive(false);
     }

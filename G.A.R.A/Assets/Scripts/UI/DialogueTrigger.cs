@@ -16,10 +16,15 @@ public class DialogueTrigger : MonoBehaviour
     private float coolDown = 1f;
     [SerializeField] private TextAsset dialogueFile;
     private bool firstTimeTriggering;
+    public string nameOfSpeaker = "";
     
     public void Start()
     {
         dialogue = new Dialogue(dialogueFile.text.Split('\n'));
+        if(nameOfSpeaker != "")
+        {
+            dialogue.name = nameOfSpeaker;
+        }
         firstTimeTriggering = true;
     }
     /// <summary>

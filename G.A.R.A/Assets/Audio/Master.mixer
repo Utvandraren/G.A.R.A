@@ -59,10 +59,18 @@ AudioMixerController:
   m_Snapshots:
   - {fileID: 24500006}
   m_StartSnapshot: {fileID: 24500006}
-  m_SuspendThreshold: -80
+  m_SuspendThreshold: 0
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 68919feb585c3af4e9bc92d48d4ea279
+    name: ambientVolume
+  - guid: afbe8e8e6799fa949a2b8db25fec5be0
+    name: fxVolume
+  - guid: 6d8df6acc5438744fbc9517c96d9e774
+    name: masterVolume
+  - guid: a646604c76d4b7b4b97d9e88a1c19c2f
+    name: musicVolume
   m_AudioMixerGroupViews:
   - guids:
     - a4284f28717932f4f8eb5eb40ccd7d9a
@@ -117,7 +125,17 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: d8fbb51f559d66a4f93ed58f68fff6ea
-  m_FloatValues: {}
+  m_FloatValues:
+    6c8b6ad1a1e2ad740a605e907cb84648: 0.833
+    9f3a2bb23aab22b458ce8e1a0f11e52d: 3.1
+    7f711864ee73b644287b4fe08b3447ab: 1
+    3939f1a561595d44e9d0301e8dc307c1: 1
+    6a53f1169cc99c0499c7ede47c8914ca: 0.855
+    683b8999b3fe5fc4fb602a4c1238e9ff: 1
+    3c6ab84b336b0e444b6a35b5a46cbc57: 3.3
+    68919feb585c3af4e9bc92d48d4ea279: 0
+    a646604c76d4b7b4b97d9e88a1c19c2f: 0
+    e284d8ce2254f7844bdd2a4a646899a4: 0.779
   m_TransitionOverrides: {}
 --- !u!243 &2041563324478971350
 AudioMixerGroupController:
@@ -158,7 +176,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Environment
+  m_Name: Ambient
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 8f2a46ac002f5894e9066193772aa33c
   m_Children: []
