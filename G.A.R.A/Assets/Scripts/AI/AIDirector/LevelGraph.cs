@@ -171,16 +171,42 @@ public class LevelGraph : MonoBehaviour
 
     public List<Node> FindActiveArea()
     {
-        return Radiate(playerNode, 5);
+        return Radiate(playerNode, 2);
     }
 
     public List<Node> Radiate(int origo, int depth)
     {
         List<Node> radialNodes = new List<Node>();
-        int[] minSpanTree = CreateMinSpanTree(origo);
+        bool[] visited = new bool[nodes.Length];
+        Queue<int> nodeQue = new Queue<int>();
 
-
-
+        nodeQue.Enqueue(origo);
+        int newDepthNode = nodeQue.Peek();
+        int currentDepth = 0;
+        while (nodeQue.Count > 0)
+        {
+            int activeNode = nodeQue.Dequeue();
+            radialNodes.Add(nodes[activeNode]);
+            visited[activeNode] = true;
+            if (activeNode == newDepthNode)
+            {
+                currentDepth++;
+                if (currentDepth > depth)
+                    break;
+            }
+            foreach (Edge edge in edges[activeNode])
+            {
+                int toIndex = edge.to;
+                if (!visited[toIndex])
+                {
+                    nodeQue.Enqueue(toIndex);
+                    if (activeNode == newDepthNode)
+                    {
+                        newDepthNode = toIndex;
+                    }
+                }
+            }
+        }
         return radialNodes;
     }
 }

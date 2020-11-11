@@ -51,6 +51,7 @@ public class Director : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        graph.FindPlayerNode(playerReader.player.transform.position);
         spawnManager.currentTempo = pacer.currentTempo;
         if (spawnManager.mobReady)
         {
