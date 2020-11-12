@@ -205,7 +205,7 @@ public class BossManager : Singleton<BossManager>
         System.Random rnd = new System.Random();
         for (int i = 0; i < tentaclesAmount; i++)
         {
-            GameObject instanceObj = Instantiate(tentaclePrefab, transform.position, Quaternion.identity);
+            GameObject instanceObj = Instantiate(tentaclePrefab, transform.position, Quaternion.identity,transform);
             Vector3 tentacleRotation = new Vector3(rnd.Next(0, 30), rnd.Next(0, 30), 0f);
             instanceObj.GetComponent<UnityStandardAssets.Utility.AutoMoveAndRotate>().rotateDegreesPerSecond.value = tentacleRotation;
             tentacles.Add(instanceObj);

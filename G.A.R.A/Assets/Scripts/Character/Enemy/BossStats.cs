@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossStats : EnemyStats
+public class BossStats : Stats
 {
     public SciptableIntObj bossHealth;
+    [SerializeField] private GameObject bossWinTimeLine;
     
     [HideInInspector]
     public bool isInvicible;
@@ -21,6 +22,8 @@ public class BossStats : EnemyStats
 
     public override void TakeDamage(SciptableAttackObj attack)
     {
+        base.TakeDamage(attack);
+
         if(isInvicible)
         {
             return;
@@ -33,13 +36,17 @@ public class BossStats : EnemyStats
             treshold = bossHealth.startValue / 3;
             GetComponent<BossManager>().PrepareNextPhase();  
         }
+        //if(bossHealth.value <= 0f)
+        //{
+        //    Die();
+        //}
     }
 
     public override void Die()
     {
-        GameManager.Instance.Win();
+        //GameManager.Instance.Win();
         //StartTimelineanimation
-        
+        bossWinTimeLine.SetActive(true);
 
     }
 }

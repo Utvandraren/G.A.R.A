@@ -35,7 +35,7 @@ public class ExplosiveProjectile : MonoBehaviour
             {
                 interObj.Interact(attack);
             }
-            else if (nearbyObj.TryGetComponent<EnemyStats>(out EnemyStats attackObj))
+            else if (nearbyObj.TryGetComponent<Stats>(out Stats attackObj))
             {
                 ////Code here deal damage to enemies caught in the explosion based on the distance to center
                 //float distanceToCenter = (int)Vector3.Distance(transform.position, attackObj.transform.position);         
@@ -55,7 +55,7 @@ public class ExplosiveProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)  //Damage if possible the obj the projectile collided with and then explode 
     {
-        if (other.TryGetComponent<EnemyStats>(out EnemyStats attackObj))
+        if (other.TryGetComponent<Stats>(out Stats attackObj))
         {
             attackObj.TakeDamage(directHitAttack);
         }
