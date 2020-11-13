@@ -37,14 +37,15 @@ public class Director : MonoBehaviour
     {
         spawnManager.started = true;
         pacer.StartedLevel();
-        if (shortestPath.nodes.Pop() != graph.nodes[graph.playerNode])
-            graph.FindShortestPathToGoal(graph.playerNode);
-        else
-            shortestPath.edges.Pop();
-        CheckAmmoRequirements();
+        //if (shortestPath.nodes.Pop() != graph.nodes[graph.playerNode])
+        //    graph.FindShortestPathToGoal(graph.playerNode);
+        //else
+        //    shortestPath.edges.Pop();
+        //CheckAmmoRequirements();
 
         List<Node> newActiveArea = graph.FindActiveArea();
-        spawnManager.OnPlayerNodeChange(graph.nodes[graph.playerNode], activeArea, newActiveArea);
+        Debug.Log("Spawning");
+        spawnManager.OnPlayerNodeChange(graph.nodes[graph.playerNode], activeArea, newActiveArea, playerReader.player.transform.position);
         activeArea = newActiveArea;
     }
 

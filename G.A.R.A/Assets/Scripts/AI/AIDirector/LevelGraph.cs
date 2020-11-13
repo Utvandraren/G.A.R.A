@@ -69,17 +69,18 @@ public class LevelGraph : MonoBehaviour
             if (closestNeighboringNodeDistance < savedNodeDistance)
             {
                 playerNode = closerNode;
+                Debug.Log("Changed to node " + playerNode);
                 savedNodeDistance = closestNeighboringNodeDistance;
-                movedNode = true;
+                ChangedNode?.Invoke(this, new EventArgs());
             }
             else
                 break;
         }
-        if (movedNode)
-            ChangedNode?.Invoke(this, new EventArgs());
         return playerNode;
     }
-
+    /// <summary>
+    /// WARNING: Only works when the end is in a terminal node (connected with only one edge).
+    /// </summary>
     public void SetNodeGradient()
     {
         bool[] visited = new bool[nodes.Length];
@@ -178,35 +179,25 @@ public class LevelGraph : MonoBehaviour
     {
         List<Node> radialNodes = new List<Node>();
         bool[] visited = new bool[nodes.Length];
-        Queue<int> nodeQue = new Queue<int>();
 
-        nodeQue.Enqueue(origo);
-        int newDepthNode = nodeQue.Peek();
-        int currentDepth = 0;
-        while (nodeQue.Count > 0)
+        RecursiveRadiate(origo, depth, 0, ref radialNodes, ref visited);
+
+        return radialNodes;
+    }
+
+    public void RecursiveRadiate(int currentNode, int maxDepth, int currentDepth, ref List<Node> radialNodes, ref bool[] visited)
+    {
+        if (currentDepth > maxDepth)
+            return;
+        radialNodes.Add(nodes[currentNode]);
+        visited[currentNode] = true;
+        currentDepth++;
+        foreach (Edge edge in edges[currentNode])
         {
-            int activeNode = nodeQue.Dequeue();
-            radialNodes.Add(nodes[activeNode]);
-            visited[activeNode] = true;
-            if (activeNode == newDepthNode)
+            if (!visited[edge.to])
             {
-                currentDepth++;
-                if (currentDepth > depth)
-                    break;
-            }
-            foreach (Edge edge in edges[activeNode])
-            {
-                int toIndex = edge.to;
-                if (!visited[toIndex])
-                {
-                    nodeQue.Enqueue(toIndex);
-                    if (activeNode == newDepthNode)
-                    {
-                        newDepthNode = toIndex;
-                    }
-                }
+                RecursiveRadiate(edge.to, maxDepth, currentDepth, ref radialNodes, ref visited);
             }
         }
-        return radialNodes;
     }
 }
