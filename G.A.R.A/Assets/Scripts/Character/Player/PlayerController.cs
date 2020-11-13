@@ -34,11 +34,13 @@ public class PlayerController : MonoBehaviour
     private float thrustForce;
     private float currentRollRate = 0.0f;
     private float acceleration;
-
     private float currentMaxSpeed;
+    public bool isSprinting { get; private set; }
 
     private float rollLerpPct;
     private float stopLerpPct;
+
+    private PlayerStats playerStats;
 
     [Header("Mouse look Settings")]
     [Tooltip("Do you want to invert the direction for looking up and down with the mouse?")]
@@ -103,6 +105,7 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         currentMaxSpeed = maxNormalSpeed;
         stopDragCoef = rb.drag;
+        playerStats = GetComponent<PlayerStats>();
     }
 
     private void OnEnable()
@@ -142,14 +145,16 @@ public class PlayerController : MonoBehaviour
         }
 
         //Sprint/Boost
-        if (Input.GetButton("Sprint"))
+        if (Input.GetButton("Sprint") && playerStats.sprint > 0 && playerStats.canSprint)
         {
+            isSprinting = true;
             thrustForce = standardthrustForce + additionalBoostForce;
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSprintSpeed);
             currentMaxSpeed = maxSprintSpeed;
         }
         else
         {
+            isSprinting = false;
             thrustForce = standardthrustForce;
             if (rb.velocity.magnitude > maxNormalSpeed + .5f)
             {

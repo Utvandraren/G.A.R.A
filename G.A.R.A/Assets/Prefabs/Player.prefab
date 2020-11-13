@@ -252,7 +252,7 @@ MonoBehaviour:
   stopLerpTime: 0.1
   maxNormalSpeed: 11
   maxSprintSpeed: 16
-  stopSmoothFactor: 0.8
+  stopSmoothFactor: 0.2
   rollSmoothFactor: 0.99
   stopDragCoef: 0
   invertY: 0
@@ -427,9 +427,14 @@ MonoBehaviour:
   health: 1000
   startingHealth: 1000
   shield: 1000
+  sprint: 0
   maxShield: 1000
+  maxSprint: 1000
   shieldRechargeDelay: 3
-  shieldRechargeRate: 1
+  shieldRechargeRate: 100
+  sprintRechargeDelay: 1
+  sprintRechargeRate: 125
+  sprintUsageRate: 150
 --- !u!1 &2381535371013716104
 GameObject:
   m_ObjectHideFlags: 0
