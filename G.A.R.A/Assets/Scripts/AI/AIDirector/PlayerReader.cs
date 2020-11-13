@@ -43,11 +43,11 @@ public class PlayerReader : MonoBehaviour
         return false;
     }
 
-    internal int GetHPPercent()
+    internal float GetHPPercent()
     {
         return playerStats.health / playerStats.startingHealth;
     }
-    internal int GetShieldPercent()
+    internal float GetShieldPercent()
     {
         return playerStats.shield / playerStats.maxShield;
     }
