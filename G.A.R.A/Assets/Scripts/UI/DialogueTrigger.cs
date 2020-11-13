@@ -17,6 +17,7 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private TextAsset dialogueFile;
     private bool firstTimeTriggering;
     public string nameOfSpeaker = "";
+    [SerializeField] private LogbookCounter lc;
     
     public void Start()
     {
@@ -38,10 +39,10 @@ public class DialogueTrigger : MonoBehaviour
             {
                 firstTimeTriggering = false;
                 GameObject obj = GameObject.Find("LogBookCounter");
-                if(obj.TryGetComponent<LogbookCounter>(out LogbookCounter lc))
-                {
+                //if(obj.TryGetComponent<LogbookCounter>(out LogbookCounter lc))
+                //{
                     lc.FoundLogbook();
-                }
+                //}
             }
             hasBeenInvoked = true;
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
