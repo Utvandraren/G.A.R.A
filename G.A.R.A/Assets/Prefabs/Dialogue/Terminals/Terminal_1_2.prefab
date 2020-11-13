@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2203755163068494549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 1
-  outlineColor: {r: 0.032707386, g: 0.036214713, b: 0.990566, a: 1}
-  outlineWidth: 3
+  outlineColor: {r: 0.99215686, g: 0.755071, b: 0.03137256, a: 1}
+  outlineWidth: 6
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -164,3 +164,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueFile: {fileID: 4900000, guid: 85f153dc22a622944a6f21b9f989efa8, type: 3}
+  nameOfSpeaker: Station AI

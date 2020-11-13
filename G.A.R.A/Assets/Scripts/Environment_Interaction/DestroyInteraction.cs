@@ -38,6 +38,11 @@ public class DestroyInteraction : MonoBehaviour
         }
     }
 
+    private void NormalDestroy()
+    {
+        Destroy(gameObject);
+    }
+
     public void ResetObject()
     {
         inCooldown = true;
@@ -74,7 +79,7 @@ public class DestroyInteraction : MonoBehaviour
 
         if (destroy)
         {
-            DestroyAnimationMinimization(); //Currently chosen destroy animation
+            NormalDestroy(); //Currently chosen destroy animation
         }
     }
 }

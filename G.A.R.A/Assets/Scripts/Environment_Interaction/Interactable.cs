@@ -34,6 +34,7 @@ public class Interactable : MonoBehaviour
                     explosiveInteraction.Invoke();
                     break;
                 case SciptableAttackObj.WeaponElement.Electricity:
+                    Debug.Log("Test");
                     electricInteraction.Invoke();
                     break;
             }

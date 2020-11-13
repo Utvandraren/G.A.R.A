@@ -34,7 +34,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (!hasBeenInvoked)
         {
-            if (firstTimeTriggering)
+            if (firstTimeTriggering && gameObject.tag == "Logbook")
             {
                 firstTimeTriggering = false;
                 GameObject obj = GameObject.Find("LogBookCounter");
