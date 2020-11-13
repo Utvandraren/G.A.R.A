@@ -15,12 +15,19 @@ public class LaserWeapon : Weapon
     [SerializeField] private float laserDuration = 0.5f;
     [SerializeField] private float inaccuracyFactor;
     private Vector3 shootDirection;
+    [SerializeField] public Animator anim;
 
 
+    public void FixedUpdate()
+    {
+        anim.SetBool("Fire", false);
+    }
 
     public override void Shoot()  //Starts visual effects and draw ray to check if colldiding with any valiable target
     {
         base.Shoot();
+
+        anim.CrossFadeInFixedTime("Fire Laser Weapon", 0.01f);
 
         RaycastHit hit;
         float x = Random.Range(-inaccuracyFactor, inaccuracyFactor);

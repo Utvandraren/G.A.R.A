@@ -57,6 +57,6 @@ public class PlayerStats : Stats
     {
         base.Die();
         Debug.Log("Player died");
-        //Gamemanager.tooglegameoverscreen/loosegame();   <-- To be added later
+        GameManager.Instance.GameOver();
     }
 }

@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
         weaponAudioSource = GetComponent<AudioSource>();
     }
 
-    
+
 
     public virtual void Update()
     {
@@ -35,11 +35,17 @@ public class Weapon : MonoBehaviour
 
     public virtual void TryShoot()  //If cooldown is ready then you can shoot
     {
+        //currentTime -= Time.deltaTime;
+        //Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
+
+        if (PauseMenu.GameIsPaused)
+            return;
+
         if (currentTime <= 0f && AmmoNotEmpty())
         {
             Shoot();
             currentTime = timeBetweenAttacks;
-            ammo.value--;           
+            ammo.value--;
         }
     }
 
@@ -60,7 +66,7 @@ public class Weapon : MonoBehaviour
             Debug.Log("Ammo Empty " + ammo.value.ToString() + " " + ammo.name);
             return false;
         }
-        
+
     }
 
     public virtual void DrawVisuals(Vector3 target)
@@ -81,7 +87,7 @@ public class Weapon : MonoBehaviour
     /// </summary>
     public void PlayStartUpSound()
     {
-        weaponAudioSource.PlayOneShot(startUpSound); 
+        weaponAudioSource.PlayOneShot(startUpSound);
     }
 
 }

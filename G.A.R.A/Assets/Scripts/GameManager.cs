@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject[] systemPrefabs;
 
     [SerializeField] private string loadingScene;
+    [SerializeField] private UIManager uiManager;
 
     private string currentLevel;
     private string previousLevel;
@@ -53,6 +54,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLevel)); //Required for SceneManager.GetActiveScene to work properly
+        uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         Debug.Log("Load complete");
     }
 
@@ -70,7 +72,7 @@ public class GameManager : Singleton<GameManager>
     /// Loads a level additively on top of already loaded scenes.
     /// </summary>
     /// <param name="sceneName"></param>
-    public void LoadScene(string sceneName)
+    private void LoadScene(string sceneName)
     {
         previousLevel = currentLevel;
         AsyncOperation ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
@@ -90,7 +92,7 @@ public class GameManager : Singleton<GameManager>
     /// Unloads one of the scenes that are currently loaded.
     /// </summary>
     /// <param name="sceneName"></param>
-    public void UnloadScene(string sceneName)
+    private void UnloadScene(string sceneName)
     {
         AsyncOperation ao = SceneManager.UnloadSceneAsync(sceneName);
 
@@ -110,25 +112,29 @@ public class GameManager : Singleton<GameManager>
         {
             nextLevel = testScene;
             LoadScene(loadingScene);
-            //LoadLevel(testScene);
-            //UnloadLevel(SceneManager.GetActiveScene().name);
         }
         else //This is for builds
         {
             nextLevel = SceneManager.GetSceneByBuildIndex((SceneManager.GetActiveScene().buildIndex + 1)).name;
-            //LoadLevel((SceneManager.GetSceneByBuildIndex((SceneManager.GetActiveScene().buildIndex + 1)).name));
-            //UnloadLevel(SceneManager.GetActiveScene().name);
+            LoadScene(loadingScene);
         }
+    }
+
+    public void RestartLevel()
+    {
+        nextLevel = SceneManager.GetActiveScene().name;
+        LoadScene(loadingScene);
     }
 
     public void GameOver()
     {
-        //UIManager.setLoseUI;
+        uiManager.SetLoseUI();
     }
 
-    public void ResetGame()
+    public void ReturnToMain()
     {
-        //LoadLevel("MainMeny");
+        nextLevel = "MainMenu";
+        LoadScene(loadingScene);
     }
 
     public void Win()

@@ -14,6 +14,7 @@ public class TaserWeapon : Weapon
     [SerializeField] private float jumpRange;
     [SerializeField] private int nmbrJumps;
     [SerializeField] private float taserThickness = 0.15f;
+    [SerializeField] public Animator anim;
 
     private Camera camera;
     private List<Collider> targetsAlreadyHit;
@@ -33,14 +34,20 @@ public class TaserWeapon : Weapon
         {
             camera = Camera.main;
         }
+        anim.SetBool("Fire", false);
     }
 
     public override void Shoot()
     {
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
         base.Shoot();
         RaycastHit hit;
         electricityEffect.Play();
         PlayShootSound();
+        anim.CrossFadeInFixedTime("Fire Taser Weapon", 0.01f);
 
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
@@ -82,11 +89,11 @@ public class TaserWeapon : Weapon
         {
             targets.Add(transformTarget.transform.position);
         }
-        StartCoroutine("VisualEffectCo", targets);       
+        StartCoroutine("VisualEffectCo", targets);
     }
 
-    IEnumerator VisualEffectCo(List<Vector3> targets)   //Draw the visual effects for the electricity based on the targets that have been hit.    
-    {    
+    IEnumerator VisualEffectCo(List<Vector3> targets)   //Draw the visual effects for the electricity based on the targets that have been hit.
+    {
         int i = 0;
         LineRenderer line = Instantiate(electricityLine, gameObject.transform.position, Quaternion.identity).GetComponent<LineRenderer>();
         line.positionCount = 0;
@@ -104,7 +111,7 @@ public class TaserWeapon : Weapon
             Instantiate(electricityHitSparks, target, Quaternion.identity);     //Sparkseffekts
             ++i;
             yield return new WaitForSeconds(0.1f);
-        }       
+        }
         yield return new WaitForSeconds(1f);
         targetsAlreadyHit.Clear();
         line.positionCount = 0;
@@ -122,7 +129,7 @@ public class TaserWeapon : Weapon
         return false;
     }
 
-    EnemyStats GetClosestEnemy(Collider[] colliders, Collider startEnemy)  //Find the enemy closest to the startEnemy 
+    EnemyStats GetClosestEnemy(Collider[] colliders, Collider startEnemy)  //Find the enemy closest to the startEnemy
     {
         Collider closestEnemy = colliders[0];
         for (int i = 0; i < colliders.Length; i++)
