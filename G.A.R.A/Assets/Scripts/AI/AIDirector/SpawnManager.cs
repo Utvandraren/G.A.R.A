@@ -48,7 +48,7 @@ class SpawnManager : MonoBehaviour
             return;
 
         mobSpawnTimer += Time.deltaTime;
-        if (mobSpawnTimer > timeBetweenMobs && BoidManager.allBoids.Count < highIntensityEnemyCount)
+        if (mobSpawnTimer > timeBetweenMobs && BoidManager.allBoids.Count < highIntensityEnemyCount && (currentTempo == Pacer.TempoType.BUILDUP || currentTempo == Pacer.TempoType.SUSTAIN))
         {
             mobReady = true;
         }
@@ -107,10 +107,42 @@ class SpawnManager : MonoBehaviour
         }
     }
 
-    public void SpawnMob(Node playerNode, List<Node> activeArea, List<Edge.DoorType> obstacleTypes)
+    public void SpawnMob(Path path)
     {
         mobReady = false;
         mobSpawnTimer = 0;
+        List<Edge.DoorType> doorTypes = new List<Edge.DoorType>();
+        while (path.edges.Count > 0)
+        {
+            Edge temp = path.edges.Pop();
+            switch (temp.type)
+            {
+                case Edge.DoorType.NONE:
+                    break;
+                case Edge.DoorType.INTERACT:
+                    break;
+                case Edge.DoorType.DESTRUCTABLE:
+                case Edge.DoorType.TOGGLEABLE:
+                    doorTypes.Add(temp.type);
+                    break;
+                default:
+                    break;
+            }
+        }
+        Node spawnNode = path.nodes.Peek();
+        for (int i = 0; i < 3; i++)
+        {
+            if(path.nodes.Count > 0)
+            {
+                spawnNode = path.nodes.Pop();
+            }
+        }
+        if (BoidManager.allBoids.Count < highIntensityEnemyCount)
+            for (int i = 0; i < mobSize; i++)
+            {
+                spawnNode.spawner.Spawn(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)]);
+            }
+
     }
 }
 

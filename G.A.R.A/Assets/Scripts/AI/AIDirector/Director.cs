@@ -56,7 +56,7 @@ public class Director : MonoBehaviour
         spawnManager.currentTempo = pacer.currentTempo;
         if (spawnManager.mobReady)
         {
-            spawnManager.SpawnMob(graph.nodes[graph.playerNode], activeArea, doorTypes);
+            spawnManager.SpawnMob(graph.FindShortestPathToGoal(graph.playerNode));
             spawnManager.IncreaseThreatSizes();
         }
     }
