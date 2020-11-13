@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] protected float timeBetweenAttacks;
     [SerializeField] private SciptableIntObj ammo;
-    [SerializeField] public Animator anim;
     [SerializeField] public AudioClip startUpSound;
 
 
@@ -51,7 +50,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void Shoot()
     {
-        anim.SetBool("Fire", true);
+        
     }
 
     bool AmmoNotEmpty()  //Metod checking if ammo is still left
