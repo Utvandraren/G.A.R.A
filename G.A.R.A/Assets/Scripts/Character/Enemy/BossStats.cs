@@ -22,12 +22,12 @@ public class BossStats : Stats
 
     public override void TakeDamage(SciptableAttackObj attack)
     {
-        base.TakeDamage(attack);
-
         if(isInvicible)
         {
             return;
         }
+
+        base.TakeDamage(attack);
         bossHealth.value -= attack.damage;
         treshold -= attack.damage;
 

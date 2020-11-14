@@ -183,9 +183,8 @@ public class BossManager : Singleton<BossManager>
 
     void SpawnEnemy()
     {
-        Vector3 posToSpawn = transform.position + Random.insideUnitSphere * 20f;
-        enemyPool.Add(Instantiate(enemySwarmerPrefab, posToSpawn, Quaternion.identity, transform));
-
+        Vector3 posToSpawn = spawnPoint.position + Random.insideUnitSphere * 20f;
+        enemyPool.Add(Instantiate(enemySwarmerPrefab, posToSpawn, Quaternion.identity, spawnPoint));
     }
 
     //Remove enemies left when transitioning to the next phase
