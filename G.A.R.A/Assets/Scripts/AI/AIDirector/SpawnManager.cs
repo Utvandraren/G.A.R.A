@@ -37,9 +37,13 @@ class SpawnManager : MonoBehaviour
 
     public void IncreaseThreatSizes()
     {
-        highIntensityEnemyCount = Mathf.Min(highIntensityEnemyCount + 5, 50);
-        lowIntensityEnemyCount = Mathf.Min(lowIntensityEnemyCount + 2, 20);
-        mobSize += 1;
+        if (mobSpawnTimer > timeBetweenMobs)
+        {
+
+            highIntensityEnemyCount = Mathf.Min(highIntensityEnemyCount + 5, 50);
+            lowIntensityEnemyCount = Mathf.Min(lowIntensityEnemyCount + 2, 20);
+            mobSize += 1;
+        }
     }
 
     private void Update()
@@ -51,6 +55,7 @@ class SpawnManager : MonoBehaviour
         if (mobSpawnTimer > timeBetweenMobs && BoidManager.allBoids.Count < highIntensityEnemyCount && (currentTempo == Pacer.TempoType.BUILDUP || currentTempo == Pacer.TempoType.SUSTAIN))
         {
             mobReady = true;
+            mobSpawnTimer = 0;
         }
     }
 
@@ -132,7 +137,7 @@ class SpawnManager : MonoBehaviour
         Node spawnNode = path.nodes.Peek();
         for (int i = 0; i < 3; i++)
         {
-            if(path.nodes.Count > 0)
+            if (path.nodes.Count > 0)
             {
                 spawnNode = path.nodes.Pop();
             }

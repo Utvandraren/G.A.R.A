@@ -27,7 +27,16 @@ public class Director : MonoBehaviour
         graph.Initialize();
         shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
         activeArea = graph.FindActiveArea();
+        playerReader.playerStats.tookDamage += PlayerStats_tookDamage;
     }
+
+    private void PlayerStats_tookDamage(object player, TakeDamageEventArgs eventArgsDamage)
+    {
+        int damage = eventArgsDamage.damage;
+        float damagePercent = (float)damage / playerReader.playerStats.startingHealth;
+        pacer.IncreasePanic(damagePercent);
+    }
+
     /// <summary>
     /// Activates functions when the player moves to a new node in the graph
     /// </summary>

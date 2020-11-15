@@ -14,6 +14,7 @@ public class PlayerReader : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
+        
     }
 
     // Update is called once per frame
