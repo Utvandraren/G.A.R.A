@@ -78,8 +78,13 @@ public class Weapon : MonoBehaviour
     /// </summary>
     public void PlayShootSound()
     {
-        weaponAudioSource.pitch = Random.Range(1f, 1.1f);
+        weaponAudioSource.pitch = Random.Range(1f, 1.04f);
         weaponAudioSource.Play();
+    }
+
+    public void StopShootSound()
+    {
+        weaponAudioSource.Stop();
     }
     /// <summary>
     /// Plays the startupSound for this weapon
