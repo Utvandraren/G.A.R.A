@@ -13,7 +13,7 @@ public class Pacer : MonoBehaviour
     PlayerReader playerReader;
     float panicScore;
     float maxPanicScore = 10;
-    float panicReductionRate;
+    float panicReductionRate = 0.1f;
     float nodeTime;
     float levelTime;
     private bool started;
@@ -36,9 +36,9 @@ public class Pacer : MonoBehaviour
             return;
 
         levelTime += Time.deltaTime;
-        if (!playerReader.InCombat())
-            panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
         ChangeTempo();
+        //if (!playerReader.InCombat())
+        panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
     }
 
     private void DetermineThreshold()
@@ -52,10 +52,11 @@ public class Pacer : MonoBehaviour
         switch (currentTempo)
         {
             case TempoType.BUILDUP:
-                if (panicScore > upperThreshold)
+                if (panicScore >= upperThreshold)
                 {
                     currentTempo = TempoType.SUSTAIN;
                     tempoTimer = 0;
+                    Debug.Log("Current tempo" + currentTempo);
                 }
                 break;
             case TempoType.SUSTAIN:
@@ -63,13 +64,15 @@ public class Pacer : MonoBehaviour
                 if (tempoTimer > sustainTime)
                 {
                     currentTempo = TempoType.FADE;
+                    Debug.Log("Current tempo" + currentTempo);
                 }
                 break;
             case TempoType.FADE:
-                if (panicScore < lowerThreshold)
+                if (panicScore <= lowerThreshold)
                 {
                     currentTempo = TempoType.RELAX;
                     tempoTimer = 0;
+                    Debug.Log("Current tempo" + currentTempo);
                 }
                 break;
             case TempoType.RELAX:
@@ -77,6 +80,7 @@ public class Pacer : MonoBehaviour
                 if (tempoTimer > sustainTime)
                 {
                     currentTempo = TempoType.BUILDUP;
+                    Debug.Log("Current tempo" + currentTempo);
                     DetermineThreshold();
                 }
                 break;
@@ -102,8 +106,9 @@ public class Pacer : MonoBehaviour
         started = true;
     }
 
-    public void IncreasePanic(float panicAddition)
+    public void IncreasePanic(float damagePercent)
     {
-        panicScore = Mathf.Min(panicScore + panicAddition, maxPanicScore);
+        float panicIncrease = damagePercent * maxPanicScore;
+        panicScore = Mathf.Min(panicScore + panicIncrease*10, maxPanicScore);
     }
 }

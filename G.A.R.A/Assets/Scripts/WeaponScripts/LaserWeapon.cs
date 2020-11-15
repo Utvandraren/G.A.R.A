@@ -37,7 +37,7 @@ public class LaserWeapon : Weapon
             DrawVisuals(hit.point);
             if (hit.transform.CompareTag("Player"))
             {
-                //hit.transform.GetComponent<Stats>().TakeDamage(attack);
+                hit.transform.GetComponent<Stats>().TakeDamage(attack);
                 Debug.Log("Hit");
             }
         }

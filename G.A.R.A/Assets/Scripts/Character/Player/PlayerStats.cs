@@ -24,6 +24,9 @@ public class PlayerStats : Stats
 
     private PlayerController player;
 
+    public delegate void PlayerDamaged(object player, TakeDamageEventArgs eventArgsDamage);
+    public event PlayerDamaged tookDamage;
+
     protected override void Start()
     {
         base.Start();
@@ -87,6 +90,7 @@ public class PlayerStats : Stats
             shield -= attack.damage;
             shield = Mathf.Max(shield, 0);
         }
+        tookDamage?.Invoke(this, new TakeDamageEventArgs(attack.damage));
     }
     public void RestoreHealth(int amount)
     {
