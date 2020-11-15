@@ -21,7 +21,6 @@ class SpawnManager : MonoBehaviour
     public int mobSize = 5;
     private float mobSpawnTimer;
     public float timeBetweenMobs = 10f;
-    Path optimalPath;
     List<Spawner> spawners;
     public bool started;
     public bool mobReady;
@@ -46,12 +45,12 @@ class SpawnManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!started)
             return;
 
-        mobSpawnTimer += Time.deltaTime;
+        mobSpawnTimer += Time.fixedDeltaTime;
         if (mobSpawnTimer > timeBetweenMobs && BoidManager.allBoids.Count < highIntensityEnemyCount && (currentTempo == Pacer.TempoType.BUILDUP || currentTempo == Pacer.TempoType.SUSTAIN))
         {
             mobReady = true;

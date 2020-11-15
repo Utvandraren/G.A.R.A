@@ -14,7 +14,7 @@ public class EnemyStats : Stats
         base.Die();
         GameObject effect = GameObject.Instantiate(deathEffect, gameObject.transform.position, Quaternion.identity);
         Destroy(effect, 3);
-        Debug.Log("DEATH TO " + gameObject.ToString());
+        //Debug.Log("DEATH TO " + gameObject.ToString());
         Destroy(gameObject, deathTimer);
     }
 }

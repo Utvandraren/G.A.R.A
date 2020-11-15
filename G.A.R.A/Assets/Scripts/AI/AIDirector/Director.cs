@@ -46,20 +46,22 @@ public class Director : MonoBehaviour
     {
         spawnManager.started = true;
         pacer.StartedLevel();
-        //if (shortestPath.nodes.Pop() != graph.nodes[graph.playerNode])
-        //    graph.FindShortestPathToGoal(graph.playerNode);
-        //else
-        //    shortestPath.edges.Pop();
-        //CheckAmmoRequirements();
+        if (shortestPath.nodes.Pop() != graph.nodes[graph.playerNode])
+        {
+            shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
+        }
+        else
+        {
+            shortestPath.edges.Pop();
+        }
+        CheckAmmoRequirements();
 
         List<Node> newActiveArea = graph.FindActiveArea();
-        Debug.Log("Spawning");
         spawnManager.OnPlayerNodeChange(graph.nodes[graph.playerNode], activeArea, newActiveArea, playerReader.player.transform.position);
         activeArea = newActiveArea;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         graph.FindPlayerNode(playerReader.player.transform.position);
         spawnManager.currentTempo = pacer.currentTempo;

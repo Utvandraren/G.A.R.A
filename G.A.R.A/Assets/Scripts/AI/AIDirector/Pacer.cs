@@ -13,7 +13,7 @@ public class Pacer : MonoBehaviour
     PlayerReader playerReader;
     float panicScore;
     float maxPanicScore = 10;
-    float panicReductionRate = 0.1f;
+    float panicReductionRate = 0.5f;
     float nodeTime;
     float levelTime;
     private bool started;
@@ -30,21 +30,22 @@ public class Pacer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!started)
             return;
 
-        levelTime += Time.deltaTime;
+        levelTime += Time.fixedDeltaTime;
         ChangeTempo();
-        //if (!playerReader.InCombat())
-        panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
+        CalcPanicReductionRate();
+        if (!playerReader.InCombat())
+            panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
     }
 
     private void DetermineThreshold()
     {
-        upperThreshold = 10; // Random.Range(5, 10);
-        lowerThreshold = 0;  // Random.Range(0, 2);
+        upperThreshold = 10;
+        lowerThreshold = 0;
     }
 
     private void ChangeTempo()
@@ -98,7 +99,7 @@ public class Pacer : MonoBehaviour
     {
         float hpPercent = playerReader.GetHPPercent();
         float shieldPercent = playerReader.GetShieldPercent();
-        panicReductionRate = maxPanicScore * hpPercent + (maxPanicScore / 4) * shieldPercent;
+        panicReductionRate = hpPercent + shieldPercent * 0.5f;
     }
 
     public void StartedLevel()
@@ -109,6 +110,6 @@ public class Pacer : MonoBehaviour
     public void IncreasePanic(float damagePercent)
     {
         float panicIncrease = damagePercent * maxPanicScore;
-        panicScore = Mathf.Min(panicScore + panicIncrease*10, maxPanicScore);
+        panicScore = Mathf.Min(panicScore + panicIncrease * 2, maxPanicScore);
     }
 }
