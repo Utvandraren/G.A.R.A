@@ -32,8 +32,10 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private GameObject tentaclePrefab;
     [SerializeField] private int tentaclesAmount = 1;
     private List<GameObject> tentacles;
+    [SerializeField] private Transform tentacleSpawnPoint;
 
-    private BossPhases currentPhase = BossPhases.ShieldPhase;
+
+    private BossPhases currentPhase = BossPhases.TentaclePhase;
     private Animator animator;
     private Transform target;
     private float blendPower = 0;
@@ -204,8 +206,8 @@ public class BossManager : Singleton<BossManager>
         System.Random rnd = new System.Random();
         for (int i = 0; i < tentaclesAmount; i++)
         {
-            GameObject instanceObj = Instantiate(tentaclePrefab, transform.position, Quaternion.identity,transform);
-            Vector3 tentacleRotation = new Vector3(rnd.Next(0, 30), rnd.Next(0, 30), 0f);
+            GameObject instanceObj = Instantiate(tentaclePrefab, tentacleSpawnPoint.position, Quaternion.identity, tentacleSpawnPoint);
+            Vector3 tentacleRotation = new Vector3(rnd.Next(0, 10), rnd.Next(0, 10), 0f);
             instanceObj.GetComponent<UnityStandardAssets.Utility.AutoMoveAndRotate>().rotateDegreesPerSecond.value = tentacleRotation;
             tentacles.Add(instanceObj);
         }
