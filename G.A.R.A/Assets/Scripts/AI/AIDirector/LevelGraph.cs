@@ -51,7 +51,6 @@ public class LevelGraph : MonoBehaviour
 
     public int FindPlayerNode(Vector3 playerPos)
     {
-        bool movedNode = false;
         float savedNodeDistance = Vector3.Distance(nodes[playerNode].spawner.transform.position, playerPos);
         while (true)
         {
