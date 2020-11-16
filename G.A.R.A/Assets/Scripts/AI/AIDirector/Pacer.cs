@@ -14,8 +14,6 @@ public class Pacer : MonoBehaviour
     float panicScore;
     float maxPanicScore = 10;
     float panicReductionRate = 0.5f;
-    float nodeTime;
-    float levelTime;
     private bool started;
     private float upperThreshold;
     private float lowerThreshold;
@@ -35,7 +33,6 @@ public class Pacer : MonoBehaviour
         if (!started)
             return;
 
-        levelTime += Time.fixedDeltaTime;
         ChangeTempo();
         CalcPanicReductionRate();
         if (!playerReader.InCombat())

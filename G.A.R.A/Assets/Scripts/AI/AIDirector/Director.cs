@@ -13,6 +13,8 @@ public class Director : MonoBehaviour
 
     List<Edge.DoorType> doorTypes = new List<Edge.DoorType>();
 
+    float nodeTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +61,11 @@ public class Director : MonoBehaviour
         List<Node> newActiveArea = graph.FindActiveArea();
         spawnManager.OnPlayerNodeChange(graph.nodes[graph.playerNode], activeArea, newActiveArea, playerReader.player.transform.position);
         activeArea = newActiveArea;
+    }
+
+    private void Update()
+    {
+        nodeTime += Time.deltaTime;
     }
 
     void FixedUpdate()

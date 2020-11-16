@@ -18,9 +18,12 @@ class SpawnManager : MonoBehaviour
     public List<Edge.DoorType> obstacles;
     public int highIntensityEnemyCount = 10;
     public int lowIntensityEnemyCount = 0;
+    int activeIntensityEnemyCount = 10;
     public int mobSize = 5;
     private float mobSpawnTimer;
     public float timeBetweenMobs = 10f;
+    public float scalingTimer;
+    public float timeBetweenScaleUp = 10f;
     List<Spawner> spawners;
     public bool started;
     public bool mobReady;
@@ -36,17 +39,40 @@ class SpawnManager : MonoBehaviour
 
     public void IncreaseThreatSizes()
     {
-        if (mobSpawnTimer > timeBetweenMobs)
-        {
+        
+            highIntensityEnemyCount = Mathf.Min(highIntensityEnemyCount + 2, 30);
+            lowIntensityEnemyCount = Mathf.Min(lowIntensityEnemyCount + 1, 10);
+            mobSize = Mathf.Min(mobSize + 1, 10);
+    }
 
-            highIntensityEnemyCount = Mathf.Min(highIntensityEnemyCount + 5, 50);
-            lowIntensityEnemyCount = Mathf.Min(lowIntensityEnemyCount + 2, 20);
-            mobSize += 1;
+    private void Update()
+    {
+        if (!started)
+            return;
+        scalingTimer += Time.deltaTime;
+        if (scalingTimer > timeBetweenScaleUp)
+        {
+            IncreaseThreatSizes();
+            scalingTimer = 0;
         }
     }
 
     private void FixedUpdate()
     {
+        switch (currentTempo)
+        {
+            case Pacer.TempoType.BUILDUP:
+            case Pacer.TempoType.SUSTAIN:
+                activeIntensityEnemyCount = highIntensityEnemyCount;
+                break;
+            case Pacer.TempoType.FADE:
+            case Pacer.TempoType.RELAX:
+                activeIntensityEnemyCount = lowIntensityEnemyCount;
+                break;
+            default:
+                break;
+        }
+
         if (!started)
             return;
 
@@ -69,12 +95,12 @@ class SpawnManager : MonoBehaviour
 
     private void SpawnWanderers(List<Node> newActiveAreaDiff)
     {
-        if (BoidManager.allBoids.Count < highIntensityEnemyCount)
+        if (BoidManager.allBoids.Count < activeIntensityEnemyCount)
         {
             for (int i = 0; i < newActiveAreaDiff.Count * 2; i++)
             {
                 newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemyPrefabs[i % enemyPrefabs.Length]);
-                if (BoidManager.allBoids.Count > highIntensityEnemyCount)
+                if (BoidManager.allBoids.Count > activeIntensityEnemyCount)
                     break;
             }
         }
@@ -115,6 +141,7 @@ class SpawnManager : MonoBehaviour
     {
         mobReady = false;
         mobSpawnTimer = 0;
+        timeBetweenMobs = UnityEngine.Random.Range(7, 20);
         List<Edge.DoorType> doorTypes = new List<Edge.DoorType>();
         while (path.edges.Count > 0)
         {
@@ -141,7 +168,7 @@ class SpawnManager : MonoBehaviour
                 spawnNode = path.nodes.Pop();
             }
         }
-        if (BoidManager.allBoids.Count < highIntensityEnemyCount)
+        if (BoidManager.allBoids.Count < activeIntensityEnemyCount)
             for (int i = 0; i < mobSize; i++)
             {
                 spawnNode.spawner.Spawn(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)]);
