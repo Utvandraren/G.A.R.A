@@ -17,7 +17,7 @@ public class Stats : MonoBehaviour
     public virtual void TakeDamage(SciptableAttackObj attack)  //Logic handling taking damage
     {
         health -= attack.damage;
-        Debug.Log(gameObject.ToString() + " is taking damage");
+        //Debug.Log(gameObject.ToString() + " is taking damage");
         if (health <= 0f)
         {
             Die();
