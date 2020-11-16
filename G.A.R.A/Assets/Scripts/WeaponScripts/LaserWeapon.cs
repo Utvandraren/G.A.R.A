@@ -38,7 +38,7 @@ public class LaserWeapon : Weapon
             if (hit.transform.CompareTag("Player"))
             {
                 hit.transform.GetComponent<Stats>().TakeDamage(attack);
-                Debug.Log("Hit");
+                //Debug.Log("Hit");
             }
         }
         else

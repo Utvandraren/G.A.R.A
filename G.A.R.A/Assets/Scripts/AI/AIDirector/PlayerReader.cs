@@ -9,17 +9,30 @@ public class PlayerReader : MonoBehaviour
     public PlayerStats playerStats;
     [SerializeField]SciptableIntObj laserAmmo, projectileAmmo, tazerAmmo;
     int playerNode;
+    bool inCombat;
+    float combatTimer = 0;
+    float timeToNotBeInCombat = 1f;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
-        
+        playerStats.tookDamage += PlayerStats_tookDamage;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void PlayerStats_tookDamage(object player, TakeDamageEventArgs eventArgsDamage)
     {
+        inCombat = true;
+    }
+
+    private void Update()
+    {
+        if (inCombat)
+        {
+            combatTimer += Time.deltaTime;
+            if (combatTimer > timeToNotBeInCombat)
+                inCombat = false;
+        }
         
     }
 
@@ -41,7 +54,7 @@ public class PlayerReader : MonoBehaviour
 
     internal bool InCombat()
     {
-        return false;
+        return inCombat;
     }
 
     internal float GetHPPercent()
