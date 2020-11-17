@@ -113,7 +113,7 @@ class SpawnManager : MonoBehaviour
         {
             if (Vector3.Distance(BoidManager.allBoids[j].transform.position, playerPos) > 50)
             {
-                BoidManager.allBoids[j].GetComponent<EnemyStats>().Die();
+                Destroy(BoidManager.allBoids[j].gameObject);
             }
         }
 
