@@ -100,7 +100,7 @@ public class Outline : MonoBehaviour {
 
         enabled = false;
         
-  }
+    }
 
   void OnEnable() {
     foreach (var renderer in renderers) {

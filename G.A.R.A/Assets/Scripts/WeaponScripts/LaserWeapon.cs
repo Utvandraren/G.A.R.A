@@ -17,10 +17,16 @@ public class LaserWeapon : Weapon
     private Vector3 shootDirection;
 
 
+    public void FixedUpdate()
+    {
+       
+    }
 
     public override void Shoot()  //Starts visual effects and draw ray to check if colldiding with any valiable target
     {
         base.Shoot();
+
+        
 
         RaycastHit hit;
         float x = Random.Range(-inaccuracyFactor, inaccuracyFactor);
@@ -31,8 +37,8 @@ public class LaserWeapon : Weapon
             DrawVisuals(hit.point);
             if (hit.transform.CompareTag("Player"))
             {
-                //hit.transform.GetComponent<Stats>().TakeDamage(attack);
-                Debug.Log("Hit");
+                hit.transform.GetComponent<Stats>().TakeDamage(attack);
+                //Debug.Log("Hit");
             }
         }
         else
@@ -46,7 +52,6 @@ public class LaserWeapon : Weapon
         if (currentTime <= 0f)
         {
             Shoot();
-            anim.SetBool("Fire", true);
             currentTime = timeBetweenAttacks;
         }
     }

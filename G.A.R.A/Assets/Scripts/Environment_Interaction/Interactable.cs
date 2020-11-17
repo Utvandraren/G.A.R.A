@@ -34,6 +34,7 @@ public class Interactable : MonoBehaviour
                     explosiveInteraction.Invoke();
                     break;
                 case SciptableAttackObj.WeaponElement.Electricity:
+                    Debug.Log("Test");
                     electricInteraction.Invoke();
                     break;
             }
@@ -67,9 +68,9 @@ public class Interactable : MonoBehaviour
     {
         if(outlineCountdown <= 0)
         {
-            if (transform.GetComponent<Outline>().enabled)
+            if (transform.TryGetComponent<Outline>(out Outline o))
             {
-                transform.GetComponent<Outline>().enabled = false;
+                o.enabled = false;
             }
         }
         else

@@ -12,6 +12,8 @@ public class PlayerLaserWeapon : Weapon
     [SerializeField] private float laserThickness = 0.15f;
     [SerializeField] private float laserDuration = 0.5f;
 
+    [SerializeField] public Animator anim;
+
     private Camera camera;
     
 
@@ -29,6 +31,7 @@ public class PlayerLaserWeapon : Weapon
         {
             camera = Camera.main;
         }
+        anim.SetBool("Fire", false);
     }
 
     //Draws ray from middle of screen to see if something is hit
@@ -39,6 +42,7 @@ public class PlayerLaserWeapon : Weapon
             return;
         }
         base.Shoot();
+        anim.CrossFadeInFixedTime("Fire Laser Weapon", 0.01f);
         RaycastHit hit;
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
         laserEffect.SetActive(true);

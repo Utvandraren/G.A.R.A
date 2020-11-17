@@ -5,6 +5,7 @@ using UnityEngine;
 public class ExplosiveWeapon : Weapon
 {
     [SerializeField] private GameObject projectile;
+    [SerializeField] public Animator anim;
 
     private Camera camera;
 
@@ -20,7 +21,9 @@ public class ExplosiveWeapon : Weapon
         if (camera == null)
         {
             camera = Camera.main;
+
         }
+    anim.SetBool("Fire", false);
     }
 
     //Sends ray to get what direction projectile needs to shoot into the middle of the crosshair
@@ -32,6 +35,7 @@ public class ExplosiveWeapon : Weapon
         }
         base.Shoot();
         PlayShootSound();
+        anim.CrossFadeInFixedTime("Fire Cannon Weapon", 0.01f);
 
         GameObject projectileInstance = Instantiate(projectile, firePoint.position, transform.rotation);
         RaycastHit hit;

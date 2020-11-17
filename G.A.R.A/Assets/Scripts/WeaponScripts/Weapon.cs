@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] protected float timeBetweenAttacks;
     [SerializeField] private SciptableIntObj ammo;
-    [SerializeField] public Animator anim;
     [SerializeField] public AudioClip startUpSound;
 
 
@@ -51,7 +50,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void Shoot()
     {
-        anim.SetBool("Fire", true);
+        
     }
 
     bool AmmoNotEmpty()  //Metod checking if ammo is still left
@@ -79,8 +78,13 @@ public class Weapon : MonoBehaviour
     /// </summary>
     public void PlayShootSound()
     {
-        weaponAudioSource.pitch = Random.Range(1f, 1.1f);
+        weaponAudioSource.pitch = Random.Range(1f, 1.04f);
         weaponAudioSource.Play();
+    }
+
+    public void StopShootSound()
+    {
+        weaponAudioSource.Stop();
     }
     /// <summary>
     /// Plays the startupSound for this weapon
