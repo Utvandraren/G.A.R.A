@@ -16,6 +16,7 @@ class SpawnManager : MonoBehaviour
     }
     public Pacer.TempoType currentTempo;
     public List<Edge.DoorType> obstacles;
+    public int purgeDistance = 150;
     public int highIntensityEnemyCount = 10;
     public int lowIntensityEnemyCount = 0;
     int activeIntensityEnemyCount = 10;
@@ -111,7 +112,7 @@ class SpawnManager : MonoBehaviour
 
         for (int j = BoidManager.allBoids.Count - 1; j >= 0; j--)
         {
-            if (Vector3.Distance(BoidManager.allBoids[j].transform.position, playerPos) > 50)
+            if (Vector3.Distance(BoidManager.allBoids[j].transform.position, playerPos) > purgeDistance)
             {
                 Destroy(BoidManager.allBoids[j].gameObject);
             }
