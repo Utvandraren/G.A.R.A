@@ -35,7 +35,7 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private Transform tentacleSpawnPoint;
 
 
-    private BossPhases currentPhase = BossPhases.TentaclePhase;
+    private BossPhases currentPhase = BossPhases.ShieldPhase;
     private Animator animator;
     private Transform target;
     private float blendPower = 0;
