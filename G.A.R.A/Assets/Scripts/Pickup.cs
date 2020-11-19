@@ -20,7 +20,11 @@ public class Pickup : MonoBehaviour
 
     void TriggerPickupEffects()
     {
-        objToModify.value += value;
+        if(objToModify.value + value >= objToModify.startValue)
+        {
+            objToModify.value = objToModify.startValue;
+        }
+        else objToModify.value += value;
         Destroy(gameObject, deathTimer);
         //pickUpSound.Play();
     }

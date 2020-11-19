@@ -14,6 +14,14 @@ public class EnemyStats : Stats
     [SerializeField] private bool isWeakToExplosive;
     [SerializeField] private float weaknessDmgMultiplier;
 
+    private EnemyDrops drops;
+
+    protected override void Start()
+    {
+        base.Start();
+        drops = gameObject.GetComponent<EnemyDrops>();
+    }
+
     public override void TakeDamage(SciptableAttackObj attack)
     {
         switch (attack.element)
@@ -57,6 +65,7 @@ public class EnemyStats : Stats
     {
         base.Die();
         GameObject effect = GameObject.Instantiate(deathEffect, gameObject.transform.position, Quaternion.identity);
+        drops.DropAmmo(transform.position);
         Destroy(effect, 3);
         //Debug.Log("DEATH TO " + gameObject.ToString());
         Destroy(gameObject, deathTimer);
