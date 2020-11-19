@@ -137,7 +137,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.36
+    m_Value: 1.08
     min: 0
   scatter:
     m_OverrideState: 1
@@ -174,41 +174,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Global Volume Profile
+  m_Name: BossScene_Global Volume Profile
   m_EditorClassIdentifier: 
   components:
   - {fileID: -7525979455520124492}
   - {fileID: -4509053328895305409}
   - {fileID: -3852541366123991095}
-  - {fileID: 3099774065821910701}
   - {fileID: -8098609750639183797}
---- !u!114 &3099774065821910701
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
-  m_Name: FilmGrain
-  m_EditorClassIdentifier: 
-  active: 0
-  m_AdvancedMode: 0
-  type:
-    m_OverrideState: 1
-    m_Value: 0
-  intensity:
-    m_OverrideState: 1
-    m_Value: 1
-    min: 0
-    max: 1
-  response:
-    m_OverrideState: 1
-    m_Value: 0.745
-    min: 0
-    max: 1
-  texture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
