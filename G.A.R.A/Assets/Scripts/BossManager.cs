@@ -58,7 +58,6 @@ public class BossManager : Singleton<BossManager>
         tentacles = new List<GameObject>();
         bossStats = GetComponent<BossStats>();
         source = GetComponent<AudioSource>();
-
         TransitionToNextPhase();
     }
 
@@ -75,6 +74,7 @@ public class BossManager : Singleton<BossManager>
         {
             case BossPhases.ShieldPhase:
                 StartShieldPhase();
+                StartCoroutine(ContinousSpawning());
                 currentPhase++;
                 break;
 
@@ -156,13 +156,19 @@ public class BossManager : Singleton<BossManager>
     {
         trackingLaser.SetActive(false);
         StartCoroutine(FastSpawnEnemies());
-        StartCoroutine(ContinousSpawning());
-        animator.SetFloat("Blend", 1);
         source.Play();
     }
 
     IEnumerator FastSpawnEnemies()
     {
+        float blendPower = 0f;
+        for (int i = 0; i < 5; i++)
+        {
+            blendPower += 0.2f;
+            animator.SetFloat("Blend", blendPower);
+            yield return new WaitForSeconds(0.05f);
+        }
+
         for (int i = 0; i < enemyAmountToSpawn; i++)
         {
             //blendPower += 0.2f;
@@ -185,7 +191,7 @@ public class BossManager : Singleton<BossManager>
 
     void SpawnEnemy()
     {
-        Vector3 posToSpawn = spawnPoint.position + Random.insideUnitSphere * 20f;
+        Vector3 posToSpawn = spawnPoint.position + Random.onUnitSphere * 20f;
         enemyPool.Add(Instantiate(enemySwarmerPrefab, posToSpawn, Quaternion.identity, spawnPoint));
     }
 
@@ -203,6 +209,7 @@ public class BossManager : Singleton<BossManager>
     {
         source.Stop();
         trackingLaser.SetActive(true);
+        StartCoroutine(StartWavingPartsAnimation());
         System.Random rnd = new System.Random();
         for (int i = 0; i < tentaclesAmount; i++)
         {
@@ -210,6 +217,16 @@ public class BossManager : Singleton<BossManager>
             Vector3 tentacleRotation = new Vector3(rnd.Next(0, 10), rnd.Next(0, 10), 0f);
             instanceObj.GetComponent<UnityStandardAssets.Utility.AutoMoveAndRotate>().rotateDegreesPerSecond.value = tentacleRotation;
             tentacles.Add(instanceObj);
+        }
+    }
+
+    IEnumerator StartWavingPartsAnimation()
+    {
+        while (true)
+        {
+            animator.SetFloat("Blend", Mathf.Sin(Time.time/2) + 1.2f);
+            yield return new WaitForSeconds(0.01f);
+
         }
     }
 
