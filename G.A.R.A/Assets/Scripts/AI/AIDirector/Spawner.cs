@@ -15,4 +15,9 @@ public class Spawner : MonoBehaviour
     {
         Instantiate(gameObject, transform.position + Random.insideUnitSphere, transform.rotation);
     }
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, 10);
+        //Gizmos.DrawWireSphere(transform.position, 50);
+    }
 }

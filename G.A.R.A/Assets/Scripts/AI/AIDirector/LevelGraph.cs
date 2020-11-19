@@ -11,6 +11,15 @@ public class LevelGraph : MonoBehaviour
 
     public event EventHandler ChangedNode;
 
+    public void OnDrawGizmos()
+    {
+        foreach (EdgeDescription edge in edgeData)
+        {
+            Vector3 one = nodes[edge.Item1].spawner.transform.position;
+            Vector3 other = nodes[edge.Item2].spawner.transform.position;
+            Gizmos.DrawLine(one, other);
+        }
+    }
     public void Initialize()
     {
         edges = new List<Edge>[nodes.Length];

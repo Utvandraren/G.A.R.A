@@ -16,7 +16,7 @@ public class Node
         NO_SPAWN,
         SPAWN
     }
-    public RoomType type;
+    public RoomType type = RoomType.NORMAL;
     //public Vector3 roomCenter;
     [HideInInspector] public float percentToEnd;
     public Spawner spawner;
