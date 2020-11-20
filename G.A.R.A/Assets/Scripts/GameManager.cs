@@ -123,6 +123,7 @@ public class GameManager : Singleton<GameManager>
     public void RestartLevel()
     {
         nextLevel = SceneManager.GetActiveScene().name;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().ResetStats();
         LoadScene(loadingScene);
     }
 

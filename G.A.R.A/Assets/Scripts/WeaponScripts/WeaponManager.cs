@@ -6,7 +6,7 @@ public class WeaponManager : MonoBehaviour
 {
     [SerializeField] GameObject laserWeapon;
     [SerializeField] GameObject explosiveWeapon;
-    [SerializeField] GameObject taserWeapon;
+    [SerializeField] GameObject teslaWeapon;
 
     Weapon currentWeapon;
 
@@ -27,7 +27,7 @@ public class WeaponManager : MonoBehaviour
         oldMouseDelta = 0;
         currentWeapon = laserWeapon.GetComponent<Weapon>();
         explosiveWeapon.SetActive(false);
-        taserWeapon.SetActive(false);
+        teslaWeapon.SetActive(false);
     }
 
     // Update is called once per frame
@@ -70,7 +70,7 @@ public class WeaponManager : MonoBehaviour
             case Weapons.Laser:
                 laserWeapon.SetActive(true);
                 explosiveWeapon.SetActive(false);
-                taserWeapon.SetActive(false);
+                teslaWeapon.SetActive(false);
                 currentWeapon = laserWeapon.GetComponent<Weapon>();
                 currentWeapon.PlayStartUpSound();
                 break;
@@ -78,21 +78,29 @@ public class WeaponManager : MonoBehaviour
             case Weapons.Explosive:
                 explosiveWeapon.SetActive(true);
                 laserWeapon.SetActive(false);
-                taserWeapon.SetActive(false);
+                teslaWeapon.SetActive(false);
                 currentWeapon = explosiveWeapon.GetComponent<Weapon>();
                 currentWeapon.PlayStartUpSound();
                 break;
 
             case Weapons.Taser:
-                taserWeapon.SetActive(true);
+                teslaWeapon.SetActive(true);
                 explosiveWeapon.SetActive(false);
                 laserWeapon.SetActive(false);
-                currentWeapon = taserWeapon.GetComponent<Weapon>();
+                currentWeapon = teslaWeapon.GetComponent<Weapon>();
                 currentWeapon.PlayStartUpSound();
                 break;
             default:
                 //
                 break;
         }
+    }
+
+    public void ResetAllAmmo()
+    {
+        laserWeapon.GetComponent<Weapon>().ResetAmmo();
+        explosiveWeapon.GetComponent<Weapon>().ResetAmmo();
+        teslaWeapon.GetComponent<Weapon>().ResetAmmo();
+
     }
 }

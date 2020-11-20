@@ -106,4 +106,8 @@ public class Weapon : MonoBehaviour
         weaponAudioSource.PlayOneShot(startUpSound);
     }
 
+    public void ResetAmmo()
+    {
+        ammo.ResetValue();
+    }
 }

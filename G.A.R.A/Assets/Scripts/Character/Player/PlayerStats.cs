@@ -104,4 +104,11 @@ public class PlayerStats : Stats
         Debug.Log("Player died");
         GameManager.Instance.GameOver();
     }
+
+    public void ResetStats()
+    {
+        shield = maxShield;
+        health = startingHealth;
+        GetComponent<WeaponManager>().ResetAllAmmo();
+    }
 }
