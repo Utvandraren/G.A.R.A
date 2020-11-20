@@ -17,6 +17,8 @@ public class DestroyInteraction : MonoBehaviour
     private bool inCooldown;
     public bool destroyable;
 
+    [SerializeField] private GameObject destructionEffect;
+
     public void Start()
     {
         destroy = false;
@@ -40,6 +42,9 @@ public class DestroyInteraction : MonoBehaviour
 
     private void NormalDestroy()
     {
+        Collider col = GetComponent<Collider>();
+        Vector3 tempPos = col.bounds.center;
+        Instantiate(destructionEffect, tempPos, Quaternion.identity);
         Destroy(gameObject);
     }
 

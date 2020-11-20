@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6275980567223361759}
   - component: {fileID: 829105424057548698}
   - component: {fileID: 3387418532278061876}
+  - component: {fileID: -6191219770574605506}
   m_Layer: 0
   m_Name: ShieldedEnemy
   m_TagString: Enemy
@@ -243,6 +244,25 @@ MonoBehaviour:
   weaknessDmgMultiplier: 2
   shieldHealth: 200
   shield: {fileID: 7348201365385495412}
+--- !u!114 &-6191219770574605506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275980567223361757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0640c15fa9c5be94c886c38f51396ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserAmmoPickup: {fileID: 1073293111457348624, guid: a9ada116d1fcc1f4dab93d6bca2ac9d8,
+    type: 3}
+  teslaAmmoPickup: {fileID: 8870971172599289961, guid: 69359fe55e256444ca23f41ffaad96ba,
+    type: 3}
+  explosiveAmmoPickup: {fileID: 3150594960979532313, guid: c8efeee333986d845bbd63265886b493,
+    type: 3}
+  dropAllowed: 0
 --- !u!1 &7348201365385495412
 GameObject:
   m_ObjectHideFlags: 0
