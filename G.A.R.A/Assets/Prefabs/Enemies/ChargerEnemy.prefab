@@ -189,8 +189,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   detectionRange: 80
   stats: {fileID: 5338604928791571533}
-  weaponMaxRange: 2
-  weaponMinRange: 0.5
+  weaponMaxRange: 4
+  weaponMinRange: 1
 --- !u!82 &4230501522975337930
 AudioSource:
   m_ObjectHideFlags: 0
@@ -452,16 +452,47 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4432575310953063624}
     m_Modifications:
+    - target: {fileID: 6031448839773314674, guid: a63764ed1734a734b882ffa6cb98864d,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.37130636
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031448839773314674, guid: a63764ed1734a734b882ffa6cb98864d,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.3143469
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031448839773314684, guid: a63764ed1734a734b882ffa6cb98864d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.732
+      objectReference: {fileID: 0}
     - target: {fileID: 6031448839773314685, guid: a63764ed1734a734b882ffa6cb98864d,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031448841098560934, guid: a63764ed1734a734b882ffa6cb98864d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.579
       objectReference: {fileID: 0}
     - target: {fileID: 6031448841338245508, guid: a63764ed1734a734b882ffa6cb98864d,
         type: 3}
       propertyPath: m_Name
       value: MeeleWeapon
       objectReference: {fileID: 0}
+    - target: {fileID: 6031448841338245530, guid: a63764ed1734a734b882ffa6cb98864d,
+        type: 3}
+      propertyPath: startUpSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031448841338245530, guid: a63764ed1734a734b882ffa6cb98864d,
+        type: 3}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 11400000, guid: 2c7365c1aa195f9449f3c91d23899128,
+        type: 2}
     - target: {fileID: 6031448841338245531, guid: a63764ed1734a734b882ffa6cb98864d,
         type: 3}
       propertyPath: m_LocalPosition.x

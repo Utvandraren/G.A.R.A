@@ -12,6 +12,8 @@ public class MeeleWeapon : Weapon
     public override void Shoot()
     {
         base.Shoot();
+        Debug.Log("MeleeAttackShoot");
+
         StartCoroutine(DealContinuousDamage());       
     }
 

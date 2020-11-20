@@ -47,7 +47,7 @@ public class ExplosiveProjectile : MonoBehaviour
                 //Debug.Log("Damage: " + attack.damage.ToString(), attackObj.gameObject);
                 //attackObj.TakeDamage(attack);
                 //attack.damage = oldDamage;
-
+                
                 attackObj.TakeDamage(attack);
             }
         }
@@ -55,11 +55,16 @@ public class ExplosiveProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)  //Damage if possible the obj the projectile collided with and then explode 
     {
+        if(other.CompareTag("Player"))
+        {
+            return;
+        }
         if (other.TryGetComponent<Stats>(out Stats attackObj))
         {
+            
             attackObj.TakeDamage(directHitAttack);
         }
-
+        
         Explode();
         gameObject.SetActive(false);
         Destroy(gameObject, 3f);

@@ -84,7 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 2
   radius: 0.22
-  maxSpeed: 5
+  maxSpeed: 8
   turningRate: 0.3
   detectionView: 0.4
   seperationWeight: 1
@@ -108,9 +108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 0}
-  detectionRange: 50
+  detectionRange: 80
   stats: {fileID: 5338604928791571533}
-  weaponMaxRange: 5
+  weaponMaxRange: 6
   weaponMinRange: 1.5
 --- !u!114 &7125789260421820239
 MonoBehaviour:
@@ -259,6 +259,7 @@ MonoBehaviour:
     type: 3}
   explosiveAmmoPickup: {fileID: 3150594960979532313, guid: c8efeee333986d845bbd63265886b493,
     type: 3}
+  dropAllowed: 0
 --- !u!1001 &2330128262617068457
 PrefabInstance:
   m_ObjectHideFlags: 0

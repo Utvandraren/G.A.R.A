@@ -19,7 +19,10 @@ public class Weapon : MonoBehaviour
     public virtual void Start()
     {
         currentTime = timeBetweenAttacks;
-        ammo.ResetValue();
+        if(ammo != null)
+        {
+            ammo.ResetValue();
+        }
         rnd = new System.Random();
         weaponAudioSource = GetComponent<AudioSource>();
     }
@@ -40,7 +43,12 @@ public class Weapon : MonoBehaviour
         if (PauseMenu.GameIsPaused)
             return;
 
-        if (currentTime <= 0f && AmmoNotEmpty())
+        if(ammo == null)
+        {
+            Shoot();
+            currentTime = timeBetweenAttacks;
+        }
+        else if (currentTime <= 0f && AmmoNotEmpty())
         {
             Shoot();
             currentTime = timeBetweenAttacks;
@@ -91,6 +99,10 @@ public class Weapon : MonoBehaviour
     /// </summary>
     public void PlayStartUpSound()
     {
+        if(startUpSound == null)
+        {
+            return;
+        }
         weaponAudioSource.PlayOneShot(startUpSound);
     }
 

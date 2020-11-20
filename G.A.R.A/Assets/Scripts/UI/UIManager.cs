@@ -6,6 +6,10 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject loseUI;
 
+    void Start()
+    {
+        Cursor.visible = false;
+    }
     public void SetLoseUI()
     {
         loseUI.gameObject.SetActive(true);

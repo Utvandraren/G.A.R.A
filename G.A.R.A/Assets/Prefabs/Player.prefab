@@ -245,12 +245,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5860164df1f06c446ab2deb370e0d6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardthrustForce: 450
-  additionalBoostForce: 250
+  standardthrustForce: 8000
+  additionalBoostForce: 1000
   maxRollRate: 1
   rollLerpTime: 0.1
   stopLerpTime: 0.1
-  maxNormalSpeed: 20
+  maxNormalSpeed: 30
   maxSprintSpeed: 50
   stopSmoothFactor: 0.2
   rollSmoothFactor: 0.99
@@ -424,14 +424,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d8a3c6047d5e42b7993e530a73e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  startingHealth: 1000
-  shield: 1000
+  health: 300
+  startingHealth: 300
+  shield: 100
   sprint: 1000
-  maxShield: 1000
+  maxShield: 100
   maxSprint: 1000
   shieldRechargeDelay: 3
-  shieldRechargeRate: 100
+  shieldRechargeRate: 10
   sprintRechargeDelay: 1
   sprintRechargeRate: 125
   sprintUsageRate: 150

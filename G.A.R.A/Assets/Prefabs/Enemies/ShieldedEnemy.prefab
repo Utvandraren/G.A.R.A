@@ -85,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 2
   radius: 0.45
-  maxSpeed: 7
+  maxSpeed: 4
   turningRate: 0.3
   detectionView: 0.2
   seperationWeight: 1
@@ -109,9 +109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 0}
-  detectionRange: 100
+  detectionRange: 130
   stats: {fileID: 3387418532278061876}
-  weaponMaxRange: 7
+  weaponMaxRange: 10
   weaponMinRange: 3
 --- !u!114 &6275980567223361759
 MonoBehaviour:
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  startingHealth: 100
+  startingHealth: 10
   deathTimer: 0
   deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
     type: 3}
