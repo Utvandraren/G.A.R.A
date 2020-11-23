@@ -8,6 +8,9 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenuObject;
 
     [SerializeField] private Options options;
+
+    private bool isClosing;
+
     // Update is called once per frame
     void Update()
     {
@@ -15,7 +18,12 @@ public class PauseMenu : MonoBehaviour
         {
             if(GameIsPaused)
             {
-                Resume();
+                if(options.isOpen)
+                {
+                    CloseOptions();
+                    isClosing = true;
+                }
+                else Resume();
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
@@ -25,6 +33,11 @@ public class PauseMenu : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
+        }
+
+        if(!options.isOpen && isClosing)
+        {
+            Resume();
         }
     }
 
@@ -39,6 +52,11 @@ public class PauseMenu : MonoBehaviour
         options.OpenOptions();
     }
 
+    private void CloseOptions()
+    {
+        options.CloseOptions();
+    }
+
     public void Quit()
     {
         Debug.Log("Why are you quitting!?");
@@ -51,6 +69,7 @@ public class PauseMenu : MonoBehaviour
         //Insert animation later?
         Time.timeScale = 1f;
         GameIsPaused = false;
+        isClosing = false;
     }
 
     private void Pause()

@@ -294,7 +294,6 @@ MonoBehaviour:
   attack: {fileID: 11400000, guid: 2c7365c1aa195f9449f3c91d23899128, type: 2}
   timeBetweenAttacks: 0.5
   ammo: {fileID: 11400000, guid: 09b7a550a075bdb4d8306072664b3afb, type: 2}
-  anim: {fileID: 6255813046894927719}
   startUpSound: {fileID: 8300000, guid: b141020e6b36f704f957e4f8e4a82e2f, type: 3}
   laserEffect: {fileID: 86076472841091122}
   laserHit: {fileID: 8710594568946369608, guid: ccd6bc785a84c4345b1bee2a51863e1f,
@@ -302,6 +301,7 @@ MonoBehaviour:
   maxRange: 100
   laserThickness: 0.15
   laserDuration: 5
+  anim: {fileID: 6255813046894927719}
 --- !u!82 &3109822106332318040
 AudioSource:
   m_ObjectHideFlags: 0
@@ -536,7 +536,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 7bdf6869719c39b4e9acddf2b570d966, type: 3}
+  - {fileID: 2100000, guid: cb03eb13577ad3d478ecca6fecbfe7e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

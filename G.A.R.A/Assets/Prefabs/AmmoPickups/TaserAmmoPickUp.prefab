@@ -306,7 +306,12 @@ MonoBehaviour:
   objToModify: {fileID: 11400000, guid: 4470a6f101c12204e86d3c72724a9fd4, type: 2}
   value: 100
   deathTimer: 0
-  pickUpSound: {fileID: 0}
+  pickUpSound: {fileID: 8870971172599289957}
+  pickUpDistance: 8
+  pickUpSpeed: 7
+  childList:
+  - {fileID: 8870971171607346824}
+  - {fileID: 1094034570047476572}
 --- !u!135 &8870971172599289962
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -329,11 +334,12 @@ AudioSource:
   m_GameObject: {fileID: 8870971172599289961}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: -3629562373716054715, guid: 2d483ad5726ff6f499314956a3975aea,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 793d5e919035cf44fb54baf0bc0c798d, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.75
   Loop: 0
   Mute: 0
   Spatialize: 0

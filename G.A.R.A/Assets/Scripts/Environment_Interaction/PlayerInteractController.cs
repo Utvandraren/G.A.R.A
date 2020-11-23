@@ -26,7 +26,7 @@ public class PlayerInteractController : MonoBehaviour
     /// </summary>
     private void RaycastForInteract()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetButtonDown("Use"))
         {
             RaycastHit raycastHitInteract;
             if (Physics.Raycast(camera.position, camera.forward, out raycastHitInteract))
