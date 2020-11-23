@@ -15,6 +15,8 @@ public class Options : MonoBehaviour
 
     [SerializeField] private AudioMixer audioMixer;
 
+    [HideInInspector] public bool isOpen;
+
     [Header("Volume sliders")]
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider musicSlider;
@@ -39,6 +41,16 @@ public class Options : MonoBehaviour
         SetGraphics(graphicsDropdown.value);
         SetFullscreen(fullscreenToggle.isOn);
         SetResolution();
+    }
+
+    private void SetOpened()
+    {
+        isOpen = true;
+    }
+
+    private void SetClosed()
+    {
+        isOpen = false;
     }
 
     private void SetResolution()

@@ -18,6 +18,8 @@ public class DialogueTrigger : MonoBehaviour
     private bool firstTimeTriggering;
     public string nameOfSpeaker = "";
     [SerializeField] private LogbookCounter lc;
+
+    private DialogueManager dm;
     
     public void Start()
     {
@@ -27,6 +29,8 @@ public class DialogueTrigger : MonoBehaviour
             dialogue.name = nameOfSpeaker;
         }
         firstTimeTriggering = true;
+        hasBeenInvoked = false;
+        dm = FindObjectOfType<DialogueManager>();
     }
     /// <summary>
     /// This method is called whenever the player tries to start a dialogue
@@ -39,19 +43,16 @@ public class DialogueTrigger : MonoBehaviour
             {
                 firstTimeTriggering = false;
                 GameObject obj = GameObject.Find("LogBookCounter");
-                //if(obj.TryGetComponent<LogbookCounter>(out LogbookCounter lc))
-                //{
-                    lc.FoundLogbook();
-                //}
+                lc.FoundLogbook();
             }
             hasBeenInvoked = true;
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            dm.StartDialogue(dialogue);
         }
     }
 
     public void Update()
     {
-        if (hasBeenInvoked)
+        if (!dm.animator.GetBool("IsOpen"))
         {
             coolDownTimer += Time.deltaTime;
             if(coolDownTimer > coolDown)

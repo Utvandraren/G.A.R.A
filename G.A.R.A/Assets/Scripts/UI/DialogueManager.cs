@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private Text nameText;
     [SerializeField] private Text dialogueText;
-    [SerializeField] private Animator animator;
+    public Animator animator;
     private PlayerInteractController interact;
 
     private Queue<string> sentences;
@@ -31,16 +31,16 @@ public class DialogueManager : MonoBehaviour
     {
         if (animator.GetBool("IsOpen"))
         {
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetButtonDown("Use"))
             {
                 DisplayNextSentence();
             }
         }
 
-        //if(!interact.canInteract)
-        //{
-        //    EndDialogue();
-        //}
+        if (!interact.canInteract)
+        {
+            EndDialogue();
+        }
     }
 
     /// <summary>
