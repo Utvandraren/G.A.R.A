@@ -15,7 +15,7 @@ public class Floating : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (transform.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        if (TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
             rigidbody = rb;
         }
