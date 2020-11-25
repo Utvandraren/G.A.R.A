@@ -16,6 +16,14 @@ public class DoorAnimation : MonoBehaviour
 
     public void PlayAnimation()
     {
+        if(TryGetComponent<BoxCollider>(out BoxCollider bc))
+        {
+            bc.enabled = false;
+        }
+        if(TryGetComponent<MeshCollider>(out MeshCollider mc))
+        {
+            mc.enabled = true;
+        }
         anim.CrossFade("Base Layer.door_2_open", 0, -1);
     }
 }

@@ -55,6 +55,7 @@ public class Interactable : MonoBehaviour
         {
             if (!transform.GetComponent<Outline>().enabled)
             {
+                Debug.Log("Outline");
                 transform.GetComponent<Outline>().enabled = true;
             }
             outlineCountdown = 1f;

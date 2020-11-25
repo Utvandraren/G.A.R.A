@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5299906927239866620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terminal_1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 5622660813790564115}
   - component: {fileID: 5622660813790564114}
   - component: {fileID: 5622660813790564109}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terminal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 9211532526922315287, guid: 8f02c1b0b8f2ffa4bbd15706f7c5f729, type: 3}
-  - {fileID: 1899272793147315829, guid: 8f02c1b0b8f2ffa4bbd15706f7c5f729, type: 3}
+  - {fileID: 2100000, guid: fa35597b4ce958c49828db792435a9b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 1, g: 0.6988383, b: 0, a: 1}
-  outlineWidth: 6
+  outlineWidth: 8
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

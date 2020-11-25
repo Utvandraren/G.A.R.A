@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 6450724323206344332}
   - component: {fileID: 6450724323206344331}
   - component: {fileID: 6450724323206344330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Logbooks_1_1
-  m_TagString: Untagged
+  m_TagString: Logbook
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6450789076734601589, guid: 458619f95ee784542bee05c25ae02dca, type: 3}
+  - {fileID: 2100000, guid: fa35597b4ce958c49828db792435a9b8, type: 2}
   - {fileID: 2100000, guid: 10de6384af0c3b54e8166f9c3f936e88, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 1, g: 0.6666245, b: 0, a: 1}
-  outlineWidth: 6
+  outlineWidth: 8
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
