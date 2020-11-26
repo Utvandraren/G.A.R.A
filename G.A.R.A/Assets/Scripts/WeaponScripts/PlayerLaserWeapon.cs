@@ -46,11 +46,12 @@ public class PlayerLaserWeapon : Weapon
         RaycastHit hit;
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
         laserEffect.SetActive(true);
-        if (Physics.SphereCast(rayOrigin, laserThickness, camera.transform.forward, out hit, maxRange))
+        if (Physics.SphereCast(rayOrigin, laserThickness, camera.transform.forward, out hit, maxRange ))
         {
+
             DrawVisuals(hit.point);
 
-            if (hit.transform.TryGetComponent<Interactable>(out Interactable interObj))
+            if (hit.transform.TryGetComponent<Interactable>(out Interactable interObj) && !hit.transform.CompareTag("Player"))
             {
                 interObj.Interact(attack);
 

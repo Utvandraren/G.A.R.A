@@ -6,11 +6,12 @@ public class MeeleDamageBox : MonoBehaviour
 {
     public SciptableAttackObj attack;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.transform.TryGetComponent<Stats>(out Stats attackObj))
         {
-            attackObj.TakeDamage(attack);
+            if (other.CompareTag("Player"))
+                attackObj.TakeContinuousDamage(attack);
         }
     }   
 }

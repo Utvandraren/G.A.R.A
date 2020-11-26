@@ -36,7 +36,7 @@ public class PlayerReader : MonoBehaviour
         
     }
 
-    public int GetPlayerHP()
+    public float GetPlayerHP()
     {
         return playerStats.health;
     }

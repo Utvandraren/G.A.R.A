@@ -55,7 +55,7 @@ public class ExplosiveProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)  //Damage if possible the obj the projectile collided with and then explode 
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") || other.isTrigger)
         {
             return;
         }

@@ -6,7 +6,7 @@
         bool failed = false;
         bool HandleStub()
         {
-            behaviorTree.boidSystem.TurnTo(behaviorTree.BlackBoard.target);
+            behaviorTree.boidSystem.TurnGradual(behaviorTree.BlackBoard.target);
             return true;
         }
 

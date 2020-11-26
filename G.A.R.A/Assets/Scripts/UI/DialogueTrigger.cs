@@ -31,6 +31,7 @@ public class DialogueTrigger : MonoBehaviour
         firstTimeTriggering = true;
         hasBeenInvoked = false;
         dm = FindObjectOfType<DialogueManager>();
+        lc = GameObject.FindGameObjectWithTag("UIManager").GetComponent<LogbookCounter>();
     }
     /// <summary>
     /// This method is called whenever the player tries to start a dialogue
