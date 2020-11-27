@@ -102,6 +102,7 @@ public class PlayerStats : Stats
 
     public override void TakeContinuousDamage(SciptableAttackObj attack)
     {
+        GUIAnim.CrossFadeInFixedTime("Screen Damage Flash", 0.01f);
         shieldTimer = 0;
         if (shield == 0)
             base.TakeContinuousDamage(attack);
