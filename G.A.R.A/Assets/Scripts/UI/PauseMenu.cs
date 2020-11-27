@@ -11,8 +11,13 @@ public class PauseMenu : MonoBehaviour
 
     private bool isClosing;
 
+    private void Start()
+    {
+        GameIsPaused = false;
+    }
+
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetButtonDown("Pause game"))
         {

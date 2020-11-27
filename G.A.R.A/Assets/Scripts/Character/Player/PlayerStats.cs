@@ -92,6 +92,19 @@ public class PlayerStats : Stats
         }
         tookDamage?.Invoke(this, new TakeDamageEventArgs(attack.damage));
     }
+
+    public override void TakeContinuousDamage(SciptableAttackObj attack)
+    {
+        shieldTimer = 0;
+        if (shield == 0)
+            base.TakeContinuousDamage(attack);
+        else
+        {
+            shield -= (attack.damage * Time.deltaTime);
+            shield = Mathf.Max(shield, 0);
+        }
+        tookDamage?.Invoke(this, new TakeDamageEventArgs(attack.damage));
+    }
     public void RestoreHealth(int amount)
     {
         //TODO: not pick up hp items if at full, need item implementation to do so

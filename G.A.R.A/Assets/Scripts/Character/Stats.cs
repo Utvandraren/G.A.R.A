@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Stats : MonoBehaviour
 {
-    public int health;
+    public float health;
     [SerializeField] public int startingHealth;
 
     // Start is called before the first frame update
@@ -22,6 +22,11 @@ public class Stats : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public virtual void TakeContinuousDamage(SciptableAttackObj attack)
+    {
+        health -= (attack.damage * Time.deltaTime);
     }
 
     public virtual void Die()  //virtual function for  whatever happens to the gameobject when it dies

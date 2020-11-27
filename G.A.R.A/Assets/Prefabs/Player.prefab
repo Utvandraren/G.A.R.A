@@ -249,8 +249,8 @@ GameObject:
   - component: {fileID: 2381535370189980976}
   - component: {fileID: 2381535370189980977}
   - component: {fileID: 2381535370189980978}
-  - component: {fileID: 2381535370189980979}
   - component: {fileID: 2381535370189980980}
+  - component: {fileID: 6878467803096524961}
   - component: {fileID: 2381535370189980981}
   - component: {fileID: 7976440762145021697}
   - component: {fileID: 2848405648556966623}
@@ -327,20 +327,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &2381535370189980979
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2381535370189980982}
-  m_Material: {fileID: 13400000, guid: adf651f676426ce42a27d2df511b1266, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2381535370189980980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,18 +339,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5860164df1f06c446ab2deb370e0d6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardthrustForce: 8000
+  standardthrustForce: 7000
   additionalBoostForce: 1000
   maxRollRate: 1
   rollLerpTime: 0.1
   stopLerpTime: 0.1
-  maxNormalSpeed: 30
+  maxNormalSpeed: 20
   maxSprintSpeed: 50
   stopSmoothFactor: 0.2
   rollSmoothFactor: 0.99
   stopDragCoef: 0
   invertY: 0
   mouseSensitivityMultiplier: 1
+--- !u!135 &6878467803096524961
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2381535370189980982}
+  m_Material: {fileID: 13400000, guid: adf651f676426ce42a27d2df511b1266, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2381535370189980981
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -379,7 +378,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!114 &7976440762145021697
 MonoBehaviour:

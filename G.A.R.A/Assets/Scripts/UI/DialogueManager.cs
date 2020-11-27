@@ -37,7 +37,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if (!interact.canInteract)
+        if (!interact.canInteract && animator.GetBool("IsOpen"))
         {
             EndDialogue();
         }
@@ -49,6 +49,8 @@ public class DialogueManager : MonoBehaviour
     /// <param name="dialogue">Dialogue variable from the object that contains the dialogue text</param>
     public void StartDialogue(Dialogue dialogue)
     {
+        Time.timeScale = 0f;
+        PauseMenu.GameIsPaused = true;
         animator.SetBool("IsOpen", true);
 
         nameText.text = dialogue.name;
@@ -100,6 +102,8 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     private void EndDialogue()
     {
+        Time.timeScale = 1f;
+        PauseMenu.GameIsPaused = false;
         animator.SetBool("IsOpen", false);
     }
 }

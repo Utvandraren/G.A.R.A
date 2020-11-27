@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 
+/// <summary>
+/// This weapon is meant to be used on enemy AI entities only
+/// </summary>
 public class LaserWeapon : Weapon
 {
     [Header("Visual effects")]
@@ -15,12 +18,6 @@ public class LaserWeapon : Weapon
     [SerializeField] private float laserDuration = 0.5f;
     [SerializeField] private float inaccuracyFactor;
     private Vector3 shootDirection;
-
-
-    public void FixedUpdate()
-    {
-       
-    }
 
     public override void Shoot()  //Starts visual effects and draw ray to check if colldiding with any valiable target
     {

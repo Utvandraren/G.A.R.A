@@ -86,8 +86,11 @@ public class Weapon : MonoBehaviour
     /// </summary>
     public void PlayShootSound()
     {
-        weaponAudioSource.pitch = Random.Range(.9f, 1.1f);
+        float tempPitch = weaponAudioSource.pitch;
+        weaponAudioSource.pitch = Random.Range(weaponAudioSource.pitch - .1f, weaponAudioSource.pitch + .1f);
+        //weaponAudioSource.PlayDelayed(Random.Range(.05f, .1f));
         weaponAudioSource.Play();
+        weaponAudioSource.pitch = tempPitch;
     }
 
     public void StopShootSound()

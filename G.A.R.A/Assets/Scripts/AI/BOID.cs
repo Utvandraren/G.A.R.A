@@ -17,6 +17,7 @@ public class BOID : MonoBehaviour
     [SerializeField] float maxSpeed = 5f;
     [SerializeField] [Range(0, 1)] float turningRate = 0.1f;
     [SerializeField] [Range(0, 1)] float detectionView = 0.30f;
+    [SerializeField] [Range(0, 360)] float aimTurnRate;
     float detectDotCompare;
 
     [Header("Weights")]
@@ -73,6 +74,19 @@ public class BOID : MonoBehaviour
         Transform tempTrans = transform;
         tempTrans.LookAt(target);
         rigidbody.MoveRotation(tempTrans.rotation);
+    }
+
+    /// <summary>
+    /// Might work currently(?)
+    /// </summary>
+    /// <param name="target"></param>
+    internal void TurnGradual(Vector3 target)
+    {
+        Transform tempTransform = transform;
+        Vector3 targetDirection = target - transform.position;
+        targetDirection.Normalize();
+        Quaternion temp = Quaternion.LookRotation(targetDirection);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, temp, aimTurnRate * Time.deltaTime);
     }
 
     private void OnDrawGizmosSelected()

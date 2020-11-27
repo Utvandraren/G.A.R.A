@@ -20,8 +20,8 @@ public class MeeleWeapon : Weapon
     private IEnumerator DealContinuousDamage()
     {
         attackBox.SetActive(true);
-        yield return new WaitForSeconds(attackDuration);
         DrawVisuals(attackBox.transform.position);
+        yield return new WaitForSeconds(attackDuration);
         attackBox.SetActive(false);
     }
 
