@@ -48,13 +48,21 @@ public class Director : MonoBehaviour
     {
         spawnManager.started = true;
         pacer.StartedLevel();
-        if (shortestPath.nodes.Pop() != graph.nodes[graph.playerNode])
+        if (shortestPath.nodes.Count != 0)
         {
-            shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
+
+            if (shortestPath.nodes.Pop() != graph.nodes[graph.playerNode])
+            {
+                shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
+            }
+            else
+            {
+                shortestPath.edges.Pop();
+            }
         }
         else
         {
-            shortestPath.edges.Pop();
+            shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
         }
         CheckAmmoRequirements();
 
