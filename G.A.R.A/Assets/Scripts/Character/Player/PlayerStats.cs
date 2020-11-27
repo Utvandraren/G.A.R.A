@@ -16,6 +16,8 @@ public class PlayerStats : Stats
     [SerializeField] private float sprintRechargeRate;
     [SerializeField] private float sprintUsageRate;
 
+    [SerializeField] private Animator GUIAnim;
+
     private float shieldTimer;
     private float sprintTimer;
 
@@ -45,6 +47,10 @@ public class PlayerStats : Stats
         else
             shieldTimer += Time.deltaTime;
 
+        if(shield == 0)
+        {
+            GUIAnim.Play("ShieldFlashing");
+        }
 
         if(player.isSprinting)
         {
@@ -82,6 +88,7 @@ public class PlayerStats : Stats
 
     public override void TakeDamage(SciptableAttackObj attack)
     {
+        GUIAnim.CrossFadeInFixedTime("Screen Damage Flash", 0.01f);
         shieldTimer = 0;
         if(shield == 0)
             base.TakeDamage(attack);
