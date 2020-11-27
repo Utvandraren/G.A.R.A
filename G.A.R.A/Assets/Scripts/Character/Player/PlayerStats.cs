@@ -47,6 +47,10 @@ public class PlayerStats : Stats
         else
             shieldTimer += Time.deltaTime;
 
+        if(shield == 0)
+        {
+            GUIAnim.Play("ShieldFlashing");
+        }
 
         if(player.isSprinting)
         {

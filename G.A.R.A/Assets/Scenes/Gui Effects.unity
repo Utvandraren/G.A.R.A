@@ -4929,7 +4929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &504627198
 Transform:
   m_ObjectHideFlags: 0
@@ -21805,6 +21805,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8698410134833995724, guid: 612979ffe91450041a0715e8b8a5c436,
+        type: 3}
+      propertyPath: m_TagString
+      value: GUI
+      objectReference: {fileID: 0}
     - target: {fileID: 8698410134833995727, guid: 612979ffe91450041a0715e8b8a5c436,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22508,6 +22513,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1392965525}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2047778748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8698410134833995724, guid: 612979ffe91450041a0715e8b8a5c436,
+    type: 3}
+  m_PrefabInstance: {fileID: 1986215271}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2047778749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047778748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c799ec509ab37f24cb45b7cc92bcef92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2054869732
 PrefabInstance:
   m_ObjectHideFlags: 0
