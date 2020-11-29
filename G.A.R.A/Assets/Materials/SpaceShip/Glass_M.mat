@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Glass_M
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_ShaderKeywords: _EMISSION _SPECULAR_SETUP
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -59,7 +59,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Metallic: 0
+    - _Metallic: 1
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -68,13 +68,13 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _WorkflowMode: 1
+    - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.058372647, b: 0.20754719, a: 1}
+    - _BaseColor: {r: 0.57271266, g: 0.6176343, b: 0.735849, a: 1}
     - _Color: {r: 0.024769517, g: 0.038770545, b: 0.07766638, a: 1}
-    - _EmissionColor: {r: 0.0016057716, g: 0, b: 0.0754717, a: 1}
-    - _SpecColor: {r: 0.12055002, g: 0.26009673, b: 0.4056604, a: 1}
+    - _EmissionColor: {r: 2.3126993, g: 2.7331903, b: 4.015687, a: 1}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1745202960766184162
 MonoBehaviour:
   m_ObjectHideFlags: 11
