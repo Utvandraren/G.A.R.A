@@ -13,7 +13,7 @@ public class ChargerBT : BehaviorTree
 
     protected override void MakeTree()
     {
-        Task[] fire = { new CheckWillToFight(), new TargetPlayer(), new CheckInMinWeaponRange(), new CheckLineOfSight(), new TurnToward(), new Fire() };
+        Task[] fire = { new CheckWillToFight(), new TargetPlayer(), new CheckInMinWeaponRange(), new CheckLineOfSight(), new TurnToward(), new Fire(), new Stop() };
         Task[] chargeArr = { new CheckWillToFight(), new TargetPlayer(), new CheckInMaxWeaponRange(), new MoveTowards() };
         Task[] getInRage = { new CheckWillToFight(), new TargetPlayer(), new CheckInDetectionRange(), new MoveTowards() };
         Task fireSeq = new Sequence(fire);
