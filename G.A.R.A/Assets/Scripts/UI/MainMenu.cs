@@ -8,6 +8,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Animator optionsAnimator;
     [SerializeField] private string preferredTestScene;
 
+    private void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void Play()
     {
         GameManager.Instance.GoToNextLevel(preferredTestScene);

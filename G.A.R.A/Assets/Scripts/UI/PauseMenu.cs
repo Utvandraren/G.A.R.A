@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenuObject;
 
     [SerializeField] private Options options;
+    [SerializeField] private GameObject controlsImage;
 
     private bool isClosing;
 
@@ -60,6 +61,16 @@ public class PauseMenu : MonoBehaviour
     private void CloseOptions()
     {
         options.CloseOptions();
+    }
+
+    public void ShowControls()
+    {
+        controlsImage.SetActive(true);
+    }
+
+    public void CloseControls()
+    {
+        controlsImage.SetActive(false);
     }
 
     public void Quit()
