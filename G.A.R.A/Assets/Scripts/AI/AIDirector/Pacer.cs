@@ -9,6 +9,8 @@ public class Pacer : MonoBehaviour
         FADE,
         RELAX,
     }
+
+    public int panicIncreaseModifier = 2;
     public TempoType currentTempo;
     PlayerReader playerReader;
     float panicScore;
@@ -106,7 +108,7 @@ public class Pacer : MonoBehaviour
 
     public void IncreasePanic(float damagePercent)
     {
-        float panicIncrease = damagePercent * maxPanicScore;
-        panicScore = Mathf.Min(panicScore + panicIncrease * 2, maxPanicScore);
+        float panicIncrease = damagePercent;
+        panicScore = Mathf.Min(panicScore + panicIncrease * panicIncreaseModifier, maxPanicScore);
     }
 }
