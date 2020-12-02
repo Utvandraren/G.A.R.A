@@ -11,6 +11,7 @@ public class Pickup : MonoBehaviour
     [SerializeField] private AudioSource pickUpSound;
     [SerializeField] private float pickUpDistance;
     [SerializeField] private float pickUpSpeed;
+    [SerializeField] private float lifetime;
     private GameObject player;
 
 
@@ -23,6 +24,7 @@ public class Pickup : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         pickUpSound = GetComponent<AudioSource>();
         deathTimer = pickUpSound.clip.length;
+        Destroy(gameObject, lifetime); //Self-destruct after the lifetime has passed
     }
 
     private void OnTriggerEnter(Collider other)
