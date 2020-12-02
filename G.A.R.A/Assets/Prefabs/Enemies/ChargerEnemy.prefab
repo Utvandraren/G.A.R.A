@@ -424,7 +424,7 @@ PrefabInstance:
     - target: {fileID: 6031448839773314685, guid: a63764ed1734a734b882ffa6cb98864d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6031448841098560932, guid: a63764ed1734a734b882ffa6cb98864d,
         type: 3}
@@ -439,7 +439,7 @@ PrefabInstance:
     - target: {fileID: 6031448841098560932, guid: a63764ed1734a734b882ffa6cb98864d,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6031448841098560932, guid: a63764ed1734a734b882ffa6cb98864d,
         type: 3}
@@ -450,6 +450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.m_BurstCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031448841098560932, guid: a63764ed1734a734b882ffa6cb98864d,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6031448841098560934, guid: a63764ed1734a734b882ffa6cb98864d,
         type: 3}
@@ -470,6 +475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MeleeWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031448841338245508, guid: a63764ed1734a734b882ffa6cb98864d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6031448841338245530, guid: a63764ed1734a734b882ffa6cb98864d,
         type: 3}
