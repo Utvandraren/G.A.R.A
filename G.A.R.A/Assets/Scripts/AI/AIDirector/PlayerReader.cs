@@ -23,6 +23,8 @@ public class PlayerReader : MonoBehaviour
     private void PlayerStats_tookDamage(object player, TakeDamageEventArgs eventArgsDamage)
     {
         inCombat = true;
+        combatTimer = 0;
+                Debug.Log("in Combat");
     }
 
     private void Update()
@@ -31,7 +33,11 @@ public class PlayerReader : MonoBehaviour
         {
             combatTimer += Time.deltaTime;
             if (combatTimer > timeToNotBeInCombat)
+            {
+                combatTimer = 0;
+                Debug.Log("No longer in Combat");
                 inCombat = false;
+            }
         }
         
     }

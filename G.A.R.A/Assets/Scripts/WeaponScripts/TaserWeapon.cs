@@ -30,7 +30,7 @@ public class TaserWeapon : Weapon
     //Might want to move this to the base class at some point
     private void FixedUpdate()
     {
-        if(camera == null)
+        if (camera == null)
         {
             camera = Camera.main;
         }
@@ -87,7 +87,8 @@ public class TaserWeapon : Weapon
         List<Vector3> targets = new List<Vector3>();
         foreach (Collider transformTarget in targetsAlreadyHit)
         {
-            targets.Add(transformTarget.transform.position);
+            if (transformTarget != null)
+                targets.Add(transformTarget.transform.position);
         }
         StartCoroutine("VisualEffectCo", targets);
     }
@@ -101,7 +102,7 @@ public class TaserWeapon : Weapon
         //Draw line from fireposition to the next target
         foreach (Vector3 target in targets)
         {
-            if(target == null)
+            if (target == null)
             {
                 targets.Remove(target);
                 continue;
