@@ -205,10 +205,10 @@ public class PlayerController : MonoBehaviour
         return temp;
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 200, 60), "Speed limit: " + currentMaxSpeed.ToString());
-        GUI.Label(new Rect(10, 30, 200, 60), "Roll rate: " + currentRollRate.ToString());
-        GUI.Label(new Rect(10, 50, 200, 60), "rb.Velocity.magnitude: " + rb.velocity.magnitude.ToString());
-    }
+    //private void OnGUI()
+    //{
+    //    GUI.Label(new Rect(10, 10, 200, 60), "Speed limit: " + currentMaxSpeed.ToString());
+    //    GUI.Label(new Rect(10, 30, 200, 60), "Roll rate: " + currentRollRate.ToString());
+    //     GUI.Label(new Rect(10, 50, 200, 60), "rb.Velocity.magnitude: " + rb.velocity.magnitude.ToString());
+    //}
 }
