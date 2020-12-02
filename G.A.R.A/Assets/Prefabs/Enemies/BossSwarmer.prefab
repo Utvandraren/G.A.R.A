@@ -88,6 +88,7 @@ MonoBehaviour:
   maxSpeed: 3
   turningRate: 0.66
   detectionView: 0.4
+  aimTurnRate: 48
   seperationWeight: 0.25
   allignmentWeight: 0.5
   cohesionWeight: 2.24
@@ -227,6 +228,10 @@ MonoBehaviour:
   deathTimer: 0
   deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
     type: 3}
+  isWeakToTesla: 0
+  isWeakToLaser: 0
+  isWeakToExplosive: 0
+  weaknessDmgMultiplier: 0
 --- !u!114 &614058918146498369
 MonoBehaviour:
   m_ObjectHideFlags: 0

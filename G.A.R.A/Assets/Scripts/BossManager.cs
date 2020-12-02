@@ -33,6 +33,7 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private int tentaclesAmount = 1;
     private List<GameObject> tentacles;
     [SerializeField] private Transform tentacleSpawnPoint;
+    [SerializeField] private float distanceFromBoss;
 
 
     private BossPhases currentPhase = BossPhases.ShieldPhase;
@@ -210,11 +211,16 @@ public class BossManager : Singleton<BossManager>
         source.Stop();
         trackingLaser.SetActive(true);
         StartCoroutine(StartWavingPartsAnimation());
-        System.Random rnd = new System.Random();
+        //System.Random rnd = new System.Random();
         for (int i = 0; i < tentaclesAmount; i++)
         {
-            GameObject instanceObj = Instantiate(tentaclePrefab, tentacleSpawnPoint.position, Quaternion.identity, tentacleSpawnPoint);
-            Vector3 tentacleRotation = new Vector3(rnd.Next(0, 10), rnd.Next(0, 10), 0f);
+            Vector3 direction = Random.onUnitSphere;
+            Vector3 tentaclePosition = tentacleSpawnPoint.position + distanceFromBoss * direction;
+            //GameObject instanceObj = Instantiate(tentaclePrefab, tentacleSpawnPoint.position, Quaternion.identity, tentacleSpawnPoint);
+            GameObject instanceObj = Instantiate(tentaclePrefab, tentaclePosition, Quaternion.identity, tentacleSpawnPoint);
+            //Vector3 tentacleRotation = new Vector3(rnd.Next(0, 10), rnd.Next(0, 10), 0f);
+            instanceObj.transform.forward = direction;
+            Vector3 tentacleRotation = new Vector3(Random.Range(0,10), Random.Range(0, 10), 0f);
             instanceObj.GetComponent<UnityStandardAssets.Utility.AutoMoveAndRotate>().rotateDegreesPerSecond.value = tentacleRotation;
             tentacles.Add(instanceObj);
         }

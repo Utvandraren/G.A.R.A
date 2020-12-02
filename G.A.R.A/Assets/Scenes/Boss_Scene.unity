@@ -215,6 +215,11 @@ PrefabInstance:
       propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2381535370189980989, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: GUIAnim
+      value: 
+      objectReference: {fileID: 1537569555}
     - target: {fileID: 2527653678616037719, guid: d3f600aa61e02e848b002a457adcd0d6,
         type: 3}
       propertyPath: m_Enabled
@@ -321,6 +326,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57371952}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &87649354 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 87649354, guid: 612979ffe91450041a0715e8b8a5c436,
+    type: 3}
+  m_PrefabInstance: {fileID: 3400112636141464251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &103663483
 GameObject:
   m_ObjectHideFlags: 0
@@ -3630,18 +3641,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 536363884}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &549305027 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2928261530110150765, guid: 612979ffe91450041a0715e8b8a5c436,
-    type: 3}
-  m_PrefabInstance: {fileID: 3400112636141464251}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &549610383
 GameObject:
   m_ObjectHideFlags: 0
@@ -7818,6 +7817,16 @@ PrefabInstance:
       propertyPath: tentacleSpawnPoint
       value: 
       objectReference: {fileID: 286309366}
+    - target: {fileID: 2206360773547588373, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
+        type: 3}
+      propertyPath: distanceFromBoss
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206360773547588373, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
+        type: 3}
+      propertyPath: tentaclesAmount
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 213277e41ed9a3f4b9906a1ce93f0ca7, type: 3}
 --- !u!1001 &1177964761
@@ -7958,6 +7967,7 @@ GameObject:
   - component: {fileID: 1256216366}
   - component: {fileID: 1256216365}
   - component: {fileID: 1256216367}
+  - component: {fileID: 1256216368}
   m_Layer: 0
   m_Name: BossStartTimelineAnimation
   m_TagString: Untagged
@@ -8046,6 +8056,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: -4610637383372657379, guid: 8cdc8f95a2775cc45af8be0191eef5db, type: 2}
     value: {fileID: 103663483}
+  - key: {fileID: 6156212036438036058, guid: 8cdc8f95a2775cc45af8be0191eef5db, type: 2}
+    value: {fileID: 87649354}
   m_ExposedReferences:
     m_References: []
 --- !u!82 &1256216367
@@ -8145,6 +8157,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1256216368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256216363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177250ce92faf104ab25371d7d8f5009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1270361738
 GameObject:
   m_ObjectHideFlags: 0
@@ -9963,6 +9987,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 960957247}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1537569555 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 109048548558782044, guid: 612979ffe91450041a0715e8b8a5c436,
+    type: 3}
+  m_PrefabInstance: {fileID: 3400112636141464251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1582080372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9998,7 +10028,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e5ba7bff2f4aeb74f9f1d32f5826089d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e5ba7bff2f4aeb74f9f1d32f5826089d,
         type: 3}
@@ -10008,7 +10038,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e5ba7bff2f4aeb74f9f1d32f5826089d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e5ba7bff2f4aeb74f9f1d32f5826089d,
         type: 3}
@@ -10519,6 +10549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7493393471609194841, guid: 743fedca2aebc9f44943435398b8f452,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8403141840827214985, guid: 743fedca2aebc9f44943435398b8f452,
         type: 3}
@@ -11506,11 +11541,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2103957489}
-    - target: {fileID: 8698410134833995723, guid: 612979ffe91450041a0715e8b8a5c436,
-        type: 3}
-      propertyPath: sprintBar
-      value: 
-      objectReference: {fileID: 549305027}
     - target: {fileID: 8698410134833995724, guid: 612979ffe91450041a0715e8b8a5c436,
         type: 3}
       propertyPath: m_Name

@@ -37,10 +37,18 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if (!interact.canInteract && animator.GetBool("IsOpen"))
+        try
         {
-            EndDialogue();
+            if (!interact.canInteract && animator.GetBool("IsOpen"))
+            {
+                EndDialogue();
+            }
+
         }
+        catch (System.Exception e)
+        {
+        }
+        
     }
 
     /// <summary>

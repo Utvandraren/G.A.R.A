@@ -18,12 +18,19 @@ public class Options : MonoBehaviour
     [HideInInspector] public bool isOpen;
 
     [Header("Volume sliders")]
-    [SerializeField] Slider masterSlider;
-    [SerializeField] Slider musicSlider;
-    [SerializeField] Slider fxSlider;
-    [SerializeField] Slider ambientSlider;
+    [SerializeField] private Slider masterSlider;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider fxSlider;
+    [SerializeField] private Slider ambientSlider;
+
+    private TMP_Text text;
 
     private Resolution[] resolutions;
+
+    private void Start()
+    {
+        text = GetComponent<TMP_Text>();
+    }
 
     public void OpenOptions()
     {
@@ -57,6 +64,9 @@ public class Options : MonoBehaviour
     {
         Resolution res = resolutions[resolutionDropdown.value];
         Screen.SetResolution(res.width, res.height, fullscreenToggle.isOn, res.refreshRate);
+
+        text.gameObject.SetActive(false); //This looks stupid, but if it works, it's not stupid :)
+        text.gameObject.SetActive(true); // don't remove please
     }
 
     private void SetFullscreen(bool isFullscreen)
