@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 5166235331517407767}
   - component: {fileID: 5166235331517407764}
   - component: {fileID: 177058000459716202}
+  - component: {fileID: 2780311928089804106}
   m_Layer: 0
   m_Name: Tentacle
   m_TagString: Untagged
@@ -341,6 +342,19 @@ CapsuleCollider:
   m_Height: 170.04788
   m_Direction: 2
   m_Center: {x: 0, y: -1.2, z: 94.54}
+--- !u!114 &2780311928089804106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5166235331517407766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a68c2edb8ddaa940bd6a1c8691647ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: {fileID: 11400000, guid: 0b68263afdee8e64aa59a495b2f93b5b, type: 2}
 --- !u!1 &5166235332797668152
 GameObject:
   m_ObjectHideFlags: 0

@@ -113,5 +113,7 @@ public class DialogueManager : MonoBehaviour
         Time.timeScale = 1f;
         PauseMenu.GameIsPaused = false;
         animator.SetBool("IsOpen", false);
+
+        
     }
 }

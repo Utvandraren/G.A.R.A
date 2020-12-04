@@ -652,7 +652,17 @@ PrefabInstance:
     - target: {fileID: 3109822106332318040, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
       propertyPath: m_Volume
-      value: 0.4
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6146890791352375864, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
