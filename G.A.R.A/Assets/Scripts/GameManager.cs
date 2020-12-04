@@ -56,6 +56,8 @@ public class GameManager : Singleton<GameManager>
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLevel)); //Required for SceneManager.GetActiveScene to work properly
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         Debug.Log("Load complete");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void OnUnloadOperationComplete(AsyncOperation ao)
