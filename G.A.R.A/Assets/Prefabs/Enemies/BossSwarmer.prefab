@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5935752182321981863}
   - component: {fileID: 2504930980313819168}
   - component: {fileID: 614058918146498369}
+  - component: {fileID: 1383266669524628746}
   m_Layer: 0
   m_Name: BossSwarmer
   m_TagString: Enemy
@@ -244,6 +245,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e26d3f65c94800479d75e23dd7e41f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1383266669524628746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6149223644204277946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0640c15fa9c5be94c886c38f51396ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserAmmoPickup: {fileID: 0}
+  teslaAmmoPickup: {fileID: 0}
+  explosiveAmmoPickup: {fileID: 0}
+  dropAllowed: 0
 --- !u!1 &8833942857593195467
 GameObject:
   m_ObjectHideFlags: 0

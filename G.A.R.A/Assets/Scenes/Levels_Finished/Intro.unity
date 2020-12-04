@@ -1353,6 +1353,7 @@ GameObject:
   - component: {fileID: 1909442269}
   - component: {fileID: 1909442268}
   - component: {fileID: 1909442271}
+  - component: {fileID: 1909442272}
   m_Layer: 0
   m_Name: IntroTimeline
   m_TagString: Untagged
@@ -1546,6 +1547,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1909442272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909442267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177250ce92faf104ab25371d7d8f5009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1924386808
 PrefabInstance:
   m_ObjectHideFlags: 0

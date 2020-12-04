@@ -577,7 +577,7 @@ MonoBehaviour:
     type: 3}
   explosiveAmmoPickup: {fileID: 3150594960979532313, guid: c8efeee333986d845bbd63265886b493,
     type: 3}
-  dropAllowed: 0
+  dropAllowed: 1
 --- !u!1 &7703775882214833482
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,7 +980,17 @@ PrefabInstance:
     - target: {fileID: 3109822106332318040, guid: dba50761cd731c643aa41688e2fa696a,
         type: 3}
       propertyPath: m_Volume
-      value: 0.1
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: dba50761cd731c643aa41688e2fa696a,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: dba50761cd731c643aa41688e2fa696a,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3304894237738080200, guid: dba50761cd731c643aa41688e2fa696a,
         type: 3}

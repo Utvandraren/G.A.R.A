@@ -9,8 +9,8 @@ public class AutomaticLevelTransition : MonoBehaviour
 
     public void LoadScene()
     {
-        Debug.Log("new scene loaded!!!!");
-        GameManager.Instance.GoToNextLevel("LevelToGoTo");
+        //Debug.Log("new scene loaded!!!!");
+        GameManager.Instance.GoToNextLevel(LevelToGoTo);
     }
 
     

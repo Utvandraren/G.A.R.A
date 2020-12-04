@@ -20,7 +20,6 @@ public class EnemyDrops : MonoBehaviour
         ammoList.Add(laserAmmoPickup);
         ammoList.Add(teslaAmmoPickup);
         ammoList.Add(explosiveAmmoPickup);
-        dropAllowed = true;
     }
 
     public void SetLaserDrop()
