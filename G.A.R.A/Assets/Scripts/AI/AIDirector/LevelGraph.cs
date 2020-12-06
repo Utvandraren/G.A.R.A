@@ -61,8 +61,7 @@ public class LevelGraph : MonoBehaviour
     public int FindPlayerNode(Vector3 playerPos)
     {
         float savedNodeDistance = Vector3.Distance(nodes[playerNode].spawner.transform.position, playerPos);
-        while (true)
-        {
+        
             float closestNeighboringNodeDistance = int.MaxValue;
             int closerNode = -1;
             foreach (Edge edge in edges[playerNode])
@@ -81,9 +80,8 @@ public class LevelGraph : MonoBehaviour
                 savedNodeDistance = closestNeighboringNodeDistance;
                 ChangedNode?.Invoke(this, new EventArgs());
             }
-            else
-                break;
-        }
+                
+        
         return playerNode;
     }
     /// <summary>
@@ -150,6 +148,7 @@ public class LevelGraph : MonoBehaviour
                 int toIndex = edge.to;
                 if (!visited[toIndex])
                 {
+                    visited[toIndex] = true;
                     minSpanningTree[edge.to] = activeNode;
                     nodeQue.Enqueue(toIndex);
                 }

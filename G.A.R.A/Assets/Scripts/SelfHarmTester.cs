@@ -6,6 +6,7 @@ public class SelfHarmTester : MonoBehaviour
 {
     PlayerStats playerStats;
     SciptableAttackObj attack;
+    public SpawnManager spawnManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +21,10 @@ public class SelfHarmTester : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
             playerStats.TakeDamage(attack);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, spawnManager.purgeDistance);
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
     public enum SpawnType
