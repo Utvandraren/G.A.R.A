@@ -148,6 +148,7 @@ public class LevelGraph : MonoBehaviour
                 int toIndex = edge.to;
                 if (!visited[toIndex])
                 {
+                    visited[toIndex] = true;
                     minSpanningTree[edge.to] = activeNode;
                     nodeQue.Enqueue(toIndex);
                 }
