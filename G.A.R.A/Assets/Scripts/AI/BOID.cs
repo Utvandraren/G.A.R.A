@@ -92,6 +92,7 @@ public class BOID : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, detectionRange*2);
     }
 
     private void Detect()

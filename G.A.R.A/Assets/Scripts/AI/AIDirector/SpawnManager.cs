@@ -100,7 +100,15 @@ public class SpawnManager : MonoBehaviour
         {
             for (int i = 0; i < newActiveAreaDiff.Count * 2; i++)
             {
-                newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemyPrefabs[i % enemyPrefabs.Length]);
+                GameObject enemy = enemyPrefabs[i % enemyPrefabs.Length];
+                newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
+                if(enemy.TryGetComponent<SwarmerBT>(out SwarmerBT swarmerBT))
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
+                    }
+                }
                 if (BoidManager.allBoids.Count > activeIntensityEnemyCount)
                     break;
             }
