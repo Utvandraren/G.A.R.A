@@ -61,6 +61,19 @@ public class WeaponManager : MonoBehaviour
             currentWeapon.TryShoot();
             
         }
+
+        if(Input.GetButton("Laser"))
+        {
+            ChangeWeapon(Weapons.Laser);
+        }
+        else if (Input.GetButton("Explosive"))
+        {
+            ChangeWeapon(Weapons.Explosive);
+        }
+        else if (Input.GetButton("Electric"))
+        {
+            ChangeWeapon(Weapons.Taser);
+        }
     }
 
     void ChangeWeapon(Weapons weaponToChangeTo)   //Fucntion changing the weapons
