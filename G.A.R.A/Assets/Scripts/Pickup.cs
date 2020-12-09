@@ -7,7 +7,7 @@ public class Pickup : MonoBehaviour
 {
     [SerializeField] private SciptableIntObj objToModify;
     [SerializeField] private int value = 0;
-    [SerializeField] private float deathTimer = 1;
+    private float deathTimer = 1;
     [SerializeField] private AudioSource pickUpSound;
     [SerializeField] private float pickUpDistance;
     [SerializeField] private float pickUpSpeed;

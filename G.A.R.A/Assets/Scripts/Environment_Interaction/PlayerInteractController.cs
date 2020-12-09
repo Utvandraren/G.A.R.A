@@ -1,5 +1,7 @@
 ﻿
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 /// <summary>
 /// A class that handles interaction between the player and interactable objects.
 /// </summary>
@@ -10,10 +12,7 @@ public class PlayerInteractController : MonoBehaviour
     public float maxOutlineDistance;
 
     public bool canInteract;
-
-    public void Start()
-    {
-    }
+    [SerializeField] private TMP_Text interactText;
 
     private void Update()
     {
@@ -26,21 +25,23 @@ public class PlayerInteractController : MonoBehaviour
     /// </summary>
     private void RaycastForInteract()
     {
-        if (Input.GetButtonDown("Use"))
+        RaycastHit raycastHitInteract;
+        if (Physics.Raycast(camera.position, camera.forward, out raycastHitInteract))
         {
-            RaycastHit raycastHitInteract;
-            if (Physics.Raycast(camera.position, camera.forward, out raycastHitInteract))
-            {
-                var interactable = raycastHitInteract.transform.GetComponent<Interactable>();
+            var interactable = raycastHitInteract.transform.GetComponent<Interactable>();
 
-                if (interactable != null)
+            if (interactable != null)
+            {
+                float distance = Vector3.Distance(camera.position, interactable.transform.position);
+                if (distance <= maxInteractDistance)
                 {
-                    float distance = Vector3.Distance(camera.position, interactable.transform.position);
-                    if (distance <= maxInteractDistance)
+                    interactText.gameObject.SetActive(true);
+                    if (Input.GetButtonDown("Use"))
                     {
                         interactable.Interact();
                     }
                 }
+                else interactText.gameObject.SetActive(false);
             }
         }
     }

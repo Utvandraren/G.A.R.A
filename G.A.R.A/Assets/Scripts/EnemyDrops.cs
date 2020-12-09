@@ -45,6 +45,9 @@ public class EnemyDrops : MonoBehaviour
         }
 
         if(dropAllowed)
-            Instantiate(currentAmmoToDrop, spawnPos, Quaternion.identity);
+        {
+            GameObject newDrop = Instantiate(currentAmmoToDrop, spawnPos, Quaternion.identity);
+            PickUpManager.AddPickUp(newDrop);
+        }
     }
 }
