@@ -46,6 +46,8 @@ public class Director : MonoBehaviour
     /// <param name="e"></param>
     private void Graph_ChangedNode(object sender, System.EventArgs e)
     {
+        if (!spawnManager.started && graph.nodes[graph.playerNode].type == Node.RoomType.START)
+            return;
         spawnManager.started = true;
         pacer.StartedLevel();
         if (shortestPath.nodes.Count != 0)
