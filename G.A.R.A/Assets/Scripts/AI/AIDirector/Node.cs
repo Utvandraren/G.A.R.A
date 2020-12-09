@@ -11,10 +11,8 @@ public class Node
     {
         NORMAL,
         START,
-        TARGET,
+        STARTEXTEND,
         END,
-        NO_SPAWN,
-        SPAWN
     }
     public RoomType type = RoomType.NORMAL;
     //public Vector3 roomCenter;
