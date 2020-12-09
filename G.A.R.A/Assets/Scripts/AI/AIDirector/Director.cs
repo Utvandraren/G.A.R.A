@@ -6,14 +6,12 @@ public class Director : MonoBehaviour
 {
     private LevelGraph graph;
     private SpawnManager spawnManager;
-    PlayerReader playerReader;
-    Pacer pacer;
-    Path shortestPath;
-    List<Node> activeArea;
+    private PlayerReader playerReader;
+    private Pacer pacer;
+    private Path shortestPath;
+    private List<Node> activeArea;
 
-    List<Edge.DoorType> doorTypes = new List<Edge.DoorType>();
-
-    float nodeTime;
+    private List<Edge.DoorType> doorTypes = new List<Edge.DoorType>();
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +33,7 @@ public class Director : MonoBehaviour
     private void PlayerStats_tookDamage(object player, TakeDamageEventArgs eventArgsDamage)
     {
         int damage = eventArgsDamage.damage;
-        float damagePercent = (float)damage / playerReader.playerStats.startingHealth;
+        float damagePercent = (float)damage / playerReader.playerStats.health;
         pacer.IncreasePanic(damagePercent);
     }
 
@@ -69,13 +67,8 @@ public class Director : MonoBehaviour
         CheckAmmoRequirements();
 
         List<Node> newActiveArea = graph.FindActiveArea();
-        spawnManager.OnPlayerNodeChange(graph.nodes[graph.playerNode], activeArea, newActiveArea, playerReader.player.transform.position);
+        spawnManager.OnPlayerNodeChange(activeArea, newActiveArea, playerReader.player.transform.position);
         activeArea = newActiveArea;
-    }
-
-    private void Update()
-    {
-        nodeTime += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -85,7 +78,6 @@ public class Director : MonoBehaviour
         if (spawnManager.mobReady)
         {
             spawnManager.SpawnMob(graph.FindShortestPathToGoal(graph.playerNode));
-            spawnManager.IncreaseThreatSizes();
         }
     }
 

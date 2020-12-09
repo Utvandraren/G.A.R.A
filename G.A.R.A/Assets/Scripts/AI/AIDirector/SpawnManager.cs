@@ -7,85 +7,90 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs;
     public enum SpawnType
     {
         NORMAL,
         HALTING,
         PUSHING,
     }
-    public Pacer.TempoType currentTempo;
-    public List<Edge.DoorType> obstacles;
+    [Header ("Global Settings")]
+    public GameObject[] enemyPrefabs;
     public int purgeDistance = 150;
-    public int highIntensityEnemyCount = 10;
-    public int lowIntensityEnemyCount = 0;
-    int activeIntensityEnemyCount = 10;
-    public int mobSize = 5;
-    private float mobSpawnTimer;
-    public float timeBetweenMobs = 10f;
-    public float scalingTimer;
     public float timeBetweenScaleUp = 10f;
-    List<Spawner> spawners;
-    public bool started;
-    public bool mobReady;
+    [SerializeField] private int nrSwarmerPerSpawn = 2;
+    [SerializeField] private int stragelerGroupSize = 2;
+
+    [Header ("High Intensity Settings")]
+    public int intenseEnemyMax = 50;
+    public int intenseEnemyAmount = 10;
+    public int highScaleAmount = 2;
+    [Header ("Low Intensity Settings")]
+    public int calmEnemyMax = 10;
+    public int calmEnemyAmount = 0;
+    public int lowScaleAmount = 2;
+    [Header ("Mob Spawning settings Settings")]
+    public int mobMaxSize = 10;
+    public int mobSize = 5;
+    public int mobScaleAmount = 2;
+    public float timeBetweenMobs = 10f;
+    [SerializeField] private int nrNodesAway = 3;
+
+
+    [HideInInspector] public bool started;
+    [HideInInspector] public bool mobReady;
+    [HideInInspector] public Pacer.TempoType currentTempo;
+
+    private float scalingTimer;
+    private int activeIntensityEnemyMax = 10;
+    private float mobSpawnTimer;
+    private List<Spawner> spawners;
+
     private void Start()
     {
         GetComponentsInChildren(spawners);
     }
 
-    public void Initialize()
-    {
-
-    }
-
     public void IncreaseThreatSizes()
     {
-        
-            highIntensityEnemyCount = Mathf.Min(highIntensityEnemyCount + 2, 30);
-            lowIntensityEnemyCount = Mathf.Min(lowIntensityEnemyCount + 1, 10);
-            mobSize = Mathf.Min(mobSize + 1, 10);
+        intenseEnemyAmount = Mathf.Min(intenseEnemyAmount + highScaleAmount, intenseEnemyMax);
+        calmEnemyAmount = Mathf.Min(calmEnemyAmount + lowScaleAmount, calmEnemyMax);
+        mobSize = Mathf.Min(mobSize + mobScaleAmount, mobMaxSize);
     }
 
     private void Update()
     {
         if (!started)
             return;
+        switch (currentTempo)
+        {
+            case Pacer.TempoType.BUILDUP:
+            case Pacer.TempoType.SUSTAIN:
+                activeIntensityEnemyMax = intenseEnemyAmount;
+                break;
+            case Pacer.TempoType.FADE:
+            case Pacer.TempoType.RELAX:
+                activeIntensityEnemyMax = calmEnemyAmount;
+                break;
+            default:
+                break;
+        }
         scalingTimer += Time.deltaTime;
+        mobSpawnTimer += Time.deltaTime;
+
         if (scalingTimer > timeBetweenScaleUp)
         {
             IncreaseThreatSizes();
             scalingTimer = 0;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        switch (currentTempo)
-        {
-            case Pacer.TempoType.BUILDUP:
-            case Pacer.TempoType.SUSTAIN:
-                activeIntensityEnemyCount = highIntensityEnemyCount;
-                break;
-            case Pacer.TempoType.FADE:
-            case Pacer.TempoType.RELAX:
-                activeIntensityEnemyCount = lowIntensityEnemyCount;
-                break;
-            default:
-                break;
-        }
-
-        if (!started)
-            return;
-
-        mobSpawnTimer += Time.fixedDeltaTime;
-        if (mobSpawnTimer > timeBetweenMobs && BoidManager.allBoids.Count < highIntensityEnemyCount && (currentTempo == Pacer.TempoType.BUILDUP || currentTempo == Pacer.TempoType.SUSTAIN))
+        if (mobSpawnTimer > timeBetweenMobs && BoidManager.allBoids.Count < intenseEnemyAmount && 
+            (currentTempo == Pacer.TempoType.BUILDUP || currentTempo == Pacer.TempoType.SUSTAIN))
         {
             mobReady = true;
             mobSpawnTimer = 0;
         }
     }
 
-    public void OnPlayerNodeChange(Node playerNode, List<Node> oldActiveArea, List<Node> newActiveArea, Vector3 playerPos)
+    public void OnPlayerNodeChange(List<Node> oldActiveArea, List<Node> newActiveArea, Vector3 playerPos)
     {
         List<Node> newActiveAreaDiff = new List<Node>(newActiveArea);
         List<Node> oldActiveAreaDiff = new List<Node>(oldActiveArea);
@@ -96,20 +101,20 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnWanderers(List<Node> newActiveAreaDiff)
     {
-        if (BoidManager.allBoids.Count < activeIntensityEnemyCount)
+        if (BoidManager.allBoids.Count < activeIntensityEnemyMax)
         {
-            for (int i = 0; i < newActiveAreaDiff.Count * 2; i++)
+            for (int i = 0; i < newActiveAreaDiff.Count * stragelerGroupSize; i++)
             {
                 GameObject enemy = enemyPrefabs[i % enemyPrefabs.Length];
                 newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
-                if(enemy.TryGetComponent<SwarmerBT>(out SwarmerBT swarmerBT))
+                if (enemy.TryGetComponent<SwarmerBT>(out SwarmerBT swarmerBT))
                 {
-                    for (int j = 0; j < 2; j++)
+                    for (int j = 0; j < nrSwarmerPerSpawn; j++)
                     {
                         newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
                     }
                 }
-                if (BoidManager.allBoids.Count > activeIntensityEnemyCount)
+                if (BoidManager.allBoids.Count > activeIntensityEnemyMax)
                     break;
             }
         }
@@ -117,7 +122,6 @@ public class SpawnManager : MonoBehaviour
 
     private void PurgeEnemies(List<Node> nodesOutOfRange, Vector3 playerPos)
     {
-
         for (int j = BoidManager.allBoids.Count - 1; j >= 0; j--)
         {
             if (Vector3.Distance(BoidManager.allBoids[j].transform.position, playerPos) > purgeDistance)
@@ -125,7 +129,6 @@ public class SpawnManager : MonoBehaviour
                 Destroy(BoidManager.allBoids[j].gameObject);
             }
         }
-
     }
 
     private void RemoveCommonNodes(ref List<Node> oldActiveArea, ref List<Node> newActiveArea)
@@ -170,19 +173,20 @@ public class SpawnManager : MonoBehaviour
             }
         }
         Node spawnNode = path.nodes.Peek();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < nrNodesAway; i++)
         {
             if (path.nodes.Count > 0)
             {
                 spawnNode = path.nodes.Pop();
             }
         }
-        if (BoidManager.allBoids.Count < activeIntensityEnemyCount)
+        if (BoidManager.allBoids.Count < activeIntensityEnemyMax)
+        {
             for (int i = 0; i < mobSize; i++)
             {
                 spawnNode.spawner.Spawn(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)]);
             }
-
+        }
     }
 }
 

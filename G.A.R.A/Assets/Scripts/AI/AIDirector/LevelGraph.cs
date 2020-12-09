@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class LevelGraph : MonoBehaviour
 {
+    [SerializeField] private int activeAreaDepth = 2;
     [SerializeField] public Node[] nodes;
     [SerializeField] private EdgeDescription[] edgeData;
     private List<Edge>[] edges;
@@ -84,6 +85,80 @@ public class LevelGraph : MonoBehaviour
         
         return playerNode;
     }
+    public int[] CreateMinSpanTree(int from)
+    {
+        bool[] visited = new bool[nodes.Length];
+        int[] minSpanningTree = new int[nodes.Length];
+        Queue<int> nodeQue = new Queue<int>();
+        nodeQue.Enqueue(from);
+        while (nodeQue.Count > 0)
+        {
+            int activeNode = nodeQue.Dequeue();
+            visited[activeNode] = true;
+            foreach (Edge edge in edges[activeNode])
+            {
+                int toIndex = edge.to;
+                if (!visited[toIndex])
+                {
+                    visited[toIndex] = true;
+                    minSpanningTree[edge.to] = activeNode;
+                    nodeQue.Enqueue(toIndex);
+                }
+            }
+        }
+        return minSpanningTree;
+    }
+    public Path FindShortestPathToGoal(int from)
+    {
+        if (from == -1)
+            throw new ArgumentOutOfRangeException("tried using node \"-1\"");
+        Path path = new Path();
+        int[] minSpanTree = CreateMinSpanTree(from);
+        for (int nodeId = FindEnd(); nodeId != from; nodeId = minSpanTree[nodeId])
+        {
+            path.AddNode(nodes[nodeId]);
+            for (int i = 0; i < edges[nodeId].Count; i++)
+            {
+                if (edges[nodeId][i].to == minSpanTree[nodeId])
+                {
+                    path.AddEdge(edges[nodeId][i]);
+                    break;
+                }
+            }
+        }
+        return path;
+    }
+
+    public List<Node> FindActiveArea()
+    {
+        return Radiate(playerNode, activeAreaDepth);
+    }
+
+    private List<Node> Radiate(int origo, int depth)
+    {
+        List<Node> radialNodes = new List<Node>();
+        bool[] visited = new bool[nodes.Length];
+
+        RecursiveRadiate(origo, depth, 0, ref radialNodes, ref visited);
+
+        return radialNodes;
+    }
+
+    private void RecursiveRadiate(int currentNode, int maxDepth, int currentDepth, ref List<Node> radialNodes, ref bool[] visited)
+    {
+        if (currentDepth > maxDepth)
+            return;
+        radialNodes.Add(nodes[currentNode]);
+        visited[currentNode] = true;
+        currentDepth++;
+        foreach (Edge edge in edges[currentNode])
+        {
+            if (!visited[edge.to])
+            {
+                RecursiveRadiate(edge.to, maxDepth, currentDepth, ref radialNodes, ref visited);
+            }
+        }
+    }
     /// <summary>
     /// WARNING: Only works when the end is in a terminal node (connected with only one edge).
     /// </summary>
@@ -133,78 +208,4 @@ public class LevelGraph : MonoBehaviour
         return frontNodes.ToArray();
     }
 
-    public int[] CreateMinSpanTree(int from)
-    {
-        bool[] visited = new bool[nodes.Length];
-        int[] minSpanningTree = new int[nodes.Length];
-        Queue<int> nodeQue = new Queue<int>();
-        nodeQue.Enqueue(from);
-        while (nodeQue.Count > 0)
-        {
-            int activeNode = nodeQue.Dequeue();
-            visited[activeNode] = true;
-            foreach (Edge edge in edges[activeNode])
-            {
-                int toIndex = edge.to;
-                if (!visited[toIndex])
-                {
-                    visited[toIndex] = true;
-                    minSpanningTree[edge.to] = activeNode;
-                    nodeQue.Enqueue(toIndex);
-                }
-            }
-        }
-        return minSpanningTree;
-    }
-    public Path FindShortestPathToGoal(int from)
-    {
-        if (from == -1)
-            throw new ArgumentOutOfRangeException("tried using node \"-1\"");
-        Path path = new Path();
-        int[] minSpanTree = CreateMinSpanTree(from);
-        for (int nodeId = FindEnd(); nodeId != from; nodeId = minSpanTree[nodeId])
-        {
-            path.AddNode(nodes[nodeId]);
-            for (int i = 0; i < edges[nodeId].Count; i++)
-            {
-                if (edges[nodeId][i].to == minSpanTree[nodeId])
-                {
-                    path.AddEdge(edges[nodeId][i]);
-                    break;
-                }
-            }
-        }
-        return path;
-    }
-
-    public List<Node> FindActiveArea()
-    {
-        return Radiate(playerNode, 2);
-    }
-
-    public List<Node> Radiate(int origo, int depth)
-    {
-        List<Node> radialNodes = new List<Node>();
-        bool[] visited = new bool[nodes.Length];
-
-        RecursiveRadiate(origo, depth, 0, ref radialNodes, ref visited);
-
-        return radialNodes;
-    }
-
-    public void RecursiveRadiate(int currentNode, int maxDepth, int currentDepth, ref List<Node> radialNodes, ref bool[] visited)
-    {
-        if (currentDepth > maxDepth)
-            return;
-        radialNodes.Add(nodes[currentNode]);
-        visited[currentNode] = true;
-        currentDepth++;
-        foreach (Edge edge in edges[currentNode])
-        {
-            if (!visited[edge.to])
-            {
-                RecursiveRadiate(edge.to, maxDepth, currentDepth, ref radialNodes, ref visited);
-            }
-        }
-    }
 }

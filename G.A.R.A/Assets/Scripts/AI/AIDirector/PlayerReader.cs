@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class PlayerReader : MonoBehaviour
 {
-    public GameObject player;
-    public PlayerStats playerStats;
-    [SerializeField]SciptableIntObj laserAmmo, projectileAmmo, tazerAmmo;
-    int playerNode;
-    bool inCombat;
-    float combatTimer = 0;
-    float timeToNotBeInCombat = 1f;
+    //[SerializeField] private SciptableIntObj laserAmmo, projectileAmmo, tazerAmmo;
+    [HideInInspector] public GameObject player;
+    [HideInInspector] public PlayerStats playerStats;
+    private int playerNode;
+    private bool inCombat;
+    private float combatTimer = 0;
+    private float timeToNotBeInCombat = 1f;
     // Start is called before the first frame update
     void Start()
     {

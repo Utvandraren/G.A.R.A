@@ -11,26 +11,25 @@ public class Pacer : MonoBehaviour
     }
 
     public int panicIncreaseModifier = 2;
-    public TempoType currentTempo;
-    PlayerReader playerReader;
-    float panicScore;
-    float maxPanicScore = 10;
-    float panicReductionRate = 0.5f;
-    private bool started;
-    private float upperThreshold;
-    private float lowerThreshold;
-    private float tempoTimer;
     public float sustainTime = 5f;
+    [HideInInspector] public TempoType currentTempo;
+    private PlayerReader playerReader;
+    private float panicScore;
+    private float maxPanicScore = 10;
+    private float panicReductionRate = 0.5f;
+    private bool started;
+    private float upperThreshold = 10f;
+    private float lowerThreshold = 0f;
+    private float tempoTimer;
 
     // Start is called before the first frame update
     void Start()
     {
-        DetermineThreshold();
         currentTempo = TempoType.BUILDUP;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (!started)
             return;
@@ -39,12 +38,6 @@ public class Pacer : MonoBehaviour
         CalcPanicReductionRate();
         if (!playerReader.InCombat())
             panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
-    }
-
-    private void DetermineThreshold()
-    {
-        upperThreshold = 10;
-        lowerThreshold = 0;
     }
 
     private void ChangeTempo()
@@ -81,7 +74,6 @@ public class Pacer : MonoBehaviour
                 {
                     currentTempo = TempoType.BUILDUP;
                     Debug.Log("Current tempo" + currentTempo);
-                    DetermineThreshold();
                 }
                 break;
             default:
@@ -89,12 +81,12 @@ public class Pacer : MonoBehaviour
         }
     }
 
-    internal void StorePlayerReader(PlayerReader playerReader)
+    public void StorePlayerReader(PlayerReader playerReader)
     {
         this.playerReader = playerReader;
     }
 
-    void CalcPanicReductionRate()
+    private void CalcPanicReductionRate()
     {
         float hpPercent = playerReader.GetHPPercent();
         float shieldPercent = playerReader.GetShieldPercent();
