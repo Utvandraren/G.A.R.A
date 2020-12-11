@@ -304,12 +304,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objToModify: {fileID: 11400000, guid: 4470a6f101c12204e86d3c72724a9fd4, type: 2}
-  value: 100
-  deathTimer: 0
+  value: 25
   pickUpSound: {fileID: 8870971172599289957}
-  pickUpDistance: 8
-  pickUpSpeed: 7
-  lifetime: 20
+  pickUpDistance: 14
+  pickUpSpeed: 15
+  lifetime: 60
   childList:
   - {fileID: 8870971171607346824}
   - {fileID: 1094034570047476572}
@@ -324,7 +323,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &8870971172599289957
 AudioSource:

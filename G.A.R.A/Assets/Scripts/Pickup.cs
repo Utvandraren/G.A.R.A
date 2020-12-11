@@ -7,11 +7,12 @@ public class Pickup : MonoBehaviour
 {
     [SerializeField] private SciptableIntObj objToModify;
     [SerializeField] private int value = 0;
-    [SerializeField] private float deathTimer = 1;
+    private float deathTimer = 1;
     [SerializeField] private AudioSource pickUpSound;
     [SerializeField] private float pickUpDistance;
     [SerializeField] private float pickUpSpeed;
     [SerializeField] private float lifetime;
+    private float minDistance;
     private GameObject player;
 
 
@@ -22,6 +23,7 @@ public class Pickup : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        minDistance = 3f;
         pickUpSound = GetComponent<AudioSource>();
         deathTimer = pickUpSound.clip.length;
         Destroy(gameObject, lifetime); //Self-destruct after the lifetime has passed
@@ -60,6 +62,10 @@ public class Pickup : MonoBehaviour
             Vector3 direction = player.transform.position - transform.position;
             Vector3.Normalize(direction);
             transform.Translate(direction * pickUpSpeed * Time.deltaTime, Space.World);
+            if(Vector3.Distance(transform.position, player.transform.position) < minDistance)
+            {
+                transform.Translate(direction * pickUpSpeed * 5 * Time.deltaTime, Space.World);
+            }
         }
     }
 }

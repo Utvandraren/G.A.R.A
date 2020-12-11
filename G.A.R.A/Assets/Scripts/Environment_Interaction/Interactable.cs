@@ -14,6 +14,7 @@ public class Interactable : MonoBehaviour
     public UnityEvent electricInteraction;
     public UnityEvent useInteraction;
     float outlineCountdown = 0;
+    public bool isUsable;
     public bool canInteract;
     public bool showOutline;
 
