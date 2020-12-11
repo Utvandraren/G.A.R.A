@@ -251,8 +251,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panicIncreaseModifier: 2
-  currentTempo: 0
   sustainTime: 5
+  currentTempo: 0
 --- !u!114 &29525836416979098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,17 +269,25 @@ MonoBehaviour:
   - {fileID: 4432575310953063639, guid: b2d4767a5450dcc4c8affa0e06c077f7, type: 3}
   - {fileID: 6275980567223361757, guid: a38018904f0165549a3cce3c8272c634, type: 3}
   - {fileID: 4432575310953063639, guid: 154bc80e7d255db46bcf6083f6668749, type: 3}
-  currentTempo: 0
-  obstacles: 
   purgeDistance: 250
-  highIntensityEnemyCount: 10
-  lowIntensityEnemyCount: 0
-  mobSize: 5
-  timeBetweenMobs: 10
-  scalingTimer: 0
   timeBetweenScaleUp: 10
+  nrSwarmerPerSpawn: 2
+  stragelerGroupSize: 1
+  intenseEnemyMax: 50
+  intenseEnemyAmount: 10
+  highScaleAmount: 2
+  calmEnemyMax: 10
+  calmEnemyAmount: 0
+  lowScaleAmount: 2
+  mobMaxSize: 10
+  mobSize: 5
+  mobScaleAmount: 2
+  mobMinSpawnInterval: 7
+  mobMaxSpawnInterval: 20
+  nrNodesAway: 3
   started: 0
   mobReady: 0
+  currentTempo: 0
 --- !u!114 &29525836416979101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,9 +302,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerStats: {fileID: 0}
-  laserAmmo: {fileID: 11400000, guid: 09b7a550a075bdb4d8306072664b3afb, type: 2}
-  projectileAmmo: {fileID: 11400000, guid: 84f2bc23bede1ee45aa87628b1124e92, type: 2}
-  tazerAmmo: {fileID: 11400000, guid: 4470a6f101c12204e86d3c72724a9fd4, type: 2}
 --- !u!114 &29525836416979174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0f8f3d71827d246bbd37064b84a81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeAreaDepth: 2
   nodes:
   - type: 1
     percentToEnd: 0
