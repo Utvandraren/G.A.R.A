@@ -64,7 +64,7 @@ public class Director : MonoBehaviour
         {
             shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
         }
-        CheckAmmoRequirements();
+        //CheckAmmoRequirements();
 
         List<Node> newActiveArea = graph.FindActiveArea();
         spawnManager.OnPlayerNodeChange(activeArea, newActiveArea, playerReader.player.transform.position);
@@ -77,7 +77,7 @@ public class Director : MonoBehaviour
         spawnManager.currentTempo = pacer.currentTempo;
         if (spawnManager.mobReady)
         {
-            spawnManager.SpawnMob(graph.FindShortestPathToGoal(graph.playerNode));
+            spawnManager.SpawnMob(new Path(shortestPath));
         }
     }
 
