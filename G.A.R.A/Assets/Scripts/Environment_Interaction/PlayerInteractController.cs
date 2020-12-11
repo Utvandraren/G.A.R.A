@@ -35,14 +35,20 @@ public class PlayerInteractController : MonoBehaviour
                 float distance = Vector3.Distance(camera.position, interactable.transform.position);
                 if (distance <= maxInteractDistance)
                 {
-                    interactText.gameObject.SetActive(true);
+                    if(interactable.isUsable)
+                    {
+                        interactText.gameObject.SetActive(true);
+                    }
+
                     if (Input.GetButtonDown("Use"))
                     {
+                        
                         interactable.Interact();
                     }
                 }
                 else interactText.gameObject.SetActive(false);
             }
+            else interactText.gameObject.SetActive(false);
         }
     }
 

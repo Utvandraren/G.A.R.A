@@ -30,14 +30,10 @@ public class PauseMenu : MonoBehaviour
                     isClosing = true;
                 }
                 else Resume();
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
             }
             else
             {
                 Pause();
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
             }
         }
 
@@ -81,6 +77,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         pauseMenuObject.SetActive(false);
         //Insert animation later?
         Time.timeScale = 1f;
@@ -90,6 +88,8 @@ public class PauseMenu : MonoBehaviour
 
     private void Pause()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         pauseMenuObject.SetActive(true);
         //Insert animation later?
         Time.timeScale = 0f;
