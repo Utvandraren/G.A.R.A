@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour
         HALTING,
         PUSHING,
     }
+
     [Header ("Global Settings")]
     public GameObject[] enemyPrefabs;
     public int purgeDistance = 150;
@@ -32,7 +33,11 @@ public class SpawnManager : MonoBehaviour
     public int mobMaxSize = 10;
     public int mobSize = 5;
     public int mobScaleAmount = 2;
-    public float timeBetweenMobs = 10f;
+    [Tooltip("First mob spawns from the average of max and min")]
+    [SerializeField] private float mobMinSpawnInterval = 7f;
+    [Tooltip("First mob spawns from the average of max and min")]
+    [SerializeField] private float mobMaxSpawnInterval = 20f;
+    private float timeBetweenMobs;
     [SerializeField] private int nrNodesAway = 3;
 
 
@@ -48,6 +53,8 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         GetComponentsInChildren(spawners);
+
+        timeBetweenMobs = (mobMinSpawnInterval + mobMaxSpawnInterval) / 2f;
     }
 
     public void IncreaseThreatSizes()
@@ -153,7 +160,7 @@ public class SpawnManager : MonoBehaviour
     {
         mobReady = false;
         mobSpawnTimer = 0;
-        timeBetweenMobs = UnityEngine.Random.Range(7, 20);
+        timeBetweenMobs = UnityEngine.Random.Range(mobMinSpawnInterval, mobMaxSpawnInterval);
         List<Edge.DoorType> doorTypes = new List<Edge.DoorType>();
         while (path.edges.Count > 0)
         {
