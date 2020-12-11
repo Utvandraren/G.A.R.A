@@ -62,27 +62,24 @@ public class LevelGraph : MonoBehaviour
     public int FindPlayerNode(Vector3 playerPos)
     {
         float savedNodeDistance = Vector3.Distance(nodes[playerNode].spawner.transform.position, playerPos);
-        
-            float closestNeighboringNodeDistance = int.MaxValue;
-            int closerNode = -1;
-            foreach (Edge edge in edges[playerNode])
+        float closestNeighboringNodeDistance = int.MaxValue;
+        int closerNode = -1;
+        foreach (Edge edge in edges[playerNode])
+        {
+            float CurrentNodeDistance = Vector3.Distance(nodes[edge.to].spawner.transform.position, playerPos);
+            if (closestNeighboringNodeDistance > CurrentNodeDistance)
             {
-                float CurrentNodeDistance = Vector3.Distance(nodes[edge.to].spawner.transform.position, playerPos);
-                if (closestNeighboringNodeDistance > CurrentNodeDistance)
-                {
-                    closerNode = edge.to;
-                    closestNeighboringNodeDistance = CurrentNodeDistance;
-                }
+                closerNode = edge.to;
+                closestNeighboringNodeDistance = CurrentNodeDistance;
             }
-            if (closestNeighboringNodeDistance < savedNodeDistance)
-            {
-                playerNode = closerNode;
-                Debug.Log("Changed to node " + playerNode);
-                savedNodeDistance = closestNeighboringNodeDistance;
-                ChangedNode?.Invoke(this, new EventArgs());
-            }
-                
-        
+        }
+        if (closestNeighboringNodeDistance < savedNodeDistance)
+        {
+            playerNode = closerNode;
+            Debug.Log("Changed to node " + playerNode);
+            savedNodeDistance = closestNeighboringNodeDistance;
+            ChangedNode?.Invoke(this, new EventArgs());
+        }
         return playerNode;
     }
     public int[] CreateMinSpanTree(int from)
