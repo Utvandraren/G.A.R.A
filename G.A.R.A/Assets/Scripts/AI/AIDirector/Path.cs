@@ -19,6 +19,8 @@ public class Path
     {
         nodes = new Stack<Node>(original.nodes);
         edges = new Stack<Edge>(original.edges);
+        nodes = new Stack<Node>(nodes);
+        edges = new Stack<Edge>(edges);
     }
 
 

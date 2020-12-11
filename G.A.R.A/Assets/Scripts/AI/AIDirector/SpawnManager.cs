@@ -187,6 +187,7 @@ public class SpawnManager : MonoBehaviour
                 spawnNode = path.nodes.Pop();
             }
         }
+        Debug.Log("Spawns mob on node " + spawnNode.spawner.name);
         if (BoidManager.allBoids.Count < activeIntensityEnemyMax)
         {
             for (int i = 0; i < mobSize; i++)
