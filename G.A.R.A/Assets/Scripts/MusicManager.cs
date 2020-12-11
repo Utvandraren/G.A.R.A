@@ -25,13 +25,13 @@ public class MusicManager : Singleton<MusicManager>
     void Update()
     {
 
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            TransitionToSoftSnapshot();
+//#if UNITY_EDITOR
+//        if (Input.GetKeyDown(KeyCode.Alpha1))
+//            TransitionToSoftSnapshot();
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            ResetSnapshot();
-#endif
+//        if (Input.GetKeyDown(KeyCode.Alpha2))
+//            ResetSnapshot();
+//#endif
 
 
     }

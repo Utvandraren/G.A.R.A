@@ -84,6 +84,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         isClosing = false;
+        MusicManager.Instance.ResetSnapshot();
     }
 
     private void Pause()
@@ -94,5 +95,6 @@ public class PauseMenu : MonoBehaviour
         //Insert animation later?
         Time.timeScale = 0f;
         GameIsPaused = true;
+        MusicManager.Instance.TransitionToSoftSnapshot();
     }
 }

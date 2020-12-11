@@ -62,15 +62,15 @@ public class WeaponManager : MonoBehaviour
             
         }
 
-        if(Input.GetButton("Laser"))
+        if(Input.GetButtonDown("Laser"))
         {
             ChangeWeapon(Weapons.Laser);
         }
-        else if (Input.GetButton("Explosive"))
+        else if (Input.GetButtonDown("Explosive"))
         {
             ChangeWeapon(Weapons.Explosive);
         }
-        else if (Input.GetButton("Electric"))
+        else if (Input.GetButtonDown("Electric"))
         {
             ChangeWeapon(Weapons.Taser);
         }
