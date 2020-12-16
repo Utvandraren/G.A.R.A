@@ -37,6 +37,11 @@ public class TaserWeapon : Weapon
         anim.SetBool("Fire", false);
     }
 
+    public override void TryShoot()
+    {
+        base.TryShoot();
+    }
+
     public override void Shoot()
     {
         if (PauseMenu.GameIsPaused)
@@ -50,6 +55,7 @@ public class TaserWeapon : Weapon
         anim.CrossFadeInFixedTime("Fire Taser Weapon", 0.01f);
 
         Vector3 rayOrigin = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+        targetsAlreadyHit.Clear();
 
         if (Physics.SphereCast(rayOrigin, taserThickness, camera.transform.forward, out hit, maxRange))
         {
@@ -66,18 +72,32 @@ public class TaserWeapon : Weapon
 
     void HandleElectricityArchs(EnemyStats attackObj) //Handles how the weapon go from enemy to enemy damaging them
     {
-        attackObj.TakeDamage(attack);
         targetsAlreadyHit.Add(attackObj.GetComponent<Collider>());
+        attackObj.TakeDamage(attack);
+        Debug.Log("Hello, I am hitting something with electricity. " + attackObj.name);
+
 
         for (int i = 0; i < nmbrJumps; i++)
         {
             Collider[] colliders = Physics.OverlapSphere(attackObj.transform.position, jumpRange);
+            int enemiesInRange = 0;
+            for (int j = 0; j < colliders.Length; j++)
+            {
+                if (colliders[j].CompareTag("Enemy"))
+                        enemiesInRange++;
+            }
+
+            if(enemiesInRange <= 1)
+            {
+                break;
+            }
+
             attackObj = GetClosestEnemy(colliders, attackObj.GetComponent<Collider>());
 
             if (attackObj != null)
             {
-                attackObj.TakeDamage(attack);
                 targetsAlreadyHit.Add(attackObj.GetComponent<Collider>());
+                attackObj.TakeDamage(attack);
             }
             else
             {
@@ -114,7 +134,7 @@ public class TaserWeapon : Weapon
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(1f);
-        targetsAlreadyHit.Clear();
+        //targetsAlreadyHit.Clear();
         line.positionCount = 0;
     }
 
@@ -133,9 +153,17 @@ public class TaserWeapon : Weapon
     EnemyStats GetClosestEnemy(Collider[] colliders, Collider startEnemy)  //Find the enemy closest to the startEnemy
     {
         Collider closestEnemy = colliders[0];
+        foreach (Collider collider in colliders)
+        {
+            if (collider != startEnemy && collider.CompareTag("Enemy"))
+                closestEnemy = collider;
+        }
+        
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (Vector3.Distance(startEnemy.transform.position, colliders[i].transform.position) < Vector3.Distance(startEnemy.transform.position, closestEnemy.transform.position) && targetAlreadyHit(colliders[i]) == false /*&& colliders[i] != closestEnemy*/)
+            if (Vector3.Distance(startEnemy.transform.position, colliders[i].transform.position) <
+                Vector3.Distance(startEnemy.transform.position, closestEnemy.transform.position)
+                && targetAlreadyHit(colliders[i]) == false && colliders[i].CompareTag("Enemy") /*&& colliders[i] != closestEnemy*/)
             {
                 closestEnemy = colliders[i];
             }
@@ -143,7 +171,9 @@ public class TaserWeapon : Weapon
 
         if (closestEnemy.TryGetComponent<EnemyStats>(out EnemyStats attackObj))
         {
-            return attackObj;
+            if (targetsAlreadyHit.Contains(closestEnemy))
+                return null;
+            else return attackObj;
         }
         else
         {

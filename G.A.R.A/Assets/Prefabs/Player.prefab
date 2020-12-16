@@ -518,6 +518,7 @@ MonoBehaviour:
   maxInteractDistance: 100
   maxOutlineDistance: 200
   canInteract: 0
+  interactText: {fileID: 0}
 --- !u!114 &6769700127276142381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,6 +944,10 @@ PrefabInstance:
       propertyPath: startUpSound
       value: 
       objectReference: {fileID: 8300000, guid: 5a79eb25a9d72884999abf18dee97357, type: 3}
+    - target: {fileID: 1404116168, guid: 217692cea192c39418198ce01a267b79, type: 3}
+      propertyPath: jumpRange
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1563856643, guid: 217692cea192c39418198ce01a267b79, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -1565,6 +1570,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -3629562373716054715, guid: 2d483ad5726ff6f499314956a3975aea,
+        type: 2}
     - target: {fileID: 3862730167860339364, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
         type: 3}
       propertyPath: m_Layer

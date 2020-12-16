@@ -7,7 +7,7 @@ namespace Assets.Scripts
     /// </summary>
     class ShielderStats : EnemyStats
     {
-        public int shieldHealth = 50;
+        public int shieldHealth;
         public GameObject shield;
         public override void TakeDamage(SciptableAttackObj attack)
         {
@@ -17,7 +17,7 @@ namespace Assets.Scripts
                 shield.SetActive(false);
                 return;
             }
-            if (shieldHealth <= 0)
+            else if (shieldHealth <= 0)
                 base.TakeDamage(attack);
             else
                 DamageShield(attack);

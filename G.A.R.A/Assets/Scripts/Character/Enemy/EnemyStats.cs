@@ -24,6 +24,8 @@ public class EnemyStats : Stats
 
     public override void TakeDamage(SciptableAttackObj attack)
     {
+        Debug.Log(gameObject.ToString() + " is taking damage: " + attack.damage + " if weak to: " + attack.damage * weaknessDmgMultiplier);
+
         switch (attack.element)
         {
             case SciptableAttackObj.WeaponElement.Laser:
@@ -53,7 +55,6 @@ public class EnemyStats : Stats
                 break;
         }
 
-        Debug.Log(gameObject.ToString() + " is taking damage");
         if (health <= 0f)
         {
             Die();
