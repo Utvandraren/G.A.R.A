@@ -92,8 +92,8 @@ public class BossManager : Singleton<BossManager>
                 break;
 
             case BossPhases.TentaclePhase:
-                DestroyAllEnemies();
                 StopCoroutine(ContinousSpawning());
+                DestroyAllEnemies();
                 StartTentaclePhase();
                 break;
 

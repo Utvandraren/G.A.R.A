@@ -1770,7 +1770,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261093471}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3678,6 +3678,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2280335289746357818, guid: 1f5ed60bbe7e6ac40a17d53e1ce8d114,
     type: 3}
   m_PrefabInstance: {fileID: 2280335290302920562}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &567221364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8698410134833995724, guid: 612979ffe91450041a0715e8b8a5c436,
+    type: 3}
+  m_PrefabInstance: {fileID: 3400112636141464251}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &585551190
 GameObject:
@@ -7706,6 +7712,10 @@ PrefabInstance:
       propertyPath: m_LightProbeVolumeOverride
       value: 
       objectReference: {fileID: 549610383}
+    - target: {fileID: 1806223422, guid: 213277e41ed9a3f4b9906a1ce93f0ca7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2206360773547588368, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7769,12 +7779,12 @@ PrefabInstance:
     - target: {fileID: 2206360773547588371, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
       propertyPath: MaxDistance
-      value: 550
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2206360773547588371, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
       propertyPath: MinDistance
-      value: 64.66
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2206360773547588372, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
@@ -8073,6 +8083,8 @@ PlayableDirector:
     value: {fileID: 1253516870}
   - key: {fileID: -978499970985615786, guid: 8cdc8f95a2775cc45af8be0191eef5db, type: 2}
     value: {fileID: 1892383976}
+  - key: {fileID: 4956262066892671562, guid: 8cdc8f95a2775cc45af8be0191eef5db, type: 2}
+    value: {fileID: 567221364}
   m_ExposedReferences:
     m_References: []
 --- !u!82 &1256216367
@@ -8569,7 +8581,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355471639}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -9265,7 +9277,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445061502}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
