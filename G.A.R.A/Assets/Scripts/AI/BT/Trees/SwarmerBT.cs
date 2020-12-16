@@ -27,7 +27,7 @@ public class SwarmerBT : BehaviorTree
         Task aprSeq = new Sequence(aprSeqArr);
         Task[] moveSelArr = { aprSeq, new MoveAway() };
         Task moveSel = new Selector(moveSelArr);
-        Task[] fightSeqArr = { new TargetPlayer(), new CheckInDetectionRange(), aprCheck, moveSel };
+        Task[] fightSeqArr = { new TargetPlayer(), new CheckInDetectionRange(), new CheckLineOfSight(), aprCheck, moveSel };
         Task fightSeq = new Sequence(fightSeqArr);
         Task[] rootArr = { fightSeq, new Wander() };
         root = new Selector(rootArr);
