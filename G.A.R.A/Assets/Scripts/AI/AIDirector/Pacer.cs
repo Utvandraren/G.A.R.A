@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using System.IO;
 public class Pacer : MonoBehaviour
 {
     public enum TempoType
@@ -16,16 +16,23 @@ public class Pacer : MonoBehaviour
     private PlayerReader playerReader;
     private float panicScore;
     private float maxPanicScore = 10;
-    private float panicReductionRate = 0.5f;
+    private float panicReductionRate = 0.1f;
     private bool started;
     private float upperThreshold = 10f;
     private float lowerThreshold = 0f;
     private float tempoTimer;
 
+    private float activeTimer;
+    private float printTimer;
+    private StreamWriter writer;
     // Start is called before the first frame update
     void Start()
     {
         currentTempo = TempoType.BUILDUP;
+        writer = new StreamWriter(@"C:/Users/golf_/Desktop/panic.txt", true);
+        writer.AutoFlush = true;
+        writer.WriteLine(System.DateTime.Now.ToString());
+        writer.WriteLine("----------------------------------------");
     }
 
     // Update is called once per frame
@@ -33,11 +40,17 @@ public class Pacer : MonoBehaviour
     {
         if (!started)
             return;
-
+        activeTimer += Time.deltaTime;
+        printTimer += Time.deltaTime;
         ChangeTempo();
         CalcPanicReductionRate();
         if (!playerReader.InCombat())
             panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
+        if(printTimer >= 1f)
+        {
+            printTimer -= 1f;
+            writer.WriteLine(activeTimer + "/" + panicScore);
+        }
     }
 
     private void ChangeTempo()
@@ -98,9 +111,16 @@ public class Pacer : MonoBehaviour
         started = true;
     }
 
-    public void IncreasePanic(float damagePercent)
+    public void IncreasePanicOnDamageTaken(float damagePercent)
     {
         float panicIncrease = damagePercent;
         panicScore = Mathf.Min(panicScore + panicIncrease * panicIncreaseModifier, maxPanicScore);
+        Debug.Log("increased Panic with " + panicIncrease * panicIncreaseModifier);
+    }
+    public void IncreasePanicOnKill(float distanceToEnemy)
+    {
+        float panicIncrease = 1f / distanceToEnemy;
+        panicScore = Mathf.Min(panicScore + panicIncrease * panicIncreaseModifier, maxPanicScore);
+        Debug.Log("increased Panic with " + panicIncrease * panicIncreaseModifier);
     }
 }

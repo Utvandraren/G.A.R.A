@@ -9,11 +9,13 @@ public class BoidManager : MonoBehaviour
 {
     public static Vector3[] CollisionRayDirections { get; private set; }
     public static List<BOID> allBoids;
+    private static Director director;
     // Start is called before the first frame update
     void Awake()
     {
         GetSampleDirections();
         allBoids = new List<BOID>();
+        director = GetComponent<Director>();
     }
 
     /// <summary>
@@ -43,5 +45,12 @@ public class BoidManager : MonoBehaviour
 
             CollisionRayDirections[i] = new Vector3(x, y, z);
         }
+    }
+
+    public static void DestroyBoid(BOID boid)
+    {
+        Vector3 deathPos = new Vector3(boid.transform.position.x, boid.transform.position.y, boid.transform.position.z);
+        director.EnemyIsDestroyed(deathPos);
+        allBoids.Remove(boid);
     }
 }

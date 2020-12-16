@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +35,7 @@ public class Director : MonoBehaviour
     {
         int damage = eventArgsDamage.damage;
         float damagePercent = (float)damage / playerReader.playerStats.health;
-        pacer.IncreasePanic(damagePercent);
+        pacer.IncreasePanicOnDamageTaken(damagePercent);
     }
 
     /// <summary>
@@ -69,6 +70,12 @@ public class Director : MonoBehaviour
         List<Node> newActiveArea = graph.FindActiveArea();
         spawnManager.OnPlayerNodeChange(activeArea, newActiveArea, playerReader.player.transform.position);
         activeArea = newActiveArea;
+    }
+
+    internal void EnemyIsDestroyed(Vector3 position)
+    {
+        float distance = Vector2.Distance(position, playerReader.player.transform.position);
+        pacer.IncreasePanicOnKill(distance);
     }
 
     void FixedUpdate()
