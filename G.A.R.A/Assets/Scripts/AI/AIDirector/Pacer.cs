@@ -16,7 +16,7 @@ public class Pacer : MonoBehaviour
     private PlayerReader playerReader;
     private float panicScore;
     private float maxPanicScore = 10;
-    private float panicReductionRate = 0.1f;
+    [SerializeField]private float panicReductionRate = 0.1f;
     private bool started;
     private float upperThreshold = 10f;
     private float lowerThreshold = 0f;
@@ -31,7 +31,7 @@ public class Pacer : MonoBehaviour
         currentTempo = TempoType.BUILDUP;
         writer = new StreamWriter(@"C:/Users/golf_/Desktop/panic.txt", true);
         writer.AutoFlush = true;
-        writer.WriteLine(System.DateTime.Now.ToString());
+        writer.WriteLine(System.DateTime.Now.ToString() + " " + panicReductionRate + " " + panicIncreaseModifier);
         writer.WriteLine("----------------------------------------");
     }
 
@@ -43,13 +43,13 @@ public class Pacer : MonoBehaviour
         activeTimer += Time.deltaTime;
         printTimer += Time.deltaTime;
         ChangeTempo();
-        CalcPanicReductionRate();
+        //CalcPanicReductionRate();
         if (!playerReader.InCombat())
             panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
         if(printTimer >= 1f)
         {
             printTimer -= 1f;
-            writer.WriteLine(activeTimer + "/" + panicScore);
+            writer.WriteLine(activeTimer + "/" + panicScore + ":" + currentTempo);
         }
     }
 
