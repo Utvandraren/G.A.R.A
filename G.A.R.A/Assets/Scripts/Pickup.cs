@@ -64,7 +64,7 @@ public class Pickup : MonoBehaviour
             transform.Translate(direction * pickUpSpeed * Time.deltaTime, Space.World);
             if(Vector3.Distance(transform.position, player.transform.position) < minDistance)
             {
-                transform.Translate(direction * pickUpSpeed * 5 * Time.deltaTime, Space.World);
+                transform.position.Set(player.transform.position.x, player.transform.position.y, player.transform.position.z);
             }
         }
     }

@@ -944,6 +944,14 @@ PrefabInstance:
       propertyPath: startUpSound
       value: 
       objectReference: {fileID: 8300000, guid: 5a79eb25a9d72884999abf18dee97357, type: 3}
+    - target: {fileID: 1404116168, guid: 217692cea192c39418198ce01a267b79, type: 3}
+      propertyPath: jumpRange
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1404116168, guid: 217692cea192c39418198ce01a267b79, type: 3}
+      propertyPath: nmbrJumps
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1563856643, guid: 217692cea192c39418198ce01a267b79, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -1466,6 +1474,11 @@ PrefabInstance:
       propertyPath: laserDuration
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 1350432437760800335, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
+        type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1824371079403959139, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
         type: 3}
       propertyPath: m_Layer
@@ -1566,6 +1579,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 3109822106332318040, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -3629562373716054715, guid: 2d483ad5726ff6f499314956a3975aea,
+        type: 2}
     - target: {fileID: 3862730167860339364, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
         type: 3}
       propertyPath: m_Layer

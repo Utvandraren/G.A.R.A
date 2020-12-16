@@ -37,9 +37,6 @@ public class Weapon : MonoBehaviour
 
     public virtual void TryShoot()  //If cooldown is ready then you can shoot
     {
-        //currentTime -= Time.deltaTime;
-        //Mathf.Clamp(currentTime, 0f, timeBetweenAttacks);
-
         if (PauseMenu.GameIsPaused)
             return;
 
