@@ -30,13 +30,14 @@ public class BossManager : Singleton<BossManager>
 
     [Header("Phase 3")]
     [SerializeField] private GameObject tentaclePrefab;
+    [SerializeField] private GameObject frontShieldPrefab;
     [SerializeField] private int tentaclesAmount = 1;
     private List<GameObject> tentacles;
     [SerializeField] private Transform tentacleSpawnPoint;
     [SerializeField] private float distanceFromBoss;
 
 
-    private BossPhases currentPhase = BossPhases.ShieldPhase;
+    private BossPhases currentPhase = BossPhases.ShieldPhase;   //----------------------------
     private Animator animator;
     private Transform target;
     private float blendPower = 0;
@@ -210,6 +211,7 @@ public class BossManager : Singleton<BossManager>
     {
         source.Stop();
         trackingLaser.SetActive(true);
+        frontShieldPrefab.SetActive(true);
         StartCoroutine(StartWavingPartsAnimation());
         //System.Random rnd = new System.Random();
         for (int i = 0; i < tentaclesAmount; i++)
