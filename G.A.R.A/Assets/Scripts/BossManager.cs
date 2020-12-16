@@ -7,12 +7,16 @@ public class BossManager : Singleton<BossManager>
 {
     [SerializeField] private float invincibleTime = 3;
     [SerializeField] private GameObject trackingLaser;
+    [SerializeField] private AudioClip transitionAudioClip;
+
 
     [Header("Phase 1")]
     [SerializeField] private GameObject shield;
     [SerializeField] private int startShieldHealth;
     [SerializeField] private int shieldCoolDown;
     [SerializeField] private GameObject switchRoot;
+    [SerializeField] private AudioClip powerDownClip;
+    [SerializeField] private AudioClip powerUpClip;
     private int shieldHealth = 0;
     private ShieldSwitch[] switches;
     private BossStats bossStats;
@@ -113,10 +117,12 @@ public class BossManager : Singleton<BossManager>
     //Turns the shield off for a certain amount of time and then activates it again
     IEnumerator TurnOffShield()
     {
+        source.PlayOneShot(powerDownClip);
         shield.SetActive(false);
         bossStats.isInvicible = false;
         yield return new WaitForSeconds(shieldCoolDown);
         StartShieldPhase();
+        source.PlayOneShot(powerUpClip);
     }
 
     //function activating random switches
@@ -242,6 +248,7 @@ public class BossManager : Singleton<BossManager>
     public void PrepareNextPhase()
     {
         StartCoroutine(BecomeInvincible());
+        source.PlayOneShot(transitionAudioClip);
     }
 
     //Disable Bossstats so boss cant be damaged a certain amount of time then transition to the next phase
