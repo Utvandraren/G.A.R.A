@@ -29,10 +29,16 @@ public class Pacer : MonoBehaviour
     void Start()
     {
         currentTempo = TempoType.BUILDUP;
-        writer = new StreamWriter(@"C:/Users/golf_/Desktop/panic.txt", true);
+        writer = new StreamWriter(@"panic.txt", true);
         writer.AutoFlush = true;
-        writer.WriteLine(System.DateTime.Now.ToString() + " " + panicReductionRate + " " + panicIncreaseModifier);
+        writer.WriteLine(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " " + System.DateTime.Now.ToString() + " " + panicReductionRate + " " + panicIncreaseModifier);
         writer.WriteLine("----------------------------------------");
+    }
+
+    private void OnDestroy()
+    {
+        writer.Flush();
+        writer.Close();
     }
 
     // Update is called once per frame

@@ -583,6 +583,7 @@ MonoBehaviour:
   panicIncreaseModifier: 2
   sustainTime: 5
   currentTempo: 0
+  panicReductionRate: 0.1
 --- !u!114 &2078882722491777373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,11 +607,11 @@ MonoBehaviour:
   intenseEnemyMax: 50
   intenseEnemyAmount: 10
   highScaleAmount: 2
-  calmEnemyMax: 10
+  calmEnemyMax: 15
   calmEnemyAmount: 0
   lowScaleAmount: 2
-  mobMaxSize: 10
-  mobSize: 5
+  mobMaxSize: 7
+  mobSize: 3
   mobScaleAmount: 2
   mobMinSpawnInterval: 7
   mobMaxSpawnInterval: 20
@@ -630,7 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0f8f3d71827d246bbd37064b84a81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeAreaDepth: 2
+  activeAreaDepth: 3
   nodes:
   - type: 2
     percentToEnd: 0
