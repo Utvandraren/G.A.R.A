@@ -6406,7 +6406,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.59
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &885250398
 PrefabInstance:
@@ -7941,6 +7941,16 @@ PrefabInstance:
       propertyPath: chargeLaserParticlesEffect
       value: 
       objectReference: {fileID: 2011150283}
+    - target: {fileID: 5422007769112343510, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
+        type: 3}
+      propertyPath: trackingSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5422007769112343510, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
+        type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6967331754273257496, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
       propertyPath: m_audioClip
@@ -7975,6 +7985,11 @@ PrefabInstance:
         type: 3}
       propertyPath: DopplerLevel
       value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230158357167033581, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
+        type: 3}
+      propertyPath: turningSpeed
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 213277e41ed9a3f4b9906a1ce93f0ca7, type: 3}
@@ -8547,7 +8562,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5.86
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1270361738
 GameObject:
