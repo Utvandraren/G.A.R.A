@@ -10,11 +10,15 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Options options;
     [SerializeField] private GameObject controlsImage;
 
+    //Used to play sounds of menues that close themselves, so they cannot play any sounds when deactivating in hierarchy.
+    private AudioSource audio;
+
     private bool isClosing;
 
     private void Start()
     {
         GameIsPaused = false;
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -66,6 +70,7 @@ public class PauseMenu : MonoBehaviour
 
     public void CloseControls()
     {
+        audio.Play();
         controlsImage.SetActive(false);
     }
 
@@ -77,10 +82,10 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        audio.Play();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         pauseMenuObject.SetActive(false);
-        //Insert animation later?
         Time.timeScale = 1f;
         GameIsPaused = false;
         isClosing = false;
@@ -91,7 +96,6 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         pauseMenuObject.SetActive(true);
-        //Insert animation later?
         Time.timeScale = 0f;
         GameIsPaused = true;
     }

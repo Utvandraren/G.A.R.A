@@ -113,8 +113,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   detectionRange: 100
   stats: {fileID: 3387418532278061876}
-  weaponMaxRange: 20
-  weaponMinRange: 5
+  weaponMaxRange: 100
+  weaponMinRange: 10
 --- !u!114 &6275980567223361759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
-  startingHealth: 60
+  startingHealth: 50
   deathTimer: 0
   deathEffect: {fileID: 9067358271160944876, guid: ba9964da5d9dd4b4f9c07909a433f136,
     type: 3}
@@ -538,7 +538,7 @@ PrefabInstance:
     - target: {fileID: 2073099231816479268, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
       propertyPath: inaccuracyFactor
-      value: 0.5
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2073099231816479268, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
@@ -554,7 +554,7 @@ PrefabInstance:
     - target: {fileID: 2073099231816479268, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
       propertyPath: maxRange
-      value: 200
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 2365036969022466034, guid: 6fb6f09a5b98bc243b18c767f1513ec3,
         type: 3}
