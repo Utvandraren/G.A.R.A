@@ -14,6 +14,7 @@ public class BossStats : Stats
 
     protected override void Start()
     {
+        bossHealth.ResetValue();
         treshold = bossHealth.startValue / 3;
         health = bossHealth.startValue;
         isInvicible = false;
