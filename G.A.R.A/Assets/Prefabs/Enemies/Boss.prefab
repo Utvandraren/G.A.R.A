@@ -879,7 +879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40db3eafde5517143b04fb402c2773c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turningSpeed: 35
+  turningSpeed: 70
 --- !u!65 &1803987306
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1202,8 +1202,8 @@ MonoBehaviour:
   timeBetweenAttacks: 4
   ammo: {fileID: 11400000, guid: 09b7a550a075bdb4d8306072664b3afb, type: 2}
   startUpSound: {fileID: 8300000, guid: fb8de98a26cf8404ea3a346cbaf6b176, type: 3}
-  trackingSpeed: 2
-  chargeUpTime: 2
+  trackingSpeed: 4
+  chargeUpTime: 1
   attackDuration: 1
   laserBeamAttackRadius: 2
   laserBeam: {fileID: 2206360775099760685}
