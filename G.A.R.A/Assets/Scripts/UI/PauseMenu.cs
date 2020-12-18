@@ -45,6 +45,11 @@ public class PauseMenu : MonoBehaviour
         {
             Resume();
         }
+
+        if(options.isOpen && !GameIsPaused)
+        {
+            Resume();
+        }
     }
 
     public void BackToMain()

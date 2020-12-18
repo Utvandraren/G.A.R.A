@@ -14,7 +14,7 @@ public class ControlsSettings : MonoBehaviour
     private void Start()
     {
         pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        sensitivityVal.text = sensitivitySlider.value.ToString();
+        sensitivityVal.text = (sensitivitySlider.value * 100).ToString() + "%";
     }
 
     public void UpdateSensitivity()
