@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TrackingLaser : Weapon
 {
-    [SerializeField] private float trackingSpeed = 0f;
-    [SerializeField] private float chargeUpTime = 0f;
+    [SerializeField] private float trackingSpeed = 0f; //Original 2
+    [SerializeField] private float chargeUpTime = 0f; //Original 2
     [SerializeField] private float attackDuration = 0f;
     [SerializeField] private float laserBeamAttackRadius = 1;
     [SerializeField] private GameObject laserBeam;
@@ -34,14 +34,14 @@ public class TrackingLaser : Weapon
     }
 
     public override void TryShoot()
-    {     
+    {
         RaycastHit hit;
         if (Physics.SphereCast(transform.position, laserBeamAttackRadius, transform.forward, out hit))
         {
             if (hit.transform.gameObject.CompareTag("Player"))
             {
                 base.TryShoot();
-            }
+    }
             else
             {
                 //Debug.Log(hit.transform.name);
@@ -63,9 +63,11 @@ public class TrackingLaser : Weapon
             return;
         }
         Vector3 currentDirection = target.transform.position - transform.position;
+        //transform.forward = Vector3.Lerp(target.transform.position, transform.position, 1);
         Quaternion neededRotation = Quaternion.LookRotation(currentDirection);
+        //transform.LookAt(target.transform);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * trackingSpeed);
-
+        //transform.rotation = Quaternion.Slerp(transform.rotation, neededRotation, Time.deltaTime * trackingSpeed);
     }
     
     //Plays the chargeup effects warning the player an attack is imminent before the laser is activated

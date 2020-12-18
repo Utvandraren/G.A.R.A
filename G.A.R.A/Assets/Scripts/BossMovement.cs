@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossMovement : MonoBehaviour
 {
-    [SerializeField] private float turningSpeed = 0f;
+    [SerializeField] private float turningSpeed = 0f; //Original 35
 
     private GameObject target;
     private Transform currentTransform;
@@ -21,7 +21,13 @@ public class BossMovement : MonoBehaviour
     void Update()
     {
         Vector3 currentDirection = target.transform.position - transform.position;
+
+        //transform.forward = Vector3.Lerp(target.transform.position, transform.position, 1).normalized;
+        
         Quaternion neededRotation = Quaternion.LookRotation(currentDirection);
+        
+        //transform.rotation = Quaternion.Slerp(transform.rotation, neededRotation, Time.deltaTime * 2f);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * turningSpeed);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, neededRotation, 0.5f);
     }
 }
