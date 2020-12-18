@@ -1633,6 +1633,8 @@ MonoBehaviour:
   panicIncreaseModifier: 5
   sustainTime: 5
   currentTempo: 0
+  panicReductionRate: 0.1
+  reducePanicInterval: 0
 --- !u!114 &4995215922326169575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,7 +1653,7 @@ MonoBehaviour:
   - {fileID: 4432575310953063639, guid: 154bc80e7d255db46bcf6083f6668749, type: 3}
   purgeDistance: 150
   timeBetweenScaleUp: 10
-  nrSwarmerPerSpawn: 2
+  nrSwarmerPerSpawn: 4
   stragelerGroupSize: 2
   intenseEnemyMax: 25
   intenseEnemyAmount: 5
@@ -1659,8 +1661,8 @@ MonoBehaviour:
   calmEnemyMax: 5
   calmEnemyAmount: 0
   lowScaleAmount: 1
-  mobMaxSize: 7
-  mobSize: 3
+  mobMaxSize: 0
+  mobSize: 0
   mobScaleAmount: 1
   mobMinSpawnInterval: 7
   mobMaxSpawnInterval: 20

@@ -5153,10 +5153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48f53f7fef806041b613add3598c4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panicIncreaseModifier: 1
+  panicIncreaseModifier: 5
   sustainTime: 5
   currentTempo: 0
   panicReductionRate: 0.1
+  reducePanicInterval: 0
 --- !u!114 &4995215922326169575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5187,7 +5188,7 @@ MonoBehaviour:
   mobSize: 5
   mobScaleAmount: 2
   mobMinSpawnInterval: 7
-  mobMaxSpawnInterval: 20
+  mobMaxSpawnInterval: 15
   nrNodesAway: 3
   started: 0
   mobReady: 0

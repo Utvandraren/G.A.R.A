@@ -29,6 +29,7 @@ public class LevelGraph : MonoBehaviour
             edges[i] = new List<Edge>();
         }
         CreateEdges();
+        SetNodeGradient();
         playerNode = FindStart();
     }
     private void CreateEdges()
@@ -141,6 +142,9 @@ public class LevelGraph : MonoBehaviour
         return radialNodes;
     }
 
+
+    // Faulty, sets depth from a depth first search. Possible nodes are missed
+    // Improvements need to compare the set depth
     private void RecursiveRadiate(int currentNode, int maxDepth, int currentDepth, ref List<Node> radialNodes, ref bool[] visited)
     {
         if (currentDepth > maxDepth)
@@ -156,41 +160,48 @@ public class LevelGraph : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// WARNING: Only works when the end is in a terminal node (connected with only one edge).
-    /// </summary>
+   /// <summary>
+   /// Functions by marking changes in depth winth a "-1" value in the queue
+   /// </summary>
     public void SetNodeGradient()
     {
-        bool[] visited = new bool[nodes.Length];
+        bool[] enqueued = new bool[nodes.Length];
         Queue<int> nodeQue = new Queue<int>();
         nodeQue.Enqueue(FindEnd());
+        enqueued[nodeQue.Peek()] = true;
+        nodeQue.Enqueue(-1);
         int treeDepth = 0;
-        int newDepthNode = nodeQue.Peek();
         while (nodeQue.Count > 0)
         {
+            bool newDepth = false;
             int activeNode = nodeQue.Dequeue();
-            nodes[activeNode].percentToEnd = treeDepth;
-            visited[activeNode] = true;
-            if (activeNode == newDepthNode)
+            if(activeNode == -1)
             {
                 treeDepth++;
+                continue;
+            }
+            nodes[activeNode].percentToEnd = treeDepth;
+            if(nodeQue.Peek() == -1)
+            {
+                newDepth = true;
             }
             foreach (Edge edge in edges[activeNode])
             {
                 int toIndex = edge.to;
-                if (!visited[toIndex])
+                if (!enqueued[toIndex])
                 {
                     nodeQue.Enqueue(toIndex);
-                    if (activeNode == newDepthNode)
-                    {
-                        newDepthNode = toIndex;
-                    }
+                    enqueued[toIndex] = true;
                 }
+            }
+            if (newDepth)
+            {
+                nodeQue.Enqueue(-1);
             }
         }
         foreach (Node node in nodes)
         {
-            node.percentToEnd = (float)((treeDepth - node.percentToEnd) / treeDepth);
+            node.percentToEnd = (((float)treeDepth - (float)node.percentToEnd) / (float)treeDepth);
         }
     }
 
