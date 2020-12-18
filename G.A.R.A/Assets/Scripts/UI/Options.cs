@@ -8,6 +8,7 @@ using UnityEngine.Audio;
 public class Options : MonoBehaviour
 {
     [SerializeField] private Animator optionsAnimator;
+    [SerializeField] private Animator optionsAppliedAnim;
     [SerializeField] private GameObject resolutionDropdownGO;
     [SerializeField] private TMP_Dropdown graphicsDropdown;
     private TMP_Dropdown resolutionDropdown;
@@ -22,15 +23,11 @@ public class Options : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider fxSlider;
     [SerializeField] private Slider ambientSlider;
+    [SerializeField] private Slider uiSlider;
 
-    private TMP_Text text;
+    [SerializeField] private TMP_Text testText;
 
     private Resolution[] resolutions;
-
-    private void Start()
-    {
-        text = GetComponent<TMP_Text>();
-    }
 
     public void OpenOptions()
     {
@@ -45,6 +42,8 @@ public class Options : MonoBehaviour
 
     public void ApplyOptions()
     {
+        //optionsAppliedAnim.SetBool("Apply", true);
+        optionsAppliedAnim.CrossFadeInFixedTime("ChangesApplied", .01f);
         SetGraphics(graphicsDropdown.value);
         SetFullscreen(fullscreenToggle.isOn);
         SetResolution();
@@ -65,8 +64,8 @@ public class Options : MonoBehaviour
         Resolution res = resolutions[resolutionDropdown.value];
         Screen.SetResolution(res.width, res.height, fullscreenToggle.isOn, res.refreshRate);
 
-        text.gameObject.SetActive(false); //This looks stupid, but if it works, it's not stupid :)
-        text.gameObject.SetActive(true); // don't remove please
+        testText.gameObject.SetActive(false); //This looks stupid, but if it works, it's not stupid :)
+        testText.gameObject.SetActive(true); // don't remove please
     }
 
     private void SetFullscreen(bool isFullscreen)
@@ -133,5 +132,9 @@ public class Options : MonoBehaviour
     public void SetAmbientVolume()
     {
         audioMixer.SetFloat("ambientVolume", ambientSlider.value);
+    }
+    public void SetUIVolume()
+    {
+        audioMixer.SetFloat("uiVolume", uiSlider.value);
     }
 }
