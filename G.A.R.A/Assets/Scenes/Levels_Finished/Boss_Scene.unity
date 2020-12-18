@@ -289,6 +289,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[3]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2848405648556966623, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: interactText
+      value: 
+      objectReference: {fileID: 3400112636141464252}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3f600aa61e02e848b002a457adcd0d6, type: 3}
 --- !u!1 &57371952
@@ -11636,6 +11641,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 612979ffe91450041a0715e8b8a5c436, type: 3}
+--- !u!114 &3400112636141464252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2858551257339654435, guid: 612979ffe91450041a0715e8b8a5c436,
+    type: 3}
+  m_PrefabInstance: {fileID: 3400112636141464251}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6217836474464639984
 PrefabInstance:
   m_ObjectHideFlags: 0
