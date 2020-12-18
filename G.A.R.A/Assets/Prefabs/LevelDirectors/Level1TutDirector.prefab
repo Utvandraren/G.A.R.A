@@ -583,7 +583,7 @@ MonoBehaviour:
   panicIncreaseModifier: 5
   sustainTime: 5
   currentTempo: 0
-  panicReductionRate: 0.1
+  panicReductionRate: 0.5
   reducePanicInterval: 2
 --- !u!114 &2078882722491777373
 MonoBehaviour:
@@ -604,18 +604,18 @@ MonoBehaviour:
   purgeDistance: 250
   timeBetweenScaleUp: 10
   nrSwarmerPerSpawn: 3
-  stragelerGroupSize: 0
+  stragelerGroupSize: 2
   intenseEnemyMax: 50
   intenseEnemyAmount: 10
   highScaleAmount: 2
-  calmEnemyMax: 15
+  calmEnemyMax: 0
   calmEnemyAmount: 0
   lowScaleAmount: 2
   mobMaxSize: 10
   mobSize: 5
   mobScaleAmount: 2
-  mobMinSpawnInterval: 3
-  mobMaxSpawnInterval: 10
+  mobMinSpawnInterval: 5
+  mobMaxSpawnInterval: 15
   nrNodesAway: 2
   started: 0
   mobReady: 0
