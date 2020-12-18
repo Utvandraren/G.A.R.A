@@ -45,7 +45,11 @@ public class PlayerController : MonoBehaviour
     [Header("Mouse look Settings")]
     [Tooltip("Do you want to invert the direction for looking up and down with the mouse?")]
     [SerializeField] private bool invertY = false;
-    [SerializeField, Range(.1f, 2f)] private float mouseSensitivityMultiplier = 1f; //Might move this later to a manager type script
+    private float mouseSensitivityMax = 2f;
+    [SerializeField] private float mouseSensitivityMultiplier;
+    
+
+
     /// <summary>
     /// CameraState class from the unity base camera script, modified. Handles mouse look rotation.
     /// </summary>
@@ -122,7 +126,9 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = Vector3.zero;
 
         if (PauseMenu.GameIsPaused)
+        {
             return;
+        }
 
         #if ENABLE_LEGACY_INPUT_MANAGER
 
@@ -169,8 +175,8 @@ public class PlayerController : MonoBehaviour
         }
 
         direction = GetInputTranslationDirection() * Time.deltaTime;
+
         #elif USE_INPUT_SYSTEM
-            // TODO: make the new input system work
         #endif
 
         m_TargetCameraState.Translate(direction);
@@ -205,10 +211,15 @@ public class PlayerController : MonoBehaviour
         return temp;
     }
 
+    public void SetSensitivity(float value)
+    {
+        mouseSensitivityMultiplier = mouseSensitivityMax * value;
+    }
+
     //private void OnGUI()
     //{
     //    GUI.Label(new Rect(10, 10, 200, 60), "Speed limit: " + currentMaxSpeed.ToString());
     //    GUI.Label(new Rect(10, 30, 200, 60), "Roll rate: " + currentRollRate.ToString());
-    //     GUI.Label(new Rect(10, 50, 200, 60), "rb.Velocity.magnitude: " + rb.velocity.magnitude.ToString());
+    //    GUI.Label(new Rect(10, 50, 200, 60), "rb.Velocity.magnitude: " + rb.velocity.magnitude.ToString());
     //}
 }

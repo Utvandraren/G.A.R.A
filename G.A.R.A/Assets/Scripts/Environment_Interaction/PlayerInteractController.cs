@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 /// <summary>
 /// A class that handles interaction between the player and interactable objects.
 /// </summary>

@@ -14,7 +14,9 @@ public class Interactable : MonoBehaviour
     public UnityEvent electricInteraction;
     public UnityEvent useInteraction;
     float outlineCountdown = 0;
+    [Tooltip("Set this to true if the object can be used with the interact key.")]
     public bool isUsable;
+    [Tooltip("Set this to true if the object is supposed to be interacted with using weaponry.")]
     public bool canInteract;
     public bool showOutline;
 
