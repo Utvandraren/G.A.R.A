@@ -8,6 +8,7 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private float invincibleTime = 3;
     [SerializeField] private GameObject trackingLaser;
     [SerializeField] private AudioClip transitionAudioClip;
+    [SerializeField] private GameObject enemyScreamerWormPrefab;
 
 
     [Header("Phase 1")]
@@ -92,7 +93,7 @@ public class BossManager : Singleton<BossManager>
                 break;
 
             case BossPhases.TentaclePhase:
-                StopCoroutine(ContinousSpawning());
+                //StopCoroutine(ContinousSpawning());
                 DestroyAllEnemies();
                 StartTentaclePhase();
                 break;
@@ -179,22 +180,26 @@ public class BossManager : Singleton<BossManager>
 
         for (int i = 0; i < enemyAmountToSpawn; i++)
         {
-            //blendPower += 0.2f;
             SpawnEnemy();
             yield return new WaitForSeconds(0.3f);
 
         }
     }
 
-    //CoRoutine spawning a new enemy every few second
+    //CoRoutine spawning a new screamerenemy every few second
     IEnumerator ContinousSpawning()
     {
-        yield return new WaitForSeconds(spawnTimeRate);
-        if (currentEnemyAmount < enemyLimit)
+        while (true)
         {
-            SpawnEnemy();
-            currentEnemyAmount++;
+            yield return new WaitForSeconds(spawnTimeRate);
+            if (currentEnemyAmount < enemyLimit)
+            {
+                Vector3 posToSpawn = spawnPoint.position + Random.onUnitSphere * 20f;
+                enemyPool.Add(Instantiate(enemyScreamerWormPrefab, posToSpawn, Quaternion.identity));
+                currentEnemyAmount++;
+            }
         }
+        
     }
 
     void SpawnEnemy()
