@@ -554,6 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464370d231cb6b42b31b08b9e924082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
 --- !u!114 &2078882722491777370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,7 +618,6 @@ MonoBehaviour:
   mobMinSpawnInterval: 5
   mobMaxSpawnInterval: 15
   nrNodesAway: 2
-  started: 0
   mobReady: 0
   currentTempo: 0
 --- !u!114 &2078882722491777313
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0f8f3d71827d246bbd37064b84a81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeAreaDepth: 3
+  activeAreaDepth: 0
   nodes:
   - type: 2
     percentToEnd: 0

@@ -129,39 +129,84 @@ public class LevelGraph : MonoBehaviour
 
     public List<Node> FindActiveArea()
     {
-        return Radiate(playerNode, activeAreaDepth);
+        List<Node> activeArea = new List<Node>();
+        bool[] enqueued = new bool[nodes.Length];
+        Queue<int> nodeQue = new Queue<int>();
+        nodeQue.Enqueue(playerNode);
+        enqueued[nodeQue.Peek()] = true;
+        nodeQue.Enqueue(-1);
+        int treeDepth = 0;
+        while (nodeQue.Count > 0)
+        {
+            bool newDepth = false;
+            int activeNode = nodeQue.Dequeue();
+            if (activeNode == -1)
+            {
+                treeDepth++;
+                if(treeDepth > activeAreaDepth)
+                {
+                    break;
+                }
+                continue;
+            }
+            if (nodeQue.Peek() == -1)
+            {
+                newDepth = true;
+            }
+
+            activeArea.Add(nodes[activeNode]);
+
+            foreach (Edge edge in edges[activeNode])
+            {
+                int toIndex = edge.to;
+                if (!enqueued[toIndex])
+                {
+                    nodeQue.Enqueue(toIndex);
+                    enqueued[toIndex] = true;
+                }
+            }
+            if (newDepth)
+            {
+                nodeQue.Enqueue(-1);
+            }
+        }
+        return activeArea;
     }
 
     private List<Node> Radiate(int origo, int depth)
     {
         List<Node> radialNodes = new List<Node>();
-        bool[] visited = new bool[nodes.Length];
+        int[] storedDepth = new int[nodes.Length];
+        for (int i = 0; i < nodes.Length; i++)
+        {
+            storedDepth[i] = nodes.Length + 1;
+        }
 
-        RecursiveRadiate(origo, depth, 0, ref radialNodes, ref visited);
+        RecursiveRadiate(origo, depth, 0, ref radialNodes, ref storedDepth);
 
         return radialNodes;
     }
 
-
-    // Faulty, sets depth from a depth first search. Possible nodes are missed
-    // Improvements need to compare the set depth
-    private void RecursiveRadiate(int currentNode, int maxDepth, int currentDepth, ref List<Node> radialNodes, ref bool[] visited)
+    private void RecursiveRadiate(int currentNode, int maxDepth, int currentDepth, ref List<Node> radialNodes, ref int[] storedDepth)
     {
         if (currentDepth > maxDepth)
             return;
-        radialNodes.Add(nodes[currentNode]);
-        visited[currentNode] = true;
+        if (!radialNodes.Contains(nodes[currentNode]))
+        {
+            radialNodes.Add(nodes[currentNode]);
+        }
+        storedDepth[currentNode] = currentDepth;
         currentDepth++;
         foreach (Edge edge in edges[currentNode])
         {
-            if (!visited[edge.to])
+            if (currentDepth < storedDepth[edge.to])
             {
-                RecursiveRadiate(edge.to, maxDepth, currentDepth, ref radialNodes, ref visited);
+                RecursiveRadiate(edge.to, maxDepth, currentDepth, ref radialNodes, ref storedDepth);
             }
         }
     }
    /// <summary>
-   /// Functions by marking changes in depth winth a "-1" value in the queue
+   /// Functions by marking changes in depth with a "-1" value in the queue
    /// </summary>
     public void SetNodeGradient()
     {

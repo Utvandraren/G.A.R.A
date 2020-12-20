@@ -17,7 +17,7 @@ public class Pacer : MonoBehaviour
     private float panicScore;
     private float maxPanicScore = 10;
     [SerializeField] private float panicReductionRate = 0.1f;
-    private bool started;
+    private bool active;
     private float upperThreshold = 10f;
     private float lowerThreshold = 0f;
     private float tempoTimer;
@@ -39,6 +39,15 @@ public class Pacer : MonoBehaviour
         writer.WriteLine("---------------------------------------------------------------------------------------");
     }
 
+    public void Activate()
+    {
+        active = true;
+    }
+    public void Deactivate()
+    {
+        active = false;
+    }
+
     private void OnDestroy()
     {
         writer.WriteLine("---------------------------------------------------------------------------------------");
@@ -49,12 +58,11 @@ public class Pacer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!started)
+        if (!active)
             return;
         activeTimer += Time.deltaTime;
         printTimer += Time.deltaTime;
         ChangeTempo();
-        //CalcPanicReductionRate();
         if (reducePanic)
         {
             panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
@@ -128,14 +136,9 @@ public class Pacer : MonoBehaviour
         panicReductionRate = hpPercent + shieldPercent * 0.5f;
     }
 
-    public void StartedLevel()
-    {
-        started = true;
-    }
-
     public void IncreasePanicOnDamageTaken(float damagePercent)
     {
-        if (!started)
+        if (!active)
             return;
         float panicIncrease = damagePercent;
         panicScore = Mathf.Min(panicScore + panicIncrease * panicIncreaseModifier, maxPanicScore);
@@ -143,7 +146,7 @@ public class Pacer : MonoBehaviour
     }
     public void IncreasePanicOnKill(float distanceToEnemy)
     {
-        if (!started)
+        if (!active)
             return;
         float panicIncrease = 1f / distanceToEnemy;
         panicScore = Mathf.Min(panicScore + panicIncrease * panicIncreaseModifier, maxPanicScore);

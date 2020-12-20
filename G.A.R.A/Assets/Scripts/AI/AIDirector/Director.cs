@@ -14,6 +14,11 @@ public class Director : MonoBehaviour
 
     private List<Edge.DoorType> doorTypes = new List<Edge.DoorType>();
 
+    private float timeBetweenPings = 0.1f;
+    private float pingTimer = 0f;
+
+    public bool active;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,10 +50,10 @@ public class Director : MonoBehaviour
     /// <param name="e"></param>
     private void Graph_ChangedNode(object sender, System.EventArgs e)
     {
-        if (!spawnManager.started && (graph.nodes[graph.playerNode].type == Node.RoomType.START || graph.nodes[graph.playerNode].type == Node.RoomType.STARTEXTEND))
-            return;
-        spawnManager.started = true;
-        pacer.StartedLevel();
+        if (!(graph.nodes[graph.playerNode].type == Node.RoomType.START || graph.nodes[graph.playerNode].type == Node.RoomType.STARTEXTEND))
+        {
+            ActivateDirector();
+        }
         if (shortestPath.nodes.Count != 0)
         {
 
@@ -68,8 +73,18 @@ public class Director : MonoBehaviour
         //CheckAmmoRequirements();
 
         List<Node> newActiveArea = graph.FindActiveArea();
-        spawnManager.OnPlayerNodeChange(activeArea, newActiveArea, playerReader.player.transform.position);
+        if (active)
+        {
+            spawnManager.OnPlayerNodeChange(activeArea, newActiveArea, playerReader.player.transform.position);
+        }
         activeArea = newActiveArea;
+    }
+
+    private void ActivateDirector()
+    {
+        active = true;
+        pacer.Activate();
+        spawnManager.Activate();
     }
 
     internal void EnemyIsDestroyed(Vector3 position)
@@ -78,9 +93,14 @@ public class Director : MonoBehaviour
         pacer.IncreasePanicOnKill(distance);
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        graph.FindPlayerNode(playerReader.player.transform.position);
+        pingTimer += Time.deltaTime;
+        if (pingTimer > timeBetweenPings)
+        {
+            pingTimer = 0;
+            graph.FindPlayerNode(playerReader.player.transform.position);
+        }
         spawnManager.currentTempo = pacer.currentTempo;
         if (spawnManager.mobReady)
         {

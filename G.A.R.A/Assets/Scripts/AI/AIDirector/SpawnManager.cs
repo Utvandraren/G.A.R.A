@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private int nrNodesAway = 3;
 
 
-    [HideInInspector] public bool started;
+    private bool active;
     [HideInInspector] public bool mobReady;
     [HideInInspector] public Pacer.TempoType currentTempo;
 
@@ -61,6 +61,15 @@ public class SpawnManager : MonoBehaviour
         streamWriter.Close();
     }
 
+    public void Activate()
+    {
+        active = true;
+    }
+    public void Deactivate()
+    {
+        active = false;
+    }
+
     private void Start()
     {
         GetComponentsInChildren(spawners);
@@ -77,7 +86,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (!started)
+        if (!active)
             return;
         switch (currentTempo)
         {
