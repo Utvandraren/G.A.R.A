@@ -29,7 +29,6 @@ public class LogbookCounter : MonoBehaviour
     public void FoundLogbook()
     {
         numberOfLogbooks--;
-        //gameLogbookAnimator.Play("LogbookCounterPopup");
         gameLogbookAnimator.SetTrigger("Trigger");
         logbookTextPause.text = numberOfLogbooks.ToString();
         logbookTextGame.text = numberOfLogbooks.ToString();
