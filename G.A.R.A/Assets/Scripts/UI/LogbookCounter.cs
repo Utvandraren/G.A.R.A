@@ -8,13 +8,16 @@ public class LogbookCounter : MonoBehaviour
 {
     private GameObject[] logbooks;
     private int numberOfLogbooks;
-    [SerializeField] private Text logbooksText;
+    [SerializeField] private Text logbookTextPause;
+    [SerializeField] private Text logbookTextGame;
+    [SerializeField] private Animator gameLogbookAnimator;
     // Start is called before the first frame update
     void Start()
     {
         logbooks = GameObject.FindGameObjectsWithTag("Logbook");
         numberOfLogbooks = logbooks.Length;
-        logbooksText.text = numberOfLogbooks.ToString();
+        logbookTextPause.text = numberOfLogbooks.ToString();
+        logbookTextGame.text = numberOfLogbooks.ToString();
     }
 
     // Update is called once per frame
@@ -26,7 +29,10 @@ public class LogbookCounter : MonoBehaviour
     public void FoundLogbook()
     {
         numberOfLogbooks--;
-        logbooksText.text = numberOfLogbooks.ToString();
+        //gameLogbookAnimator.Play("LogbookCounterPopup");
+        gameLogbookAnimator.SetTrigger("Trigger");
+        logbookTextPause.text = numberOfLogbooks.ToString();
+        logbookTextGame.text = numberOfLogbooks.ToString();
     }
 
     public int GetNumberOfLogbooks()
