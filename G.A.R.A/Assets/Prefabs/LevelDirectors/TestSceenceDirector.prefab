@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 1
 --- !u!1 &1512473618202958235
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +88,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 4
 --- !u!1 &1512473618384890632
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 3
 --- !u!1 &1512473618425525916
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 6
 --- !u!1 &1512473618482573044
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 2
 --- !u!1 &1512473618535125619
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 0
 --- !u!1 &1512473618960177716
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 7
 --- !u!1 &1512473619025278439
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +352,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 9
 --- !u!1 &1512473619105857366
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +368,7 @@ GameObject:
   - component: {fileID: 1512473619105857324}
   - component: {fileID: 1512473619105857325}
   m_Layer: 0
-  m_Name: Director
+  m_Name: TestSceenceDirector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,7 +383,7 @@ Transform:
   m_GameObject: {fileID: 1512473619105857366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.692, y: 3.692, z: 3.692}
   m_Children:
   - {fileID: 1512473618535125581}
   - {fileID: 1512473618067008264}
@@ -432,8 +424,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48f53f7fef806041b613add3598c4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTempo: 0
+  panicIncreaseModifier: 2
   sustainTime: 5
+  currentTempo: 0
+  panicReductionRate: 0.1
+  reducePanicInterval: 0
 --- !u!114 &1512473619105857360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,16 +445,25 @@ MonoBehaviour:
   - {fileID: 4432575310953063639, guid: b2d4767a5450dcc4c8affa0e06c077f7, type: 3}
   - {fileID: 6275980567223361757, guid: a38018904f0165549a3cce3c8272c634, type: 3}
   - {fileID: 4432575310953063639, guid: 154bc80e7d255db46bcf6083f6668749, type: 3}
-  currentTempo: 0
-  obstacles: 
-  highIntensityEnemyCount: 10
-  lowIntensityEnemyCount: 0
-  mobSize: 5
-  timeBetweenMobs: 10
-  scalingTimer: 0
+  purgeDistance: 290
   timeBetweenScaleUp: 10
+  nrSwarmerPerSpawn: 1
+  stragelerGroupSize: 1
+  intenseEnemyMax: 50
+  intenseEnemyAmount: 10
+  highScaleAmount: 2
+  calmEnemyMax: 10
+  calmEnemyAmount: 0
+  lowScaleAmount: 2
+  mobMaxSize: 0
+  mobSize: 0
+  mobScaleAmount: 0
+  mobMinSpawnInterval: 7
+  mobMaxSpawnInterval: 20
+  nrNodesAway: 3
   started: 0
   mobReady: 0
+  currentTempo: 0
 --- !u!114 &1512473619105857367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,9 +478,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerStats: {fileID: 0}
-  laserAmmo: {fileID: 11400000, guid: 09b7a550a075bdb4d8306072664b3afb, type: 2}
-  projectileAmmo: {fileID: 11400000, guid: 84f2bc23bede1ee45aa87628b1124e92, type: 2}
-  tazerAmmo: {fileID: 11400000, guid: 4470a6f101c12204e86d3c72724a9fd4, type: 2}
 --- !u!114 &1512473619105857324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,11 +490,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0f8f3d71827d246bbd37064b84a81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeAreaDepth: 2
   nodes:
   - type: 1
     percentToEnd: 0
     spawner: {fileID: 1512473618535125580}
-  - type: 0
+  - type: 1
     percentToEnd: 0
     spawner: {fileID: 1512473618067008265}
   - type: 0
@@ -617,7 +619,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 8
 --- !u!1 &1512473619875093124
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +663,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 5
 --- !u!1 &1512473620095563451
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,7 +707,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 10
 --- !u!1 &1512473620195473614
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,4 +751,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  index: 11

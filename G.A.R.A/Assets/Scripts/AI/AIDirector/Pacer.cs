@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using System.IO;
 public class Pacer : MonoBehaviour
 {
     public enum TempoType
@@ -16,28 +16,70 @@ public class Pacer : MonoBehaviour
     private PlayerReader playerReader;
     private float panicScore;
     private float maxPanicScore = 10;
-    private float panicReductionRate = 0.5f;
-    private bool started;
+    [SerializeField] private float panicReductionRate = 0.1f;
+    private bool active;
     private float upperThreshold = 10f;
     private float lowerThreshold = 0f;
     private float tempoTimer;
 
+    private bool reducePanic = true;
+    private float reducePanicTimer;
+    [SerializeField] private float reducePanicInterval = 2f;
+
+    private float activeTimer;
+    private float printTimer;
+    private StreamWriter writer;
     // Start is called before the first frame update
     void Start()
     {
         currentTempo = TempoType.BUILDUP;
+        writer = new StreamWriter(@"panic.txt", true);
+        writer.AutoFlush = true;
+        writer.WriteLine(string.Format("Reduction rate: {0} point/sec; Panic inctease Multiplier: {1}", panicReductionRate, panicIncreaseModifier));
+        writer.WriteLine("---------------------------------------------------------------------------------------");
+    }
+
+    public void Activate()
+    {
+        active = true;
+    }
+    public void Deactivate()
+    {
+        active = false;
+    }
+
+    private void OnDestroy()
+    {
+        writer.WriteLine("---------------------------------------------------------------------------------------");
+        writer.Flush();
+        writer.Close();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!started)
+        if (!active)
             return;
-
+        activeTimer += Time.deltaTime;
+        printTimer += Time.deltaTime;
         ChangeTempo();
-        CalcPanicReductionRate();
-        if (!playerReader.InCombat())
+        if (reducePanic)
+        {
             panicScore = Mathf.Max(Mathf.Min(panicScore - panicReductionRate * Time.deltaTime, maxPanicScore), 0);
+        }
+        else
+        {
+            reducePanicTimer -= Time.deltaTime;
+            if(reducePanicTimer <= 0)
+            {
+                reducePanic = true;
+            }
+        }
+        if (printTimer >= 1f)
+        {
+            printTimer -= 1f;
+            writer.WriteLine(activeTimer + " " + panicScore + " " + currentTempo);
+        }
     }
 
     private void ChangeTempo()
@@ -58,6 +100,7 @@ public class Pacer : MonoBehaviour
                 {
                     currentTempo = TempoType.FADE;
                     Debug.Log("Current tempo" + currentTempo);
+                    ResetReductionTimer();
                 }
                 break;
             case TempoType.FADE:
@@ -93,14 +136,27 @@ public class Pacer : MonoBehaviour
         panicReductionRate = hpPercent + shieldPercent * 0.5f;
     }
 
-    public void StartedLevel()
+    public void IncreasePanicOnDamageTaken(float damagePercent)
     {
-        started = true;
-    }
-
-    public void IncreasePanic(float damagePercent)
-    {
+        if (!active)
+            return;
         float panicIncrease = damagePercent;
         panicScore = Mathf.Min(panicScore + panicIncrease * panicIncreaseModifier, maxPanicScore);
+        ResetReductionTimer();
+    }
+    public void IncreasePanicOnKill(float distanceToEnemy)
+    {
+        if (!active)
+            return;
+        float panicIncrease = 1f / distanceToEnemy;
+        panicScore = Mathf.Min(panicScore + panicIncrease * panicIncreaseModifier, maxPanicScore);
+        ResetReductionTimer();
+    }
+
+    private void ResetReductionTimer()
+    {
+        reducePanic = false;
+        reducePanicTimer = reducePanicInterval;
+
     }
 }

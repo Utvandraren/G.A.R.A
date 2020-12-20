@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,22 +15,22 @@ public class SpawnManager : MonoBehaviour
         PUSHING,
     }
 
-    [Header ("Global Settings")]
+    [Header("Global Settings")]
     public GameObject[] enemyPrefabs;
     public int purgeDistance = 150;
     public float timeBetweenScaleUp = 10f;
     [SerializeField] private int nrSwarmerPerSpawn = 2;
     [SerializeField] private int stragelerGroupSize = 2;
 
-    [Header ("High Intensity Settings")]
+    [Header("High Intensity Settings")]
     public int intenseEnemyMax = 50;
     public int intenseEnemyAmount = 10;
     public int highScaleAmount = 2;
-    [Header ("Low Intensity Settings")]
+    [Header("Low Intensity Settings")]
     public int calmEnemyMax = 10;
     public int calmEnemyAmount = 0;
     public int lowScaleAmount = 2;
-    [Header ("Mob Spawning settings Settings")]
+    [Header("Mob Spawning settings Settings")]
     public int mobMaxSize = 10;
     public int mobSize = 5;
     public int mobScaleAmount = 2;
@@ -41,7 +42,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private int nrNodesAway = 3;
 
 
-    [HideInInspector] public bool started;
+    private bool active;
     [HideInInspector] public bool mobReady;
     [HideInInspector] public Pacer.TempoType currentTempo;
 
@@ -50,11 +51,30 @@ public class SpawnManager : MonoBehaviour
     private float mobSpawnTimer;
     private List<Spawner> spawners;
 
+    private void PrintSettings()
+    {
+        StreamWriter streamWriter = new StreamWriter("panic.txt", true);
+        streamWriter.WriteLine(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " " + DateTime.Now.ToString());
+        streamWriter.WriteLine(string.Format("Straggeler spawns: {0}, High Max: {1}, High Start {2}; Low Max: {3}, Low Start: {4}; Mob Max {5}, Mob Start {6}",
+                                                stragelerGroupSize, intenseEnemyMax, intenseEnemyAmount, calmEnemyMax, calmEnemyAmount, mobMaxSize, mobSize));
+        streamWriter.Flush();
+        streamWriter.Close();
+    }
+
+    public void Activate()
+    {
+        active = true;
+    }
+    public void Deactivate()
+    {
+        active = false;
+    }
+
     private void Start()
     {
         GetComponentsInChildren(spawners);
-
         timeBetweenMobs = (mobMinSpawnInterval + mobMaxSpawnInterval) / 2f;
+        PrintSettings();
     }
 
     public void IncreaseThreatSizes()
@@ -66,7 +86,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (!started)
+        if (!active)
             return;
         switch (currentTempo)
         {
@@ -89,7 +109,7 @@ public class SpawnManager : MonoBehaviour
             IncreaseThreatSizes();
             scalingTimer = 0;
         }
-        if (mobSpawnTimer > timeBetweenMobs && BoidManager.allBoids.Count < intenseEnemyAmount && 
+        if (mobSpawnTimer > timeBetweenMobs && BoidManager.allBoids.Count < intenseEnemyAmount &&
             (currentTempo == Pacer.TempoType.BUILDUP || currentTempo == Pacer.TempoType.SUSTAIN))
         {
             mobReady = true;
@@ -103,27 +123,39 @@ public class SpawnManager : MonoBehaviour
         List<Node> oldActiveAreaDiff = new List<Node>(oldActiveArea);
         RemoveCommonNodes(ref oldActiveAreaDiff, ref newActiveAreaDiff);
         PurgeEnemies(oldActiveAreaDiff, playerPos);
-        SpawnWanderers(newActiveAreaDiff);
+        SpawnWanderers(newActiveAreaDiff, newActiveArea[0].percentToEnd);
     }
 
-    private void SpawnWanderers(List<Node> newActiveAreaDiff)
+    private void SpawnWanderers(List<Node> newActiveAreaDiff, float playerNodeDistToEnd)
     {
-        if (BoidManager.allBoids.Count < activeIntensityEnemyMax)
+        if (BoidManager.allBoids.Count >= activeIntensityEnemyMax)
         {
-            for (int i = 0; i < newActiveAreaDiff.Count * stragelerGroupSize; i++)
+            return;
+        }
+
+        for (int i = newActiveAreaDiff.Count - 1; i >= 0; i--)
+        {
+            
+            if(newActiveAreaDiff[i].percentToEnd < playerNodeDistToEnd)
             {
-                GameObject enemy = enemyPrefabs[i % enemyPrefabs.Length];
-                newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
-                if (enemy.TryGetComponent<SwarmerBT>(out SwarmerBT swarmerBT))
+                newActiveAreaDiff.RemoveAt(i);
+            }    
+
+        }
+
+        for (int i = 0; i < newActiveAreaDiff.Count * stragelerGroupSize; i++)
+        {
+            GameObject enemy = enemyPrefabs[i % enemyPrefabs.Length];
+            newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
+            if (enemy.TryGetComponent<SwarmerBT>(out SwarmerBT swarmerBT))
+            {
+                for (int j = 0; j < nrSwarmerPerSpawn; j++)
                 {
-                    for (int j = 0; j < nrSwarmerPerSpawn; j++)
-                    {
-                        newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
-                    }
+                    newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
                 }
-                if (BoidManager.allBoids.Count > activeIntensityEnemyMax)
-                    break;
             }
+            if (BoidManager.allBoids.Count > activeIntensityEnemyMax)
+                break;
         }
     }
 

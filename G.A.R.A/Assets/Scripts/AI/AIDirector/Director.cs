@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ public class Director : MonoBehaviour
     private List<Node> activeArea;
 
     private List<Edge.DoorType> doorTypes = new List<Edge.DoorType>();
+
+    private float timeBetweenPings = 0.1f;
+    private float pingTimer = 0f;
+
+    public bool active;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +40,7 @@ public class Director : MonoBehaviour
     {
         int damage = eventArgsDamage.damage;
         float damagePercent = (float)damage / playerReader.playerStats.health;
-        pacer.IncreasePanic(damagePercent);
+        pacer.IncreasePanicOnDamageTaken(damagePercent);
     }
 
     /// <summary>
@@ -44,10 +50,10 @@ public class Director : MonoBehaviour
     /// <param name="e"></param>
     private void Graph_ChangedNode(object sender, System.EventArgs e)
     {
-        if (!spawnManager.started && (graph.nodes[graph.playerNode].type == Node.RoomType.START || graph.nodes[graph.playerNode].type == Node.RoomType.STARTEXTEND))
-            return;
-        spawnManager.started = true;
-        pacer.StartedLevel();
+        if (!(graph.nodes[graph.playerNode].type == Node.RoomType.START || graph.nodes[graph.playerNode].type == Node.RoomType.STARTEXTEND))
+        {
+            ActivateDirector();
+        }
         if (shortestPath.nodes.Count != 0)
         {
 
@@ -67,13 +73,34 @@ public class Director : MonoBehaviour
         //CheckAmmoRequirements();
 
         List<Node> newActiveArea = graph.FindActiveArea();
-        spawnManager.OnPlayerNodeChange(activeArea, newActiveArea, playerReader.player.transform.position);
+        if (active)
+        {
+            spawnManager.OnPlayerNodeChange(activeArea, newActiveArea, playerReader.player.transform.position);
+        }
         activeArea = newActiveArea;
     }
 
-    void FixedUpdate()
+    private void ActivateDirector()
     {
-        graph.FindPlayerNode(playerReader.player.transform.position);
+        active = true;
+        pacer.Activate();
+        spawnManager.Activate();
+    }
+
+    internal void EnemyIsDestroyed(Vector3 position)
+    {
+        float distance = Vector2.Distance(position, playerReader.player.transform.position);
+        pacer.IncreasePanicOnKill(distance);
+    }
+
+    void Update()
+    {
+        pingTimer += Time.deltaTime;
+        if (pingTimer > timeBetweenPings)
+        {
+            pingTimer = 0;
+            graph.FindPlayerNode(playerReader.player.transform.position);
+        }
         spawnManager.currentTempo = pacer.currentTempo;
         if (spawnManager.mobReady)
         {

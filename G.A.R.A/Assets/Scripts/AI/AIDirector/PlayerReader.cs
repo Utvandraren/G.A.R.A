@@ -39,7 +39,7 @@ public class PlayerReader : MonoBehaviour
                 inCombat = false;
             }
         }
-        
+
     }
 
     public float GetPlayerHP()

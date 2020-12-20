@@ -42,7 +42,7 @@ public class BOID : MonoBehaviour
     }
     private void OnDestroy()
     {
-        BoidManager.allBoids.Remove(this);
+        BoidManager.DestroyBoid(this);
     }
 
     internal void UpdateMovement(Vector3 targetDir)
