@@ -132,7 +132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393901228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15.9}
+  m_LocalPosition: {x: 0, y: 0, z: -15.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1512412689254425708}
@@ -152,8 +152,8 @@ Light:
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 600
   m_Range: 230
-  m_SpotAngle: 68.49275
-  m_InnerSpotAngle: 15.35299
+  m_SpotAngle: 68.50631
+  m_InnerSpotAngle: 15.366544
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -162,7 +162,7 @@ Light:
     m_Strength: 1
     m_Bias: 1
     m_NormalBias: 0
-    m_NearPlane: 1.42
+    m_NearPlane: 0.29
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 6769700127276142381}
   - component: {fileID: 2381535370189980988}
   - component: {fileID: 2381535370189980989}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1276,6 +1276,11 @@ PrefabInstance:
     - target: {fileID: 2365036969022466035, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365036969828263400, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2365036969828263405, guid: 11e8ebe1d8ac4424bbf8b8cbeed99aa4,

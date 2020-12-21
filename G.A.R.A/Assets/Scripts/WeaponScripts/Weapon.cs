@@ -104,6 +104,7 @@ public class Weapon : MonoBehaviour
             return;
         }
         weaponAudioSource.PlayOneShot(startUpSound);
+
     }
 
     public void ResetAmmo()

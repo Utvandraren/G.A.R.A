@@ -54,7 +54,16 @@ public class GameManager : Singleton<GameManager>
         }
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentLevel)); //Required for SceneManager.GetActiveScene to work properly
-        uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+
+        try
+        {
+            uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        }
+        catch
+        {
+            Debug.Log("GameManager.cs could not find the UIManager. Was this intentional?");
+        }
+
         Debug.Log("Load complete");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
