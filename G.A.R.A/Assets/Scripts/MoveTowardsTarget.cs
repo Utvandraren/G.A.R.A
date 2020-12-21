@@ -23,4 +23,9 @@ public class MoveTowardsTarget : MonoBehaviour
         rb.AddForce(forceToAdd);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxForce);
     }
+
+    void OnDestroy()
+    {
+        GetComponent<EnemyDrops>().DropAmmo(transform.position);
+    }
 }

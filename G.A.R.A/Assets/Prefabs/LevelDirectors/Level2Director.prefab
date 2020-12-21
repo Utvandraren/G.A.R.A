@@ -1618,6 +1618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464370d231cb6b42b31b08b9e924082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
 --- !u!114 &4995215922326169574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1658,7 +1659,7 @@ MonoBehaviour:
   intenseEnemyMax: 25
   intenseEnemyAmount: 5
   highScaleAmount: 2
-  calmEnemyMax: 5
+  calmEnemyMax: 0
   calmEnemyAmount: 0
   lowScaleAmount: 1
   mobMaxSize: 0
@@ -1667,7 +1668,6 @@ MonoBehaviour:
   mobMinSpawnInterval: 7
   mobMaxSpawnInterval: 20
   nrNodesAway: 3
-  started: 0
   mobReady: 0
   currentTempo: 0
 --- !u!114 &4995215922326169568

@@ -18,7 +18,7 @@ public class MusicManager : Singleton<MusicManager>
     void Start()
     {
         source = GetComponent<AudioSource>();
-       StartCoroutine(StartMusic());
+        StartMusic();
         PauseMusic();
     }
 
@@ -41,21 +41,20 @@ public class MusicManager : Singleton<MusicManager>
     {
         source.clip = musicClip;
         StopAllCoroutines();
-        source.Play();
-        StartCoroutine(CoolDown());
-        source.volume = Mathf.Lerp(0f, 1f, Time.time);
+        StartCoroutine(StartMusic());
+        source.volume = Mathf.Lerp(0f, 1f, 4f);
     }
 
     //Smoothly transition to the next snapshot
     public void TransitionToSoftSnapshot()
     {
-        softenSnapshot.TransitionTo(transitionTime);
+        softenSnapshot.TransitionTo(transitionTime );
     }
 
     //Go back to the default snapshot
     public void ResetSnapshot()
     {
-        defaultSnapshot.TransitionTo(transitionTime);
+        defaultSnapshot.TransitionTo(transitionTime );
     }
 
     public void PauseMusic()
@@ -75,12 +74,6 @@ public class MusicManager : Singleton<MusicManager>
         yield return new WaitForSeconds(Random.Range(minRandomStartTime, maxRandomStartTime));
         source.Play();
         StartCoroutine(CoolDown());
-        source.volume = Mathf.Lerp(0f, 1f, Time.time);
-        //for (int i = 0; i < 1f / 0.001f; i++)
-        //{
-        //    yield return new WaitForSeconds(0.1f);
-        //    source.volume += 0.01f;
-        //}
     }
 
     //Coroutine that stops the music from starting before its done

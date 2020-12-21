@@ -44,13 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198fd1971e3cea240b261c21d8081813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minRandomStartTime: 15
-  maxRandomStartTime: 30
+  minRandomStartTime: 20
+  maxRandomStartTime: 35
   mixer: {fileID: 24100000, guid: 2d483ad5726ff6f499314956a3975aea, type: 2}
   defaultSnapshot: {fileID: 24500006, guid: 2d483ad5726ff6f499314956a3975aea, type: 2}
-  softenSnapshot: {fileID: 6336916392295704803, guid: 2d483ad5726ff6f499314956a3975aea,
+  softenSnapshot: {fileID: 4499571822697839553, guid: 2d483ad5726ff6f499314956a3975aea,
     type: 2}
-  transitionTime: 0.5
+  transitionTime: 2
 --- !u!82 &3436624211669656625
 AudioSource:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: dd39994fa71c3af41adde48fd7eac468, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
