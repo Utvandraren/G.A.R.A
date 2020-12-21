@@ -86,9 +86,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: 2383
-    y: 160
+    y: 17
     width: 3029
-    height: 2035
+    height: 2178
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2350,14 +2350,11 @@ VisualEffectResource:
         data: 00000000
     m_Events:
     - name: OnPlay
-      playSystems: 
+      playSystems: 0000000001000000
       stopSystems: 
     - name: OnStop
       playSystems: 
       stopSystems: 0000000001000000
-    - name: OnFire
-      playSystems: 0100000000000000
-      stopSystems: 
     m_RuntimeVersion: 10
     m_RendererSettings:
       motionVectorGenerationMode: 0
@@ -2949,9 +2946,7 @@ MonoBehaviour:
   m_Label: 
   m_Data: {fileID: 0}
   m_InputFlowSlot:
-  - link:
-    - context: {fileID: 8926484042661615915}
-      slotIndex: 0
+  - link: []
   - link: []
   m_OutputFlowSlot:
   - link:
@@ -4895,7 +4890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 3660, y: 160}
+  m_UIPosition: {x: 3655, y: 17}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -4905,11 +4900,7 @@ MonoBehaviour:
   m_InputFlowSlot:
   - link: []
   m_OutputFlowSlot:
-  - link:
-    - context: {fileID: 8926484042661614816}
-      slotIndex: 0
-    - context: {fileID: 8926484042661616088}
-      slotIndex: 0
+  - link: []
   eventName: OnFire
 --- !u!114 &8926484042661615918
 MonoBehaviour:
@@ -4996,9 +4987,7 @@ MonoBehaviour:
   m_Label: 
   m_Data: {fileID: 0}
   m_InputFlowSlot:
-  - link:
-    - context: {fileID: 8926484042661615915}
-      slotIndex: 0
+  - link: []
   - link: []
   m_OutputFlowSlot:
   - link:
