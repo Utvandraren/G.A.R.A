@@ -194,7 +194,7 @@ public class BossManager : Singleton<BossManager>
             yield return new WaitForSeconds(spawnTimeRate);
             if (currentEnemyAmount < enemyLimit)
             {
-                Vector3 posToSpawn = spawnPoint.position + Random.onUnitSphere * 20f;
+                Vector3 posToSpawn = spawnPoint.position + Random.onUnitSphere * 40f;
                 enemyPool.Add(Instantiate(enemyScreamerWormPrefab, posToSpawn, Quaternion.identity));
                 currentEnemyAmount++;
             }

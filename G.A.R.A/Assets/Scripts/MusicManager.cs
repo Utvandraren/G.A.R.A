@@ -18,7 +18,8 @@ public class MusicManager : Singleton<MusicManager>
     void Start()
     {
         source = GetComponent<AudioSource>();
-        StartCoroutine(StartMusic());
+       StartCoroutine(StartMusic());
+        PauseMusic();
     }
 
     void Update()

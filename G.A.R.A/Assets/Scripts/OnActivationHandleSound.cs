@@ -10,27 +10,64 @@ public class OnActivationHandleSound : MonoBehaviour
     [SerializeField]
     Behavior behaviorToPlay;
 
+    [SerializeField]
+    WhenToPlay whenToPlay;
+
+
+    enum WhenToPlay
+    {
+        Onstart,
+        OnEnable
+    }
+
     enum Behavior
     {
-        play,
-        pause,
-        continuePlaying
+        Play,
+        Pause,
+        ContinuePlaying
+    }
+
+    void Start()
+    {
+        switch (whenToPlay)
+        {
+            case WhenToPlay.Onstart:
+                PlayBehavior();
+                break;       
+            default:
+                break;
+        }
     }
 
     void OnEnable()
     {
+        switch (whenToPlay)
+        {
+            case WhenToPlay.OnEnable:
+                PlayBehavior();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void PlayBehavior()
+    {
         switch (behaviorToPlay)
         {
-            case Behavior.play:
+            case Behavior.Play:
                 MusicManager.Instance.PlayMusicClip(clipToPlay);
                 break;
 
-            case Behavior.pause:
+            case Behavior.Pause:
                 MusicManager.Instance.PauseMusic();
                 break;
 
-            case Behavior.continuePlaying:
+            case Behavior.ContinuePlaying:
                 MusicManager.Instance.ContinueMusic();
+                break;
+
+            default:
                 break;
         }
     }
