@@ -12,14 +12,14 @@ public class MusicManager : Singleton<MusicManager>
     [SerializeField] AudioMixerSnapshot softenSnapshot;
     [SerializeField] float transitionTime = 0.5f;
 
-
     AudioSource source;
 
     // Start is called before the first frame update
     void Start()
     {
         source = GetComponent<AudioSource>();
-        StartCoroutine(StartMusic());
+       StartCoroutine(StartMusic());
+        PauseMusic();
     }
 
     void Update()
@@ -36,16 +36,23 @@ public class MusicManager : Singleton<MusicManager>
 
     }
 
+    //Play the audioclip of your choice
     public void PlayMusicClip(AudioClip musicClip)
     {
         source.clip = musicClip;
+        StopAllCoroutines();
+        source.Play();
+        StartCoroutine(CoolDown());
+        source.volume = Mathf.Lerp(0f, 1f, Time.time);
     }
 
+    //Smoothly transition to the next snapshot
     public void TransitionToSoftSnapshot()
     {
         softenSnapshot.TransitionTo(transitionTime);
     }
 
+    //Go back to the default snapshot
     public void ResetSnapshot()
     {
         defaultSnapshot.TransitionTo(transitionTime);
@@ -68,14 +75,15 @@ public class MusicManager : Singleton<MusicManager>
         yield return new WaitForSeconds(Random.Range(minRandomStartTime, maxRandomStartTime));
         source.Play();
         StartCoroutine(CoolDown());
-
-        for (int i = 0; i < 1f / 0.001f; i++)
-        {
-            yield return new WaitForSeconds(0.1f);
-            source.volume += 0.01f;
-        }
+        source.volume = Mathf.Lerp(0f, 1f, Time.time);
+        //for (int i = 0; i < 1f / 0.001f; i++)
+        //{
+        //    yield return new WaitForSeconds(0.1f);
+        //    source.volume += 0.01f;
+        //}
     }
 
+    //Coroutine that stops the music from starting before its done
     IEnumerator CoolDown()
     {
         yield return new WaitForSeconds(source.clip.length);

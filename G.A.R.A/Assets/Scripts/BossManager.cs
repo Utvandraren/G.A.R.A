@@ -7,12 +7,17 @@ public class BossManager : Singleton<BossManager>
 {
     [SerializeField] private float invincibleTime = 3;
     [SerializeField] private GameObject trackingLaser;
+    [SerializeField] private AudioClip transitionAudioClip;
+    [SerializeField] private GameObject enemyScreamerWormPrefab;
+
 
     [Header("Phase 1")]
     [SerializeField] private GameObject shield;
     [SerializeField] private int startShieldHealth;
     [SerializeField] private int shieldCoolDown;
     [SerializeField] private GameObject switchRoot;
+    [SerializeField] private AudioClip powerDownClip;
+    [SerializeField] private AudioClip powerUpClip;
     private int shieldHealth = 0;
     private ShieldSwitch[] switches;
     private BossStats bossStats;
@@ -30,13 +35,14 @@ public class BossManager : Singleton<BossManager>
 
     [Header("Phase 3")]
     [SerializeField] private GameObject tentaclePrefab;
+    [SerializeField] private GameObject frontShieldPrefab;
     [SerializeField] private int tentaclesAmount = 1;
     private List<GameObject> tentacles;
     [SerializeField] private Transform tentacleSpawnPoint;
     [SerializeField] private float distanceFromBoss;
 
 
-    private BossPhases currentPhase = BossPhases.ShieldPhase;
+    private BossPhases currentPhase = BossPhases.ShieldPhase;   //----------------------------
     private Animator animator;
     private Transform target;
     private float blendPower = 0;
@@ -87,8 +93,8 @@ public class BossManager : Singleton<BossManager>
                 break;
 
             case BossPhases.TentaclePhase:
+                //StopCoroutine(ContinousSpawning());
                 DestroyAllEnemies();
-                StopCoroutine(ContinousSpawning());
                 StartTentaclePhase();
                 break;
 
@@ -112,10 +118,12 @@ public class BossManager : Singleton<BossManager>
     //Turns the shield off for a certain amount of time and then activates it again
     IEnumerator TurnOffShield()
     {
+        source.PlayOneShot(powerDownClip);
         shield.SetActive(false);
         bossStats.isInvicible = false;
         yield return new WaitForSeconds(shieldCoolDown);
         StartShieldPhase();
+        source.PlayOneShot(powerUpClip);
     }
 
     //function activating random switches
@@ -172,22 +180,26 @@ public class BossManager : Singleton<BossManager>
 
         for (int i = 0; i < enemyAmountToSpawn; i++)
         {
-            //blendPower += 0.2f;
             SpawnEnemy();
             yield return new WaitForSeconds(0.3f);
 
         }
     }
 
-    //CoRoutine spawning a new enemy every few second
+    //CoRoutine spawning a new screamerenemy every few second
     IEnumerator ContinousSpawning()
     {
-        yield return new WaitForSeconds(spawnTimeRate);
-        if (currentEnemyAmount < enemyLimit)
+        while (true)
         {
-            SpawnEnemy();
-            currentEnemyAmount++;
+            yield return new WaitForSeconds(spawnTimeRate);
+            if (currentEnemyAmount < enemyLimit)
+            {
+                Vector3 posToSpawn = spawnPoint.position + Random.onUnitSphere * 40f;
+                enemyPool.Add(Instantiate(enemyScreamerWormPrefab, posToSpawn, Quaternion.identity));
+                currentEnemyAmount++;
+            }
         }
+        
     }
 
     void SpawnEnemy()
@@ -210,6 +222,7 @@ public class BossManager : Singleton<BossManager>
     {
         source.Stop();
         trackingLaser.SetActive(true);
+        frontShieldPrefab.SetActive(true);
         StartCoroutine(StartWavingPartsAnimation());
         //System.Random rnd = new System.Random();
         for (int i = 0; i < tentaclesAmount; i++)
@@ -240,6 +253,7 @@ public class BossManager : Singleton<BossManager>
     public void PrepareNextPhase()
     {
         StartCoroutine(BecomeInvincible());
+        source.PlayOneShot(transitionAudioClip);
     }
 
     //Disable Bossstats so boss cant be damaged a certain amount of time then transition to the next phase

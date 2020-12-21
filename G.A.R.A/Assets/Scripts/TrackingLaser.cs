@@ -10,6 +10,8 @@ public class TrackingLaser : Weapon
     [SerializeField] private float laserBeamAttackRadius = 1;
     [SerializeField] private GameObject laserBeam;
     [SerializeField] private GameObject aimingBeam;
+    [SerializeField] private ParticleSystem chargeLaserParticlesEffect;
+
 
 
     private GameObject target;
@@ -74,6 +76,7 @@ public class TrackingLaser : Weapon
     private IEnumerator ChargeLaser()
     {
         PlayStartUpSound();
+        chargeLaserParticlesEffect.Play();
         currentlyShooting = true;
         bossMov.enabled = false;        
         yield return new WaitForSeconds(chargeUpTime);

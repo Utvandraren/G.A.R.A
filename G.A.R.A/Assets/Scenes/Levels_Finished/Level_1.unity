@@ -5525,6 +5525,7 @@ GameObject:
   m_Component:
   - component: {fileID: 504627198}
   - component: {fileID: 504627199}
+  - component: {fileID: 504627200}
   m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
@@ -5561,6 +5562,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   revolveFactor: 0.685
+--- !u!114 &504627200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504627197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577e70a0daffb64408edc0bfa2fe9b39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipToPlay: {fileID: 0}
+  behaviorToPlay: 2
 --- !u!1001 &510920149
 PrefabInstance:
   m_ObjectHideFlags: 0
