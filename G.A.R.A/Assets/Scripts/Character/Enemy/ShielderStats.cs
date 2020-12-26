@@ -18,16 +18,22 @@ namespace Assets.Scripts
                 return;
             }
             else if (shieldHealth <= 0)
+            {
                 base.TakeDamage(attack);
+            }
             else
+            {
                 DamageShield(attack);
+            }
         }
         private void DamageShield(SciptableAttackObj attack)
         {
             shieldHealth -= attack.damage;
             shieldHealth = Mathf.Max(0, shieldHealth);
             if (shieldHealth <= 0)
+            {
                 shield.SetActive(false);
+            }
         }
     }
 }

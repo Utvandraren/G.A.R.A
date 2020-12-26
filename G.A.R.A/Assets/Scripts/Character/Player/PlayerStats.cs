@@ -43,9 +43,13 @@ public class PlayerStats : Stats
             shieldTimer = 0;
         }
         if (shieldTimer >= shieldRechargeDelay)
+        {
             RechargeShield();
+        }
         else
+        {
             shieldTimer += Time.deltaTime;
+        }
 
         if(shield == 0)
         {
@@ -58,14 +62,22 @@ public class PlayerStats : Stats
             sprintTimer = 0;
         }
         if (sprintTimer >= sprintRechargeDelay && !player.isSprinting)
+        {
             RechargeSprint();
-        else sprintTimer += Time.deltaTime;
+        }
+        else
+        {
+            sprintTimer += Time.deltaTime;
+        }
 
         if (sprint / maxSprint <= sprintRegenThreshold && !player.isSprinting)
         {
             canSprint = false;
         }
-        else canSprint = true;
+        else
+        {
+            canSprint = true;
+        }
     }
 
     private void RechargeShield()
@@ -91,7 +103,9 @@ public class PlayerStats : Stats
         GUIAnim.CrossFadeInFixedTime("Screen Damage Flash", 0.01f);
         shieldTimer = 0;
         if(shield == 0)
+        {
             base.TakeDamage(attack);
+        }
         else
         {
             shield -= attack.damage;
@@ -105,7 +119,9 @@ public class PlayerStats : Stats
         GUIAnim.CrossFadeInFixedTime("Screen Damage Flash", 0.01f);
         shieldTimer = 0;
         if (shield == 0)
+        {
             base.TakeContinuousDamage(attack);
+        }
         else
         {
             shield -= (attack.damage * Time.deltaTime);
