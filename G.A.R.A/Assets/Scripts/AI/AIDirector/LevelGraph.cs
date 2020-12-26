@@ -32,12 +32,15 @@ public class LevelGraph : MonoBehaviour
         SetNodeGradient();
         playerNode = FindStart();
     }
+    /// <summary>
+    /// Creates edges from the developer inputed edgedata classes
+    /// </summary>
     private void CreateEdges()
     {
-        foreach (var tuple in edgeData)
+        foreach (EdgeDescription desciption in edgeData)
         {
-            edges[tuple.Item1].Add(new Edge(tuple.Item2, tuple.Item3));
-            edges[tuple.Item2].Add(new Edge(tuple.Item1, tuple.Item3));
+            edges[desciption.Item1].Add(new Edge(desciption.Item2, desciption.Item3));
+            edges[desciption.Item2].Add(new Edge(desciption.Item1, desciption.Item3));
         }
 
     }
@@ -46,7 +49,9 @@ public class LevelGraph : MonoBehaviour
         for (int i = 0; i < nodes.Length; i++)
         {
             if (nodes[i].type == Node.RoomType.END)
+            {
                 return i;
+            }
         }
         throw new NullReferenceException("No \"End\" node in graph");
     }
@@ -55,7 +60,9 @@ public class LevelGraph : MonoBehaviour
         for (int i = 0; i < nodes.Length; i++)
         {
             if (nodes[i].type == Node.RoomType.START)
+            {
                 return i;
+            }
         }
         throw new NullReferenceException("No \"Start\" node in graph");
     }
@@ -109,7 +116,7 @@ public class LevelGraph : MonoBehaviour
     public Path FindShortestPathToGoal(int from)
     {
         if (from == -1)
-            throw new ArgumentOutOfRangeException("tried using node \"-1\"");
+            throw new ArgumentOutOfRangeException("Origin node was not specified (\"-1\")");
         Path path = new Path();
         int[] minSpanTree = CreateMinSpanTree(from);
         for (int nodeId = FindEnd(); nodeId != from; nodeId = minSpanTree[nodeId])
@@ -172,39 +179,6 @@ public class LevelGraph : MonoBehaviour
         }
         return activeArea;
     }
-
-    private List<Node> Radiate(int origo, int depth)
-    {
-        List<Node> radialNodes = new List<Node>();
-        int[] storedDepth = new int[nodes.Length];
-        for (int i = 0; i < nodes.Length; i++)
-        {
-            storedDepth[i] = nodes.Length + 1;
-        }
-
-        RecursiveRadiate(origo, depth, 0, ref radialNodes, ref storedDepth);
-
-        return radialNodes;
-    }
-
-    private void RecursiveRadiate(int currentNode, int maxDepth, int currentDepth, ref List<Node> radialNodes, ref int[] storedDepth)
-    {
-        if (currentDepth > maxDepth)
-            return;
-        if (!radialNodes.Contains(nodes[currentNode]))
-        {
-            radialNodes.Add(nodes[currentNode]);
-        }
-        storedDepth[currentNode] = currentDepth;
-        currentDepth++;
-        foreach (Edge edge in edges[currentNode])
-        {
-            if (currentDepth < storedDepth[edge.to])
-            {
-                RecursiveRadiate(edge.to, maxDepth, currentDepth, ref radialNodes, ref storedDepth);
-            }
-        }
-    }
    /// <summary>
    /// Functions by marking changes in depth with a "-1" value in the queue
    /// </summary>
@@ -246,19 +220,7 @@ public class LevelGraph : MonoBehaviour
         }
         foreach (Node node in nodes)
         {
-            node.percentToEnd = (((float)treeDepth - (float)node.percentToEnd) / (float)treeDepth);
+            node.percentToEnd = ((float)treeDepth - (float)node.percentToEnd) / (float)treeDepth;
         }
     }
-
-    public Node[] GetFrontNodes(int index)
-    {
-        List<Node> frontNodes = new List<Node>();
-        foreach (Node node in nodes)
-        {
-            if (node.percentToEnd > nodes[index].percentToEnd)
-                frontNodes.Add(node);
-        }
-        return frontNodes.ToArray();
-    }
-
 }

@@ -56,7 +56,6 @@ public class Director : MonoBehaviour
         }
         if (shortestPath.nodes.Count != 0)
         {
-
             if (shortestPath.nodes.Pop() != graph.nodes[graph.playerNode])
             {
                 shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
@@ -70,8 +69,6 @@ public class Director : MonoBehaviour
         {
             shortestPath = graph.FindShortestPathToGoal(graph.playerNode);
         }
-        //CheckAmmoRequirements();
-
         List<Node> newActiveArea = graph.FindActiveArea();
         if (active)
         {
@@ -134,6 +131,5 @@ public class Director : MonoBehaviour
                     break;
             }
         }
-
     }
 }

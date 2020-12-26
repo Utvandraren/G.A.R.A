@@ -15,8 +15,7 @@ public class Node
         END,
     }
     public RoomType type = RoomType.NORMAL;
-    //public Vector3 roomCenter;
     [HideInInspector] public float percentToEnd;
-    public Spawner spawner;
+    public Spawner spawner; //Spawner is a game object with acces to all that data
 }
 

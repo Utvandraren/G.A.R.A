@@ -129,17 +129,12 @@ public class Pacer : MonoBehaviour
         this.playerReader = playerReader;
     }
 
-    private void CalcPanicReductionRate()
-    {
-        float hpPercent = playerReader.GetHPPercent();
-        float shieldPercent = playerReader.GetShieldPercent();
-        panicReductionRate = hpPercent + shieldPercent * 0.5f;
-    }
-
     public void IncreasePanicOnDamageTaken(float damagePercent)
     {
         if (!active)
+        {
             return;
+        }
         float panicIncrease = damagePercent;
         panicScore = Mathf.Min(panicScore + panicIncrease * panicIncreaseModifier, maxPanicScore);
         ResetReductionTimer();
@@ -147,7 +142,9 @@ public class Pacer : MonoBehaviour
     public void IncreasePanicOnKill(float distanceToEnemy)
     {
         if (!active)
+        {
             return;
+        }
         float panicIncrease = 1f / distanceToEnemy;
         panicScore = Mathf.Min(panicScore + panicIncrease * panicIncreaseModifier, maxPanicScore);
         ResetReductionTimer();
@@ -157,6 +154,5 @@ public class Pacer : MonoBehaviour
     {
         reducePanic = false;
         reducePanicTimer = reducePanicInterval;
-
     }
 }
