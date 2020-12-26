@@ -15,6 +15,7 @@ public class BOID : MonoBehaviour
     [SerializeField] float radius = 1f;
     float detectionRangeSqrd;
     [SerializeField] float maxSpeed = 5f;
+    [SerializeField] float minSpeedPercent = 0.1f;
     [SerializeField] [Range(0, 1)] float turningRate = 0.1f;
     [SerializeField] [Range(0, 1)] float detectionView = 0.30f;
     [SerializeField] [Range(0, 360)] float aimTurnRate;
@@ -48,16 +49,30 @@ public class BOID : MonoBehaviour
     internal void UpdateMovement(Vector3 targetDir)
     {
         Detect();
+        CreateAcceleration(targetDir);
+        ApplyAccelleration();
+    }
+
+    private void ApplyAccelleration()
+    {
+        rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, rigidbody.velocity + acceleration, turningRate);
+        if (rigidbody.velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2))
+        {
+            rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+        }
+        else if (rigidbody.velocity.sqrMagnitude < Mathf.Pow(maxSpeed * minSpeedPercent, 2))
+        {
+            rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed * minSpeedPercent;
+        }
+        transform.rotation = Quaternion.LookRotation(rigidbody.velocity);
+    }
+
+    private void CreateAcceleration(Vector3 targetDir)
+    {
         acceleration = CalcAcceleration();
         acceleration += AvoidObstacle();
         acceleration += RandomWiggle() * wiggleWeight;
         acceleration += targetDir * targetWeight;
-        rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, rigidbody.velocity + acceleration, turningRate);
-        if (rigidbody.velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2))
-            rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
-        else if (rigidbody.velocity.sqrMagnitude < Mathf.Pow(maxSpeed / 10f, 2))
-            rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed / 10f;
-        transform.rotation = Quaternion.LookRotation(rigidbody.velocity);
     }
 
     internal void Stop()
@@ -92,7 +107,7 @@ public class BOID : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, radius);
-        Gizmos.DrawWireSphere(transform.position, detectionRange*2);
+        Gizmos.DrawWireSphere(transform.position, detectionRange * 2);
     }
 
     private void Detect()
@@ -105,9 +120,11 @@ public class BOID : MonoBehaviour
                 continue;
             Vector3 toOther = other.transform.position - transform.position;
             Vector3 normalizedToOther = Vector3.Normalize(toOther);
-            if (toOther.sqrMagnitude < detectionRangeSqrd)
-                if (Vector3.Dot(transform.forward, normalizedToOther) > detectDotCompare)
-                    relevantBoids.Add(other);
+            //Check the distance and relative position of the other boid, to determine if this boid sees the other one or not
+            if (toOther.sqrMagnitude < detectionRangeSqrd && Vector3.Dot(transform.forward, normalizedToOther) > detectDotCompare)
+            {
+                relevantBoids.Add(other);
+            }
         }
     }
     /// <summary>
@@ -128,12 +145,16 @@ public class BOID : MonoBehaviour
         }
         Vector3 tempAcceleration;
         if (relevantBoids.Count > 0)
+        {
             tempAcceleration = (seperationVector * seperationWeight +
                                 allignmentVector * allignmentWeight +
                                 cohesionVector * cohesionWeight) /
                                 relevantBoids.Count;
+        }
         else
+        {
             tempAcceleration = transform.forward;
+        }
         return tempAcceleration;
     }
     /// <summary>
@@ -164,9 +185,11 @@ public class BOID : MonoBehaviour
     {
         RaycastHit hit;
         if (!Physics.SphereCast(transform.position, radius, transform.forward, out hit, detectionRange * 2, LayerMask.GetMask("Wall")))
+        {
             return Vector3.zero;
+        }
         Vector3[] obstAvoidRayDirs = BoidManager.CollisionRayDirections;
-        float shortestDistToObst = float.MaxValue;
+        float shortestDistToObst = detectionRange * 2;
         for (int i = 0; i < obstAvoidRayDirs.Length; i++)
         {
             RaycastHit searchHit;
