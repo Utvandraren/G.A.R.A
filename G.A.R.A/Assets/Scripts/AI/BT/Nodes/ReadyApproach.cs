@@ -1,21 +1,14 @@
 ﻿public class ReadyApproach : Task
 {
+    /// <summary>
+    /// Readies the entity for approach
+    /// </summary>
+    /// <param name="behaviorTree"></param>
+    /// <returns></returns>
     public override Status Tick(BehaviorTree behaviorTree)
     {
-        bool succeeded = true;
-        bool failed = false;
-        bool HandleStub()
-        {
-            behaviorTree.BlackBoard.readyForApproach = true;
-            return true;
-        }
-
-        if (HandleStub() == succeeded)
-            return Status.success;
-        else if (HandleStub() == failed)
-            return Status.failed;
-        else
-            return Status.running;
+        behaviorTree.BlackBoard.readyForApproach = true;
+        return Status.success;
     }
 }
 

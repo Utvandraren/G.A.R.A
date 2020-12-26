@@ -11,7 +11,10 @@
     {
         for (int i = 0; i < repetitions; i++)
         {
-            child.Tick(behaviorTree);
+            if(child.Tick(behaviorTree) == Status.failed)
+            {
+                return Status.failed;
+            }
         }
         return Status.success;
     }

@@ -1,21 +1,14 @@
 ﻿public class Fire : Task
 {
+    /// <summary>
+    /// Tries to fire weapons
+    /// </summary>
+    /// <param name="behaviorTree"></param>
+    /// <returns>Success Status</returns>
     public override Status Tick(BehaviorTree behaviorTree)
     {
-        bool succeeded = true;
-        bool failed = false;
-        bool HandleStub()
-        {
-            behaviorTree.weapon.TryShoot();
-            return true;
-        }
-
-        if (HandleStub() == succeeded)
-            return Status.success;
-        else if (HandleStub() == failed)
-            return Status.failed;
-        else
-            return Status.running;
+        behaviorTree.weapon.TryShoot();
+        return Status.success;
     }
 }
 

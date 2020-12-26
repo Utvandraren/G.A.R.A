@@ -8,9 +8,13 @@ public class CheckApproach : Task
     public override Status Tick(BehaviorTree behaviorTree)
     {
         if (behaviorTree.BlackBoard.readyForApproach)
+        {
             return Status.success;
+        }
         else
+        {
             return Status.failed;
+        }
     }
 }
 
