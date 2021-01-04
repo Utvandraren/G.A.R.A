@@ -13,8 +13,8 @@ public class ShielderBT : BehaviorTree
 
     protected override void MakeTree()
     {
-        Task[] fire = { new CheckWillToFight(), new TargetPlayer(), new CheckInMaxWeaponRange(), new CheckLineOfSight(), new TurnToward(), new Stop(), new Fire() };
-        Task[] getInRage = { new CheckWillToFight(), new TargetPlayer(), new CheckInDetectionRange(), new MoveTowards() };
+        Task[] fire = { new TargetPlayer(), new CheckInMaxWeaponRange(), new CheckLineOfSight(), new TurnToward(), new Stop(), new Fire() };
+        Task[] getInRage = { new TargetPlayer(), new CheckInDetectionRange(), new MoveTowards() };
         Task fireSeq = new Sequence(fire);
         Task goTo = new Sequence(getInRage);
         Task[] root = { fireSeq, goTo, new Wander() };
