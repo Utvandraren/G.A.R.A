@@ -70,7 +70,7 @@ public class Pacer : MonoBehaviour
         else
         {
             reducePanicTimer -= Time.deltaTime;
-            if(reducePanicTimer <= 0)
+            if (reducePanicTimer <= 0)
             {
                 reducePanic = true;
             }
@@ -78,7 +78,7 @@ public class Pacer : MonoBehaviour
         if (printTimer >= 1f)
         {
             printTimer -= 1f;
-            writer.WriteLine(activeTimer + " " + panicScore + " " + currentTempo);
+            writer.WriteLine(activeTimer + " " + panicScore + " " + BoidManager.allBoids.Count + " " + currentTempo);
         }
     }
 

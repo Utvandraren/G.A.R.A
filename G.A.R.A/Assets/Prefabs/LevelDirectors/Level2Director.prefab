@@ -1631,10 +1631,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48f53f7fef806041b613add3598c4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panicIncreaseModifier: 5
+  panicIncreaseModifier: 3
   sustainTime: 5
   currentTempo: 0
-  panicReductionRate: 0.1
+  panicReductionRate: 0.5
   reducePanicInterval: 0
 --- !u!114 &4995215922326169575
 MonoBehaviour:
@@ -1654,20 +1654,20 @@ MonoBehaviour:
   - {fileID: 4432575310953063639, guid: 154bc80e7d255db46bcf6083f6668749, type: 3}
   purgeDistance: 200
   timeBetweenScaleUp: 10
-  nrSwarmerPerSpawn: 4
-  stragelerGroupSize: 2
-  intenseEnemyMax: 25
-  intenseEnemyAmount: 5
-  highScaleAmount: 2
+  nrSwarmerPerSpawn: 2
+  stragelerGroupSize: 1
+  intenseEnemyMax: 20
+  intenseEnemyAmount: 3
+  highScaleAmount: 1
   calmEnemyMax: 0
   calmEnemyAmount: 0
-  lowScaleAmount: 1
-  mobMaxSize: 0
-  mobSize: 0
+  lowScaleAmount: 0
+  mobMaxSize: 10
+  mobSize: 3
   mobScaleAmount: 1
   mobMinSpawnInterval: 7
   mobMaxSpawnInterval: 20
-  nrNodesAway: 3
+  nrNodesAway: 2
   mobReady: 0
   currentTempo: 0
 --- !u!114 &4995215922326169568
@@ -1696,7 +1696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0f8f3d71827d246bbd37064b84a81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeAreaDepth: 3
+  activeAreaDepth: 2
   nodes:
   - type: 1
     percentToEnd: 0
