@@ -1635,7 +1635,7 @@ MonoBehaviour:
   sustainTime: 5
   currentTempo: 0
   panicReductionRate: 0.5
-  reducePanicInterval: 0
+  reducePanicInterval: 2
 --- !u!114 &4995215922326169575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1656,16 +1656,16 @@ MonoBehaviour:
   timeBetweenScaleUp: 10
   nrSwarmerPerSpawn: 2
   stragelerGroupSize: 1
-  intenseEnemyMax: 20
+  intenseEnemyMax: 15
   intenseEnemyAmount: 3
   highScaleAmount: 1
   calmEnemyMax: 0
   calmEnemyAmount: 0
   lowScaleAmount: 0
-  mobMaxSize: 10
+  mobMaxSize: 7
   mobSize: 3
   mobScaleAmount: 1
-  mobMinSpawnInterval: 7
+  mobMinSpawnInterval: 10
   mobMaxSpawnInterval: 20
   nrNodesAway: 2
   mobReady: 0

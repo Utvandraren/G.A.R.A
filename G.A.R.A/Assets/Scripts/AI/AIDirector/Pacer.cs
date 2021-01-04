@@ -59,7 +59,9 @@ public class Pacer : MonoBehaviour
     void Update()
     {
         if (!active)
+        {
             return;
+        }
         activeTimer += Time.deltaTime;
         printTimer += Time.deltaTime;
         ChangeTempo();
