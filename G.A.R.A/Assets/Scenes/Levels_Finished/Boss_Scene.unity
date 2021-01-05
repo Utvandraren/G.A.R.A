@@ -264,6 +264,11 @@ PrefabInstance:
       propertyPath: GUIAnim
       value: 
       objectReference: {fileID: 1537569555}
+    - target: {fileID: 2381535370189980989, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: takeDamageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f15ab1eb9787a2d4ea51891f44a90151, type: 3}
     - target: {fileID: 2527653678616037719, guid: d3f600aa61e02e848b002a457adcd0d6,
         type: 3}
       propertyPath: m_Enabled
@@ -287,6 +292,16 @@ PrefabInstance:
     - target: {fileID: 2527653678616037719, guid: d3f600aa61e02e848b002a457adcd0d6,
         type: 3}
       propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585262615232534865, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585262615232534865, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7820,14 +7835,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1427833005, guid: 213277e41ed9a3f4b9906a1ce93f0ca7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1427833007, guid: 213277e41ed9a3f4b9906a1ce93f0ca7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 21451455ed7a101439bb6b72e87d2d49, type: 2}
     - target: {fileID: 1806223422, guid: 213277e41ed9a3f4b9906a1ce93f0ca7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -7848,15 +7855,6 @@ PrefabInstance:
       propertyPath: m_LightProbeVolumeOverride
       value: 
       objectReference: {fileID: 549610383}
-    - target: {fileID: 1806223422, guid: 213277e41ed9a3f4b9906a1ce93f0ca7, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 81265233655378715, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2206360773547588368, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7922,11 +7920,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
-    - target: {fileID: 2206360773547588372, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2206360773547588373, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
       propertyPath: switchRoot
@@ -7942,21 +7935,6 @@ PrefabInstance:
       propertyPath: tentacleSpawnPoint
       value: 
       objectReference: {fileID: 286309366}
-    - target: {fileID: 5115043724849756290, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6596141680890310861, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: af39a5c094683ee469307e878a00ca55, type: 2}
-    - target: {fileID: 7406943465377266592, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: af39a5c094683ee469307e878a00ca55, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 213277e41ed9a3f4b9906a1ce93f0ca7, type: 3}
 --- !u!1001 &1177964761
@@ -12024,12 +12002,12 @@ PrefabInstance:
     - target: {fileID: 7545340180027924019, guid: 612979ffe91450041a0715e8b8a5c436,
         type: 3}
       propertyPath: m_fontSize
-      value: 37.75
+      value: 37.7
       objectReference: {fileID: 0}
     - target: {fileID: 7545340180027924019, guid: 612979ffe91450041a0715e8b8a5c436,
         type: 3}
       propertyPath: m_text
-      value: "Nal\xB4gurith, mouth of madness"
+      value: Station AI, servant of Yog-Sothoth
       objectReference: {fileID: 0}
     - target: {fileID: 8165500902046400070, guid: 612979ffe91450041a0715e8b8a5c436,
         type: 3}
@@ -12075,6 +12053,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 4.7271166
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226816376227074705, guid: 612979ffe91450041a0715e8b8a5c436,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 23.300041
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226816376227074705, guid: 612979ffe91450041a0715e8b8a5c436,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -553.4001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226816376227074705, guid: 612979ffe91450041a0715e8b8a5c436,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -65.09999
       objectReference: {fileID: 0}
     - target: {fileID: 8698410134833995723, guid: 612979ffe91450041a0715e8b8a5c436,
         type: 3}

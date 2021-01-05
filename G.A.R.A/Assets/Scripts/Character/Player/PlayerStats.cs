@@ -17,6 +17,8 @@ public class PlayerStats : Stats
     [SerializeField] private float sprintUsageRate;
 
     [SerializeField] private Animator GUIAnim;
+    [SerializeField] private AudioClip takeDamageSound;
+
 
     private float shieldTimer;
     private float sprintTimer;
@@ -25,6 +27,7 @@ public class PlayerStats : Stats
     public bool canSprint { get; private set; }
 
     private PlayerController player;
+    private AudioSource source;
 
     public delegate void PlayerDamaged(object player, TakeDamageEventArgs eventArgsDamage);
     public event PlayerDamaged tookDamage;
@@ -34,6 +37,7 @@ public class PlayerStats : Stats
         base.Start();
         shield = maxShield;
         player = GetComponent<PlayerController>();
+        source = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -101,6 +105,8 @@ public class PlayerStats : Stats
     public override void TakeDamage(SciptableAttackObj attack)
     {
         GUIAnim.CrossFadeInFixedTime("Screen Damage Flash", 0.01f);
+        source.pitch = UnityEngine.Random.Range(0.8f, 0.82f);
+        source.PlayOneShot(takeDamageSound);
         shieldTimer = 0;
         if(shield == 0)
         {
@@ -118,6 +124,7 @@ public class PlayerStats : Stats
     {
         GUIAnim.CrossFadeInFixedTime("Screen Damage Flash", 0.01f);
         shieldTimer = 0;
+
         if (shield == 0)
         {
             base.TakeContinuousDamage(attack);

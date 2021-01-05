@@ -64,14 +64,17 @@ public class WeaponManager : MonoBehaviour
 
         if(Input.GetButtonDown("Laser"))
         {
+            mouseDelta = (int)Weapons.Laser;
             ChangeWeapon(Weapons.Laser);
         }
         else if (Input.GetButtonDown("Explosive"))
         {
+            mouseDelta = (int)Weapons.Explosive;
             ChangeWeapon(Weapons.Explosive);
         }
         else if (Input.GetButtonDown("Electric"))
         {
+            mouseDelta = (int)Weapons.Taser;
             ChangeWeapon(Weapons.Taser);
         }
     }
