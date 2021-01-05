@@ -67,6 +67,10 @@ public class TaserWeapon : Weapon
             {
                 HandleElectricityArchs(attackObj);
             }
+            else if (hit.transform.TryGetComponent<BossStats>(out BossStats bossObj))
+            {
+                bossObj.TakeDamage(attack);
+            }
         }
     }
 
