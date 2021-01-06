@@ -25,14 +25,6 @@ public class MusicManager : Singleton<MusicManager>
     void Update()
     {
 
-//#if UNITY_EDITOR
-//        if (Input.GetKeyDown(KeyCode.Alpha1))
-//            TransitionToSoftSnapshot();
-
-//        if (Input.GetKeyDown(KeyCode.Alpha2))
-//            ResetSnapshot();
-//#endif
-
 
     }
 
@@ -71,9 +63,12 @@ public class MusicManager : Singleton<MusicManager>
 
     IEnumerator StartMusic()
     {
-        yield return new WaitForSeconds(Random.Range(minRandomStartTime, maxRandomStartTime));
-        source.Play();
-        StartCoroutine(CoolDown());
+        if (!source.isPlaying)
+        {
+            yield return new WaitForSeconds(Random.Range(minRandomStartTime, maxRandomStartTime));
+            source.Play();
+            StartCoroutine(CoolDown());
+        }      
     }
 
     //Coroutine that stops the music from starting before its done
