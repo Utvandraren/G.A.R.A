@@ -66,7 +66,8 @@ public class EnemyStats : Stats
     {
         base.Die();
         GameObject effect = GameObject.Instantiate(deathEffect, gameObject.transform.position, Quaternion.identity);
-        drops.DropAmmo(transform.position);
+        if(drops != null)
+            drops.DropAmmo(transform.position);
         Destroy(effect, 3);
         //Debug.Log("DEATH TO " + gameObject.ToString());
         Destroy(gameObject, deathTimer);

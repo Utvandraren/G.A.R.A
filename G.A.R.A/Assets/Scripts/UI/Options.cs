@@ -27,7 +27,25 @@ public class Options : MonoBehaviour
 
     [SerializeField] private TMP_Text testText;
 
+    [SerializeField] private Canvas canvas;
+    private CanvasRenderer canvasRend;
+
     private Resolution[] resolutions;
+
+    private void Start()
+    {
+        canvasRend = canvas.GetComponent<CanvasRenderer>();
+        if (audioMixer.GetFloat("masterVolume", out float masterVal))
+            masterSlider.value = masterVal;
+        if(audioMixer.GetFloat("musicVolume", out float musicVal))
+            musicSlider.value = musicVal;
+        if(audioMixer.GetFloat("fxVolume", out float fxVal))
+            fxSlider.value = fxVal;
+        if(audioMixer.GetFloat("ambientVolume", out float ambientVal))
+            ambientSlider.value = ambientVal;
+        if(audioMixer.GetFloat("uiVolume", out float uiVal))
+            uiSlider.value = uiVal;
+    }
 
     public void OpenOptions()
     {
