@@ -50,7 +50,8 @@ public class BoidManager : MonoBehaviour
     public static void DestroyBoid(BOID boid)
     {
         Vector3 deathPos = new Vector3(boid.transform.position.x, boid.transform.position.y, boid.transform.position.z);
-        director.EnemyIsDestroyed(deathPos);
+        if(director != null)
+            director.EnemyIsDestroyed(deathPos);
         allBoids.Remove(boid);
     }
 }
