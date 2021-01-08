@@ -18,7 +18,7 @@ public class ExplosiveProjectile : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, lifeTime);
-        hasExploded = false;
+        //hasExploded = false;
         //rigidBody.velocity = transform.forward * speed;
     }
 
@@ -57,10 +57,10 @@ public class ExplosiveProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)  //Damage if possible the obj the projectile collided with and then explode 
     {
-        if (hasExploded)
-        {
-            return;
-        }
+        //if (hasExploded)
+        //{
+        //    return;
+        //}
 
         if(other.CompareTag("Player") || other.isTrigger)
         {
@@ -73,9 +73,9 @@ public class ExplosiveProjectile : MonoBehaviour
         }
         
         Explode();
-        //gameObject.SetActive(false);
-        hasExploded = true;
-        Destroy(gameObject, 2f);
+        gameObject.SetActive(false);
+        //hasExploded = true;
+        Destroy(gameObject, 3f);
     }
 
     public void SetDirection(Vector3 direction)
