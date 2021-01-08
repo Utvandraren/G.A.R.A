@@ -82,10 +82,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 2424
+    x: 0
     y: -86
-    width: 3096
-    height: 3112
+    width: 5520
+    height: 3087
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,7 +158,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 20
+      m_SerializableObject: 5
     min: -Infinity
     max: Infinity
     descendantCount: 0
@@ -1736,7 +1736,7 @@ VisualEffectResource:
         - m_ExpressionIndex: 1
           m_Value: 0
         - m_ExpressionIndex: 3
-          m_Value: 20
+          m_Value: 5
         - m_ExpressionIndex: 9
           m_Value: 0.5
         - m_ExpressionIndex: 11
@@ -1823,7 +1823,7 @@ VisualEffectResource:
             m_Curve:
             - serializedVersion: 3
               time: -0.0058898926
-              value: 0.2
+              value: 0.6
               inSlope: -0.266806
               outSlope: -0.266806
               tangentMode: 0
@@ -1833,8 +1833,8 @@ VisualEffectResource:
             - serializedVersion: 3
               time: 1
               value: 0
-              inSlope: -0.19882892
-              outSlope: -0.19882892
+              inSlope: -0.5964868
+              outSlope: -0.5964868
               tangentMode: 34
               weightedMode: 0
               inWeight: 0
@@ -5099,7 +5099,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 20
+      m_SerializableObject: 5
     m_Space: 2147483647
   m_Property:
     name: o
@@ -6681,7 +6681,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":-0.005889892578125,"value":0.20000000298023225,"inTangent":-0.2668060064315796,"outTangent":-0.2668060064315796,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":0.0,"inTangent":-0.19882892072200776,"outTangent":-0.19882892072200776,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":-0.005889892578125,"value":0.6000000238418579,"inTangent":-0.2668060064315796,"outTangent":-0.2668060064315796,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":0.0,"inTangent":-0.5964868068695068,"outTangent":-0.5964868068695068,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: 2147483647
   m_Property:
     name: Size

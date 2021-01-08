@@ -244,7 +244,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 15000
+      m_SerializableObject: 10000
     min: -Infinity
     max: Infinity
     descendantCount: 0
@@ -2089,8 +2089,8 @@ VisualEffectResource:
       attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\tOrient_4(
       /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout */attributes.axisZ);\n\t\t\t\t{\n\t\t\t\t   
       uint tmp_bc = attributes.particleId ^ asuint(uniform_a);\n\t\t\t\t    float
-      tmp_bd = FixedRand(tmp_bc);\n\t\t\t\t    float tmp_bf = tmp_bd * (float)0.0200000014;\n\t\t\t\t   
-      float tmp_bg = (float)0.0299999993 + tmp_bf;\n\t\t\t\t    SetAttribute_3278B22F(
+      tmp_bd = FixedRand(tmp_bc);\n\t\t\t\t    float tmp_bf = tmp_bd * (float)0.0299999975;\n\t\t\t\t   
+      float tmp_bg = (float)0.0500000007 + tmp_bf;\n\t\t\t\t    SetAttribute_3278B22F(
       /*inout */attributes.size, tmp_bg);\n\t\t\t\t}\n\t\t\t\tSetAttribute_FA15ADAA(
       /*inout */attributes.color, Color_c);\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t#if !HAS_STRIPS\n\t\t\t\tif
       (!attributes.alive)\n\t\t\t\t\treturn o;\n\t\t\t#endif\n\t\t\t\t\n\t\t\t#if
@@ -2287,8 +2287,8 @@ VisualEffectResource:
       attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\tOrient_4(
       /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout */attributes.axisZ);\n\t\t\t\t{\n\t\t\t\t   
       uint tmp_bc = attributes.particleId ^ asuint(uniform_a);\n\t\t\t\t    float
-      tmp_bd = FixedRand(tmp_bc);\n\t\t\t\t    float tmp_bf = tmp_bd * (float)0.0200000014;\n\t\t\t\t   
-      float tmp_bg = (float)0.0299999993 + tmp_bf;\n\t\t\t\t    SetAttribute_3278B22F(
+      tmp_bd = FixedRand(tmp_bc);\n\t\t\t\t    float tmp_bf = tmp_bd * (float)0.0299999975;\n\t\t\t\t   
+      float tmp_bg = (float)0.0500000007 + tmp_bf;\n\t\t\t\t    SetAttribute_3278B22F(
       /*inout */attributes.size, tmp_bg);\n\t\t\t\t}\n\t\t\t\tSetAttribute_FA15ADAA(
       /*inout */attributes.color, Color_c);\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t#if !HAS_STRIPS\n\t\t\t\tif
       (!attributes.alive)\n\t\t\t\t\treturn o;\n\t\t\t#endif\n\t\t\t\t\n\t\t\t#if
@@ -2928,15 +2928,15 @@ VisualEffectResource:
         - m_ExpressionIndex: 16
           m_Value: 0
         - m_ExpressionIndex: 21
-          m_Value: 0.020000001
+          m_Value: 0.029999997
         - m_ExpressionIndex: 24
           m_Value: 30
         - m_ExpressionIndex: 25
-          m_Value: 15000
+          m_Value: 10000
         - m_ExpressionIndex: 29
           m_Value: 0.3
         - m_ExpressionIndex: 34
-          m_Value: 0.03
+          m_Value: 0.05
         - m_ExpressionIndex: 41
           m_Value: 3
         - m_ExpressionIndex: 42
@@ -12376,7 +12376,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 15000
+      m_SerializableObject: 10000
     m_Space: 2147483647
   m_Property:
     name: o
@@ -12503,7 +12503,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.03
+      m_SerializableObject: 0.05
     m_Space: 2147483647
   m_Property:
     name: min
@@ -12543,7 +12543,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.05
+      m_SerializableObject: 0.08
     m_Space: 2147483647
   m_Property:
     name: max

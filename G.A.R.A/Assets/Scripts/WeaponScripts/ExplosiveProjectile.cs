@@ -11,12 +11,14 @@ public class ExplosiveProjectile : MonoBehaviour
     [SerializeField] private SciptableAttackObj attack;
     [SerializeField] private SciptableAttackObj directHitAttack;
     [SerializeField] private Rigidbody rigidBody;
+    private bool hasExploded;
 
 
     // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, lifeTime);
+        hasExploded = false;
         //rigidBody.velocity = transform.forward * speed;
     }
 
@@ -55,6 +57,11 @@ public class ExplosiveProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)  //Damage if possible the obj the projectile collided with and then explode 
     {
+        if (hasExploded)
+        {
+            return;
+        }
+
         if(other.CompareTag("Player") || other.isTrigger)
         {
             return;
@@ -66,8 +73,9 @@ public class ExplosiveProjectile : MonoBehaviour
         }
         
         Explode();
-        gameObject.SetActive(false);
-        Destroy(gameObject, 3f);
+        //gameObject.SetActive(false);
+        hasExploded = true;
+        Destroy(gameObject, 2f);
     }
 
     public void SetDirection(Vector3 direction)
