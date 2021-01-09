@@ -71,12 +71,13 @@ MonoBehaviour:
   detectionRange: 20
   radius: 1
   maxSpeed: 15
+  minSpeedPercent: 0.1
   turningRate: 0.95
   detectionView: 0.3
   aimTurnRate: 30
   seperationWeight: 1.4
-  allignmentWeight: 1.3
-  cohesionWeight: 1
+  allignmentWeight: 1
+  cohesionWeight: 0
   avoidWeight: 3
   wiggleWeight: 0
   wiggleOffset: 1
