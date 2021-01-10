@@ -135,24 +135,27 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = newActiveAreaDiff.Count - 1; i >= 0; i--)
         {
-            
-            if(newActiveAreaDiff[i].percentToEnd < playerNodeDistToEnd)
+
+            if (newActiveAreaDiff[i].percentToEnd < playerNodeDistToEnd)
             {
                 newActiveAreaDiff.RemoveAt(i);
-            }    
+            }
 
         }
 
         for (int i = 0; i < newActiveAreaDiff.Count * stragelerGroupSize; i++)
         {
-            GameObject enemy = enemyPrefabs[i % enemyPrefabs.Length];
-            newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
+            GameObject enemy = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)];
             if (enemy.TryGetComponent<SwarmerBT>(out SwarmerBT swarmerBT))
             {
                 for (int j = 0; j < nrSwarmerPerSpawn; j++)
                 {
                     newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
                 }
+            }
+            else
+            {
+                newActiveAreaDiff[i % newActiveAreaDiff.Count].spawner.Spawn(enemy);
             }
             if (BoidManager.allBoids.Count > activeIntensityEnemyMax)
                 break;
@@ -190,6 +193,10 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnMob(Path path)
     {
+        if (BoidManager.allBoids.Count >= activeIntensityEnemyMax + mobSize)
+        {
+            return;
+        }
         mobReady = false;
         mobSpawnTimer = 0;
         timeBetweenMobs = UnityEngine.Random.Range(mobMinSpawnInterval, mobMaxSpawnInterval);
@@ -220,11 +227,23 @@ public class SpawnManager : MonoBehaviour
             }
         }
         Debug.Log("Spawns mob on node " + spawnNode.spawner.name);
-        if (BoidManager.allBoids.Count < activeIntensityEnemyMax)
+        for (int i = 0; i < mobSize; i++)
         {
-            for (int i = 0; i < mobSize; i++)
+            if (BoidManager.allBoids.Count > activeIntensityEnemyMax + mobSize)
             {
-                spawnNode.spawner.Spawn(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)]);
+                break;
+            }
+            GameObject enemy = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)];
+            if (enemy.TryGetComponent<SwarmerBT>(out SwarmerBT swarmerBT))
+            {
+                for (int s = 0; s < nrSwarmerPerSpawn; s++)
+                {
+                    spawnNode.spawner.Spawn(enemy);
+                }
+            }
+            else
+            {
+                spawnNode.spawner.Spawn(enemy);
             }
         }
     }
