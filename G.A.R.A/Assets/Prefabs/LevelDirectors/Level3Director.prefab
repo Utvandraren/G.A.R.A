@@ -5154,10 +5154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48f53f7fef806041b613add3598c4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panicIncreaseModifier: 5
+  panicIncreaseModifier: 7
   sustainTime: 5
   currentTempo: 0
-  panicReductionRate: 0.5
+  panicReductionRate: 0.4
   reducePanicInterval: 2
 --- !u!114 &4995215922326169575
 MonoBehaviour:
@@ -5179,7 +5179,7 @@ MonoBehaviour:
   timeBetweenScaleUp: 10
   nrSwarmerPerSpawn: 2
   stragelerGroupSize: 1
-  intenseEnemyMax: 15
+  intenseEnemyMax: 10
   intenseEnemyAmount: 3
   highScaleAmount: 1
   calmEnemyMax: 0
