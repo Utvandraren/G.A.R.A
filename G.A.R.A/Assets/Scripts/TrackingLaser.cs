@@ -12,7 +12,7 @@ public class TrackingLaser : Weapon
     [SerializeField] private GameObject aimingBeam;
     [SerializeField] private ParticleSystem chargeLaserParticlesEffect;
 
-
+    [SerializeField] LayerMask ignoreLayer;
 
     private GameObject target;
     private BossMovement bossMov;
@@ -38,12 +38,12 @@ public class TrackingLaser : Weapon
     public override void TryShoot()
     {
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position, laserBeamAttackRadius, transform.forward, out hit))
+        if (Physics.SphereCast(transform.position, laserBeamAttackRadius, transform.forward, out hit, ignoreLayer))
         {
             if (hit.transform.gameObject.CompareTag("Player"))
             {
                 base.TryShoot();
-    }
+            }
             else
             {
                 //Debug.Log(hit.transform.name);
