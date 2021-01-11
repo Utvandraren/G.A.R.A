@@ -20,9 +20,15 @@ public class ControlsSettings : MonoBehaviour
     public void UpdateSensitivity()
     {
         string desiredDisplayText = (sensitivitySlider.value * 100).ToString();
-        if (desiredDisplayText.Substring(0, 4) == "99,8")
+
+        //Stupid floats never ever want to cooperate
+        if (sensitivitySlider.value * 100 >= 99.8f)
         {
             desiredDisplayText = "100,0";
+        }
+        else if(sensitivitySlider.value * 100 <= 2f)
+        {
+            desiredDisplayText = "1";
         }
         else
         {

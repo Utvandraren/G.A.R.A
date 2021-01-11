@@ -36,15 +36,26 @@ public class Options : MonoBehaviour
     {
         canvasRend = canvas.GetComponent<CanvasRenderer>();
         if (audioMixer.GetFloat("masterVolume", out float masterVal))
+        {
             masterSlider.value = masterVal;
-        if(audioMixer.GetFloat("musicVolume", out float musicVal))
+        }
+        if (audioMixer.GetFloat("musicVolume", out float musicVal))
+        {
             musicSlider.value = musicVal;
+        } 
         if(audioMixer.GetFloat("fxVolume", out float fxVal))
+        {
             fxSlider.value = fxVal;
+        }
         if(audioMixer.GetFloat("ambientVolume", out float ambientVal))
+        {
             ambientSlider.value = ambientVal;
+        }
         if(audioMixer.GetFloat("uiVolume", out float uiVal))
+        {
             uiSlider.value = uiVal;
+        }
+        testText.gameObject.SetActive(false);
     }
 
     public void OpenOptions()
@@ -82,8 +93,8 @@ public class Options : MonoBehaviour
         Resolution res = resolutions[resolutionDropdown.value];
         Screen.SetResolution(res.width, res.height, fullscreenToggle.isOn, res.refreshRate);
 
-        testText.gameObject.SetActive(false); //This looks stupid, but if it works, it's not stupid :)
-        testText.gameObject.SetActive(true); // don't remove please
+        testText.gameObject.SetActive(true); //This looks stupid, but if it works, it's not stupid :)
+        testText.gameObject.SetActive(false); // don't remove please
     }
 
     private void SetFullscreen(bool isFullscreen)
