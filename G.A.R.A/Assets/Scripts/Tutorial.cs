@@ -29,16 +29,21 @@ public class Tutorial : MonoBehaviour
     
     void Start()
     {
-        bars.SetActive(false);
-        ammobars.SetActive(false);
-        subtitles[0].SetActive(true);
-        moveStateCompleted = false;
-        weaponsObj.SetActive(false);
+        if(GameManager.Instance.tutorialActive)
+        {
+            bars.SetActive(false);
+            ammobars.SetActive(false);
+            subtitles[0].SetActive(true);
+            moveStateCompleted = false;
+            weaponsObj.SetActive(false);
+        }
+        
     }
-
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.tutorialActive)
+        { 
         if (subtitles[2].activeSelf && !subSound[2].isPlaying)
         {
             introVoiceoverPlayed = true;
@@ -98,45 +103,46 @@ public class Tutorial : MonoBehaviour
                     }
                     break;
             }
-            if(moveStateCompleted)
-            {
-                ammobars.SetActive(true);
-                weaponsObj.SetActive(true);
-                switch (currentWeaponInfoState)
+                if (moveStateCompleted)
                 {
-                    case (int)WeaponInfoStates.BaseInfo:
-                        subtitles[7].SetActive(true);
-                        if (!subSound[3].isPlaying)
-                        {
-                            subtitles[7].SetActive(false);
-                            subtitles[8].SetActive(true);
-                            currentWeaponInfoState++;
-                        }
+                    ammobars.SetActive(true);
+                    weaponsObj.SetActive(true);
+                    switch (currentWeaponInfoState)
+                    {
+                        case (int)WeaponInfoStates.BaseInfo:
+                            subtitles[7].SetActive(true);
+                            if (!subSound[3].isPlaying)
+                            {
+                                subtitles[7].SetActive(false);
+                                subtitles[8].SetActive(true);
+                                currentWeaponInfoState++;
+                            }
                             break;
-                    case (int)WeaponInfoStates.LaserInfo:
-                        if (Input.GetAxis("Fire1") != 0 && !subSound[4].isPlaying)
-                        {
-                            subtitles[8].SetActive(false);
-                            subtitles[9].SetActive(true);
-                            currentWeaponInfoState++;
-                        }
+                        case (int)WeaponInfoStates.LaserInfo:
+                            if (Input.GetAxis("Fire1") != 0 && !subSound[4].isPlaying)
+                            {
+                                subtitles[8].SetActive(false);
+                                subtitles[9].SetActive(true);
+                                currentWeaponInfoState++;
+                            }
 
-                        break;
-                    case (int)WeaponInfoStates.CannonInfo:
-                        if (Input.GetAxis("Fire1") != 0 && !subSound[5].isPlaying)
-                        {
-                            subtitles[9].SetActive(false);
-                            subtitles[10].SetActive(true);
-                            currentWeaponInfoState++;
-                        }
-                        break;
-                    case (int)WeaponInfoStates.TeslaInfo:
-                        if (Input.GetAxis("Fire1") != 0 && !subSound[6].isPlaying)
-                        {
-                            subtitles[10].SetActive(false);
-                            currentWeaponInfoState++;
-                        }
-                        break;
+                            break;
+                        case (int)WeaponInfoStates.CannonInfo:
+                            if (Input.GetAxis("Fire1") != 0 && !subSound[5].isPlaying)
+                            {
+                                subtitles[9].SetActive(false);
+                                subtitles[10].SetActive(true);
+                                currentWeaponInfoState++;
+                            }
+                            break;
+                        case (int)WeaponInfoStates.TeslaInfo:
+                            if (Input.GetAxis("Fire1") != 0 && !subSound[6].isPlaying)
+                            {
+                                subtitles[10].SetActive(false);
+                                currentWeaponInfoState++;
+                            }
+                            break;
+                    }
                 }
             }
             
