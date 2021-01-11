@@ -28202,10 +28202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialIntroManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4896323429988843670, guid: 22448a9a4ebecbf40a6e1f7d2b9a2ff7,
+    - target: {fileID: 4896323429988843664, guid: 22448a9a4ebecbf40a6e1f7d2b9a2ff7,
         type: 3}
-      propertyPath: subSound.Array.size
-      value: 7
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4896323429988843670, guid: 22448a9a4ebecbf40a6e1f7d2b9a2ff7,
         type: 3}
@@ -28314,9 +28314,10 @@ PrefabInstance:
       objectReference: {fileID: 1044429822}
     - target: {fileID: 4896323429988843670, guid: 22448a9a4ebecbf40a6e1f7d2b9a2ff7,
         type: 3}
-      propertyPath: subSound.Array.data[7]
+      propertyPath: gameManager
       value: 
-      objectReference: {fileID: 1044429822}
+      objectReference: {fileID: 4705489363703831223, guid: ed386a8249fa3874189085bef565ff72,
+        type: 3}
     - target: {fileID: 4896323429988843671, guid: 22448a9a4ebecbf40a6e1f7d2b9a2ff7,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private string loadingScene;
     [SerializeField] private UIManager uiManager;
 
+    public bool tutorialActive;
     private string currentLevel;
     private string previousLevel;
     private string nextLevel;
@@ -39,6 +40,7 @@ public class GameManager : Singleton<GameManager>
 
     void OnLoadOperationComplete(AsyncOperation ao)
     {
+
         if (loadOperations.Contains(ao))
         {
             loadOperations.Remove(ao);
@@ -63,7 +65,7 @@ public class GameManager : Singleton<GameManager>
         {
             Debug.Log("GameManager.cs could not find the UIManager. Was this intentional?");
         }
-
+        
         Debug.Log("Load complete");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -85,6 +87,7 @@ public class GameManager : Singleton<GameManager>
     /// <param name="sceneName"></param>
     private void LoadScene(string sceneName)
     {
+        
         previousLevel = currentLevel;
         AsyncOperation ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
@@ -93,10 +96,11 @@ public class GameManager : Singleton<GameManager>
             Debug.LogError("[GameManager] unable to load level: " + sceneName);
             return;
         }
-
+        
         ao.completed += OnLoadOperationComplete;
         loadOperations.Add(ao);
         currentLevel = sceneName;
+        
     }
 
     /// <summary>
@@ -135,6 +139,7 @@ public class GameManager : Singleton<GameManager>
     {
         nextLevel = SceneManager.GetActiveScene().name;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().ResetStats();
+        tutorialActive = false;
         LoadScene(loadingScene);
     }
 
