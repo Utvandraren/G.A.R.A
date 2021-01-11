@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ExplosiveProjectile : MonoBehaviour
 {
@@ -11,12 +12,17 @@ public class ExplosiveProjectile : MonoBehaviour
     [SerializeField] private SciptableAttackObj attack;
     [SerializeField] private SciptableAttackObj directHitAttack;
     [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] private GameObject mainEffect;
+    [SerializeField] private GameObject trailEffectGO;
+    private bool hasExploded;
+    [SerializeField] private VisualEffect trailEffect;
 
 
     // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, lifeTime);
+        hasExploded = false;
         //rigidBody.velocity = transform.forward * speed;
     }
 
@@ -55,7 +61,12 @@ public class ExplosiveProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)  //Damage if possible the obj the projectile collided with and then explode 
     {
-        if(other.CompareTag("Player") || other.isTrigger)
+        if(hasExploded)
+        {
+            return;
+        }
+
+        if (other.CompareTag("Player") || other.isTrigger)
         {
             return;
         }
@@ -65,9 +76,13 @@ public class ExplosiveProjectile : MonoBehaviour
             attackObj.TakeDamage(directHitAttack);
         }
         
-        Explode();
-        gameObject.SetActive(false);
+        
+        mainEffect.SetActive(false);
         Destroy(gameObject, 3f);
+        Explode();
+        rigidBody.velocity = Vector3.zero;
+        trailEffect.Stop();
+        hasExploded = true;
     }
 
     public void SetDirection(Vector3 direction)

@@ -96,7 +96,7 @@ public class GameManager : Singleton<GameManager>
 
         ao.completed += OnLoadOperationComplete;
         loadOperations.Add(ao);
-        currentLevel = sceneName;
+        currentLevel = sceneName; //Loaded new scene, so set the current level to the current one now.
     }
 
     /// <summary>
