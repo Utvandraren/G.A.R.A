@@ -1792,7 +1792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -621.35}
+  m_AnchoredPosition: {x: 250, y: -708.95}
   m_SizeDelta: {x: 400, y: 87.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2932585655146110131
@@ -2751,7 +2751,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -181.84999}
+  m_AnchoredPosition: {x: 250, y: -196.4502}
   m_SizeDelta: {x: 400, y: 87.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2647909718448676196
@@ -4130,7 +4130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -357.65}
+  m_AnchoredPosition: {x: 250, y: -401.45}
   m_SizeDelta: {x: 400, y: 87.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7429523478199075398
@@ -5579,7 +5579,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -709.25}
+  m_AnchoredPosition: {x: 250, y: -811.45}
   m_SizeDelta: {x: 400, y: 87.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &193035539146700336
@@ -5783,7 +5783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -533.44995}
+  m_AnchoredPosition: {x: 250, y: -606.45}
   m_SizeDelta: {x: 400, y: 87.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2504756862231946963
@@ -5830,7 +5830,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -269.75}
+  m_AnchoredPosition: {x: 250, y: -298.95}
   m_SizeDelta: {x: 400, y: 87.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &427257476813842498
@@ -5877,7 +5877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -93.95}
+  m_AnchoredPosition: {x: 250, y: -93.950195}
   m_SizeDelta: {x: 400, y: 87.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &737710252548748472
@@ -9204,7 +9204,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -445.55}
+  m_AnchoredPosition: {x: 250, y: -503.95}
   m_SizeDelta: {x: 400, y: 87.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1636368267455851698
@@ -9684,6 +9684,26 @@ PrefabInstance:
       propertyPath: m_UpdateMode
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5462131838355547913, guid: b717e8b0b2c766a439624262e3a3ea07,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916093235969048382, guid: b717e8b0b2c766a439624262e3a3ea07,
+        type: 3}
+      propertyPath: m_fontColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916093235969048382, guid: b717e8b0b2c766a439624262e3a3ea07,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916093235969048382, guid: b717e8b0b2c766a439624262e3a3ea07,
+        type: 3}
+      propertyPath: m_text
+      value: Hello, you're not supposed to see me.
+      objectReference: {fileID: 0}
     - target: {fileID: 7166108633088437111, guid: b717e8b0b2c766a439624262e3a3ea07,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -9713,6 +9733,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001189450456133320, guid: b717e8b0b2c766a439624262e3a3ea07,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 620.71
       objectReference: {fileID: 0}
     - target: {fileID: 8596085835613930879, guid: b717e8b0b2c766a439624262e3a3ea07,
         type: 3}

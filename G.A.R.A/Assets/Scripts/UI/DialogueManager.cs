@@ -12,7 +12,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Text nameText;
     [SerializeField] private Text dialogueText;
     public Animator animator;
-    private PlayerInteractController interact;
+    private PlayerInteractController interactCtrl;
 
     private Queue<string> sentences;
 
@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         sentences = new Queue<string>();
-        interact = FindObjectOfType<PlayerInteractController>();
+        interactCtrl = FindObjectOfType<PlayerInteractController>();
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public class DialogueManager : MonoBehaviour
 
         try
         {
-            if (!interact.canInteract && animator.GetBool("IsOpen"))
+            if (!interactCtrl.canInteract && animator.GetBool("IsOpen"))
             {
                 EndDialogue();
             }
