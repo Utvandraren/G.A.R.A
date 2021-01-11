@@ -85,12 +85,9 @@ public class PlayerInteractController : MonoBehaviour
                 float distance = Vector3.Distance(camera.position, interactable.transform.position);
                 if (distance <= maxOutlineDistance)
                 {
-                    canInteract = true;
                     interactable.EnableOutline();
                 }
-                //else canInteract = false;
             }
-            //else canInteract = false;
         }
     }
 }

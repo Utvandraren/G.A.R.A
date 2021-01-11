@@ -98,8 +98,6 @@ public class PlayerLaserWeapon : Weapon
         laserEffect.SetActive(false);
     }
 
-    
-
     void OnDrawGizmos()
     {
         Gizmos.DrawSphere(firePoint.position, laserThickness);

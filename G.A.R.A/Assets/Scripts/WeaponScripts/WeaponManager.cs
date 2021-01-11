@@ -13,6 +13,8 @@ public class WeaponManager : MonoBehaviour
     private int mouseDelta;
     private int oldMouseDelta;
 
+    private Weapons previousWeapon;
+
     enum Weapons
     {
         Laser = 0,
@@ -28,6 +30,7 @@ public class WeaponManager : MonoBehaviour
         currentWeapon = laserWeapon.GetComponent<Weapon>();
         explosiveWeapon.SetActive(false);
         teslaWeapon.SetActive(false);
+        previousWeapon = Weapons.Laser;
     }
 
     // Update is called once per frame
@@ -39,6 +42,11 @@ public class WeaponManager : MonoBehaviour
 
     void handleInput()   //Check if mouseScroll has changed and thus should change the weapon
     {       
+        if(PauseMenu.GameIsPaused)
+        {
+            return;
+        }
+
         mouseDelta += (int)Input.mouseScrollDelta.y;
 
         if (mouseDelta != oldMouseDelta)
@@ -79,7 +87,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    void ChangeWeapon(Weapons weaponToChangeTo)   //Fucntion changing the weapons
+    void ChangeWeapon(Weapons weaponToChangeTo)   //Function changing the weapons
     {
         switch (weaponToChangeTo)
         {
@@ -88,6 +96,10 @@ public class WeaponManager : MonoBehaviour
                 explosiveWeapon.SetActive(false);
                 teslaWeapon.SetActive(false);
                 currentWeapon = laserWeapon.GetComponent<Weapon>();
+                if(previousWeapon == Weapons.Laser)
+                {
+                    break;
+                }
                 currentWeapon.PlayStartUpSound();
                 break;
 
@@ -96,6 +108,10 @@ public class WeaponManager : MonoBehaviour
                 laserWeapon.SetActive(false);
                 teslaWeapon.SetActive(false);
                 currentWeapon = explosiveWeapon.GetComponent<Weapon>();
+                if (previousWeapon == Weapons.Explosive)
+                {
+                    break;
+                }
                 currentWeapon.PlayStartUpSound();
                 break;
 
@@ -104,12 +120,18 @@ public class WeaponManager : MonoBehaviour
                 explosiveWeapon.SetActive(false);
                 laserWeapon.SetActive(false);
                 currentWeapon = teslaWeapon.GetComponent<Weapon>();
+                if (previousWeapon == Weapons.Taser)
+                {
+                    break;
+                }
                 currentWeapon.PlayStartUpSound();
                 break;
             default:
                 //
                 break;
         }
+
+        previousWeapon = weaponToChangeTo;
     }
 
     public void ResetAllAmmo()
