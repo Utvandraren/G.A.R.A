@@ -130,50 +130,18 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        #if ENABLE_LEGACY_INPUT_MANAGER
+#if ENABLE_LEGACY_INPUT_MANAGER
 
-        // Mouse Rotation
-        var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
-        m_TargetCameraState.yaw = mouseMovement.x * mouseSensitivityMultiplier;
-        m_TargetCameraState.pitch = mouseMovement.y * mouseSensitivityMultiplier;
+        // Mouse Look Rotation
+        HandleMouseLook();
 
         //Keyboard rotation
-        if(Input.GetAxis("Roll") == 0)
-        {
-            //Smoothly stops the rotation
-            currentRollRate = calculateLerp(currentRollRate, 0, rollLerpTime, rollSmoothFactor);
-            transform.Rotate(new Vector3(0, 0, currentRollRate));
-        }
-        else
-        {
-            currentRollRate = calculateLerp(currentRollRate, maxRollRate * Input.GetAxis("Roll"), rollLerpTime, rollSmoothFactor);
-            transform.Rotate(new Vector3(0, 0, currentRollRate));
-        }
+        HandleRoll();
 
         //Sprint/Boost
-        if (Input.GetButton("Sprint") && playerStats.sprint > 0 && playerStats.canSprint)
-        {
-            isSprinting = true;
-            thrustForce = standardthrustForce + additionalBoostForce;
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSprintSpeed);
-            currentMaxSpeed = maxSprintSpeed;
-        }
-        else
-        {
-            isSprinting = false;
-            thrustForce = standardthrustForce;
-            if (rb.velocity.magnitude > maxNormalSpeed + .5f)
-            {
-                currentMaxSpeed = calculateLerp(currentMaxSpeed, maxNormalSpeed, stopLerpTime, stopSmoothFactor);
-                rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentMaxSpeed);
-            }
-            else
-            {
-                rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxNormalSpeed);
-            }
+        HandleMovement();
 
-        }
-
+        //Final direction to start moving towards
         direction = GetInputTranslationDirection() * Time.deltaTime;
 
         #elif USE_INPUT_SYSTEM
@@ -207,13 +175,61 @@ public class PlayerController : MonoBehaviour
     private float calculateLerp(float current, float target, float lerpTime, float smoothnessFactor)
     {
         float temp = Mathf.Lerp(current, target, (1f - Mathf.Exp((Mathf.Log(1f - smoothnessFactor) / lerpTime) * Time.deltaTime)));
-        //float temp = Mathf.Lerp(current, target, smoothnessFactor * Time.deltaTime);
         return temp;
     }
 
     public void SetSensitivity(float value)
     {
         mouseSensitivityMultiplier = mouseSensitivityMax * value;
+    }
+
+    private void HandleRoll()
+    {
+        if (Input.GetAxis("Roll") == 0)
+        {
+            //Smoothly stops the rotation
+            currentRollRate = calculateLerp(currentRollRate, 0, rollLerpTime, rollSmoothFactor);
+            transform.Rotate(new Vector3(0, 0, currentRollRate));
+        }
+        else
+        {
+            currentRollRate = calculateLerp(currentRollRate, maxRollRate * Input.GetAxis("Roll"), rollLerpTime, rollSmoothFactor);
+            transform.Rotate(new Vector3(0, 0, currentRollRate));
+        }
+    }
+
+    private void HandleMovement()
+    {
+        if (Input.GetButton("Sprint") && playerStats.sprint > 0 && playerStats.canSprint)
+        {
+            isSprinting = true;
+            thrustForce = standardthrustForce + additionalBoostForce;
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSprintSpeed);
+            currentMaxSpeed = maxSprintSpeed;
+        }
+        else
+        {
+            isSprinting = false;
+            thrustForce = standardthrustForce;
+            
+            if (rb.velocity.magnitude > maxNormalSpeed + .5f) //Gradually slow down from sprint max speed to normal max speed
+            {
+                currentMaxSpeed = calculateLerp(currentMaxSpeed, maxNormalSpeed, stopLerpTime, stopSmoothFactor);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentMaxSpeed);
+            }
+            else //Continue normal movement
+            {
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxNormalSpeed);
+            }
+
+        }
+    }
+
+    private void HandleMouseLook()
+    {
+        var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
+        m_TargetCameraState.yaw = mouseMovement.x * mouseSensitivityMultiplier;
+        m_TargetCameraState.pitch = mouseMovement.y * mouseSensitivityMultiplier;
     }
 
     //private void OnGUI()
