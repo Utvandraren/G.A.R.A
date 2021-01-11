@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.014619506, g: 0.01293809, b: 0.014304297, a: 1}
+  m_IndirectSpecularColor: {r: 0.0011228157, g: 0.0011513508, b: 0.0014250866, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -56,8 +56,8 @@ LightmapSettings:
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 2
-    m_BakeResolution: 16
-    m_AtlasSize: 1024
+    m_BakeResolution: 40
+    m_AtlasSize: 512
     m_AO: 1
     m_AOMaxDistance: 2
     m_CompAOExponent: 1
@@ -75,7 +75,7 @@ LightmapSettings:
     m_MixedBakeMode: 0
     m_BakeBackend: 2
     m_PVRSampling: 1
-    m_PVRDirectSampleCount: 16
+    m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 256
     m_PVRBounces: 2
     m_PVREnvironmentSampleCount: 256
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilterTypeDirect: 0
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
-    m_PVREnvironmentMIS: 1
+    m_PVREnvironmentMIS: 0
     m_PVRCulling: 0
     m_PVRFilteringGaussRadiusDirect: 3
     m_PVRFilteringGaussRadiusIndirect: 5
@@ -98,7 +98,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 32e8d6aa498560849a8e2978283393ee,
+  m_LightingDataAsset: {fileID: 112000000, guid: eb53e6caff8570840b724e2f2fe5e11b,
     type: 2}
   m_UseShadowmask: 0
 --- !u!196 &4
@@ -3821,6 +3821,11 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.y
       value: 2.1911e-41
       objectReference: {fileID: 0}
+    - target: {fileID: 5407568323512299827, guid: d911231c40dcd804792fb50b7d4f154e,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d911231c40dcd804792fb50b7d4f154e, type: 3}
 --- !u!1001 &400201909
@@ -5188,6 +5193,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Intensity
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407568323512299827, guid: d911231c40dcd804792fb50b7d4f154e,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d911231c40dcd804792fb50b7d4f154e, type: 3}
@@ -6785,6 +6795,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Intensity
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407568323512299827, guid: d911231c40dcd804792fb50b7d4f154e,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d911231c40dcd804792fb50b7d4f154e, type: 3}
@@ -8913,19 +8928,19 @@ LightProbeGroup:
   - {x: 1.0000002, y: 0.9999999, z: 3.0353549}
   - {x: 1.0000002, y: -1, z: 3.0353549}
   - {x: -0.7012264, y: 0.9999999, z: 2.9662774}
-  - {x: -0.7012264, y: -1, z: 2.9662774}
+  - {x: -0.7012264, y: -0.8406068, z: 2.9662774}
   - {x: 1.0000004, y: 0.9999999, z: 5.828719}
-  - {x: 1.0000004, y: -1, z: 5.828719}
+  - {x: 1.0000004, y: -0.8027867, z: 5.828719}
   - {x: -0.7012264, y: 0.9999999, z: 5.7596436}
-  - {x: -0.7012264, y: -1, z: 5.7596436}
+  - {x: -0.7012264, y: -0.8591283, z: 5.7596436}
   - {x: 1.0000006, y: 0.9999999, z: 8.563061}
-  - {x: 1.0000006, y: -1, z: 8.563061}
+  - {x: 1.0000006, y: -0.83725727, z: 8.563061}
   - {x: -0.7012258, y: 0.9999999, z: 8.493982}
-  - {x: -0.7012258, y: -1, z: 8.493982}
+  - {x: -0.7012258, y: -0.83725727, z: 8.493982}
   - {x: 1.1913806, y: 0.8778953, z: 11.171941}
-  - {x: 1.19426, y: -1, z: 11.171275}
+  - {x: 1.19426, y: -0.83725727, z: 11.171275}
   - {x: -0.24332339, y: 0.8778953, z: 11.041239}
-  - {x: -0.23482107, y: -1, z: 11.039273}
+  - {x: -0.23482107, y: -0.83725727, z: 11.039273}
   - {x: 1.585599, y: 0.8158143, z: 9.49937}
   - {x: 1.585599, y: -0.63043374, z: 9.49937}
   - {x: 1.7025077, y: -0.6304338, z: 10.87896}
@@ -8998,8 +9013,8 @@ LightProbeGroup:
   - {x: -4.3021226, y: 2.493752, z: 9.687303}
   - {x: -4.6018767, y: 2.847609, z: 8.930561}
   - {x: -4.6018763, y: 3.890858, z: 8.930562}
-  - {x: -0.14390357, y: -1, z: 14.68326}
-  - {x: 1.2851787, y: -1, z: 14.815262}
+  - {x: -0.14390358, y: -0.7105938, z: 14.029463}
+  - {x: 1.2851787, y: -0.7105938, z: 14.161465}
   - {x: 1.282299, y: 0.8778953, z: 14.815927}
   - {x: -0.15240635, y: 0.8778953, z: 14.685226}
   - {x: -0.43266812, y: 0.025726581, z: 15.035296}
@@ -9866,7 +9881,7 @@ PrefabInstance:
     - target: {fileID: 2074356350467074307, guid: f65ebe57ccfa75241b133cd9f3972a81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 27
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 2074356350467074307, guid: f65ebe57ccfa75241b133cd9f3972a81,
         type: 3}
@@ -9911,6 +9926,11 @@ PrefabInstance:
     - target: {fileID: 7047285981014190494, guid: f65ebe57ccfa75241b133cd9f3972a81,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047285981014190494, guid: f65ebe57ccfa75241b133cd9f3972a81,
+        type: 3}
+      propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10756,7 +10776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10886524, guid: 496fa247adc61d44ebaeaf9d72671287, type: 3}
       propertyPath: m_BounceIntensity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10886524, guid: 496fa247adc61d44ebaeaf9d72671287, type: 3}
       propertyPath: m_Lightmapping
@@ -11976,6 +11996,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
       value: 1e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047285981014190494, guid: f65ebe57ccfa75241b133cd9f3972a81,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f65ebe57ccfa75241b133cd9f3972a81, type: 3}
@@ -15859,12 +15884,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ad8c471c16826514f82895e15a258a03,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.3
+      value: 7.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ad8c471c16826514f82895e15a258a03,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ad8c471c16826514f82895e15a258a03,
         type: 3}
@@ -15940,6 +15965,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ad8c471c16826514f82895e15a258a03,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad8c471c16826514f82895e15a258a03, type: 3}
@@ -17387,7 +17417,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1.3387818, y: 12.963668}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1e-45}
@@ -18042,7 +18072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10886524, guid: 496fa247adc61d44ebaeaf9d72671287, type: 3}
       propertyPath: m_BounceIntensity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10886524, guid: 496fa247adc61d44ebaeaf9d72671287, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -19123,7 +19153,7 @@ PrefabInstance:
     - target: {fileID: 5407568323159345087, guid: d911231c40dcd804792fb50b7d4f154e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 5407568323159345087, guid: d911231c40dcd804792fb50b7d4f154e,
         type: 3}
@@ -19213,6 +19243,11 @@ PrefabInstance:
     - target: {fileID: 5407568323512299827, guid: d911231c40dcd804792fb50b7d4f154e,
         type: 3}
       propertyPath: m_Range
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407568323512299827, guid: d911231c40dcd804792fb50b7d4f154e,
+        type: 3}
+      propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -20091,7 +20126,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1.3387818, y: 12.940911}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1e-45}
@@ -20277,7 +20312,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7df8105d4fa55d84db01ba2882625829, type: 2}
+      objectReference: {fileID: 2100000, guid: e41cbd65ba355054da070b61f66dc7a4, type: 2}
     - target: {fileID: 919132149155446097, guid: f94d3181f3ad1c04f83288f630b25815,
         type: 3}
       propertyPath: m_Name
@@ -21837,7 +21872,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1.3387818, y: 16.594154}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1e-45}
@@ -22609,7 +22644,7 @@ PrefabInstance:
     - target: {fileID: 2074356350467074307, guid: f65ebe57ccfa75241b133cd9f3972a81,
         type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 2074356350467074307, guid: f65ebe57ccfa75241b133cd9f3972a81,
         type: 3}
@@ -22649,6 +22684,11 @@ PrefabInstance:
     - target: {fileID: 7047285981014190494, guid: f65ebe57ccfa75241b133cd9f3972a81,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047285981014190494, guid: f65ebe57ccfa75241b133cd9f3972a81,
+        type: 3}
+      propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -22913,6 +22953,11 @@ PrefabInstance:
     - target: {fileID: 5341021900723616246, guid: 382d15c6cb3fcca4fbaa41fd76600f71,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341021900723616246, guid: 382d15c6cb3fcca4fbaa41fd76600f71,
+        type: 3}
+      propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -23300,7 +23345,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1.3387818, y: 15.863251}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1e-45}
@@ -23977,6 +24022,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Intensity
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407568323512299827, guid: d911231c40dcd804792fb50b7d4f154e,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d911231c40dcd804792fb50b7d4f154e, type: 3}
@@ -25973,6 +26023,11 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.w
       value: 1e-45
       objectReference: {fileID: 0}
+    - target: {fileID: 7047285981014190494, guid: f65ebe57ccfa75241b133cd9f3972a81,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f65ebe57ccfa75241b133cd9f3972a81, type: 3}
 --- !u!4 &2011697237 stripped
@@ -26863,6 +26918,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Intensity
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407568323512299827, guid: d911231c40dcd804792fb50b7d4f154e,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d911231c40dcd804792fb50b7d4f154e, type: 3}

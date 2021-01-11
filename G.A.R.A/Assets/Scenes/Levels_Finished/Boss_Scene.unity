@@ -2962,7 +2962,7 @@ GameObject:
   - component: {fileID: 404607301}
   - component: {fileID: 404607303}
   - component: {fileID: 404607302}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: ShieldSurface (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7999,7 +7999,7 @@ GameObject:
   - component: {fileID: 1075690962}
   - component: {fileID: 1075690964}
   - component: {fileID: 1075690963}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: ShieldSurface (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8735,10 +8735,20 @@ PrefabInstance:
       propertyPath: frontShieldPrefab
       value: 
       objectReference: {fileID: 963184050}
+    - target: {fileID: 2206360773547588373, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
+        type: 3}
+      propertyPath: distanceFromBoss
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5422007769112343510, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
       propertyPath: trackingSpeed
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5422007769112343510, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
+        type: 3}
+      propertyPath: ignoreLayer.m_Bits
+      value: 1845
       objectReference: {fileID: 0}
     - target: {fileID: 6447246368916323226, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
@@ -8852,7 +8862,7 @@ PrefabInstance:
     - target: {fileID: -8952139183755210495, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
@@ -8927,7 +8937,7 @@ PrefabInstance:
     - target: {fileID: -7863797491864377383, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -7253823196812927905, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
@@ -8977,12 +8987,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1715026836020297892, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2089249743690564186, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
@@ -8997,7 +9007,7 @@ PrefabInstance:
     - target: {fileID: 4101585377856813314, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6227330894828306055, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
@@ -9007,7 +9017,7 @@ PrefabInstance:
     - target: {fileID: 8858056555319871796, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea841c5f94bc7004e9f362794ffc430d, type: 3}

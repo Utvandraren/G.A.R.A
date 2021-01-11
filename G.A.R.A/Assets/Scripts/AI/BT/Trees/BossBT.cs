@@ -13,7 +13,7 @@ public class BossBT : BehaviorTree
 
     protected override void MakeTree()
     {
-        Task[] fire = { new TargetPlayer(), new CheckInMaxWeaponRange(), new CheckLineOfSight(), new Stop(),  new Fire() };
+        Task[] fire = { new TargetPlayer(), new CheckInMaxWeaponRange()/*, new CheckLineOfSight()*/, new Stop(),  new Fire() };
         Task[] getInRange = { new TargetPlayer(), new CheckInDetectionRange(), new MoveTowards() };
         Task fireSeq = new Sequence(fire);
         Task goTo = new Sequence(getInRange);

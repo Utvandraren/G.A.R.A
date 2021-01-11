@@ -134,7 +134,7 @@ public class BossManager : Singleton<BossManager>
       
         while (objLeftToActivate > 0)
         {
-            if(switches[rnd.Next(0, switches.Length + 1)].Activate())
+            if(switches[rnd.Next(0, switches.Length)].Activate())
             {
                 objLeftToActivate--;
             }                          
