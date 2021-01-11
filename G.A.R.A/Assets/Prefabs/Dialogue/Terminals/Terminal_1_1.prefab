@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 5622660813790564115}
   - component: {fileID: 5622660813790564114}
   - component: {fileID: 5622660813790564109}
+  - component: {fileID: 9195279474743519291}
   m_Layer: 8
   m_Name: Terminal
   m_TagString: Untagged
@@ -204,7 +205,7 @@ MeshCollider:
   m_GameObject: {fileID: 7215801019921429926}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -222,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueFile: {fileID: 4900000, guid: dce76dee24c9c764dbad37053f96ef78, type: 3}
-  nameOfSpeaker: 'Station AI (Mood: Helpful)'
+  nameOfSpeaker: Station AI
   lc: {fileID: 0}
 --- !u!114 &5622660813790564114
 MonoBehaviour:
@@ -280,3 +281,16 @@ MonoBehaviour:
   isUsable: 1
   canInteract: 1
   showOutline: 1
+--- !u!65 &9195279474743519291
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7215801019921429926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0052646156, y: 0.030600427, z: 0.021924729}
+  m_Center: {x: 0.0018175249, y: -0.008045914, z: -0.0022533138}
