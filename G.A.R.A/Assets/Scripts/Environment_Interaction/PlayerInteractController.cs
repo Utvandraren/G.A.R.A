@@ -14,10 +14,19 @@ public class PlayerInteractController : MonoBehaviour
 
     public bool canInteract;
     [SerializeField] private TMP_Text interactText;
+    public static bool interactButtonPressed = false;
 
     private void Update()
     {
-        RaycastForOutline();
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            interactButtonPressed = !interactButtonPressed;
+        }
+
+        if (!interactButtonPressed)
+        {
+            RaycastForOutline();
+        }
         RaycastForInteract();
     }
     /// <summary>
