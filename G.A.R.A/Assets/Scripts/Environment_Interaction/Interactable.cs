@@ -58,7 +58,7 @@ public class Interactable : MonoBehaviour
         {
             if (!transform.GetComponent<Outline>().enabled)
             {
-                Debug.Log("Outline");
+                //Debug.Log("Outline");
                 transform.GetComponent<Outline>().enabled = true;
             }
             outlineCountdown = 1f;
@@ -70,6 +70,11 @@ public class Interactable : MonoBehaviour
     /// </summary>
     public void Update()
     {
+        if (PlayerInteractController.interactButtonPressed)
+        {
+            EnableOutline();
+            outlineCountdown = 0.5f;
+        }
         if(outlineCountdown <= 0)
         {
             if (transform.TryGetComponent<Outline>(out Outline o))
