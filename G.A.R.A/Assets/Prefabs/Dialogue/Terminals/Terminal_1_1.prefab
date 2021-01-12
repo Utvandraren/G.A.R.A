@@ -235,7 +235,6 @@ GameObject:
   - component: {fileID: 4155951923643871549}
   - component: {fileID: 79124706423540352}
   - component: {fileID: 2626860213654311623}
-  - component: {fileID: 5622660813790564108}
   - component: {fileID: 5622660813790564115}
   - component: {fileID: 5622660813790564114}
   - component: {fileID: 5622660813790564109}
@@ -309,20 +308,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5622660813790564108
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7215801019921429926}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3286549722944424052, guid: 8f02c1b0b8f2ffa4bbd15706f7c5f729, type: 3}
 --- !u!114 &5622660813790564115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,9 +320,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08aaed36b80c25b49bed3f55353f4400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueFile: {fileID: 4900000, guid: dce76dee24c9c764dbad37053f96ef78, type: 3}
   nameOfSpeaker: Station AI
+  dialogueFile: {fileID: 4900000, guid: dce76dee24c9c764dbad37053f96ef78, type: 3}
   lc: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: 51e916a095305e14382c16d176b262aa, type: 3}
+  - {fileID: 8300000, guid: 51e916a095305e14382c16d176b262aa, type: 3}
+  - {fileID: 8300000, guid: 51e916a095305e14382c16d176b262aa, type: 3}
+  - {fileID: 8300000, guid: cd31a2d626d6596488a20113dd5c39a7, type: 3}
+  - {fileID: 8300000, guid: 51e916a095305e14382c16d176b262aa, type: 3}
 --- !u!114 &5622660813790564114
 MonoBehaviour:
   m_ObjectHideFlags: 0

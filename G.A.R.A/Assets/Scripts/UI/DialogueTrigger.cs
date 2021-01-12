@@ -14,16 +14,25 @@ public class DialogueTrigger : MonoBehaviour
     private bool hasBeenInvoked = false;
     private float coolDownTimer = 0;
     private float coolDown = 1f;
-    [SerializeField] private TextAsset dialogueFile;
     private bool firstTimeTriggering;
     public string nameOfSpeaker = "";
+    [SerializeField] private TextAsset dialogueFile;
     [SerializeField] private LogbookCounter lc;
+    [SerializeField] private AudioClip[] clips;
 
     private DialogueManager dm;
-    
+
     public void Start()
     {
-        dialogue = new Dialogue(dialogueFile.text.Split('\n'));
+        if (clips.Length > 0)
+        {
+            dialogue = new Dialogue(dialogueFile.text.Split('\n'), clips);
+        }
+        else
+        {
+            dialogue = new Dialogue(dialogueFile.text.Split('\n'));
+        }
+
         if(nameOfSpeaker != "")
         {
             dialogue.name = nameOfSpeaker;

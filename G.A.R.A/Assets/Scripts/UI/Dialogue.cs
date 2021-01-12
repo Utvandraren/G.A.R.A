@@ -12,10 +12,19 @@ public class Dialogue
 
     public string[] sentences;
 
+    public AudioClip[] clips { get; private set; }
+
     public Dialogue(string[] textFileSentences)
     {
         sentences = new string[textFileSentences.Length];
         sentences = textFileSentences;
+    }
+
+    public Dialogue(string[] textFileSentences, AudioClip[] clips)
+    {
+        sentences = new string[textFileSentences.Length];
+        sentences = textFileSentences;
+        this.clips = clips;
     }
 
     public void FillSentences(string[] textFileSentences)

@@ -15,11 +15,16 @@ public class DialogueManager : MonoBehaviour
     private PlayerInteractController interactCtrl;
 
     private Queue<string> sentences;
+    private Queue<AudioClip> clips;
+    private AudioSource audio;
+    private bool useAudio;
 
     // Start is called before the first frame update
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
         sentences = new Queue<string>();
+        clips = new Queue<AudioClip>();
         interactCtrl = FindObjectOfType<PlayerInteractController>();
     }
 
@@ -47,6 +52,7 @@ public class DialogueManager : MonoBehaviour
         }
         catch (System.Exception e)
         {
+            Debug.Log(e.StackTrace);
         }
         
     }
@@ -62,12 +68,25 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("IsOpen", true);
 
         nameText.text = dialogue.name;
-
         sentences.Clear();
+        clips.Clear();
 
         foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
+        }
+
+        if(dialogue.clips != null)
+        {
+            useAudio = true;
+            foreach (AudioClip clip in dialogue.clips)
+            {
+                clips.Enqueue(clip);
+            }
+        }
+        else
+        {
+            useAudio = false;
         }
 
         DisplayNextSentence();
@@ -83,9 +102,16 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
+        audio.Stop();
+        if(useAudio)
+        {
+            AudioClip clip = clips.Dequeue();
+            audio.PlayOneShot(clip);
+        }
 
         string sentence = sentences.Dequeue();
         dialogueText.text = sentence;
+
         //StopCoroutine(TypeSentence(sentence));
         //StartCoroutine(TypeSentence(sentence));
     }
