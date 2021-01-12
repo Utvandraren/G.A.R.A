@@ -132,14 +132,13 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// This method makes the dialogue box close.
+    /// This method makes the dialogue box close. Resumes the game and stops any sound that is playing.
     /// </summary>
     private void EndDialogue()
     {
+        audio.Stop();
         Time.timeScale = 1f;
         PauseMenu.GameIsPaused = false;
         animator.SetBool("IsOpen", false);
-
-        
     }
 }

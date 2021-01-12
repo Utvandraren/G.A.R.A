@@ -427,9 +427,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08aaed36b80c25b49bed3f55353f4400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueFile: {fileID: 4900000, guid: 33f494836e29e6f438d8d924edb20585, type: 3}
   nameOfSpeaker: Station AI
+  dialogueFile: {fileID: 4900000, guid: 33f494836e29e6f438d8d924edb20585, type: 3}
   lc: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: 7becc43f733f8984b815e97e9617d4ca, type: 3}
+  - {fileID: 8300000, guid: f12bcd9b9bd499240b1305d7cf152fc8, type: 3}
 --- !u!114 &5622660813790564114
 MonoBehaviour:
   m_ObjectHideFlags: 0
