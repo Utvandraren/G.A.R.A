@@ -42,7 +42,7 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private float distanceFromBoss;
 
 
-    private BossPhases currentPhase = BossPhases.TentaclePhase;   //----------------------------
+    private BossPhases currentPhase = BossPhases.ShieldPhase;   //----------------------------
     private Animator animator;
     private Transform target;
     private float blendPower = 0;
@@ -209,7 +209,7 @@ public class BossManager : Singleton<BossManager>
     }
 
     //Remove enemies left when transitioning to the next phase
-    void DestroyAllEnemies()
+    public void DestroyAllEnemies()
     {       
         foreach (GameObject enemy in enemyPool)
         {

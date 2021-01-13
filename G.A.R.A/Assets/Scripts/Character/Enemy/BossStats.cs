@@ -47,9 +47,8 @@ public class BossStats : Stats
     {
         //GameManager.Instance.Win();
         //StartTimelineanimation
-        bossWinTimeLine.SetActive(true);
+        GetComponent<BossManager>().DestroyAllEnemies();
         GetComponent<BossManager>().StopAllCoroutines();
-
-
+        bossWinTimeLine.SetActive(true);
     }
 }
