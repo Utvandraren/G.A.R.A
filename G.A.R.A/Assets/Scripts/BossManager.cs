@@ -42,7 +42,7 @@ public class BossManager : Singleton<BossManager>
     [SerializeField] private float distanceFromBoss;
 
 
-    private BossPhases currentPhase = BossPhases.ShieldPhase;   //----------------------------
+    private BossPhases currentPhase = BossPhases.TentaclePhase;   //----------------------------
     private Animator animator;
     private Transform target;
     private float blendPower = 0;

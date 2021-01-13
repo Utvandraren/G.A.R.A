@@ -25,6 +25,7 @@ public class TrackingLaser : Weapon
         currentlyShooting = false;
         base.Start();
         bossMov = GetComponentInParent<BossMovement>();
+        
     }
 
     // Update is called once per frame
@@ -38,7 +39,7 @@ public class TrackingLaser : Weapon
     public override void TryShoot()
     {
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position, laserBeamAttackRadius, transform.forward, out hit, ignoreLayer))
+        if (Physics.SphereCast(transform.position, laserBeamAttackRadius, transform.forward, out hit, 400f, ignoreLayer.value))
         {
             if (hit.transform.gameObject.CompareTag("Player"))
             {

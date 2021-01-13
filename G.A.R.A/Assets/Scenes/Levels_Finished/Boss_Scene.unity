@@ -179,6 +179,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1512412689254425709, guid: d3f600aa61e02e848b002a457adcd0d6,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2359
+      objectReference: {fileID: 0}
     - target: {fileID: 2381535370189980976, guid: d3f600aa61e02e848b002a457adcd0d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2962,7 +2967,7 @@ GameObject:
   - component: {fileID: 404607301}
   - component: {fileID: 404607303}
   - component: {fileID: 404607302}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: ShieldSurface (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3934,7 +3939,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 533139842}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7335,7 +7340,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963184050}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6af47be7ea4fa2e4ca2e69a4b259ad99, type: 3}
   m_Name: 
@@ -7999,7 +8004,7 @@ GameObject:
   - component: {fileID: 1075690962}
   - component: {fileID: 1075690964}
   - component: {fileID: 1075690963}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: ShieldSurface (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8748,7 +8753,7 @@ PrefabInstance:
     - target: {fileID: 5422007769112343510, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
       propertyPath: ignoreLayer.m_Bits
-      value: 1845
+      value: 1847
       objectReference: {fileID: 0}
     - target: {fileID: 6447246368916323226, guid: 213277e41ed9a3f4b9906a1ce93f0ca7,
         type: 3}
@@ -8862,7 +8867,7 @@ PrefabInstance:
     - target: {fileID: -8952139183755210495, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
@@ -8937,7 +8942,7 @@ PrefabInstance:
     - target: {fileID: -7863797491864377383, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -7253823196812927905, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
@@ -8987,12 +8992,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1715026836020297892, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2089249743690564186, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
@@ -9007,7 +9012,7 @@ PrefabInstance:
     - target: {fileID: 4101585377856813314, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6227330894828306055, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
@@ -9017,7 +9022,7 @@ PrefabInstance:
     - target: {fileID: 8858056555319871796, guid: ea841c5f94bc7004e9f362794ffc430d,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea841c5f94bc7004e9f362794ffc430d, type: 3}
@@ -9032,7 +9037,7 @@ GameObject:
   - component: {fileID: 1226525074}
   - component: {fileID: 1226525076}
   - component: {fileID: 1226525075}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BossFrontShieldPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
