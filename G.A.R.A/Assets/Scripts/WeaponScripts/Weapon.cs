@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
 
 
     protected float currentTime;
-    private AudioSource weaponAudioSource;
+    [SerializeField] private AudioSource weaponAudioSource;
     private System.Random rnd;
 
     public virtual void Start()

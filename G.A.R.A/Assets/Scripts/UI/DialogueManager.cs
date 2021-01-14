@@ -14,17 +14,23 @@ public class DialogueManager : MonoBehaviour
     public Animator animator;
     private PlayerInteractController interactCtrl;
 
-    private Queue<string> sentences;
-    private Queue<AudioClip> clips;
+    //private Queue<string> sentences;
+    //private Queue<AudioClip> clips;
+    private List<string> sentences;
+    private List<AudioClip> clips;
     private AudioSource audio;
     private bool useAudio;
+
+    private int index;
 
     // Start is called before the first frame update
     private void Start()
     {
         audio = GetComponent<AudioSource>();
-        sentences = new Queue<string>();
-        clips = new Queue<AudioClip>();
+        //sentences = new Queue<string>();
+        //clips = new Queue<AudioClip>();
+        sentences = new List<string>();
+        clips = new List<AudioClip>();
         interactCtrl = FindObjectOfType<PlayerInteractController>();
     }
 
@@ -73,7 +79,7 @@ public class DialogueManager : MonoBehaviour
 
         foreach (string sentence in dialogue.sentences)
         {
-            sentences.Enqueue(sentence);
+            sentences.Add(sentence);
         }
 
         if(dialogue.clips != null)
@@ -81,7 +87,7 @@ public class DialogueManager : MonoBehaviour
             useAudio = true;
             foreach (AudioClip clip in dialogue.clips)
             {
-                clips.Enqueue(clip);
+                clips.Add(clip);
             }
         }
         else
@@ -89,7 +95,9 @@ public class DialogueManager : MonoBehaviour
             useAudio = false;
         }
 
-        DisplayNextSentence();
+        index = 0;
+        dialogueText.text = sentences[0];
+        //DisplayNextSentence();
     }
 
     /// <summary>
@@ -97,7 +105,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void DisplayNextSentence()
     {
-        if(sentences.Count == 0)
+        if(index >= sentences.Count)
         {
             EndDialogue();
             return;
@@ -105,13 +113,13 @@ public class DialogueManager : MonoBehaviour
         audio.Stop();
         if(useAudio)
         {
-            AudioClip clip = clips.Dequeue();
+            AudioClip clip = clips[index];
             audio.PlayOneShot(clip);
         }
 
-        string sentence = sentences.Dequeue();
+        string sentence = sentences[index];
         dialogueText.text = sentence;
-
+        index++;
         //StopCoroutine(TypeSentence(sentence));
         //StartCoroutine(TypeSentence(sentence));
     }

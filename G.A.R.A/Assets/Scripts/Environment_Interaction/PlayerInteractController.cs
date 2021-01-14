@@ -54,6 +54,7 @@ public class PlayerInteractController : MonoBehaviour
                     if (Input.GetButtonDown("Use"))
                     {
                         interactable.Interact();
+                        Debug.Log("I interacted with: " + interactable.name);
                     }
                 }
                 else
